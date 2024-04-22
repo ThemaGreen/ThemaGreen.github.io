@@ -45,7 +45,8 @@
 						<!-- Intro -->
 							<article id="intro">
 								<h2 class="major">Who am I?</h2>
-								<span class="image main"><img src="images/Professional Headshot.png" alt="" /></span>
+								<a href="https://people.umass.edu/scroberts/ridereu.html#" target="_blank" </a>
+									<img src="images/Professional Headshot.png" alt=""></a>
 								<p>I'm Thema Green, a highly motivated, resilient, and adaptable individual with a strong foundation in human factors psychology and engineering seeks to leverage a
 									diverse skillset to contribute to innovative projects and enhance human-technology interactions. Possesses a strong
 									commitment to bridging the gap between research and design through the application of user-centered principles. Proven
@@ -94,7 +95,6 @@
 									<a href="https://www.gmu.edu/news/2023-07/new-psychology-special-topics-course-puts-theory-practice-around-campus#:~:text=Psychology%20major%20Thema%20Green%2C%20who%20took%20the%20class%20as%20a%20sophomore%2C" target="_blank"</a>
 								 <class="image main"><img src= "images/First Cohort of Adv. Topics in HF - GMU.jpg" alt="First Cohort of Advanced Topics in Human Factors" class="responsive";width="555"; height:"400"></body>
 								Pictured is the first cohort of the new course, "Advanced Topics in Human Factors" offered at GMU.
-								</a>
 								<hr><h2 style="text-align: center;">Coursework</h2>
 								<p>
 									✓   Human Factors Psychology, PSYC 340 <br>
@@ -113,7 +113,6 @@
 								◇ 17 transfer credits while dually enrolled at College of Southern Maryland while attending St. Charles Highschool ◇</p>
 								<button><a onclick="history.back()" style="text-align:left;">Back</button>
 								<button onclick="location.href='#contact';" style="float:right;">Proceed</button>
-								</a>
 							</article>
 				
 
