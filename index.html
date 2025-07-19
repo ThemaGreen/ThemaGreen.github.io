@@ -3,39 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thema Green | Human Factors & UX Expert</title>
+    <title>Thema Green | Human Factors & UX Professional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #000000;
-            --primary-light: #333333;
+            --primary: #121212;
+            --primary-light: #1e1e1e;
             --secondary: #1d1d1f;
-            --accent: #0066cc;
-            --accent-light: #2997ff;
-            --light: #f5f5f7;
+            --accent: #294d119d;
+            --accent-light: #1a6546;
+            --light: #f5f5f5;
             --light-gray: #e5e5e5;
-            --dark: #1d1d1f;
+            --dark: #0a0a0a;
             --text: #1d1d1f;
             --text-light: #86868b;
+            --cream: #f8f4e9;
+            --dark-brown: #1a120b;
+            --typewriter-gold: #d4af37;
             --white: #ffffff;
             --success: #34c759;
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        [data-theme="dark"] {
+            --primary: #0a0a0a;
+            --primary-light: #1e1e1e;
+            --secondary: #121212;
+            --light: #1a120b;
+            --cream: #1a120b;
+            --text: #f8f4e9;
+            --text-light: #b0b0b0;
+            --white: #f8f4e9;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Chivo', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background-color: var(--white);
+            background-color: var(--cream);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
         }
 
         /* Accessibility features */
@@ -61,8 +96,8 @@
 
         /* Typography */
         h1, h2, h3, h4 {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-weight: 600;
+            font-family: 'Chivo', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.1;
             letter-spacing: -0.5px;
@@ -137,7 +172,7 @@
         header {
             background-color: rgba(0, 0, 0, 0.8);
             color: var(--white);
-            padding: 25px 0;
+            padding: 15px 0;
             position: fixed;
             width: 100%;
             top: 0;
@@ -145,12 +180,14 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            height: 70px;
         }
 
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 100%;
         }
 
         .logo {
@@ -160,16 +197,16 @@
         }
 
         .logo img {
-            height: 48px;
-            width: 48px;
+            height: 40px;
+            width: 40px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo-text {
-            font-family: 'SF Pro Display', sans-serif;
-            font-size: 1.8rem;
+            font-family: 'Chivo', sans-serif;
+            font-size: 1.5rem;
             font-weight: 600;
             letter-spacing: -0.5px;
             color: var(--white);
@@ -192,13 +229,13 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 40px;
+            gap: 30px;
         }
 
         nav a {
             color: var(--white);
             font-weight: 500;
-            font-size: 1.1rem;
+            font-size: 1rem;
             position: relative;
             opacity: 0.8;
             transition: var(--transition);
@@ -362,13 +399,18 @@
             font-weight: 600;
             min-height: 80px;
             color: var(--white);
-            font-family: 'SF Pro Display', sans-serif;
+            font-family: 'Chivo', sans-serif;
         }
 
         .typewriter-text {
             display: inline-block;
             color: var(--white);
             padding: 0 5px;
+        }
+
+        .typewriter-highlight {
+            color: var(--typewriter-gold);
+            font-weight: 700;
         }
 
         .typewriter-cursor {
@@ -871,11 +913,16 @@
     <!-- Skip link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <!-- Header -->
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Thema Green">
+                <img src="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg:true" srcset="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg:true, //img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true 2x, //img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1095,h:1095,cg:true 3x" alt="Thema Green smiling" data-ux="ContentCardImageThumbnail" overlayalpha="0" data-aid="ABOUT_IMAGE_RENDERED0" class="x-el x-el-img c1-1 c1-2 c1-4 c1-x c1-t c1-r c1-q c1-s c1-y c1-a0 c1-a1 c1-1a c1-b c1-c c1-a2 c1-d c1-e c1-f c1-g" alt="Thema Green">
                 <div class="logo-text">Thema <span>Green</span></div>
             </div>
             
@@ -890,7 +937,7 @@
                     <li><a href="#portfolio">Work</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#" class="badge">Available</a></li>
+                    <li><a href="https://www.linkedin.com/in/themagreen/" class="badge">Open to Work</a></li>
                 </ul>
             </nav>
         </div>
@@ -899,10 +946,8 @@
     <!-- Hero Section with Video Background -->
     <section class="hero" id="home">
         <video autoplay muted loop playsinline class="hero-video">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-programmer-working-on-a-desk-41551-large.mp4" type="video/mp4">
-            Your browser does not support the video tag.
+        <span data-ux="Element" class="x-el x-el-span c2-1 c2-2 c2-3 c2-4 c2-5 c2-6 c2-7 c2-8"><img src="https://i.vimeocdn.com/video/default" alt="https://i.vimeocdn.com/video/default" data-ux="HeaderMediaImage" data-aid="HEADER_VIDEO_EMBED_FILL_POSTER" class="x-el x-el-img c2-1 c2-2 c2-g c2-h c2-i c2-j c2-k c2-l c2-m c2-n c2-o c2-p c2-q c2-r c2-s c2-t c2-u c2-v c2-w c2-x c2-y c2-z c2-10 c2-11 c2-12 c2-13 c2-14 c2-15 c2-16 c2-17 c2-3 c2-4 c2-18 c2-5 c2-6 c2-7 c2-8"><div data-ux="Block" class="x-el x-el-div c2-1 c2-2 c2-y c2-19 c2-3 c2-4 c2-1a c2-5 c2-6 c2-7 c2-8"><iframe data-ux="Embed" id="embed-iframe-1" src="https://player.vimeo.com/video/925667239?h=12644e44b4&amp;autoplay=1&amp;loop=1&amp;autopause=0&amp;muted=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;controls=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" loading="lazy" data-aid="HEADER_VIDEO_EMBED" class="x-el x-el-iframe c2-1 c2-2 c2-u c2-1b c2-1c c2-1d c2-g c2-y c2-1e c2-1f c2-1g c2-1h c2-an c2-3 c2-4 c2-5 c2-6 c2-7 c2-8"></iframe></div></span>
         </video>
-        
         <div class="container hero-content">
             <h1>Human-Centered Design <br>Meets Technical Excellence</h1>
             <p class="hero-subtitle">Bridging cognitive science with cutting-edge technology to create intuitive experiences</p>
@@ -920,8 +965,8 @@
             <!-- Typewriter Section -->
             <div class="typewriter-section">
                 <div class="typewriter-container">
-                    <span class="typewriter-text">Expert in </span>
-                    <span id="typewriter-target" class="typewriter-text"></span>
+                    <span class="typewriter-text">Experienced in </span>
+                    <span id="typewriter-target" class="typewriter-text typewriter-highlight"></span>
                     <span class="typewriter-cursor"></span>
                 </div>
             </div>
@@ -938,7 +983,7 @@
             
             <div class="about-content">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" 
+                    <img src="https://Themagreen.github.io/images/Professional Headshot.png" 
                          alt="Thema Green - Human Factors Professional">
                 </div>
                 
@@ -1120,10 +1165,10 @@
                 <h2>Let's Connect</h2>
                 <p>Currently available for select consulting projects and full-time opportunities</p>
             </div>
-            
+
             <div class="contact-container">
                 <div class="contact-info">
-                    <h3>Contact Information</h3>
+                    <h3>Get in Touch</h3>
                     
                     <div class="contact-method">
                         <div class="contact-icon">
@@ -1131,7 +1176,17 @@
                         </div>
                         <div class="contact-method-content">
                             <h4>Email</h4>
-                            <p>thema.green@example.com</p>
+                            <a href="mailto:thema@example.com">thema@example.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-method-content">
+                            <h4>Phone</h4>
+                            <a href="tel:+1234567890">+1 (234) 567-890</a>
                         </div>
                     </div>
                     
@@ -1141,44 +1196,41 @@
                         </div>
                         <div class="contact-method-content">
                             <h4>Location</h4>
-                            <p>Washington D.C. Metropolitan Area</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-method">
-                        <div class="contact-icon">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <div class="contact-method-content">
-                            <h4>Resume</h4>
-                            <p><a href="#" target="_blank">Download PDF</a></p>
+                            <p>San Francisco Bay Area</p>
+                            <p>Available for remote work</p>
                         </div>
                     </div>
                     
                     <div class="social-links">
-                        <a href="#" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="#" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Dribbble" target="_blank"><i class="fab fa-dribbble"></i></a>
+                        <a href="https://www.linkedin.com/in/themagreen/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/Themagreen" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://twitter.com/themagreen" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://dribbble.com/themagreen" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
                     </div>
                 </div>
                 
                 <div class="contact-form">
-                    <h3>Send a Message</h3>
-                    <form id="contactForm">
+                    <form id="contactForm" aria-live="polite">
                         <div class="form-group">
-                            <input type="text" placeholder="Your Name" required aria-label="Your Name" id="name">
+                            <input type="text" placeholder="Your Name" required aria-label="Your Name" id="name" 
+                                   role="textbox" aria-multiline="false" data-aid="CONTACT_FORM_NAME">
                         </div>
+                        
                         <div class="form-group">
-                            <input type="email" placeholder="Your Email" required aria-label="Your Email" id="email">
+                            <input type="email" placeholder="Your Email" required aria-label="Your Email" id="email"
+                                   role="textbox" aria-multiline="false" data-aid="CONTACT_FORM_EMAIL">
                         </div>
+                        
                         <div class="form-group">
                             <input type="text" placeholder="Subject" aria-label="Subject" id="subject">
                         </div>
+                        
                         <div class="form-group">
-                            <textarea placeholder="Your Message" required aria-label="Your Message" id="message"></textarea>
+                            <textarea placeholder="Your Message" required aria-label="Your Message" id="message"
+                                     role="textbox" aria-multiline="true" rows="6" data-aid="CONTACT_FORM_MESSAGE"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        
+                        <button type="submit" class="btn btn-primary" data-aid="CONTACT_SUBMIT_BUTTON_REND">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
                     </form>
@@ -1193,7 +1245,7 @@
             <div class="footer-container">
                 <div class="footer-col">
                     <h3>Thema Green</h3>
-                    <p>Human Factors & UX Expert combining cognitive science with technical implementation to create exceptional human-centered experiences.</p>
+                    <p>Human Factors & UX Professional combining cognitive science with technical implementation to create exceptional human-centered experiences.</p>
                     <div class="accessibility-badge">
                         <i class="fas fa-universal-access"></i>
                         Inclusive by Design
@@ -1242,6 +1294,38 @@
     </footer>
 
     <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Check for saved theme preference or use system preference
+        const currentTheme = localStorage.getItem('theme') || 
+                            (prefersDarkScheme.matches ? 'dark' : 'light');
+        
+        // Apply the current theme
+        if (currentTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            document.body.removeAttribute('data-theme');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+        
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            let theme;
+            if (document.body.hasAttribute('data-theme')) {
+                document.body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                theme = 'light';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                theme = 'dark';
+            }
+            localStorage.setItem('theme', theme);
+        });
+
         // Navigation toggle
         const navToggle = document.querySelector('.nav-toggle');
         const navMenu = document.querySelector('nav ul');
