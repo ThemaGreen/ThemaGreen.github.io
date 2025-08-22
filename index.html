@@ -1,219 +1,2281 @@
-<!DOCTYPE HTML>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Thema Green's Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thema Green - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* All previous CSS remains unchanged */
+        :root {
+            --emerald: #047857;
+            --emerald-light: #059669;
+            --emerald-dark: #065F46;
+            --gold: #B7942C;
+            --gold-light: #D4AF37;
+            --cream: #F5F5DC;
+            --brown: #5C4033;
+            --brown-dark: #4A3327;
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<a href="https://vigilant-winner-7v7pqq9wq9xw3xwr9-5500.app.github.dev/Project/index.html" class="logo"><strong>Thema's</strong> <span>Portfolio</span></a>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--brown);
+            background-color: var(--cream);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-				<!-- Menu -->
-					<nav id="menu">
-						<ul class="links">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="projects.html">Projects</a></li>
-							<li><a href="coursework.html">Coursework</a></li>
-							<li><a href="achievements.html">Achievements</a></li>
-							<li><a href="techniical&nbsp;abilities.html">Technical Abilities</a></li>
-							<li><a href="at&nbsp;a&nbsp;glance.html">At A Glance</a></li>
-						</ul>
-						<ul class="actions stacked">
-							<li><a href="#" class="button primary fit">Art Business Site</a></li>
-							<li><a href="#" class="button fit">Contact Me</a></li>
-						</ul>
-					</nav>
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--brown-dark);
+        }
 
-				<!-- Banner -->
-					<section id="banner" class="major">
-						<div class="inner">
-							<header class="major">
-								<h1>Welcome! You made it.</h1>
-							</header>
-							<div class="content">
-								<p>I'm Thema Green, a rising Human Factors Psychologist with a passion for crafting user experiences that leave a lasting impression. Let's explore the intersection of psychology and technology to create seamless, impactful designs.</p>
-								<ul class="actions">
-									<li><a href="#one" class="button next scrolly">Let's Get Started</a></li>
-								</ul>
-							</div>
-						</div>
-					</section>
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--emerald-dark);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--emerald-dark) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-				<!-- Main -->
-					<div id="main">
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            color: var(--emerald);
+            position: relative;
+            display: inline-block;
+        }
 
-						<!-- One -->
-							<section id="one" class="tiles">
-								<article>
-									<span class="image">
-										<img src="images/pic01.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="projects.html" class="link">Research Projects</a></h3>
-										<p>Conference papers, prototypes & wireframes, stakeholder presentations, and more!</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic02.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="coursework.html" class="link">Coursework</a></h3>
-										<p>George Mason University 2021-2025</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="achievements.html" class="link">Achievements</a></h3>
-										<p>Project results, benchmarks, and more.</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic04.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="techniical&nbsp;abilities.html" class="link">Technical Abilities</a></h3>
-										<p>Figma, Canva, SPSS, Matlab, Unity, Blender,AutoCAD, etc.</p>
-									</header>
-								</article>
-								<!-- <article> 
-									<span class="image">
-										<img src="images/pic05.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="achievements.html" class="link">QW</a></h3>
-										<p>Q</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/pic06.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="achievements.html" class="link">QW</a></h3>
-										<p>Q</p>
-									</header>
-								</article>
-							</section>
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+        }
 
-						<!-- Two 
-							<section id="two">-->
-								<div class="inner">
-									<header class="major">
-										<h2>Art</h2>
-									</header>
-									<p>Commission Work, 3D Modeling, Graphic Design</p>
-									<ul class="actions">
-										<li><a href="https://www.linkedin.com/services/page/05549132325309771a/" class="button next">Haven't found what you're looking for? Try this!</a></li>
-										<li><a href="https://www.instagram.com/art.by.thema/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-									</ul>
-								</div>
-							</section>
+        h3 {
+            font-size: 1.8rem;
+            color: var(--emerald);
+        }
 
-					</div>
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
 
-				<!-- Contact -->
-					<section id="contact">
-						<div class="inner">
-							<section>
-								<form class="fields" action="https://formsubmit.co/427757010e796bcd80def93e390063d7" method="POST">
-									<!-- Honeypot -->
-									<input type="text"name="_honey" style="display: none;">
-									<!--Disable Captcha-->
-									<input type="hidden" name="_captcha" value="false">
-				
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" required/>
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="email" name="email" id="email" pattern="+@example.com" size = "33" required/>
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" required rows="6"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Clear" /></li>
-									</ul>
-								</form>
-							</section>
-							<section class="split">
-								<section>
-									<div class="contact-method">
-										<span class="icon solid alt fa-envelope"></span>
-										<h3>Email</h3>
-										<a href="#">Sample@Sample.com</a>
-									</div>
-								</section>
-								<section>
-									<div class="contact-method">
-										<span class="icon solid alt fa-phone"></span>
-										<h3>Phone</h3>
-										<span>(240) xxx-xxxx</span>
-									</div>
-								</section>
-								<section>
-									<div class="contact-method">
-										<span class="icon solid alt fa-home"></span>
-										<h3>Address</h3>
-										<span>4400 Rivanna River Way<br />
-										Fairfax, VA 22030<br />
-										United States of America</span>
-									</div>
-								</section>
-							</section>
-						</div>
-					</section>
+        a {
+            color: var(--emerald);
+            text-decoration: none;
+            transition: var(--transition);
+        }
 
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<ul class="icons">
-								<li><a href="https://github.com/ThemaGreen" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="https://www.linkedin.com/in/themagreen/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Forty </li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
+        a:hover {
+            color: var(--gold);
+        }
 
-			</div>
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--emerald);
+            color: white;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
 
-	</body>
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: var(--emerald-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--emerald);
+            color: var(--emerald);
+        }
+
+        .btn-outline:hover {
+            background: var(--emerald);
+            color: white;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-light);
+            color: var(--brown-dark);
+        }
+
+        /* Scroll Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--emerald), var(--gold));
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        /* Particle background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(245, 245, 220, 0.95);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--emerald);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+
+        .nav-menu a {
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: var(--emerald);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 10rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(245, 245, 220, 0.9) 0%, rgba(245, 245, 220, 0.95) 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--gold);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--emerald);
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, transparent 100%);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--cream);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--emerald);
+            border: 1px solid var(--emerald-light);
+        }
+
+        /* Project Filter */
+        .project-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--gold);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-list i {
+            color: var(--emerald);
+            margin-right: 0.5rem;
+        }
+
+        /* Education Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline:after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--emerald);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .timeline-content:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            border: 3px solid var(--emerald);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content:after {
+            right: -10px;
+            transform: translateX(50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content:after {
+            left: -10px;
+            transform: translateX(-50%);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--emerald);
+            margin-bottom: 5px;
+        }
+
+        .dual-enrollment-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .course-list {
+            list-style-type: none;
+            margin-top: 10px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .timeline-content.active .course-list {
+            max-height: 1000px;
+        }
+
+        .course-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-list li:before {
+            content: '•';
+            color: var(--gold);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .course-grade {
+            background: var(--emerald);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .course-details {
+            background: var(--cream);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 10px;
+            display: none;
+            border-left: 3px solid var(--gold);
+        }
+
+        .course-details.active {
+            display: block;
+        }
+
+        /* Skills Matrix */
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category-expanded {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--emerald);
+        }
+
+        .skill-category-expanded h4 {
+            color: var(--emerald);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-category-expanded h4 i {
+            margin-right: 10px;
+            color: var(--gold);
+        }
+
+        .skill-item {
+            margin-bottom: 0.8rem;
+            padding: 0.5rem;
+            background: var(--cream);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            transform: translateX(5px);
+            background: rgba(4, 120, 87, 0.1);
+        }
+
+        /* Transferable Skills Section */
+        .transferable-skills {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 3rem;
+        }
+
+        .skill-pill {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--cream);
+            border: 1px solid var(--emerald-light);
+            border-radius: 50px;
+            margin: 0.3rem;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .skill-pill:hover {
+            background: var(--emerald);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Contact Form */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--emerald);
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--emerald);
+            box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Form Submission Results */
+        .submission-results {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+            border-left: 4px solid var(--emerald);
+        }
+
+        .submission-results h3 {
+            color: var(--emerald);
+            margin-bottom: 1.5rem;
+        }
+
+        .result-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: var(--brown-dark);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .result-value {
+            color: var(--brown);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--brown-dark);
+            color: var(--cream);
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            color: var(--cream);
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(245, 245, 220, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(245, 245, 220, 0.2);
+            color: var(--cream);
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* 3D Card Effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .card-3d:hover {
+            transform: rotateY(10deg) rotateX(10deg);
+        }
+
+        /* Education Filter */
+        .education-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid var(--emerald-light);
+            border-radius: 50px;
+            color: var(--emerald);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--emerald);
+            color: white;
+        }
+
+        /* Tab Navigation */
+        .tabs-container {
+            background: white;
+            padding: 5rem 0;
+        }
+
+        .tabs-navigation {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--cream);
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--brown);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .tab-btn:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--emerald);
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            color: var(--emerald);
+        }
+
+        .tab-btn.active:after, .tab-btn:hover:after {
+            width: 100%;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Additional Info Cards */
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--gold);
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .info-card h3 {
+            color: var(--emerald);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card h3 i {
+            margin-right: 10px;
+            color: var(--gold);
+        }
+
+        .cert-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--emerald-light);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline:after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-content:after {
+                left: 15px;
+                transform: translateX(-50%);
+            }
+
+            .skills-matrix {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--cream);
+                width: 100%;
+                height: auto;
+                padding: 2rem;
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+                z-index: 999;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero {
+                padding: 7rem 0 3rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-container {
+                top: 60px;
+            }
+
+            .tabs-navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tab-btn {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Header & Navigation -->
+<img src="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg:true" srcset="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg:true, //img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true 2x, //img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1095,h:1095,cg:true 3x" alt="Thema Green smiling" data-ux="ContentCardImageThumbnail" overlayalpha="0" data-aid="ABOUT_IMAGE_RENDERED0" class="x-el x-el-img c1-1 c1-2 c1-4 c1-x c1-t c1-r c1-q c1-s c1-y c1-a0 c1-a1 c1-1a c1-b c1-c c1-a2 c1-d c1-e c1-f c1-g">
+            <div class="logo">
+                
+                <div class="logo-text">Thema <span>Green</span></div>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portfolio-tabs">Portfolio</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+				<li><a href="https://www.linkedin.com/in/themagreen/" class="badge">Open to Work</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">Human Factors & AI Research Professional</span>
+                <h1>Engineering Human-Centered Systems</h1>
+                <p>Human Factors specialist with a background in engineering and design, focused on medical device software, research, and AI alignment. My work bridges psychology, technology, and design to create intuitive, safe, and effective human-system interactions.</p>
+                <div class="hero-actions">
+                    <a href="#portfolio-tabs" class="btn">View Portfolio</a>
+                    <a href="#contact" class="btn btn-gold" style="margin-left: 1rem;">Discuss Collaboration</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Tabs Section -->
+    <section id="portfolio-tabs" class="tabs-container">
+        <div class="container">
+            <div class="section-title">
+                <h2>Portfolio & Experience</h2>
+                <p>Explore my projects, education, and professional journey</p>
+            </div>
+            
+            <div class="tabs-navigation">
+                <button class="tab-btn active" data-tab="projects">Projects</button>
+                <button class="tab-btn" data-tab="education">Education</button>
+                <button class="tab-btn" data-tab="additional">Additional Info</button>
+            </div>
+            
+            <!-- Projects Tab -->
+            <div id="projects-tab" class="tab-content active">
+                <!-- Project Filter -->
+                <div class="project-filter">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="core">Core Academic</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile Design</button>
+                    <button class="filter-btn" data-filter="design">Design Thinking</button>
+                    <button class="filter-btn" data-filter="conceptual">Conceptual</button>
+                </div>
+                
+                <div class="project-grid">
+                    <!-- Core Academic Projects -->
+                    <div class="project-card card-3d fade-in" data-category="core">
+                        <div class="project-img">
+                            <i class="fas fa-ship"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Titanic Disaster Human Factors Analysis</h3>
+                            <p>Comprehensive incident investigation using HFACS to analyze human error, communication breakdowns, and organizational failures.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">HFACS</span>
+                                <span class="project-tag">Root-cause Analysis</span>
+                                <span class="project-tag">Systems Thinking</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Case Study</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-1" data-category="core">
+                        <div class="project-img">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>GMU Library Website Redesign</h3>
+                            <p>Research-driven UX redesign involving usability studies, competitive analysis, and heuristic evaluation. Recommendations implemented on the live site.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">UX Research</span>
+                                <span class="project-tag">Usability Testing</span>
+                                <span class="project-tag">Heuristic Evaluation</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Case Study</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-2" data-category="core">
+                        <div class="project-img">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Bigbelly Waste Management Partnership</h3>
+                            <p>User-centered design research and human-system integration analysis. Insights and recommendations adopted by stakeholders.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Industry Collaboration</span>
+                                <span class="project-tag">Task Analysis</span>
+                                <span class="project-tag">Human-System Integration</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Case Study</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-3" data-category="core">
+                        <div class="project-img">
+                            <i class="fas fa-bicycle"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>UMass-Amherst Human Performance Lab Fellowship</h3>
+                            <p>Enhanced a Unity 3D VR bicycle simulator for DOT safety studies; research presented at a university symposium.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">VR Development</span>
+                                <span class="project-tag">Unity 3D</span>
+                                <span class="project-tag">Behavioral Data</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Case Study</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile App Design Projects -->
+                    <div class="project-card card-3d fade-in" data-category="mobile">
+                        <div class="project-img">
+                            <i class="fas fa-bus"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Mason Commutes App</h3>
+                            <p>Native iOS/Android app for GMU commuter students to network, designed to address student isolation with detailed competitive analysis.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Native App Design</span>
+                                <span class="project-tag">User Personas</span>
+                                <span class="project-tag">Competitive Analysis</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-1" data-category="mobile">
+                        <div class="project-img">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Focus Guardian - Mobile Control Panel</h3>
+                            <p>4-screen companion app for the Focus Guardian browser extension with dashboard, timer management, insights, and settings.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">iOS/Android Design</span>
+                                <span class="project-tag">High-Fidelity Prototyping</span>
+                                <span class="project-tag">Feature Scoping</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-2" data-category="mobile">
+                        <div class="project-img">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>FOCUS Mobile App</h3>
+                            <p>Full native app (6+ screens) for a minimalist social media platform with feed, analytics, messaging, and app timer functionality.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">End-to-End Design</span>
+                                <span class="project-tag">Interaction Design</span>
+                                <span class="project-tag">Visual Design Systems</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-3" data-category="mobile">
+                        <div class="project-img">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>AuraFlex Smartwatch + Companion App</h3>
+                            <p>Wearable device app paired with a mobile experience featuring Zen Mode, AR Wardrobe Sync, Voice Command, and Posture Alerts.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Wearable Design</span>
+                                <span class="project-tag">Cross-Device Experience</span>
+                                <span class="project-tag">AR Concept Design</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Design Thinking Projects -->
+                    <div class="project-card card-3d fade-in" data-category="design">
+                        <div class="project-img">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>"Shark Tank" Innovation Pitch</h3>
+                            <p>Semester-long application of the full design thinking process to develop a new product/service with lean canvas and prototypes.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Design Thinking</span>
+                                <span class="project-tag">Business Strategy</span>
+                                <span class="project-tag">Storytelling</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-1" data-category="design">
+                        <div class="project-img">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Field Study Assignment</h3>
+                            <p>Conducted field research (observational study, contextual inquiry) to identify unmet user needs in various environments.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Ethnographic Research</span>
+                                <span class="project-tag">Contextual Inquiry</span>
+                                <span class="project-tag">Latent Needs</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-2" data-category="design">
+                        <div class="project-img">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Design Thinking "Mini-Projects"</h3>
+                            <p>Five projects practicing empathy mapping, POV statements, problem framing, HMW questions, and rapid prototyping.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Empathy Mapping</span>
+                                <span class="project-tag">Problem Framing</span>
+                                <span class="project-tag">Rapid Prototyping</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Projects</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Conceptual Projects -->
+                    <div class="project-card card-3d fade-in" data-category="conceptual">
+                        <div class="project-img">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>The FOCUS Ecosystem</h3>
+                            <p>Minimalist social platform with daily post limits and Focus Guardian browser extension for mindful browsing interventions.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Product Strategy</span>
+                                <span class="project-tag">Ecosystem Design</span>
+                                <span class="project-tag">UX Writing</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Concept</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-1" data-category="conceptual">
+                        <div class="project-img">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>The AuraFlex Product Ecosystem</h3>
+                            <p>Brand for customizable wearables with AR Wardrobe Sync, Voice-First Interface, Design Studio, and Posture Alerts.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Brand Development</span>
+                                <span class="project-tag">Hardware-Software Integration</span>
+                                <span class="project-tag">Accessibility Design</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Concept</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-2" data-category="conceptual">
+                        <div class="project-img">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>The Sunlight Project</h3>
+                            <p>Web app/social platform using gamification ("rays" for positivity) to foster constructive engagement and community building.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Gamification Design</span>
+                                <span class="project-tag">Positive Psychology</span>
+                                <span class="project-tag">Community Design</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Concept</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-3d fade-in delay-3" data-category="conceptual">
+                        <div class="project-img">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Anime Recommender Website</h3>
+                            <p>Web app with clean UI and robust filtering (genre, themes, year) for anime discovery and community-driven recommendations.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Information Architecture</span>
+                                <span class="project-tag">Advanced Filtering</span>
+                                <span class="project-tag">Community Design</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Foundational Work -->
+                    <div class="project-card card-3d fade-in" data-category="core">
+                        <div class="project-img">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Project Lead The Way (PLTW) Engineering</h3>
+                            <p>High school engineering courses providing foundation in CAD, prototyping, and problem-solving for human factors career path.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Engineering Principles</span>
+                                <span class="project-tag">Technical Drawing</span>
+                                <span class="project-tag">Problem-Solving</span>
+                            </div>
+                            <a href="#" class="btn btn-outline">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Education Tab -->
+            <div id="education-tab" class="tab-content">
+                <div class="education-filter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="highschool">High School</button>
+                    <button class="filter-btn" data-filter="college">College</button>
+                    <button class="filter-btn" data-filter="university">University</button>
+                </div>
+                
+                <div class="timeline">
+                    <!-- High School -->
+                    <div class="timeline-item fade-in" data-category="highschool">
+                        <div class="timeline-content card-3d">
+                            <div class="timeline-date">2017 - 2021</div>
+                            <h3>St. Charles High School <span class="dual-enrollment-badge">Dual Enrollment</span></h3>
+                            <p><strong>Project Lead the Way Engineering & Computer Science</strong></p>
+                            <p>Advanced Placement Program with 17 AP courses + Civil Engineering</p>
+                            
+                            <ul class="course-list">
+                                <li>
+                                    <span>Intro to Engineering Design (3 years)</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Principles of Engineering</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Civil Engineering & Architecture</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Computer Science & Coding (Python, Java, C++)</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Digital Electronics</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Engineering Capstone / Senior Project</span>
+                                    <span class="course-grade">A+</span>
+                                </li>
+                                <li>
+                                    <span>AP Physics 1 & 2</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>AP Calculus AB/BC</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>AP Statistics</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>AP Computer Science A</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="course-details">
+                                <h4>Skills Gained:</h4>
+                                <p>CAD, prototyping, 3D modeling, iterative design, problem-solving, applied physics, mechanical systems, teamwork, data-driven design, Python, Java, C++, coding logic, algorithmic thinking, circuit design, logic gates, electronics, project management, interdisciplinary integration, structural design, architectural principles</p>
+                                
+                                <h4>Transferable Skills for AI Alignment:</h4>
+                                <div class="project-tags" style="margin-top: 10px;">
+                                    <span class="project-tag">Systems Thinking</span>
+                                    <span class="project-tag">Problem Decomposition</span>
+                                    <span class="project-tag">Algorithmic Reasoning</span>
+                                    <span class="project-tag">Technical Prototyping</span>
+                                    <span class="project-tag">Structural Analysis</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-tags" style="margin-top: 15px;">
+                                <span class="project-tag">CAD</span>
+                                <span class="project-tag">Prototyping</span>
+                                <span class="project-tag">Algorithmic Thinking</span>
+                                <span class="project-tag">Circuit Design</span>
+                                <span class="project-tag">Physics</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dual Enrollment -->
+                    <div class="timeline-item fade-in delay-1" data-category="college">
+                        <div class="timeline-content card-3d">
+                            <div class="timeline-date">2020 - 2021</div>
+                            <h3>College of Southern Maryland <span class="dual-enrollment-badge">Dual Enrollment</span></h3>
+                            <p><strong>Dual Enrollment Program</strong></p>
+                            <p>20 transfer credits accepted by GMU - College courses taken during high school</p>
+                            
+                            <ul class="course-list">
+                                <li>
+                                    <span>Accounting Elective</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Computer Science Elective</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Precalculus</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Analytic Geometry & Calculus I</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Logic & Critical Thinking</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Basic Concepts in Psychology</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="course-details">
+                                <h4>Skills Gained:</h4>
+                                <p>Financial modeling, data organization, advanced coding, logic structures, analytical reasoning, functions, derivatives, integrals, argumentation, structured reasoning, behavioral principles, cognitive theory</p>
+                                
+                                <h4>Transferable Skills for AI Alignment:</h4>
+                                <div class="project-tags" style="margin-top: 10px;">
+                                    <span class="project-tag">Formal Logic</span>
+                                    <span class="project-tag">Mathematical Modeling</span>
+                                    <span class="project-tag">Analytical Reasoning</span>
+                                    <span class="project-tag">Cognitive Foundations</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-tags" style="margin-top: 15px;">
+                                <span class="project-tag">Financial Modeling</span>
+                                <span class="project-tag">Advanced Coding</span>
+                                <span class="project-tag">Analytical Reasoning</span>
+                                <span class="project-tag">Structured Reasoning</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- University -->
+                    <div class="timeline-item fade-in delay-2" data-category="university">
+                        <div class="timeline-content card-3d">
+                            <div class="timeline-date">2021 - 2025</div>
+                            <h3>George Mason University</h3>
+                            <p><strong>BS Psychology, Concentration in Human Factors / Applied Cognition</strong></p>
+                            <p><strong>Minor in Design Thinking</strong></p>
+                            
+                            <h4 style="margin-top: 15px; color: var(--emerald);">Core Psychology & Human Factors</h4>
+                            <ul class="course-list">
+                                <li>
+                                    <span>Statistics in Psychology</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Research Methods in Psychology</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Cognitive Psychology</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Human Factors Psychology</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Biopsychology & Lab</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Applied Cross-Cultural Psychology</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Developmental Psychology</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Mystery, Madness, and Murder</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Revitalizing Endangered Languages</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Advanced Topics in Human Factors</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Psychology in the Community</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                            </ul>
+                            
+                            <h4 style="margin-top: 15px; color: var(--emerald);">Design Thinking Minor</h4>
+                            <ul class="course-list">
+                                <li>
+                                    <span>Drawing I</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Mobile App Design</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Design in the Modern World</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Design Thinking Capstone</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>History of Graphic Design</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                            </ul>
+
+                            <h4 style="margin-top: 15px; color: var(--emerald);">Additional Relevant Courses</h4>
+                            <ul class="course-list">
+                                <li>
+                                    <span>General Biology & Labs</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Cell Structure and Function</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Introduction to Neuroscience</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Introduction to Nutrition</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Fundamentals of Communication</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Advanced Composition (Multidisciplinary)</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Professional & Technical Writing</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Philosophy and Literature</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Intro to Childhood Studies</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Introductory Sociology</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                                <li>
+                                    <span>Practicum in Educational Psychology</span>
+                                    <span class="course-grade">A</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="course-details">
+                                <h4>Skills Gained:</h4>
+                                <p>Experimental design, surveys, data collection, inferential statistics, SPSS, regression, attention, memory, perception, ergonomics, usability, error analysis, neurophysiology, lab techniques, EEG/psychophysiology, cultural competency, behavioral variation, visual design, observation, aesthetics, iOS/Android design guidelines, high-fidelity prototyping, design principles, historical context, human-centered design, project integration, biology fundamentals, neuroscience foundations, technical communication, philosophical analysis, sociological perspectives</p>
+                                
+                                <h4>Transferable Skills for AI Alignment:</h4>
+                                <div class="project-tags" style="margin-top: 10px;">
+                                    <span class="project-tag">Human Behavior Modeling</span>
+                                    <span class="project-tag">Experimental Design</span>
+                                    <span class="project-tag">Cognitive Architecture</span>
+                                    <span class="project-tag">Cross-Cultural UX</span>
+                                    <span class="project-tag">Interface Design</span>
+                                    <span class="project-tag">Human-Centered AI</span>
+                                    <span class="project-tag">Biological Systems</span>
+                                    <span class="project-tag">Technical Communication</span>
+                                    <span class="project-tag">Ethical Reasoning</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-tags" style="margin-top: 15px;">
+                                <span class="project-tag">Experimental Design</span>
+                                <span class="project-tag">Usability Testing</span>
+                                <span class="project-tag">Prototyping</span>
+                                <span class="project-tag">Human-Centered Design</span>
+                                <span class="project-tag">Biology</span>
+                                <span class="project-tag">Philosophy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Matrix -->
+                <div class="skills-matrix">
+                    <div class="skill-category-expanded fade-in">
+                        <h4><i class="fas fa-brain"></i> Cognitive Science & Psychology</h4>
+                        <div class="skill-item">Cognitive Psychology - Attention, memory, perception mechanisms</div>
+                        <div class="skill-item">Biopsychology - Neural basis of behavior and cognition</div>
+                        <div class="skill-item">Developmental Psychology - Lifespan cognitive development</div>
+                        <div class="skill-item">Cross-Cultural Psychology - Behavioral variation across cultures</div>
+                        <div class="skill-item">Human Factors Psychology - Ergonomics, usability, error analysis</div>
+                    </div>
+                    
+                    <div class="skill-category-expanded fade-in delay-1">
+                        <h4><i class="fas fa-flask"></i> Research Methods & Statistics</h4>
+                        <div class="skill-item">Experimental Design - Controlled studies and hypothesis testing</div>
+                        <div class="skill-item">Statistical Analysis - SPSS, regression, inferential statistics</div>
+                        <div class="skill-item">Data Collection - Surveys, behavioral observation, psychometrics</div>
+                        <div class="skill-item">Research Ethics - IRB protocols, ethical research practices</div>
+                    </div>
+                    
+                    <div class="skill-category-expanded fade-in delay-2">
+                        <h4><i class="fas fa-laptop-code"></i> Technical & Design Skills</h4>
+                        <div class="skill-item">Engineering Principles - CAD, prototyping, systems design</div>
+                        <div class="skill-item">UI/UX Design - User research, prototyping, interface design</div>
+                        <div class="skill-item">Programming - Python, Java, C++, data structures, algorithms</div>
+                        <div class="skill-item">Mathematics - Calculus, statistics, analytical geometry</div>
+                        <div class="skill-item">Physics - Mechanics, electricity, magnetism</div>
+                    </div>
+                </div>
+
+                <!-- Transferable Skills Section -->
+                <div class="transferable-skills fade-in">
+                    <h3>Transferable Skills for AI Alignment Research</h3>
+                    <p>Thema's interdisciplinary education provides a unique foundation for AI alignment research, combining technical rigor with deep understanding of human cognition and behavior.</p>
+                    
+                    <div style="margin: 1.5rem 0;">
+                        <span class="skill-pill">Systems Thinking</span>
+                        <span class="skill-pill">Behavioral Modeling</span>
+                        <span class="skill-pill">Experimental Design</span>
+                        <span class="skill-pill">Ethical Reasoning</span>
+                        <span class="skill-pill">Cross-Cultural Analysis</span>
+                        <span class="skill-pill">Cognitive Architecture</span>
+                        <span class="skill-pill">Human-Centered Design</span>
+                        <span class="skill-pill">Algorithmic Thinking</span>
+                        <span class="skill-pill">Technical Communication</span>
+                        <span class="skill-pill">Interdisciplinary Synthesis</span>
+                        <span class="skill-pill">Mathematical Modeling</span>
+                        <span class="skill-pill">Physics Principles</span>
+                        <span class="skill-pill">Formal Logic</span>
+                        <span class="skill-pill">Biological Systems</span>
+                    </div>
+                    
+                    <p>This unique combination allows for developing AI systems that are not only technically robust but also aligned with human values, ethical considerations, and diverse cultural perspectives.</p>
+                </div>
+            </div>
+            
+            <!-- Additional Info Tab -->
+            <div id="additional-tab" class="tab-content">
+                <!-- Work in Progress -->
+                <div class="info-card fade-in">
+                    <h3><i class="fas fa-hourglass-half"></i> Work in Progress</h3>
+                    <p>Current projects and research initiatives focused on human factors and AI alignment:</p>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <h4 style="color: var(--emerald);">Medical Device Software Research</h4>
+                        <p>Developing novel approaches to improve usability and safety in medical device interfaces, with a focus on reducing human error in high-stakes environments.</p>
+                        
+                        <h4 style="color: var(--emerald); margin-top: 1rem;">AI Alignment Framework</h4>
+                        <p>Creating a comprehensive framework for evaluating and ensuring AI systems remain aligned with nuanced human values and intentions across diverse contexts.</p>
+                        
+                        <h4 style="color: var(--emerald); margin-top: 1rem;">Human-Centered Design Patterns</h4>
+                        <p>Documenting reusable design patterns that prioritize human factors in complex systems, particularly in healthcare and safety-critical applications.</p>
+                    </div>
+                </div>
+                
+                <!-- Professional Experience -->
+                <div class="info-card fade-in delay-1">
+                    <h3><i class="fas fa-briefcase"></i> Professional Experience</h3>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <h4 style="color: var(--emerald);">Human Factors Research Assistant</h4>
+                        <p><strong>George Mason University</strong> | 2022 - Present</p>
+                        <p>Conducted user research studies, performed usability testing, and contributed to publications on human-computer interaction and cognitive ergonomics.</p>
+                        
+                        <h4 style="color: var(--emerald); margin-top: 1rem;">UX Design Intern</h4>
+                        <p><strong>Bigbelly Solar</strong> | Summer 2023</p>
+                        <p>Collaborated with industry partners to redesign user interfaces for smart waste management systems, focusing on intuitive interaction design.</p>
+                        
+                        <h4 style="color: var(--emerald); margin-top: 1rem;">VR Development Fellow</h4>
+                        <p><strong>UMass-Amherst Human Performance Lab</strong> | Summer 2022</p>
+                        <p>Enhanced Unity 3D VR simulations for transportation safety research, contributing to DOT-funded studies on cyclist behavior.</p>
+                    </div>
+                </div>
+                
+                <!-- Certifications -->
+                <div class="info-card fade-in delay-2">
+                    <h3><i class="fas fa-certificate"></i> Certifications & Professional Development</h3>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <span class="cert-badge">Human Factors and Ergonomics Society (HFES) Student Member</span>
+                            <span class="cert-badge">UXPA Member</span>
+                            <span class="cert-badge">Certified Usability Analyst (In Progress)</span>
+                        </div>
+                        
+                        <h4 style="color: var(--emerald);">Completed Certifications:</h4>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li>Human-Centered Design - IDEO</li>
+                            <li>UX Research Methods - Nielsen Norman Group</li>
+                            <li>Python for Data Science - DataCamp</li>
+                            <li>Introduction to Medical Device Regulations</li>
+                        </ul>
+                        
+                        <h4 style="color: var(--emerald);">Conference Presentations:</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>HFES Annual Meeting 2023 - Poster Presentation on Medical Device Usability</li>
+                            <li>GMU Research Symposium 2022 - VR Bicycle Simulator Research</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Skills Focus -->
+                <div class="info-card fade-in delay-3">
+                    <h3><i class="fas fa-star"></i> Specialized Skills Focus</h3>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <h4 style="color: var(--emerald);">Medical Device & Healthcare</h4>
+                        <div class="project-tags" style="margin: 0.5rem 0;">
+                            <span class="project-tag">Usability Testing</span>
+                            <span class="project-tag">Human Error Reduction</span>
+                            <span class="project-tag">FDA Regulations</span>
+                            <span class="project-tag">Task Analysis</span>
+                            <span class="project-tag">Heuristic Evaluation</span>
+                        </div>
+                        
+                        <h4 style="color: var(--emerald); margin-top: 1rem;">AI & Technology</h4>
+                        <div class="project-tags" style="margin: 0.5rem 0;">
+                            <span class="project-tag">Human-AI Interaction</span>
+                            <span class="project-tag">Alignment Research</span>
+                            <span class="project-tag">Ethical Design</span>
+                            <span class="project-tag">Behavioral Modeling</span>
+                            <span class="project-tag">Value Alignment</span>
+                        </div>
+                        
+                        <h4 style="color: var(--emerald); margin-top: 1rem;">Research Methods</h4>
+                        <div class="project-tags" style="margin: 0.5rem 0;">
+                            <span class="project-tag">Experimental Design</span>
+                            <span class="project-tag">Statistical Analysis</span>
+                            <span class="project-tag">Qualitative Research</span>
+                            <span class="project-tag">Survey Design</span>
+                            <span class="project-tag">Data Visualization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" style="background: white;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Skills & Expertise</h2>
+                <p>A multidisciplinary approach to human factors and design</p>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-brain"></i> Cognitive Science</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check-circle"></i> Human Information Processing</li>
+                        <li><i class="fas fa-check-circle"></i> Attention & Memory Systems</li>
+                        <li><i class="fas fa-check-circle"></i> Decision Making</li>
+                        <li><i class="fas fa-check-circle"></i> Perception & Psychophysics</li>
+                        <li><i class="fas fa-check-circle"></i> Mental Models</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category fade-in delay-1">
+                    <h3><i class="fas fa-laptop-code"></i> UX Research & Design</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check-circle"></i> Usability Testing</li>
+                        <li><i class="fas fa-check-circle"></i> Heuristic Evaluation</li>
+                        <li><i class="fas fa-check-circle"></i> User Interviews</li>
+                        <li><i class="fas fa-check-circle"></i> Persona Development</li>
+                        <li><i class="fas fa-check-circle"></i> Wireframing & Prototyping</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category fade-in delay-2">
+                    <h3><i class="fas fa-chart-line"></i> Data Analysis</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check-circle"></i> Statistical Analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Experimental Design</li>
+                        <li><i class="fas fa-check-circle"></i> R / Python</li>
+                        <li><i class="fas fa-check-circle"></i> Data Visualization</li>
+                        <li><i class="fas fa-check-circle"></i> Survey Design</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category fade-in delay-3">
+                    <h3><i class="fas fa-robot"></i> AI & Technology</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check-circle"></i> Human-AI Interaction</li>
+                        <li><i class="fas fa-check-circle"></i> AI Alignment Research</li>
+                        <li><i class="fas fa-check-circle"></i> Ethical Design</li>
+                        <li><i class="fas fa-check-circle"></i> Python Programming</li>
+                        <li><i class="fas fa-check-circle"></i> Machine Learning Concepts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="background: var(--cream);">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>My journey in human factors and design thinking</p>
+            </div>
+            
+            <div class="about-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                <div class="about-text fade-in">
+                    <p>I'm a Human Factors specialist with a unique background spanning engineering, psychology, and design. My work focuses on creating intuitive, safe, and effective human-system interactions, particularly in medical devices and AI systems.</p>
+                    
+                    <p>My approach combines rigorous scientific methodology with creative design thinking to solve complex problems at the intersection of humans and technology.</p>
+                    
+                    <p>I'm passionate about ensuring that technological advancements remain aligned with human values and capabilities, creating systems that augment rather than hinder human potential.</p>
+                    
+                    <div class="project-tags" style="margin-top: 2rem;">
+                        <span class="project-tag">Human-Centered Design</span>
+                        <span class="project-tag">Cognitive Engineering</span>
+                        <span class="project-tag">AI Safety</span>
+                        <span class="project-tag">Medical Devices</span>
+                        <span class="project-tag">Research Methodology</span>
+                    </div>
+                </div>
+                
+                <div class="about-image fade-in delay-1" style="background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%); height: 300px; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; color: white;">
+                    <i class="fas fa-user-circle" style="font-size: 5rem;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background: white;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Have a project in mind or want to discuss human factors and AI alignment? Reach out below.</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>contact@themagreen.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Fairfax, Virginia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-university"></i>
+                        <div>
+                            <h4>Education</h4>
+                            <p>George Mason University</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+            
+            <div class="submission-results" id="submissionResults">
+                <h3>Form Submission Details</h3>
+                <div class="result-item">
+                    <span class="result-label">Name:</span>
+                    <span class="result-value" id="resultName"></span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Email:</span>
+                    <span class="result-value" id="resultEmail"></span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Subject:</span>
+                    <span class="result-value" id="resultSubject"></span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Message:</span>
+                    <span class="result-value" id="resultMessage"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <!-- About Column -->
+                <div class="footer-col">
+                    <h3>Thema Green</h3>
+                    <p>Human Factors & AI Research Professional specializing in medical device software, research, and AI alignment. Bridging psychology, technology, and design.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links Column -->
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#portfolio-tabs">Portfolio</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Expertise Column -->
+                <div class="footer-col">
+                    <h3>Areas of Expertise</h3>
+                    <ul>
+                        <li><a href="#">Human Factors Research</a></li>
+                        <li><a href="#">Medical Device UX</a></li>
+                        <li><a href="#">AI Alignment</a></li>
+                        <li><a href="#">Cognitive Psychology</a></li>
+                        <li><a href="#">Design Thinking</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Column -->
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@themagreen.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Fairfax, Virginia</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-university"></i>
+                        <span>George Mason University</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Thema Green. All Rights Reserved.</p>
+                <p>Designed and developed with a focus on human-centered principles.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Scroll progress bar
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+
+        // Particles.js configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#047857" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#B7942C",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 1 } },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with fade-in class
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+
+        // 3D card effect on mouse move
+        document.querySelectorAll('.card-3d').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleY = (x - centerX) / 25;
+                const angleX = (centerY - y) / 25;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        // Project filter functionality
+        const projectFilterButtons = document.querySelectorAll('.project-filter .filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        projectFilterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                projectFilterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                // Filter project cards
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Education timeline interaction
+        document.querySelectorAll('.timeline-content').forEach(content => {
+            content.addEventListener('click', function() {
+                this.classList.toggle('active');
+                
+                // Close other open items
+                document.querySelectorAll('.timeline-content').forEach(item => {
+                    if (item !== this) {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Education filter
+        const filterButtons = document.querySelectorAll('.education-filter .filter-btn');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                // Filter items
+                timelineItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = button.getAttribute('data-tab');
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tabId}-tab`) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Display results
+            document.getElementById('resultName').textContent = name;
+            document.getElementById('resultEmail').textContent = email;
+            document.getElementById('resultSubject').textContent = subject;
+            document.getElementById('resultMessage').textContent = message;
+            
+            // Show results section
+            document.getElementById('submissionResults').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('submissionResults').scrollIntoView({ behavior: 'smooth' });
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
 </html>
