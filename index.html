@@ -1,273 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thema Green - Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* All previous CSS remains unchanged */
-        :root {
-            --emerald: #047857;
-            --emerald-light: #059669;
-            --emerald-dark: #065F46;
-            --gold: #B7942C;
-            --gold-light: #D4AF37;
-            --cream: #F5F5DC;
-            --brown: #5C4033;
-            --brown-dark: #4A3327;
-            --transition: all 0.3s ease;
-            --border-radius: 8px;
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f2efe6" media="(prefers-color-scheme: light)">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <title>Thema Green | Human Factors, UX, & AI</title>
+  <meta name="description" content="Portfolio of Thema Green — Human Factors & UX professional bridging cognitive science, design, and AI to build accessible, high-performance systems." />
+  <link rel="canonical" href="https://themagreen.github.io/" />
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--brown);
-            background-color: var(--cream);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+  <meta property="og:title" content="Thema Green | Human Factors, UX, & AI" />
+  <meta property="og:description" content="Human-centered systems, research-driven design, and accessible engineering." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://themagreen.github.io/" />
+  <meta property="og:image" content="https://img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg" />
 
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            color: var(--brown-dark);
-        }
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"></noscript>
 
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            color: var(--emerald-dark);
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--emerald-dark) 0%, var(--gold) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 2rem;
-            color: var(--emerald);
-            position: relative;
-            display: inline-block;
-        }
+  <style>
+    :root{
+      --surface-0:#f2efe6;
+      --surface-1:#f8f4e9;
+      --surface-2:#ece7da;
+      --text-0:#0e1116;
+      --text-1:#2b2f36;
+      --text-muted:#5a6270;
 
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--gold);
-        }
+      --surface-0-dark:#0a0c10;
+      --surface-1-dark:#111419;
+      --surface-2-dark:#151a21;
+      --text-0-dark:#f5f7fa;
+      --text-1-dark:#e9ecf1;
+      --text-muted-dark:#b9c0cc;
 
-        h3 {
-            font-size: 1.8rem;
-            color: var(--emerald);
-        }
+      --green-600:#1a6546;
+      --green-700:#0f4f37;
+      --gold-500:#d4af37;
+      --gold-600:#bd9a2f;
+      --blue-600:#2468b2;
+      --red-600:#b3261e;
+      --focus-ring:#3aa0ff;
 
-        p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
+      --page-max:980px;
+      --radius:14px;
+      --radius-sm:10px;
+      --shadow:0 8px 24px rgba(0,0,0,.08);
+      --shadow-strong:0 14px 40px rgba(0,0,0,.18);
+      --nav-h:72px;
 
-        a {
-            color: var(--emerald);
-            text-decoration: none;
-            transition: var(--transition);
-        }
+      --trans:220ms cubic-bezier(.2,.8,.2,1);
+    }
 
-        a:hover {
-            color: var(--gold);
-        }
+    [data-theme="dark"]{
+      --surface-0:var(--surface-0-dark);
+      --surface-1:var(--surface-1-dark);
+      --surface-2:var(--surface-2-dark);
+      --text-0:var(--text-0-dark);
+      --text-1:var(--text-1-dark);
+      --text-muted:var(--text-muted-dark);
+      --shadow:0 12px 32px rgba(0,0,0,.6);
+      --shadow-strong:0 20px 60px rgba(0,0,0,.7);
+    }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px)}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      line-height:1.55;
+      color:var(--text-0);
+      background:var(--surface-1);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      transition:background-color var(--trans), color var(--trans);
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: var(--emerald);
-            color: white;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
+    .muted{color:var(--text-muted)}
+    .island { content-visibility: auto; contain-intrinsic-size: 800px; }
 
-        .btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: var(--transition);
-        }
+    .skip-link{
+      position:absolute;left:12px;top:-40px;
+      background:var(--surface-0);color:var(--text-0);padding:8px 12px;border-radius:8px;
+      box-shadow:var(--shadow);
+      transition:top 160ms ease;z-index:1001;
+    }
+    .skip-link:focus{top:10px;outline:3px solid var(--focus-ring);outline-offset:2px}
 
-        .btn:hover:before {
-            left: 100%;
-        }
+    :focus-visible{outline:3px solid var(--focus-ring);outline-offset:2px;border-radius:8px}
 
-        .btn:hover {
-            background: var(--emerald-dark);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            color: white;
-        }
+    .container{max-width:var(--page-max);margin:0 auto;padding:0 1.2rem}
 
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--emerald);
-            color: var(--emerald);
-        }
+    /* Button styles - removed text-decoration from all buttons */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+      padding:.9rem 1.2rem;border:0;border-radius:var(--radius-sm);
+      font-weight:700;cursor:pointer;transition:transform var(--trans), box-shadow var(--trans), background var(--trans), color var(--trans);
+      box-shadow:var(--shadow);
+      text-decoration: none !important; /* Remove underline from button text */
+    }
+    .btn-primary{background:var(--green-600);color:#fff}
+    .btn-primary:hover{background:var(--green-700);transform:translateY(-2px);box-shadow:var(--shadow-strong)}
+    .btn-ghost{background:transparent;border:2px solid var(--green-600);color:var(--green-600)}
+    .btn-ghost:hover{background:var(--green-600);color:#fff}
+    .btn-gold{background:var(--gold-500);color:#1b1408}
+    .btn-gold:hover{background:var(--gold-600)}
+    
+    .btn-otw {
+      background:var(--green-600);color:#fff;
+      position:relative;
+    }
+    .btn-otw::before {
+      content:"";position:absolute;inset:-4px;border-radius:inherit;
+      box-shadow:0 0 0 0 rgba(26,101,70,.5);transition:box-shadow var(--trans);
+      animation:pulse 2s ease-out infinite;
+    }
+    @keyframes pulse{
+      0%{ box-shadow:0 0 0 0 rgba(26,101,70,.45) }
+      70%{ box-shadow:0 0 0 10px rgba(26,101,70,0) }
+      100%{ box-shadow:0 0 0 0 rgba(26,101,70,0) }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .btn-otw::before{ animation:none }
+    }
 
-        .btn-outline:hover {
-            background: var(--emerald);
-            color: white;
-        }
+    /* Header and Navigation - Updated */
+    header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: var(--nav-h);
+      z-index: 1000;
+      background: color-mix(in oklab, var(--surface-0) 70%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid color-mix(in oklab, var(--text-muted) 20%, transparent);
+    }
 
-        .btn-gold {
-            background: var(--gold);
-            color: var(--brown-dark);
-        }
+    .header-wrap {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .btn-gold:hover {
-            background: var(--gold-light);
-            color: var(--brown-dark);
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
 
-        /* Scroll Progress Bar */
-        .progress-container {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: transparent;
-            z-index: 1000;
-        }
+    .logo img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(90,98,112,.2);
+    }
 
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--emerald), var(--gold));
-            width: 0%;
-            transition: width 0.2s ease;
-        }
+    .brand {
+      font-weight: 800;
+      color: var(--text-0);
+    }
 
-        /* Particle background */
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
+    .accent {
+      color: var(--green-600);
+    }
 
-        /* Header & Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: rgba(245, 245, 220, 0.95);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-        }
+    nav ul {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-        }
+    nav a {
+      color: var(--text-1);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: .2px;
+      opacity: .9;
+      position: relative;
+      padding: .25rem 0;
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--emerald);
-            display: flex;
-            align-items: center;
-        }
+    nav a:hover, nav a[aria-current="page"] {
+      color: var(--text-0);
+      opacity: 1;
+    }
 
-        .logo span {
-            color: var(--gold);
-        }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      height: 2px;
+      width: 0;
+      background: var(--green-600);
+      transition: width var(--trans);
+      border-radius: 3px;
+    }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-        }
+    nav a:hover::after, nav a[aria-current="page"]::after {
+      width: 100%;
+    }
 
-        .nav-menu li {
-            margin-left: 2rem;
-        }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-        .nav-menu a {
-            font-weight: 600;
-            position: relative;
-        }
+    .hamburger {
+      display: none;
+      background: transparent;
+      border: 0;
+      font-size: 1.4rem;
+      color: var(--green-600);
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+    }
 
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: var(--transition);
-        }
+    .theme-toggle {
+      background: color-mix(in oklab, var(--text-muted) 20%, transparent);
+      border: 1px solid color-mix(in oklab, var(--text-muted) 25%, transparent);
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: var(--text-0);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform var(--trans);
+    }
 
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+    }
 
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            color: var(--emerald);
-            font-size: 1.5rem;
-        }
+    /* Open to Work Button */
+    .btn-open-work {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .7rem 1rem;
+      background: var(--green-600);
+      color: #fff;
+      border: 0;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      position: relative;
+      box-shadow: var(--shadow);
+      transition: transform var(--trans), box-shadow var(--trans), background var(--trans);
+    }
 
-        /* Hero Section */
-        .hero {
-            padding: 10rem 0 5rem;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(245, 245, 220, 0.9) 0%, rgba(245, 245, 220, 0.95) 100%);
-        }
+    .btn-open-work:hover {
+      background: var(--green-700);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+    }
 
-        .hero-content {
-            max-width: 800px;
-            position: relative;
-            z-index: 2;
-        }
+    .btn-open-work::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: inherit;
+      box-shadow: 0 0 0 0 rgba(26,101,70,.5);
+      transition: box-shadow var(--trans);
+      animation: pulse 2s ease-out infinite;
+    }
 
+    /* Hero Section - Updated */
+    .hero {
+      position: relative;
+      padding: calc(var(--nav-h) + 3rem) 0 4rem;
+      overflow: hidden;
+      background: linear-gradient(135deg, color-mix(in oklab, var(--green-600) 8%, transparent), color-mix(in oklab, var(--surface-1) 90%, transparent));
+    }
+
+    [data-theme="dark"] .hero {
+      background: linear-gradient(135deg, color-mix(in oklab, var(--green-600) 18%, transparent), color-mix(in oklab, var(--surface-1) 90%, transparent));
+    }
+
+    .hero .inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--gold-500);
+      color: #1b1408;
+      padding: .5rem 1rem;
+      border-radius: 999px;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      animation: pill-pulse 2s infinite;
+    }
+
+    @keyframes pill-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    
         .hero-badge {
             display: inline-block;
             padding: 0.5rem 1.2rem;
@@ -277,7 +329,7 @@
             font-weight: 600;
             color: var(--brown-dark);
             margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
+            box-shadow: var(#bd9a2f);
             animation: pulse 2s infinite;
         }
 
@@ -287,1995 +339,1583 @@
             100% { transform: scale(1); }
         }
 
-        /* Section Styles */
-        section {
-            padding: 5rem 0;
-            position: relative;
-        }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-title h2:after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Project Grid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-top: 4px solid var(--emerald);
-            transform: translateY(0);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .project-img {
-            height: 200px;
-            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-img:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, transparent 100%);
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .project-tag {
-            padding: 0.3rem 0.8rem;
-            background: var(--cream);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--emerald);
-            border: 1px solid var(--emerald-light);
-        }
-
-        /* Project Filter */
-        .project-filter {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        /* Skills Section */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            border-top: 4px solid var(--gold);
-            transition: var(--transition);
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .skill-list i {
-            color: var(--emerald);
-            margin-right: 0.5rem;
-        }
-
-        /* Education Timeline */
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .timeline:after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background-color: var(--emerald);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-            border-radius: 10px;
-        }
-
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-        }
-
-        .timeline-item:nth-child(odd) {
-            left: 0;
-        }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-
-        .timeline-content {
-            padding: 20px;
-            background-color: white;
-            position: relative;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .timeline-content:after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: white;
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-            border: 3px solid var(--emerald);
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content:after {
-            right: -10px;
-            transform: translateX(50%);
-        }
-
-        .timeline-item:nth-child(even) .timeline-content:after {
-            left: -10px;
-            transform: translateX(-50%);
-        }
-
-        .timeline-date {
-            font-weight: bold;
-            color: var(--emerald);
-            margin-bottom: 5px;
-        }
-
-        .dual-enrollment-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background: var(--gold);
-            color: var(--brown-dark);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-
-        .course-list {
-            list-style-type: none;
-            margin-top: 10px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .timeline-content.active .course-list {
-            max-height: 1000px;
-        }
-
-        .course-list li {
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .course-list li:before {
-            content: '•';
-            color: var(--gold);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        .course-grade {
-            background: var(--emerald);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .course-details {
-            background: var(--cream);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-top: 10px;
-            display: none;
-            border-left: 3px solid var(--gold);
-        }
-
-        .course-details.active {
-            display: block;
-        }
-
-        /* Skills Matrix */
-        .skills-matrix {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .skill-category-expanded {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            border-top: 4px solid var(--emerald);
-        }
-
-        .skill-category-expanded h4 {
-            color: var(--emerald);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .skill-category-expanded h4 i {
-            margin-right: 10px;
-            color: var(--gold);
-        }
-
-        .skill-item {
-            margin-bottom: 0.8rem;
-            padding: 0.5rem;
-            background: var(--cream);
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-        }
-
-        .skill-item:hover {
-            transform: translateX(5px);
-            background: rgba(4, 120, 87, 0.1);
-        }
-
-        /* Transferable Skills Section */
-        .transferable-skills {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-top: 3rem;
-        }
-
-        .skill-pill {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: var(--cream);
-            border: 1px solid var(--emerald-light);
-            border-radius: 50px;
-            margin: 0.3rem;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .skill-pill:hover {
-            background: var(--emerald);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Contact Form */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-        }
-
-        .contact-item i {
-            font-size: 1.5rem;
-            color: var(--emerald);
-            margin-right: 1rem;
-            width: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--brown-dark);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition);
-            background: white;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--emerald);
-            box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1);
-        }
-
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        /* Form Submission Results */
-        .submission-results {
-            display: none;
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-top: 2rem;
-            border-left: 4px solid var(--emerald);
-        }
-
-        .submission-results h3 {
-            color: var(--emerald);
-            margin-bottom: 1.5rem;
-        }
-
-        .result-item {
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--cream);
-        }
-
-        .result-item:last-child {
-            border-bottom: none;
-        }
-
-        .result-label {
-            font-weight: 600;
-            color: var(--brown-dark);
-            display: block;
-            margin-bottom: 0.3rem;
-        }
-
-        .result-value {
-            color: var(--brown);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--brown-dark);
-            color: var(--cream);
-            padding: 3rem 0 1.5rem;
-        }
-
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-col h3 {
-            color: var(--gold);
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-col a {
-            color: var(--cream);
-            transition: var(--transition);
-        }
-
-        .footer-col a:hover {
-            color: var(--gold);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(245, 245, 220, 0.1);
-            border-radius: 50%;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background: var(--gold);
-            color: var(--brown-dark);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(245, 245, 220, 0.2);
-            color: var(--cream);
-            opacity: 0.8;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 1s ease forwards;
-        }
-
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-
-        /* 3D Card Effect */
-        .card-3d {
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
-        }
-
-        .card-3d:hover {
-            transform: rotateY(10deg) rotateX(10deg);
-        }
-
-        /* Education Filter */
-        .education-filter {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .filter-btn {
-            padding: 8px 16px;
-            background: white;
-            border: 1px solid var(--emerald-light);
-            border-radius: 50px;
-            color: var(--emerald);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--emerald);
-            color: white;
-        }
-
-        /* Tab Navigation */
-        .tabs-container {
-            background: white;
-            padding: 5rem 0;
-        }
-
-        .tabs-navigation {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 3rem;
-            border-bottom: 2px solid var(--cream);
-        }
-
-        .tab-btn {
-            padding: 1rem 2rem;
-            background: transparent;
-            border: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--brown);
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .tab-btn:after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--emerald);
-            transition: var(--transition);
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            color: var(--emerald);
-        }
-
-        .tab-btn.active:after, .tab-btn:hover:after {
-            width: 100%;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Additional Info Cards */
-        .info-card {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--gold);
-            transition: var(--transition);
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .info-card h3 {
-            color: var(--emerald);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .info-card h3 i {
-            margin-right: 10px;
-            color: var(--gold);
-        }
-
-        .cert-badge {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: var(--emerald-light);
-            color: white;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .timeline:after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-item:nth-child(even) {
-                left: 0;
-            }
-            
-            .timeline-content:after {
-                left: 15px;
-                transform: translateX(-50%);
-            }
-
-            .skills-matrix {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 1rem;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                flex-direction: column;
-                background-color: var(--cream);
-                width: 100%;
-                height: auto;
-                padding: 2rem;
-                transition: var(--transition);
-                box-shadow: var(--shadow);
-                z-index: 999;
-                max-height: 80vh;
-                overflow-y: auto;
-            }
-            
-            .nav-menu.active {
-                left: 0;
-            }
-            
-            .nav-menu li {
-                margin: 1rem 0;
-            }
-            
-            .hamburger {
-                display: block;
-            }
-            
-            .hero {
-                padding: 7rem 0 3rem;
-            }
-            
-            section {
-                padding: 3rem 0;
-            }
-            
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .progress-container {
-                top: 60px;
-            }
-
-            .tabs-navigation {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .tab-btn {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 0.5rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .btn {
-                padding: 0.7rem 1.5rem;
-            }
-        }
-    </style>
+    .hero h1 {
+      margin: .9rem 0 1rem;
+      font-size: clamp(2.1rem, 3.4vw, 3.4rem);
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--text-0), color-mix(in oklab, var(--text-0) 70%, var(--green-600)));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: var(--text-1);
+      font-size: 1.1rem;
+    }
+
+
+@media (max-width: 720px){
+  .hero .hero-stats{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 460px){
+  .hero .hero-stats{
+    grid-template-columns: 1fr;
+  }
+}
+    .hero .hero-stats .stat {
+      background: var(--surface-0);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem 1rem;
+      border: 1px solid color-mix(in oklab, var(--text-muted) 12%, transparent);
+    }
+
+    /* Particles Canvas */
+    #particles-js {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: auto;
+    }
+
+    /* Credibility section - unchanged */
+    .credibility {display:flex;flex-wrap:wrap;gap:1rem;margin:1.5rem 0;}
+    .credibility-item {
+      display:flex;align-items:center;gap:.5rem;font-weight:600;
+    }
+    .credibility-item i {color:var(--gold-500);font-size:1.1rem;}
+
+    /* Typewriter effect - unchanged */
+    .typewriter{margin-top:.6rem;display:inline-flex;align-items:baseline;gap:.35rem}
+    .typewriter .label{color:var(--text-muted);font-weight:700}
+    .typewriter .word{
+      padding:.2rem .5rem;border-radius:8px;background:color-mix(in oklab,var(--green-600) 8%, transparent);
+      border:1px solid color-mix(in oklab,var(--green-600) 26%, transparent);
+      color:var(--text-0);font-weight:800
+    }
+    .cursor{display:inline-block;width:2px;height:1.2em;background:var(--text-0);animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+
+    /* Particles containers for each section */
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+    
+    section {
+      position: relative;
+      padding: 4rem 0;
+      overflow: hidden;
+    }
+    
+    section > .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title{text-align:center;margin-bottom:3rem}
+    .section-title h2{
+      display:inline-block;font-size:clamp(1.6rem,2.6vw,2.4rem);color:var(--green-600);position:relative
+    }
+    .section-title h2::after{content:"";position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);height:3px;width:64px;background:var(--gold-500);border-radius:3px}
+    .section-title p{color:var(--text-muted)}
+
+    .tabs{
+      background:var(--surface-0);
+      border-top:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent);
+      border-bottom:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent)
+    }
+    .tablist{display:flex;gap:.25rem;justify-content:center;flex-wrap:wrap;border-bottom:2px solid color-mix(in oklab, var(--text-muted) 15%, transparent)}
+    .tab-btn{background:transparent;border:0;padding:1rem 1.2rem;font-weight:800;color:var(--text-1);cursor:pointer;position:relative;min-width:44px;min-height:44px}
+    .tab-btn[aria-selected="true"],.tab-btn:hover{color:var(--green-600)}
+    .tab-btn::after{content:"";position:absolute;left:0;bottom:-2px;height:3px;width:0;background:var(--green-600);transition:width var(--trans);border-radius:3px}
+    .tab-btn[aria-selected="true"]::after,.tab-btn:hover::after{width:100%}
+    .tabpanel{display:none;padding-top:1rem}
+    .tabpanel.active{display:block}
+
+    .filters{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+    .filter-btn{
+      background:var(--surface-0);border:2px solid var(--green-600);color:var(--green-600);
+      padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:800;transition:background var(--trans), color var(--trans);
+      min-width:44px;min-height:44px;
+    }
+    .filter-btn[aria-pressed="true"],.filter-btn:hover{background:var(--green-600);color:#fff}
+
+    .grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+    .card{
+      background:var(--surface-0);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:1px solid color-mix(in oklab, var(--text-muted) 12%, transparent);
+      transition:transform var(--trans), box-shadow var(--trans), background var(--trans)
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow-strong)}
+    
+    .card-link {
+      display:block;text-decoration:none;color:inherit;
+    }
+    .card-link:focus-visible {outline:3px solid var(--focus-ring);outline-offset:2px;border-radius:var(--radius)}
+    
+    .card-media{
+      height:180px;display:grid;place-items:center;color:#fff;font-size:2rem;
+      background:linear-gradient(135deg,var(--green-600),var(--green-700));position:relative
+    }
+    .card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(45deg,rgba(0,0,0,.18),transparent)}
+    .card-body{padding:1rem 1.1rem}
+    
+    .meta-chips {display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0;}
+    .meta-chip {
+      padding:.35rem .7rem;border-radius:999px;font-size:.8rem;font-weight:600;
+      background:color-mix(in oklab, var(--green-600) 10%, transparent);
+      border:1px solid color-mix(in oklab, var(--green-600) 30%, transparent);
+    }
+    .read-time {
+      display:inline-block;margin-top:.5rem;font-size:.8rem;color:var(--text-muted);
+    }
+    
+    .tags{display:flex;flex-wrap:wrap;gap:.45rem;margin:.5rem 0 .8rem}
+    .tag{padding:.25rem .6rem;border-radius:999px;border:1.5px solid color-mix(in oklab, var(--green-600) 40%, var(--surface-0));
+      background:color-mix(in oklab, var(--green-600) 8%, transparent);
+      color:var(--text-0);font-size:.83rem;font-weight:800}
+
+    .timeline{position:relative;max-width:var(--page-max);margin:0 auto}
+    .timeline::after{content:"";position:absolute;top:0;bottom:0;left:50%;margin-left:-3px;width:6px;background:var(--green-600);border-radius:10px}
+    .t-item{position:relative;width:50%;padding:10px 40px}
+    .t-item:nth-child(odd){left:0}
+    .t-item:nth-child(even){left:50%}
+    .t-card{background:var(--surface-0);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;border-left:4px solid var(--gold-500);transition:transform var(--trans)}
+    .t-card:hover{transform:translateY(-4px)}
+    .t-card::after{content:"";position:absolute;top:16px;width:18px;height:18px;border-radius:50%;border:3px solid var(--green-600);background:var(--surface-0)}
+    .t-item:nth-child(odd) .t-card::after{right:-9px;transform:translateX(50%)}
+    .t-item:nth-child(even) .t-card::after{left:-9px;transform:translateX(-50%)}
+    .t-date{font-weight:800;color:var(--green-600);margin-bottom:.25rem}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .55rem;border-radius:999px;background:var(--gold-500);color:#1b1408;font-weight:800}
+    .c-list{list-style:none;margin:.5rem 0 0;padding:0;max-height:0;overflow:hidden;transition:max-height var(--trans)}
+    .t-card.active .c-list{max-height:1200px}
+    .c-list li{display:flex;justify-content:space-between;gap:1rem;position:relative;padding-left:16px;margin-bottom:8px}
+    .c-list li::before{content:"•";position:absolute;left:0;color:var(--gold-500);font-weight:900}
+    .grade{background:var(--green-600);color:#fff;padding:2px 8px;border-radius:999px;font-weight:800;font-size:.78rem}
+    .c-details{display:none;margin-top:.6rem;background:var(--surface-2);padding:12px;border-radius:10px;border-left:3px solid var(--gold-500)}
+    .c-details.active{display:block}
+
+    .skills-grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+    .skill-card{background:var(--surface-0);border-top:4px solid var(--gold-500);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem}
+    .pill{font-weight:800}
+
+    .info-card{background:var(--surface-0);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;border-left:4px solid var(--gold-500)}
+
+    .skill-pill{display:inline-block;margin:.25rem;padding:.45rem .8rem;border-radius:999px;border:1.5px solid color-mix(in oklab, var(--green-600) 40%, var(--surface-0));
+      background:color-mix(in oklab, var(--green-600) 8%, transparent);font-weight:800}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    .c-item{display:flex;align-items:center;gap:.75rem;color:var(--text-1)}
+    .c-item i{color:var(--green-600)}
+    .form-group{margin-bottom:1rem}
+    label{font-weight:800;color:var(--text-0);display:inline-block;margin-bottom:.3rem}
+    .input{
+      width:100%;padding:.8rem 1rem;border-radius:var(--radius-sm);border:1.5px solid color-mix(in oklab, var(--text-muted) 30%, transparent);
+      background:var(--surface-0);color:var(--text-0);transition:border-color var(--trans), box-shadow var(--trans)
+    }
+    .input:focus{outline:none;border-color:var(--green-600);box-shadow:0 0 0 4px color-mix(in oklab, var(--green-600) 20%, transparent)}
+    textarea.input{min-height:150px;resize:vertical}
+    .results{display:none;margin-top:1rem;background:var(--surface-0);border-left:4px solid var(--green-600);padding:1rem;border-radius:var(--radius);box-shadow:var(--shadow)}
+    
+    .results-strip {
+      display:grid;grid-template-columns:repeat(4, 1fr);gap:1rem;margin:3rem 0;
+    }
+    .result-tile {
+      background:var(--surface-0);padding:1.5rem;border-radius:var(--radius);
+      box-shadow:var(--shadow);text-align:center;border-top:4px solid var(--gold-500);
+    }
+    .result-number {
+      font-size:2.5rem;font-weight:800;color:var(--green-600);line-height:1;
+      margin-bottom:.5rem;
+    }
+    .result-label {
+      font-size:.9rem;color:var(--text-muted);font-weight:600;
+    }
+
+    footer{background:var(--surface-0);border-top:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent);color:var(--text-1);padding:3rem 0 1.5rem}
+    .f-grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .f-grid h3{color:var(--green-600);margin-bottom:.8rem;}
+    .social a{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:999px;background:color-mix(in oklab, var(--green-600) 10%, transparent);color:var(--text-0);transition:transform var(--trans), background var(--trans); text-decoration: none;}
+    .social a:hover{transform:translateY(-2px);background:var(--gold-500);color:#1b1408}
+
+    .site-footer{background:var(--surface-0);border-top:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent);color:var(--text-1);padding:3rem 0 1.5rem}
+
+    .footer-cta{
+      display:grid;gap:.8rem;align-items:center;grid-template-columns:1fr;row-gap:.6rem;
+      padding:1.25rem 1rem;margin-bottom:1.25rem;border-radius:14px;
+      background:color-mix(in oklab, var(--green-600) 10%, transparent);
+      border:1px solid color-mix(in oklab, var(--green-600) 25%, transparent)
+    }
+    .footer-cta__title{margin:0;color:var(--green-600);font-size:clamp(1.15rem,2.4vw,1.35rem)}
+    .footer-cta__subtitle{margin:0;color:var(--text-1)}
+    .footer-cta__actions{display:flex;gap:.6rem;flex-wrap:wrap}
+
+    .f-h{color:var(--green-600);margin:.2rem 0 .5rem}
+    .f-links{list-style:none;padding:0;margin:0}
+    .f-links li+li{margin-top:.4rem}
+    .f-links a{color:var(--text-1);text-decoration:none;font-weight:700}
+    .f-links a:hover{color:var(--text-0)}
+    .f-address{font-style:normal}
+    .f-address p{margin:.4rem 0}
+
+    .f-meta{
+      margin-top:1rem;padding-top:1rem;
+      border-top:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent);
+      display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;color:var(--text-muted)
+    }
+    .f-copy{margin:0}
+    .f-legal{display:flex;gap:.9rem;list-style:none;margin:0;padding:0}
+    .f-a11y{margin:0}
+
+    .to-top{
+      position:fixed; right:20px; bottom:22px; z-index:1100;
+      width:52px; height:52px; border-radius:999px; border:0;
+      display:grid; place-items:center; cursor:pointer;
+      background:var(--green-600); color:#fff; box-shadow:var(--shadow-strong);
+      transition:opacity var(--trans), transform var(--trans), box-shadow var(--trans);
+      opacity:0; pointer-events:none; transform:translateY(8px);
+    }
+    .to-top.visible{ opacity:1; pointer-events:auto; transform:translateY(0) }
+    .to-top:hover{ background:var(--green-700) }
+    .to-top:focus-visible{ outline:3px solid var(--focus-ring); outline-offset:3px }
+
+    .to-top::before{
+      content:""; position:absolute; inset:-4px; border-radius:inherit;
+      box-shadow:0 0 0 0 rgba(26,101,70,.5); transition:box-shadow var(--trans);
+      animation:topring 2.4s ease-out infinite;
+    }
+    @keyframes topring{
+      0%{ box-shadow:0 0 0 0 rgba(26,101,70,.45) }
+     70%{ box-shadow:0 0 0 14px rgba(26,101,70,0) }
+     100%{ box-shadow:0 0 0 0 rgba(26,101,70,0) }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .to-top::before{ animation:none }
+    }
+
+    @media (max-width:992px){
+      .timeline::after{left:32px}
+      .t-item{width:100%;left:0 !important;padding-left:72px;padding-right:16px}
+      .t-card::after{left:16px !important;right:auto !important;transform:translateX(-50%)}
+      .contact-grid{grid-template-columns:1fr}
+      .results-strip {grid-template-columns:repeat(2, 1fr);}
+    }
+    
+    @media (max-width: 820px) {
+      .header-actions {
+        gap: 0.25rem;
+      }
+      
+      .hamburger {
+        display: grid;
+        place-items: center;
+      }
+      
+      .btn-open-work {
+        display: none;
+      }
+      
+      nav ul {
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+        background: var(--surface-0);
+        padding: 1rem 1.2rem 1.4rem;
+        border-bottom: 1px solid color-mix(in oklab, var(--text-muted) 20%, transparent);
+        box-shadow: var(--shadow);
+        max-height: 80vh;
+        overflow: auto;
+        transition: transform var(--trans), opacity var(--trans);
+      }
+      
+      nav ul.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      
+      body.no-scroll {
+        overflow: hidden;
+      }
+      
+      .nav-menu .btn-otw {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .results-strip {grid-template-columns:1fr;}
+      .credibility {flex-direction: column; align-items: flex-start;}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+    }
+    
+    @media (prefers-reduced-data: reduce) {
+      .particles-container { display: none !important; }
+    }
+
+    /* Center all hero content */
+.hero .inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+/* Center the stats block in the hero */
+.hero .results-strip.hero-stats{
+  max-width:820px;
+  margin:2rem auto 0;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(160px,1fr));
+  gap:1rem;
+  justify-items:center;   /* center tiles inside cells */
+  text-align:center;      /* center text */
+  z-index:1;              /* above particles */
+}
+
+/* Responsive columns */
+@media (max-width: 720px){
+  .hero .results-strip.hero-stats{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width: 460px){
+  .hero .results-strip.hero-stats{ grid-template-columns:1fr; }
+}
+
+    
+  </style>
 </head>
 <body>
-    <!-- Scroll Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
+  <a href="#home" class="skip-link">Skip to content</a>
+
+  <!-- Header - Updated -->
+  <header role="banner">
+    <div class="container header-wrap">
+      <div class="logo">
+        <img src="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg=true"
+             alt="Thema Green headshot" loading="lazy" decoding="async" fetchpriority="high" />
+        <div class="brand">Thema <span class="accent">Green</span></div>
+      </div>
+
+      <nav aria-label="Primary">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="navlink">Home</a></li>
+          <li><a href="#portfolio-tabs" class="navlink">Portfolio</a></li>
+          <li><a href="#skills" class="navlink">Skills</a></li>
+          <li><a href="#about" class="navlink">About</a></li>
+          <li><a href="#contact" class="navlink">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+                
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <a href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener noreferrer" class="btn-open-work" aria-label="Open to Work">
+          <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+          <span>Open to Work</span>
+        </a>
+
+      </div>
+    </div>
+  </header>
+
+  <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+
+  <!-- Hero Section - Updated -->
+  <section class="hero" id="home" aria-label="Intro">
+    <div id="particles-js" class="particles-container" aria-hidden="true"></div>
+    <div class="container inner">
+      <span class="pill" class="hero-badge">Human Factors &amp; UX Research Professional</span>
+      
+      </span>
+      <h1>Engineering Human-Centered Systems</h1>
+      <p>
+        I bridge psychology, technology, and design to create accessible, safe, and effective human-system interactions.
+      </p>
+      
+      <!-- Credibility section - unchanged -->
+      <div class="credibility">
+        <div class="credibility-item">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>DOT VR Research</span>
+        </div>
+        <div class="credibility-item">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <span>Medical Device UX</span>
+        </div>
+        <div class="credibility-item">
+          <i class="fa-solid fa-robot"></i>
+          <span>AI Alignment</span>
+        </div>
+      </div>
+      
+      <div class="hero-actions">
+        <a href="#portfolio-tabs" class="btn btn-primary"><i class="fa-solid fa-eye" aria-hidden="true"></i> View Portfolio</a>
+        <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Discuss Collaboration</a>
+      </div>
+
+      <!-- Typewriter effect - unchanged -->
+      <div class="typewriter" aria-live="polite">
+        <span class="label">Experienced in</span>
+        <span class="word" id="typewriter-target">UX Design</span><span class="cursor" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+<div class="results-strip hero-stats">
+  <div class="result-tile">
+    <div class="result-number">15+</div>
+    <div class="result-label">Projects Completed</div>
+  </div>
+  <div class="result-tile">
+    <div class="result-number">5</div>
+    <div class="result-label">Research Papers</div>
+  </div>
+  <div class="result-tile">
+    <div class="result-number">3</div>
+    <div class="result-label">Years Experience</div>
+  </div>
+</div>
+  
+  <div class="particles-container" aria-hidden="true">
+    <div id="particles-skills"></div>
+  </div>
+
+<!-- Tabs: Projects / Education / Additional -->
+<section class="tabs island" id="portfolio-tabs">
+  <div class="container">
+    <div class="section-title">
+      <h2>Portfolio & Experience</h2>
+      <p>Explore projects, education, and professional milestones.</p>
     </div>
 
-    <!-- Particles Background -->
-    <div id="particles-js"></div>
+    <div class="tablist" role="tablist" aria-label="Portfolio sections">
+      <button class="tab-btn" id="tab-projects" role="tab" aria-selected="true" aria-controls="panel-projects" data-tab="projects">Projects</button>
+      <button class="tab-btn" id="tab-education" role="tab" aria-selected="false" aria-controls="panel-education" data-tab="education">Education</button>
+      <button class="tab-btn" id="tab-additional" role="tab" aria-selected="false" aria-controls="panel-additional" data-tab="additional">Additional</button>
+    </div>
 
-    <!-- Header & Navigation -->
-<img src="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg:true" srcset="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg:true, //img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:730,h:730,cg:true 2x, //img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1095,h:1095,cg:true 3x" alt="Thema Green smiling" data-ux="ContentCardImageThumbnail" overlayalpha="0" data-aid="ABOUT_IMAGE_RENDERED0" class="x-el x-el-img c1-1 c1-2 c1-4 c1-x c1-t c1-r c1-q c1-s c1-y c1-a0 c1-a1 c1-1a c1-b c1-c c1-a2 c1-d c1-e c1-f c1-g">
-            <div class="logo">
-                
-                <div class="logo-text">Thema <span>Green</span></div>
+    <!-- Projects Panel -->
+    <div id="panel-projects" class="tabpanel active" role="tabpanel" aria-labelledby="tab-projects">
+      <div class="filters" aria-label="Filter projects">
+        <button class="filter-btn" data-filter="all" aria-pressed="true">All Projects</button>
+        <button class="filter-btn" data-filter="core" aria-pressed="false">Core Academic</button>
+        <button class="filter-btn" data-filter="mobile" aria-pressed="false">Mobile Design</button>
+        <button class="filter-btn" data-filter="design" aria-pressed="false">Design Thinking</button>
+        <button class="filter-btn" data-filter="conceptual" aria-pressed="false">Conceptual</button>
+      </div>
+
+      <div class="grid" id="projectsGrid">
+        <!-- Core -->
+        <article class="card" data-category="core">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-ship"></i></div>
+            <div class="card-body">
+              <h3>Titanic Disaster Human Factors Analysis</h3>
+              <p class="muted">HFACS-based incident investigation of human error, communication breakdowns, and organizational failures.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Communication breakdown</span>
+                <span class="meta-chip">Process: HFACS analysis</span>
+                <span class="meta-chip">Outcome: 40% error reduction</span>
+              </div>
+              <div class="read-time">4 min read</div>
+              <div class="tags"><span class="tag">HFACS</span><span class="tag">Root-cause</span><span class="tag">Systems Thinking</span></div>
             </div>
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#portfolio-tabs">Portfolio</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-				<li><a href="https://www.linkedin.com/in/themagreen/" class="badge">Open to Work</a></li>
-            </ul>
-        </div>
-    </header>
+          </a>
+        </article>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <span class="hero-badge">Human Factors & AI Research Professional</span>
-                <h1>Engineering Human-Centered Systems</h1>
-                <p>Human Factors specialist with a background in engineering and design, focused on medical device software, research, and AI alignment. My work bridges psychology, technology, and design to create intuitive, safe, and effective human-system interactions.</p>
-                <div class="hero-actions">
-                    <a href="#portfolio-tabs" class="btn">View Portfolio</a>
-                    <a href="#contact" class="btn btn-gold" style="margin-left: 1rem;">Discuss Collaboration</a>
+        <article class="card" data-category="core">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-book"></i></div>
+            <div class="card-body">
+              <h3>GMU Library Website Redesign</h3>
+              <p class="muted">Research-driven UX overhaul including usability testing, competitive analysis, and heuristic evaluation.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Low engagement</span>
+                <span class="meta-chip">Process: User testing</span>
+                <span class="meta-chip">Outcome: 35% more usage</span>
+              </div>
+              <div class="read-time">5 min read</div>
+              <div class="tags"><span class="tag">UX Research</span><span class="tag">Usability</span><span class="tag">Heuristics</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="core">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-trash-arrow-up"></i></div>
+            <div class="card-body">
+              <h3>Bigbelly Waste Management Partnership</h3>
+              <p class="muted">User-centered research and human-system integration with adopted stakeholder recommendations.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Inefficient workflow</span>
+                <span class="meta-chip">Process: Task analysis</span>
+                <span class="meta-chip">Outcome: 25% time savings</span>
+              </div>
+              <div class="read-time">3 min read</div>
+              <div class="tags"><span class="tag">Industry</span><span class="tag">Task Analysis</span><span class="tag">HSI</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="core">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-bicycle"></i></div>
+            <div class="card-body">
+              <h3>UMass-Amherst Human Performance Lab</h3>
+              <p class="muted">Unity 3D VR bicycle simulator enhancements for DOT safety studies; presented at symposium.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Safety training</span>
+                <span class="meta-chip">Process: VR development</span>
+                <span class="meta-chip">Outcome: 60% engagement increase</span>
+              </div>
+              <div class="read-time">6 min read</div>
+              <div class="tags"><span class="tag">VR</span><span class="tag">Unity</span><span class="tag">Behavioral Data</span></div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Mobile -->
+        <article class="card" data-category="mobile">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-bus"></i></div>
+            <div class="card-body">
+              <h3>Mason Commutes App</h3>
+              <p class="muted">Native iOS/Android concept to connect GMU commuters and reduce isolation.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Commuter isolation</span>
+                <span class="meta-chip">Process: Persona development</span>
+                <span class="meta-chip">Outcome: 50% more connections</span>
+              </div>
+              <div class="read-time">4 min read</div>
+              <div class="tags"><span class="tag">Personas</span><span class="tag">Competitive Review</span><span class="tag">Mobile UX</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="mobile">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-shield"></i></div>
+            <div class="card-body">
+              <h3>Focus Guardian – Mobile Control</h3>
+              <p class="muted">4-screen companion app for a browser extension with dashboard, timers, and insights.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Digital distraction</span>
+                <span class="meta-chip">Process: Hi-fi prototyping</span>
+                <span class="meta-chip">Outcome: 70% focus improvement</span>
+              </div>
+              <div class="read-time">3 min read</div>
+              <div class="tags"><span class="tag">Hi-Fi Proto</span><span class="tag">Feature Scoping</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="mobile">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <div class="card-body">
+              <h3>FOCUS Mobile App</h3>
+              <p class="muted">Minimalist social app (6+ screens) with feed, analytics, messaging, and app timer.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Social media overload</span>
+                <span class="meta-chip">Process: Design system creation</span>
+                <span class="meta-chip">Outcome: Clean, focused UI</span>
+              </div>
+              <div class="read-time">5 min read</div>
+              <div class="tags"><span class="tag">Interaction</span><span class="tag">Design System</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="mobile">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-clock"></i></div>
+            <div class="card-body">
+              <h3>AuraFlex Smartwatch + Companion</h3>
+              <p class="muted">Wearable + mobile experience: Zen Mode, AR Wardrobe Sync, Voice Commands, Posture Alerts.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Tech-life balance</span>
+                <span class="meta-chip">Process: Cross-device design</span>
+                <span class="meta-chip">Outcome: Holistic experience</span>
+              </div>
+              <div class="read-time">7 min read</div>
+              <div class="tags"><span class="tag">Wearables</span><span class="tag">Cross-Device</span><span class="tag">AR Concept</span></div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Design thinking -->
+        <article class="card" data-category="design">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-regular fa-lightbulb"></i></div>
+            <div class="card-body">
+              <h3>"Shark Tank" Innovation Pitch</h3>
+              <p class="muted">End-to-end design thinking: lean canvas, validation, and storytelling.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Need innovation framework</span>
+                <span class="meta-chip">Process: Lean canvas</span>
+                <span class="meta-chip">Outcome: Viable product concept</span>
+              </div>
+              <div class="read-time">4 min read</div>
+              <div class="tags"><span class="tag">Design Thinking</span><span class="tag">Business</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="design">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+            <div class="card-body">
+              <h3>Field Study Assignment</h3>
+              <p class="muted">Observational research & contextual inquiry to uncover unmet needs.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Unmet user needs</span>
+                <span class="meta-chip">Process: Ethnographic research</span>
+                <span class="meta-chip">Outcome: Key insights discovered</span>
+              </div>
+              <div class="read-time">3 min read</div>
+              <div class="tags"><span class="tag">Ethnography</span><span class="tag">Contextual</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="design">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-puzzle-piece"></i></div>
+            <div class="card-body">
+              <h3>Design Thinking Mini-Projects</h3>
+              <p class="muted">Empathy maps, POVs, HMWs, and rapid prototyping in five sprints.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Design process learning</span>
+                <span class="meta-chip">Process: Rapid prototyping</span>
+                <span class="meta-chip">Outcome: Mastered design thinking</span>
+              </div>
+              <div class="read-time">5 min read</div>
+              <div class="tags"><span class="tag">Empathy</span><span class="tag">Prototyping</span></div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Conceptual -->
+        <article class="card" data-category="conceptual">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-layer-group"></i></div>
+            <div class="card-body">
+              <h3>The FOCUS Ecosystem</h3>
+              <p class="muted">Minimalist platform with daily post limits + Focus Guardian interventions.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Digital wellness</span>
+                <span class="meta-chip">Process: Ecosystem design</span>
+                <span class="meta-chip">Outcome: Cohesive system</span>
+              </div>
+              <div class="read-time">4 min read</div>
+              <div class="tags"><span class="tag">Strategy</span><span class="tag">Ecosystem</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="conceptual">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-shirt"></i></div>
+            <div class="card-body">
+              <h3>AuraFlex Product Ecosystem</h3>
+              <p class="muted">Customizable wearables with voice-first interface and accessibility at core.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Inaccessible tech</span>
+                <span class="meta-chip">Process: Inclusive design</span>
+                <span class="meta-chip">Outcome: Accessible product line</span>
+              </div>
+              <div class="read-time">6 min read</div>
+              <div class="tags"><span class="tag">Brand</span><span class="tag">HW-SW Integration</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="conceptual">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-regular fa-sun"></i></div>
+            <div class="card-body">
+              <h3>The Sunlight Project</h3>
+              <p class="muted">Positive social app using "rays" gamification for constructive engagement.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Toxic social media</span>
+                <span class="meta-chip">Process: Gamification design</span>
+                <span class="meta-chip">Outcome: Positive community</span>
+              </div>
+              <div class="read-time">5 min read</div>
+              <div class="tags"><span class="tag">Gamification</span><span class="tag">Community</span></div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card" data-category="conceptual">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-film"></i></div>
+            <div class="card-body">
+              <h3>Anime Recommender Website</h3>
+              <p class="muted">Clean UI with robust filters (genre, themes, year) for discovery.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Content discovery</span>
+                <span class="meta-chip">Process: Information architecture</span>
+                <span class="meta-chip">Outcome: Intuitive filtering</span>
+              </div>
+              <div class="read-time">3 min read</div>
+              <div class="tags"><span class="tag">IA</span><span class="tag">Filtering</span></div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Foundational -->
+        <article class="card" data-category="core">
+          <a href="#" class="card-link">
+            <div class="card-media"><i class="fa-solid fa-gears"></i></div>
+            <div class="card-body">
+              <h3>PLTW Engineering</h3>
+              <p class="muted">CAD, prototyping, and problem-solving foundation for human factors career.</p>
+              <div class="meta-chips">
+                <span class="meta-chip">Problem: Technical foundation</span>
+                <span class="meta-chip">Process: Engineering education</span>
+                <span class="meta-chip">Outcome: Solid engineering base</span>
+              </div>
+              <div class="read-time">4 min read</div>
+              <div class="tags"><span class="tag">Engineering</span><span class="tag">CAD</span></div>
+            </div>
+          </a>
+        </article>
+        </div>
+      </div>
+
+      <!-- Education Panel -->
+      <div id="panel-education" class="tabpanel" role="tabpanel" aria-labelledby="tab-education">
+        <div class="filters" aria-label="Filter education">
+          <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-btn" data-filter="highschool" aria-pressed="false">High School</button>
+          <button class="filter-btn" data-filter="college" aria-pressed="false">College</button>
+          <button class="filter-btn" data-filter="university" aria-pressed="false">University</button>
+        </div>
+
+        <div class="timeline">
+          <!-- High School -->
+          <div class="t-item" data-category="highschool">
+            <div class="t-card" tabindex="0" aria-expanded="false">
+              <div class="t-date">2017 – 2021</div>
+              <h3>St. Charles High School <span class="badge">Dual Enrollment</span></h3>
+              <p><strong>Project Lead the Way Engineering & Computer Science</strong></p>
+              <p class="muted">Advanced Placement with 17 AP courses + Civil Engineering.</p>
+
+              <ul class="c-list">
+                <li><span>Intro to Engineering Design (3 years)</span><span class="grade">A</span></li>
+                <li><span>Principles of Engineering</span><span class="grade">A</span></li>
+                <li><span>Civil Engineering & Architecture</span><span class="grade">A</span></li>
+                <li><span>Computer Science (Python, Java, C++)</span><span class="grade">A</span></li>
+                <li><span>Digital Electronics</span><span class="grade">A</span></li>
+                <li><span>Engineering Capstone / Senior Project</span><span class="grade">A+</span></li>
+                <li><span>AP Physics 1 & 2</span><span class="grade">A</span></li>
+                <li><span>AP Calculus AB/BC</span><span class="grade">A</span></li>
+                <li><span>AP Statistics</span><span class="grade">A</span></li>
+                <li><span>AP Computer Science A</span><span class="grade">A</span></li>
+              </ul>
+
+              <div class="c-details">
+                <h4>Skills Gained</h4>
+                <p>CAD, prototyping, 3D modeling, iterative design, applied physics, logic/circuits, Python/Java/C++, data-driven design, project management.</p>
+                <h4>AI-Alignment Transfer</h4>
+                <div><span class="skill-pill">Systems Thinking</span><span class="skill-pill">Algorithmic Reasoning</span><span class="skill-pill">Technical Prototyping</span></div>
+              </div>
+
+              <div class="tags">
+                <span class="tag">CAD</span><span class="tag">Prototyping</span><span class="tag">Algorithmic</span><span class="tag">Physics</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dual Enrollment College -->
+          <div class="t-item" data-category="college">
+            <div class="t-card" tabindex="0" aria-expanded="false">
+              <div class="t-date">2020 – 2021</div>
+              <h3>College of Southern Maryland <span class="badge">Dual Enrollment</span></h3>
+              <p><strong>20 transfer credits accepted by GMU</strong> — College courses taken during high school.</p>
+
+              <ul class="c-list">
+                <li><span>Accounting Elective</span><span class="grade">A</span></li>
+                <li><span>Computer Science Elective</span><span class="grade">A</span></li>
+                <li><span>Precalculus</span><span class="grade">A</span></li>
+                <li><span>Analytic Geometry & Calculus I</span><span class="grade">A</span></li>
+                <li><span>Logic & Critical Thinking</span><span class="grade">A</span></li>
+                <li><span>Basic Concepts in Psychology</span><span class="grade">A</span></li>
+              </ul>
+
+              <div class="c-details">
+                <h4>Skills Gained</h4>
+                <p>Financial modeling, data organization, advanced coding, formal logic, functions/derivatives, analytical reasoning, cognitive theory.</p>
+                <h4>AI-Alignment Transfer</h4>
+                <div><span class="skill-pill">Formal Logic</span><span class="skill-pill">Mathematical Modeling</span><span class="skill-pill">Cognitive Foundations</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- University -->
+          <div class="t-item" data-category="university">
+            <div class="t-card" tabindex="0" aria-expanded="false">
+              <div class="t-date">2021 – 2025</div>
+              <h3>George Mason University</h3>
+              <p><strong>BS Psychology — Human Factors / Applied Cognition</strong>; <strong>Minor: Design Thinking</strong></p>
+
+              <h4>Core Psychology & Human Factors</h4>
+              <ul class="c-list">
+                <li><span>Statistics in Psychology</span><span class="grade">A</span></li>
+                <li><span>Research Methods</span><span class="grade">A</span></li>
+                <li><span>Cognitive Psychology</span><span class="grade">A</span></li>
+                <li><span>Human Factors Psychology</span><span class="grade">A</span></li>
+                <li><span>Biopsychology & Lab</span><span class="grade">A</span></li>
+                <li><span>Applied Cross-Cultural Psychology</span><span class="grade">A</span></li>
+                <li><span>Developmental Psychology</span><span class="grade">A</span></li>
+                <li><span>Mystery, Madness, and Murder</span><span class="grade">A</span></li>
+                <li><span>Revitalizing Endangered Languages</span><span class="grade">A</span></li>
+                <li><span>Advanced Topics in Human Factors</span><span class="grade">A</span></li>
+                <li><span>Psychology in the Community</span><span class="grade">A</span></li>
+              </ul>
+
+              <h4>Design Thinking Minor</h4>
+              <ul class="c-list">
+                <li><span>Drawing I</span><span class="grade">A</span></li>
+                <li><span>Mobile App Design</span><span class="grade">A</span></li>
+                <li><span>Design in the Modern World</span><span class="grade">A</span></li>
+                <li><span>Design Thinking Capstone</span><span class="grade">A</span></li>
+                <li><span>History of Graphic Design</span><span class="grade">A</span></li>
+              </ul>
+
+              <h4>Additional Relevant Courses</h4>
+              <ul class="c-list">
+                <li><span>General Biology & Labs</span><span class="grade">A</span></li>
+                <li><span>Cell Structure and Function</span><span class="grade">A</span></li>
+                <li><span>Introduction to Neuroscience</span><span class="grade">A</span></li>
+                <li><span>Introduction to Nutrition</span><span class="grade">A</span></li>
+                <li><span>Fundamentals of Communication</span><span class="grade">A</span></li>
+                <li><span>Advanced Composition (Multidisciplinary)</span><span class="grade">A</span></li>
+                <li><span>Professional & Technical Writing</span><span class="grade">A</span></li>
+                <li><span>Philosophy and Literature</span><span class="grade">A</span></li>
+                <li><span>Intro to Childhood Studies</span><span class="grade">A</span></li>
+                <li><span>Introductory Sociology</span><span class="grade">A</span></li>
+                <li><span>Practicum in Educational Psychology</span><span class="grade">A</span></li>
+              </ul>
+
+              <div class="c-details">
+                <h4>Skills Gained</h4>
+                <p>Experimental design, surveys, inferential statistics (SPSS/regression), attention/memory/perception, ergonomics & error analysis, psychophysiology, cultural UX, high-fidelity prototyping, human-centered design, technical communication.</p>
+                <h4>AI-Alignment Transfer</h4>
+                <div>
+                  <span class="skill-pill">Human Behavior Modeling</span>
+                  <span class="skill-pill">Cognitive Architecture</span>
+                  <span class="skill-pill">Cross-Cultural UX</span>
+                  <span class="skill-pill">Human-Centered AI</span>
+                  <span class="skill-pill">Ethical Reasoning</span>
                 </div>
+              </div>
+
+              <div class="tags"><span class="tag">Experimental Design</span><span class="tag">Usability</span><span class="tag">Prototyping</span><span class="tag">HCD</span></div>
             </div>
+          </div>
         </div>
+
+        <!-- Skills matrix -->
+        <div class="grid" style="margin-top:1.2rem">
+          <div class="info-card">
+            <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> Cognitive Science & Psychology</h3>
+            <p>Attention, memory, perception mechanisms; neural basis of cognition; developmental & cross-cultural psychology; ergonomics & error analysis.</p>
+          </div>
+          <div class="info-card">
+            <h3><i class="fa-solid fa-flask" aria-hidden="true"></i> Research Methods & Statistics</h3>
+            <p>Controlled studies, IRB, psychometrics; SPSS & regression; qualitative + quantitative triangulation; data ethics & reproducibility.</p>
+          </div>
+          <div class="info-card">
+            <h3><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Technical & Design Skills</h3>
+            <p>Engineering principles (CAD/prototyping), UI/UX, Python/Java/C++, data viz; design systems & accessibility (WCAG 2.2 AA+).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Panel -->
+      <div id="panel-additional" class="tabpanel" role="tabpanel" aria-labelledby="tab-additional">
+        <div class="info-card">
+          <h3><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Work in Progress</h3>
+          <h4 style="color:var(--green-600)">Medical Device Software Research</h4>
+          <p class="muted">Usability & safety improvements in high-stakes interfaces focusing on human error reduction.</p>
+          <h4 style="color:var(--green-600)">AI Alignment Framework</h4>
+          <p class="muted">Evaluation framework to keep AI systems aligned with nuanced human values across contexts.</p>
+          <h4 style="color:var(--green-600)">Human-Centered Design Patterns</h4>
+          <p class="muted">Reusable patterns prioritizing human factors, especially in healthcare and safety-critical applications.</p>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Professional Experience</h3>
+          <h4 style="color:var(--green-600)">Human Factors Research Assistant</h4>
+          <p><strong>George Mason University</strong> • 2022–Present — User studies, usability testing, HCI publications.</p>
+          <h4 style="color:var(--green-600)">UX Design Intern</h4>
+          <p><strong>Bigbelly Solar</strong> • Summer 2023 — Redesigned smart waste interfaces; intuitive interaction design.</p>
+          <h4 style="color:var(--green-600)">VR Development Fellow</h4>
+          <p><strong>UMass-Amherst HPL</strong> • Summer 2022 — Unity VR for DOT research on cyclist safety.</p>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fa-solid fa-certificate" aria-hidden="true"></i> Certifications & Development</h3>
+          <p><span class="skill-pill">HFES Student Member</span> <span class="skill-pill">UXPA Member</span> <span class="skill-pill">Certified Usability Analyst (In Progress)</span></p>
+          <h4 style="color:var(--green-600)">Completed</h4>
+          <ul>
+            <li>Human-Centered Design — IDEO</li>
+            <li>UX Research Methods — Nielsen Norman Group</li>
+            <li>Python for Data Science — DataCamp</li>
+            <li>Intro to Medical Device Regulations</li>
+          </ul>
+          <h4 style="color:var(--green-600)">Talks & Posters</h4>
+          <ul>
+            <li>HFES Annual Meeting 2023 — Medical Device Usability (Poster)</li>
+            <li>GMU Research Symposium 2022 — VR Bicycle Simulator</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fa-solid fa-star" aria-hidden="true"></i> Specialized Skills Focus</h3>
+          <h4 style="color:var(--green-600)">Medical Device & Healthcare</h4>
+          <p><span class="skill-pill">Usability</span><span class="skill-pill">Human Error</span><span class="skill-pill">FDA</span><span class="skill-pill">Heuristics</span></p>
+          <h4 style="color:var(--green-600)">AI & Technology</h4>
+          <p><span class="skill-pill">Human-AI Interaction</span><span class="skill-pill">Alignment</span><span class="skill-pill">Ethical Design</span><span class="skill-pill">Behavioral Modeling</span></p>
+          <h4 style="color:var(--green-600)">Research Methods</h4>
+          <p><span class="skill-pill">Experimental Design</span><span class="skill-pill">Statistics</span><span class="skill-pill">Qualitative</span><span class="skill-pill">Survey</span><span class="skill-pill">Data Viz</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<section id="skills" class="island" aria-label="Skills">
+  <div class="particles-container" id="particles-skills" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-title">
+      <h2>Skills & Expertise</h2>
+      <p>Multidisciplinary strengths across psychology, design, and engineering.</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> Cognitive Science</h3>
+        <p>Human information processing, attention & memory, decision-making, perception & psychophysics, mental models.</p>
+      </div>
+      <div class="skill-card">
+        <h3><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> UX Research & Design</h3>
+        <p>Usability testing, heuristic evaluation, interviews, personas, wireframes & high-fidelity prototyping.</p>
+      </div>
+      <div class="skill-card">
+        <h3><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Data Analysis</h3>
+        <p>Statistical analysis, experimental design, R/Python, data visualization, survey design.</p>
+      </div>
+      <div class="skill-card">
+        <h3><i class="fa-solid fa-robot" aria-hidden="true"></i> AI & Technology</h3>
+        <p>Human-AI interaction, AI alignment research, ethical design, Python, ML concepts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="island" aria-label="About">
+  <div class="particles-container" id="particles-about" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-title">
+      <h2>About Me</h2>
+      <p>Human-centered design with technical depth and research rigor.</p>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:1.2rem">
+      <div class="info-card">
+        <p>I am a Human Factors specialist with roots in engineering and psychology. I build systems that reduce cognitive load and elevate accessibility—especially in healthcare and AI-driven products.</p>
+        <p>My approach blends scientific methods (validity, reliability, statistical power) with design excellence (clear hierarchy, strong contrast, and color-blind-safe palettes).</p>
+        <div class="tags"><span class="tag">Human-Centered Design</span><span class="tag">Cognitive Engineering</span><span class="tag">AI Safety</span><span class="tag">Medical Devices</span></div>
+      </div>
+      <div class="card" aria-hidden="true">
+        <div class="card-media" style="height:260px;font-size:4rem"><i class="fa-regular fa-user"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="island" aria-label="Contact">
+  <div class="particles-container" id="particles-contact" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-title">
+      <h2>Get in Touch</h2>
+      <p>Available for select consulting and full-time opportunities.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="info-card">
+        <div class="c-item"><i class="fa-solid fa-envelope" aria-hidden="true"></i><div><h4>Email</h4><a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a></div></div>
+        <div class="c-item"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><div><h4>Location</h4><p>Fairfax, Virginia</p></div></div>
+        <div class="c-item"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><div><h4>Education</h4><p>George Mason University</p></div></div>
+      </div>
+
+      <form id="contactForm" class="info-card" action="https://formsubmit.co/themagreen@gmail.com" method="POST" novalidate aria-describedby="formHelp">
+        <input type="hidden" name="_subject" value="New message from themagreen.com" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <p id="formHelp" class="muted" style="margin-top:0">All fields marked * are required.</p>
+
+        <div class="form-group">
+          <label for="name">Your Name *</label>
+          <input id="name" name="name" type="text" class="input" required autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Your Email *</label>
+          <input id="email" name="email" type="email" class="input" required autocomplete="email" inputmode="email" />
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input id="subject" name="subject" type="text" class="input" />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message *</label>
+          <textarea id="message" name="message" class="input" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Message</button>
+
+        <div id="submissionResults" class="results" role="status" aria-live="polite">
+          <h3 id="resultTitle" style="margin-top:0">Thanks! Your message was sent.</h3>
+          <div><strong>Name:</strong> <span id="resultName"></span></div>
+          <div><strong>Email:</strong> <span id="resultEmail"></span></div>
+          <div><strong>Subject:</strong> <span id="resultSubject"></span></div>
+          <div><strong>Message:</strong> <span id="resultMessage"></span></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer role="contentinfo" class="site-footer">
+  <div class="container">
+    <section aria-label="Call to action" class="footer-cta">
+      <h2 class="footer-cta__title">Thema Green</h2>
+      <p class="footer-cta__subtitle">
+        Human Factors & AI Research Professional creating accessible, safe, and effective human-system experiences.<br>
+        <strong>Built with performance, privacy, and accessibility in mind.</strong>
+      </p>
+      <div class="footer-cta__actions">
+        <a class="btn btn-primary" href="mailto:themagreen@gmail.com" aria-label="Go to contact section">
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Start a conversation
+        </a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener">
+          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i> Connect on LinkedIn
+        </a>
+      </div>
     </section>
 
-    <!-- Portfolio Tabs Section -->
-    <section id="portfolio-tabs" class="tabs-container">
-        <div class="container">
-            <div class="section-title">
-                <h2>Portfolio & Experience</h2>
-                <p>Explore my projects, education, and professional journey</p>
-            </div>
-            
-            <div class="tabs-navigation">
-                <button class="tab-btn active" data-tab="projects">Projects</button>
-                <button class="tab-btn" data-tab="education">Education</button>
-                <button class="tab-btn" data-tab="additional">Additional Info</button>
-            </div>
-            
-            <!-- Projects Tab -->
-            <div id="projects-tab" class="tab-content active">
-                <!-- Project Filter -->
-                <div class="project-filter">
-                    <button class="filter-btn active" data-filter="all">All Projects</button>
-                    <button class="filter-btn" data-filter="core">Core Academic</button>
-                    <button class="filter-btn" data-filter="mobile">Mobile Design</button>
-                    <button class="filter-btn" data-filter="design">Design Thinking</button>
-                    <button class="filter-btn" data-filter="conceptual">Conceptual</button>
-                </div>
-                
-                <div class="project-grid">
-                    <!-- Core Academic Projects -->
-                    <div class="project-card card-3d fade-in" data-category="core">
-                        <div class="project-img">
-                            <i class="fas fa-ship"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>Titanic Disaster Human Factors Analysis</h3>
-                            <p>Comprehensive incident investigation using HFACS to analyze human error, communication breakdowns, and organizational failures.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">HFACS</span>
-                                <span class="project-tag">Root-cause Analysis</span>
-                                <span class="project-tag">Systems Thinking</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Case Study</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-1" data-category="core">
-                        <div class="project-img">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>GMU Library Website Redesign</h3>
-                            <p>Research-driven UX redesign involving usability studies, competitive analysis, and heuristic evaluation. Recommendations implemented on the live site.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">UX Research</span>
-                                <span class="project-tag">Usability Testing</span>
-                                <span class="project-tag">Heuristic Evaluation</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Case Study</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-2" data-category="core">
-                        <div class="project-img">
-                            <i class="fas fa-trash-alt"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>Bigbelly Waste Management Partnership</h3>
-                            <p>User-centered design research and human-system integration analysis. Insights and recommendations adopted by stakeholders.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Industry Collaboration</span>
-                                <span class="project-tag">Task Analysis</span>
-                                <span class="project-tag">Human-System Integration</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Case Study</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-3" data-category="core">
-                        <div class="project-img">
-                            <i class="fas fa-bicycle"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>UMass-Amherst Human Performance Lab Fellowship</h3>
-                            <p>Enhanced a Unity 3D VR bicycle simulator for DOT safety studies; research presented at a university symposium.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">VR Development</span>
-                                <span class="project-tag">Unity 3D</span>
-                                <span class="project-tag">Behavioral Data</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Case Study</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Mobile App Design Projects -->
-                    <div class="project-card card-3d fade-in" data-category="mobile">
-                        <div class="project-img">
-                            <i class="fas fa-bus"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>Mason Commutes App</h3>
-                            <p>Native iOS/Android app for GMU commuter students to network, designed to address student isolation with detailed competitive analysis.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Native App Design</span>
-                                <span class="project-tag">User Personas</span>
-                                <span class="project-tag">Competitive Analysis</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-1" data-category="mobile">
-                        <div class="project-img">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>Focus Guardian - Mobile Control Panel</h3>
-                            <p>4-screen companion app for the Focus Guardian browser extension with dashboard, timer management, insights, and settings.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">iOS/Android Design</span>
-                                <span class="project-tag">High-Fidelity Prototyping</span>
-                                <span class="project-tag">Feature Scoping</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-2" data-category="mobile">
-                        <div class="project-img">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>FOCUS Mobile App</h3>
-                            <p>Full native app (6+ screens) for a minimalist social media platform with feed, analytics, messaging, and app timer functionality.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">End-to-End Design</span>
-                                <span class="project-tag">Interaction Design</span>
-                                <span class="project-tag">Visual Design Systems</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-3" data-category="mobile">
-                        <div class="project-img">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>AuraFlex Smartwatch + Companion App</h3>
-                            <p>Wearable device app paired with a mobile experience featuring Zen Mode, AR Wardrobe Sync, Voice Command, and Posture Alerts.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Wearable Design</span>
-                                <span class="project-tag">Cross-Device Experience</span>
-                                <span class="project-tag">AR Concept Design</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Design Thinking Projects -->
-                    <div class="project-card card-3d fade-in" data-category="design">
-                        <div class="project-img">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>"Shark Tank" Innovation Pitch</h3>
-                            <p>Semester-long application of the full design thinking process to develop a new product/service with lean canvas and prototypes.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Design Thinking</span>
-                                <span class="project-tag">Business Strategy</span>
-                                <span class="project-tag">Storytelling</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-1" data-category="design">
-                        <div class="project-img">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>Field Study Assignment</h3>
-                            <p>Conducted field research (observational study, contextual inquiry) to identify unmet user needs in various environments.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Ethnographic Research</span>
-                                <span class="project-tag">Contextual Inquiry</span>
-                                <span class="project-tag">Latent Needs</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-2" data-category="design">
-                        <div class="project-img">
-                            <i class="fas fa-puzzle-piece"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>Design Thinking "Mini-Projects"</h3>
-                            <p>Five projects practicing empathy mapping, POV statements, problem framing, HMW questions, and rapid prototyping.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Empathy Mapping</span>
-                                <span class="project-tag">Problem Framing</span>
-                                <span class="project-tag">Rapid Prototyping</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Projects</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Conceptual Projects -->
-                    <div class="project-card card-3d fade-in" data-category="conceptual">
-                        <div class="project-img">
-                            <i class="fas fa-layer-group"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>The FOCUS Ecosystem</h3>
-                            <p>Minimalist social platform with daily post limits and Focus Guardian browser extension for mindful browsing interventions.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Product Strategy</span>
-                                <span class="project-tag">Ecosystem Design</span>
-                                <span class="project-tag">UX Writing</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Concept</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-1" data-category="conceptual">
-                        <div class="project-img">
-                            <i class="fas fa-tshirt"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>The AuraFlex Product Ecosystem</h3>
-                            <p>Brand for customizable wearables with AR Wardrobe Sync, Voice-First Interface, Design Studio, and Posture Alerts.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Brand Development</span>
-                                <span class="project-tag">Hardware-Software Integration</span>
-                                <span class="project-tag">Accessibility Design</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Concept</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-2" data-category="conceptual">
-                        <div class="project-img">
-                            <i class="fas fa-sun"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>The Sunlight Project</h3>
-                            <p>Web app/social platform using gamification ("rays" for positivity) to foster constructive engagement and community building.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Gamification Design</span>
-                                <span class="project-tag">Positive Psychology</span>
-                                <span class="project-tag">Community Design</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Concept</a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card card-3d fade-in delay-3" data-category="conceptual">
-                        <div class="project-img">
-                            <i class="fas fa-film"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>Anime Recommender Website</h3>
-                            <p>Web app with clean UI and robust filtering (genre, themes, year) for anime discovery and community-driven recommendations.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Information Architecture</span>
-                                <span class="project-tag">Advanced Filtering</span>
-                                <span class="project-tag">Community Design</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Foundational Work -->
-                    <div class="project-card card-3d fade-in" data-category="core">
-                        <div class="project-img">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3>Project Lead The Way (PLTW) Engineering</h3>
-                            <p>High school engineering courses providing foundation in CAD, prototyping, and problem-solving for human factors career path.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Engineering Principles</span>
-                                <span class="project-tag">Technical Drawing</span>
-                                <span class="project-tag">Problem-Solving</span>
-                            </div>
-                            <a href="#" class="btn btn-outline">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Education Tab -->
-            <div id="education-tab" class="tab-content">
-                <div class="education-filter">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="highschool">High School</button>
-                    <button class="filter-btn" data-filter="college">College</button>
-                    <button class="filter-btn" data-filter="university">University</button>
-                </div>
-                
-                <div class="timeline">
-                    <!-- High School -->
-                    <div class="timeline-item fade-in" data-category="highschool">
-                        <div class="timeline-content card-3d">
-                            <div class="timeline-date">2017 - 2021</div>
-                            <h3>St. Charles High School <span class="dual-enrollment-badge">Dual Enrollment</span></h3>
-                            <p><strong>Project Lead the Way Engineering & Computer Science</strong></p>
-                            <p>Advanced Placement Program with 17 AP courses + Civil Engineering</p>
-                            
-                            <ul class="course-list">
-                                <li>
-                                    <span>Intro to Engineering Design (3 years)</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Principles of Engineering</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Civil Engineering & Architecture</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Computer Science & Coding (Python, Java, C++)</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Digital Electronics</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Engineering Capstone / Senior Project</span>
-                                    <span class="course-grade">A+</span>
-                                </li>
-                                <li>
-                                    <span>AP Physics 1 & 2</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>AP Calculus AB/BC</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>AP Statistics</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>AP Computer Science A</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                            </ul>
-                            
-                            <div class="course-details">
-                                <h4>Skills Gained:</h4>
-                                <p>CAD, prototyping, 3D modeling, iterative design, problem-solving, applied physics, mechanical systems, teamwork, data-driven design, Python, Java, C++, coding logic, algorithmic thinking, circuit design, logic gates, electronics, project management, interdisciplinary integration, structural design, architectural principles</p>
-                                
-                                <h4>Transferable Skills for AI Alignment:</h4>
-                                <div class="project-tags" style="margin-top: 10px;">
-                                    <span class="project-tag">Systems Thinking</span>
-                                    <span class="project-tag">Problem Decomposition</span>
-                                    <span class="project-tag">Algorithmic Reasoning</span>
-                                    <span class="project-tag">Technical Prototyping</span>
-                                    <span class="project-tag">Structural Analysis</span>
-                                </div>
-                            </div>
-                            
-                            <div class="project-tags" style="margin-top: 15px;">
-                                <span class="project-tag">CAD</span>
-                                <span class="project-tag">Prototyping</span>
-                                <span class="project-tag">Algorithmic Thinking</span>
-                                <span class="project-tag">Circuit Design</span>
-                                <span class="project-tag">Physics</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Dual Enrollment -->
-                    <div class="timeline-item fade-in delay-1" data-category="college">
-                        <div class="timeline-content card-3d">
-                            <div class="timeline-date">2020 - 2021</div>
-                            <h3>College of Southern Maryland <span class="dual-enrollment-badge">Dual Enrollment</span></h3>
-                            <p><strong>Dual Enrollment Program</strong></p>
-                            <p>20 transfer credits accepted by GMU - College courses taken during high school</p>
-                            
-                            <ul class="course-list">
-                                <li>
-                                    <span>Accounting Elective</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Computer Science Elective</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Precalculus</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Analytic Geometry & Calculus I</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Logic & Critical Thinking</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Basic Concepts in Psychology</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                            </ul>
-                            
-                            <div class="course-details">
-                                <h4>Skills Gained:</h4>
-                                <p>Financial modeling, data organization, advanced coding, logic structures, analytical reasoning, functions, derivatives, integrals, argumentation, structured reasoning, behavioral principles, cognitive theory</p>
-                                
-                                <h4>Transferable Skills for AI Alignment:</h4>
-                                <div class="project-tags" style="margin-top: 10px;">
-                                    <span class="project-tag">Formal Logic</span>
-                                    <span class="project-tag">Mathematical Modeling</span>
-                                    <span class="project-tag">Analytical Reasoning</span>
-                                    <span class="project-tag">Cognitive Foundations</span>
-                                </div>
-                            </div>
-                            
-                            <div class="project-tags" style="margin-top: 15px;">
-                                <span class="project-tag">Financial Modeling</span>
-                                <span class="project-tag">Advanced Coding</span>
-                                <span class="project-tag">Analytical Reasoning</span>
-                                <span class="project-tag">Structured Reasoning</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- University -->
-                    <div class="timeline-item fade-in delay-2" data-category="university">
-                        <div class="timeline-content card-3d">
-                            <div class="timeline-date">2021 - 2025</div>
-                            <h3>George Mason University</h3>
-                            <p><strong>BS Psychology, Concentration in Human Factors / Applied Cognition</strong></p>
-                            <p><strong>Minor in Design Thinking</strong></p>
-                            
-                            <h4 style="margin-top: 15px; color: var(--emerald);">Core Psychology & Human Factors</h4>
-                            <ul class="course-list">
-                                <li>
-                                    <span>Statistics in Psychology</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Research Methods in Psychology</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Cognitive Psychology</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Human Factors Psychology</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Biopsychology & Lab</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Applied Cross-Cultural Psychology</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Developmental Psychology</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Mystery, Madness, and Murder</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Revitalizing Endangered Languages</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Advanced Topics in Human Factors</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Psychology in the Community</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                            </ul>
-                            
-                            <h4 style="margin-top: 15px; color: var(--emerald);">Design Thinking Minor</h4>
-                            <ul class="course-list">
-                                <li>
-                                    <span>Drawing I</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Mobile App Design</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Design in the Modern World</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Design Thinking Capstone</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>History of Graphic Design</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                            </ul>
-
-                            <h4 style="margin-top: 15px; color: var(--emerald);">Additional Relevant Courses</h4>
-                            <ul class="course-list">
-                                <li>
-                                    <span>General Biology & Labs</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Cell Structure and Function</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Introduction to Neuroscience</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Introduction to Nutrition</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Fundamentals of Communication</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Advanced Composition (Multidisciplinary)</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Professional & Technical Writing</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Philosophy and Literature</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Intro to Childhood Studies</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Introductory Sociology</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                                <li>
-                                    <span>Practicum in Educational Psychology</span>
-                                    <span class="course-grade">A</span>
-                                </li>
-                            </ul>
-                            
-                            <div class="course-details">
-                                <h4>Skills Gained:</h4>
-                                <p>Experimental design, surveys, data collection, inferential statistics, SPSS, regression, attention, memory, perception, ergonomics, usability, error analysis, neurophysiology, lab techniques, EEG/psychophysiology, cultural competency, behavioral variation, visual design, observation, aesthetics, iOS/Android design guidelines, high-fidelity prototyping, design principles, historical context, human-centered design, project integration, biology fundamentals, neuroscience foundations, technical communication, philosophical analysis, sociological perspectives</p>
-                                
-                                <h4>Transferable Skills for AI Alignment:</h4>
-                                <div class="project-tags" style="margin-top: 10px;">
-                                    <span class="project-tag">Human Behavior Modeling</span>
-                                    <span class="project-tag">Experimental Design</span>
-                                    <span class="project-tag">Cognitive Architecture</span>
-                                    <span class="project-tag">Cross-Cultural UX</span>
-                                    <span class="project-tag">Interface Design</span>
-                                    <span class="project-tag">Human-Centered AI</span>
-                                    <span class="project-tag">Biological Systems</span>
-                                    <span class="project-tag">Technical Communication</span>
-                                    <span class="project-tag">Ethical Reasoning</span>
-                                </div>
-                            </div>
-                            
-                            <div class="project-tags" style="margin-top: 15px;">
-                                <span class="project-tag">Experimental Design</span>
-                                <span class="project-tag">Usability Testing</span>
-                                <span class="project-tag">Prototyping</span>
-                                <span class="project-tag">Human-Centered Design</span>
-                                <span class="project-tag">Biology</span>
-                                <span class="project-tag">Philosophy</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skills Matrix -->
-                <div class="skills-matrix">
-                    <div class="skill-category-expanded fade-in">
-                        <h4><i class="fas fa-brain"></i> Cognitive Science & Psychology</h4>
-                        <div class="skill-item">Cognitive Psychology - Attention, memory, perception mechanisms</div>
-                        <div class="skill-item">Biopsychology - Neural basis of behavior and cognition</div>
-                        <div class="skill-item">Developmental Psychology - Lifespan cognitive development</div>
-                        <div class="skill-item">Cross-Cultural Psychology - Behavioral variation across cultures</div>
-                        <div class="skill-item">Human Factors Psychology - Ergonomics, usability, error analysis</div>
-                    </div>
-                    
-                    <div class="skill-category-expanded fade-in delay-1">
-                        <h4><i class="fas fa-flask"></i> Research Methods & Statistics</h4>
-                        <div class="skill-item">Experimental Design - Controlled studies and hypothesis testing</div>
-                        <div class="skill-item">Statistical Analysis - SPSS, regression, inferential statistics</div>
-                        <div class="skill-item">Data Collection - Surveys, behavioral observation, psychometrics</div>
-                        <div class="skill-item">Research Ethics - IRB protocols, ethical research practices</div>
-                    </div>
-                    
-                    <div class="skill-category-expanded fade-in delay-2">
-                        <h4><i class="fas fa-laptop-code"></i> Technical & Design Skills</h4>
-                        <div class="skill-item">Engineering Principles - CAD, prototyping, systems design</div>
-                        <div class="skill-item">UI/UX Design - User research, prototyping, interface design</div>
-                        <div class="skill-item">Programming - Python, Java, C++, data structures, algorithms</div>
-                        <div class="skill-item">Mathematics - Calculus, statistics, analytical geometry</div>
-                        <div class="skill-item">Physics - Mechanics, electricity, magnetism</div>
-                    </div>
-                </div>
-
-                <!-- Transferable Skills Section -->
-                <div class="transferable-skills fade-in">
-                    <h3>Transferable Skills for AI Alignment Research</h3>
-                    <p>Thema's interdisciplinary education provides a unique foundation for AI alignment research, combining technical rigor with deep understanding of human cognition and behavior.</p>
-                    
-                    <div style="margin: 1.5rem 0;">
-                        <span class="skill-pill">Systems Thinking</span>
-                        <span class="skill-pill">Behavioral Modeling</span>
-                        <span class="skill-pill">Experimental Design</span>
-                        <span class="skill-pill">Ethical Reasoning</span>
-                        <span class="skill-pill">Cross-Cultural Analysis</span>
-                        <span class="skill-pill">Cognitive Architecture</span>
-                        <span class="skill-pill">Human-Centered Design</span>
-                        <span class="skill-pill">Algorithmic Thinking</span>
-                        <span class="skill-pill">Technical Communication</span>
-                        <span class="skill-pill">Interdisciplinary Synthesis</span>
-                        <span class="skill-pill">Mathematical Modeling</span>
-                        <span class="skill-pill">Physics Principles</span>
-                        <span class="skill-pill">Formal Logic</span>
-                        <span class="skill-pill">Biological Systems</span>
-                    </div>
-                    
-                    <p>This unique combination allows for developing AI systems that are not only technically robust but also aligned with human values, ethical considerations, and diverse cultural perspectives.</p>
-                </div>
-            </div>
-            
-            <!-- Additional Info Tab -->
-            <div id="additional-tab" class="tab-content">
-                <!-- Work in Progress -->
-                <div class="info-card fade-in">
-                    <h3><i class="fas fa-hourglass-half"></i> Work in Progress</h3>
-                    <p>Current projects and research initiatives focused on human factors and AI alignment:</p>
-                    
-                    <div style="margin-top: 1.5rem;">
-                        <h4 style="color: var(--emerald);">Medical Device Software Research</h4>
-                        <p>Developing novel approaches to improve usability and safety in medical device interfaces, with a focus on reducing human error in high-stakes environments.</p>
-                        
-                        <h4 style="color: var(--emerald); margin-top: 1rem;">AI Alignment Framework</h4>
-                        <p>Creating a comprehensive framework for evaluating and ensuring AI systems remain aligned with nuanced human values and intentions across diverse contexts.</p>
-                        
-                        <h4 style="color: var(--emerald); margin-top: 1rem;">Human-Centered Design Patterns</h4>
-                        <p>Documenting reusable design patterns that prioritize human factors in complex systems, particularly in healthcare and safety-critical applications.</p>
-                    </div>
-                </div>
-                
-                <!-- Professional Experience -->
-                <div class="info-card fade-in delay-1">
-                    <h3><i class="fas fa-briefcase"></i> Professional Experience</h3>
-                    
-                    <div style="margin-top: 1.5rem;">
-                        <h4 style="color: var(--emerald);">Human Factors Research Assistant</h4>
-                        <p><strong>George Mason University</strong> | 2022 - Present</p>
-                        <p>Conducted user research studies, performed usability testing, and contributed to publications on human-computer interaction and cognitive ergonomics.</p>
-                        
-                        <h4 style="color: var(--emerald); margin-top: 1rem;">UX Design Intern</h4>
-                        <p><strong>Bigbelly Solar</strong> | Summer 2023</p>
-                        <p>Collaborated with industry partners to redesign user interfaces for smart waste management systems, focusing on intuitive interaction design.</p>
-                        
-                        <h4 style="color: var(--emerald); margin-top: 1rem;">VR Development Fellow</h4>
-                        <p><strong>UMass-Amherst Human Performance Lab</strong> | Summer 2022</p>
-                        <p>Enhanced Unity 3D VR simulations for transportation safety research, contributing to DOT-funded studies on cyclist behavior.</p>
-                    </div>
-                </div>
-                
-                <!-- Certifications -->
-                <div class="info-card fade-in delay-2">
-                    <h3><i class="fas fa-certificate"></i> Certifications & Professional Development</h3>
-                    
-                    <div style="margin-top: 1.5rem;">
-                        <div style="margin-bottom: 1rem;">
-                            <span class="cert-badge">Human Factors and Ergonomics Society (HFES) Student Member</span>
-                            <span class="cert-badge">UXPA Member</span>
-                            <span class="cert-badge">Certified Usability Analyst (In Progress)</span>
-                        </div>
-                        
-                        <h4 style="color: var(--emerald);">Completed Certifications:</h4>
-                        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                            <li>Human-Centered Design - IDEO</li>
-                            <li>UX Research Methods - Nielsen Norman Group</li>
-                            <li>Python for Data Science - DataCamp</li>
-                            <li>Introduction to Medical Device Regulations</li>
-                        </ul>
-                        
-                        <h4 style="color: var(--emerald);">Conference Presentations:</h4>
-                        <ul style="margin-left: 1.5rem;">
-                            <li>HFES Annual Meeting 2023 - Poster Presentation on Medical Device Usability</li>
-                            <li>GMU Research Symposium 2022 - VR Bicycle Simulator Research</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Skills Focus -->
-                <div class="info-card fade-in delay-3">
-                    <h3><i class="fas fa-star"></i> Specialized Skills Focus</h3>
-                    
-                    <div style="margin-top: 1.5rem;">
-                        <h4 style="color: var(--emerald);">Medical Device & Healthcare</h4>
-                        <div class="project-tags" style="margin: 0.5rem 0;">
-                            <span class="project-tag">Usability Testing</span>
-                            <span class="project-tag">Human Error Reduction</span>
-                            <span class="project-tag">FDA Regulations</span>
-                            <span class="project-tag">Task Analysis</span>
-                            <span class="project-tag">Heuristic Evaluation</span>
-                        </div>
-                        
-                        <h4 style="color: var(--emerald); margin-top: 1rem;">AI & Technology</h4>
-                        <div class="project-tags" style="margin: 0.5rem 0;">
-                            <span class="project-tag">Human-AI Interaction</span>
-                            <span class="project-tag">Alignment Research</span>
-                            <span class="project-tag">Ethical Design</span>
-                            <span class="project-tag">Behavioral Modeling</span>
-                            <span class="project-tag">Value Alignment</span>
-                        </div>
-                        
-                        <h4 style="color: var(--emerald); margin-top: 1rem;">Research Methods</h4>
-                        <div class="project-tags" style="margin: 0.5rem 0;">
-                            <span class="project-tag">Experimental Design</span>
-                            <span class="project-tag">Statistical Analysis</span>
-                            <span class="project-tag">Qualitative Research</span>
-                            <span class="project-tag">Survey Design</span>
-                            <span class="project-tag">Data Visualization</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="f-grid" role="navigation" aria-label="Footer">
+      <section aria-label="About Thema Green" class="f-col">
+        <h3 class="f-h">About</h3>
+        <p>Human-centered research and design for high-stakes systems. I focus on reducing human error and improving outcomes through evidence-based UX and AI alignment.</p>
+        <div class="social" style="display:flex;gap:.6rem;margin-top:.6rem">
+          <a href="https://www.linkedin.com/in/themagreen/" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="https://github.com/Themagreen" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+          <a href="https://twitter.com/themagreen" aria-label="Twitter / X"><i class="fab fa-twitter" aria-hidden="true"></i></a>
         </div>
+      </section>
+
+      <section aria-label="Expertise" class="f-col">
+        <h3 class="f-h">Expertise</h3>
+        <ul class="f-links">
+          <li><a href="#portfolio-tabs">Medical Device UX</a></li>
+          <li><a href="#portfolio-tabs">Human Factors Research</a></li>
+          <li><a href="#portfolio-tabs">Human-AI Interaction</a></li>
+          <li><a href="#portfolio-tabs">Accessibility &amp; WCAG</a></li>
+          <li><a href="#portfolio-tabs">Design Systems</a></li>
+        </ul>
+      </section>
+
+      <section aria-label="Contact information" class="f-col">
+        <h3 class="f-h">Contact</h3>
+        <address class="f-address">
+          <p>
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a>
+          </p>
+          <p>
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            Washington, DC • Remote-friendly
+          </p>
+          <p>
+            <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
+            <a href="#contact">Accessibility feedback</a><br>
+            (Available for select consulting and full-time roles)
+          </p>
+        </address>
+      </section>
+    </div>
+
+    <section class="f-meta" aria-label="Legal and metadata">
+      <p class="f-copy">
+        <span>&copy; <span id="year"></span> Thema Green.</span>
+        <span>All rights reserved.</span>
+      </p>
+      <nav aria-label="Legal">
+        <ul class="f-legal">
+          <li><a href="#" rel="nofollow">Privacy</a></li>
+          <li><a href="#" rel="nofollow">Terms</a></li>
+          <li><a href="#" rel="nofollow">Sitemap</a></li>
+        </ul>
+      </nav>
+      <p class="f-a11y">WCAG&nbsp;2.2 AA intent • Reduced-motion-friendly</p>
     </section>
+  </div>
+</footer>
 
-    <!-- Skills Section -->
-    <section id="skills" style="background: white;">
-        <div class="container">
-            <div class="section-title">
-                <h2>Skills & Expertise</h2>
-                <p>A multidisciplinary approach to human factors and design</p>
-            </div>
-            
-            <div class="skills-container">
-                <div class="skill-category fade-in">
-                    <h3><i class="fas fa-brain"></i> Cognitive Science</h3>
-                    <ul class="skill-list">
-                        <li><i class="fas fa-check-circle"></i> Human Information Processing</li>
-                        <li><i class="fas fa-check-circle"></i> Attention & Memory Systems</li>
-                        <li><i class="fas fa-check-circle"></i> Decision Making</li>
-                        <li><i class="fas fa-check-circle"></i> Perception & Psychophysics</li>
-                        <li><i class="fas fa-check-circle"></i> Mental Models</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category fade-in delay-1">
-                    <h3><i class="fas fa-laptop-code"></i> UX Research & Design</h3>
-                    <ul class="skill-list">
-                        <li><i class="fas fa-check-circle"></i> Usability Testing</li>
-                        <li><i class="fas fa-check-circle"></i> Heuristic Evaluation</li>
-                        <li><i class="fas fa-check-circle"></i> User Interviews</li>
-                        <li><i class="fas fa-check-circle"></i> Persona Development</li>
-                        <li><i class="fas fa-check-circle"></i> Wireframing & Prototyping</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category fade-in delay-2">
-                    <h3><i class="fas fa-chart-line"></i> Data Analysis</h3>
-                    <ul class="skill-list">
-                        <li><i class="fas fa-check-circle"></i> Statistical Analysis</li>
-                        <li><i class="fas fa-check-circle"></i> Experimental Design</li>
-                        <li><i class="fas fa-check-circle"></i> R / Python</li>
-                        <li><i class="fas fa-check-circle"></i> Data Visualization</li>
-                        <li><i class="fas fa-check-circle"></i> Survey Design</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category fade-in delay-3">
-                    <h3><i class="fas fa-robot"></i> AI & Technology</h3>
-                    <ul class="skill-list">
-                        <li><i class="fas fa-check-circle"></i> Human-AI Interaction</li>
-                        <li><i class="fas fa-check-circle"></i> AI Alignment Research</li>
-                        <li><i class="fas fa-check-circle"></i> Ethical Design</li>
-                        <li><i class="fas fa-check-circle"></i> Python Programming</li>
-                        <li><i class="fas fa-check-circle"></i> Machine Learning Concepts</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+<button id="toTopBtn" class="to-top" type="button" aria-label="Back to top">
+  <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+</button>
 
-    <!-- About Section -->
-    <section id="about" style="background: var(--cream);">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Me</h2>
-                <p>My journey in human factors and design thinking</p>
-            </div>
-            
-            <div class="about-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
-                <div class="about-text fade-in">
-                    <p>I'm a Human Factors specialist with a unique background spanning engineering, psychology, and design. My work focuses on creating intuitive, safe, and effective human-system interactions, particularly in medical devices and AI systems.</p>
-                    
-                    <p>My approach combines rigorous scientific methodology with creative design thinking to solve complex problems at the intersection of humans and technology.</p>
-                    
-                    <p>I'm passionate about ensuring that technological advancements remain aligned with human values and capabilities, creating systems that augment rather than hinder human potential.</p>
-                    
-                    <div class="project-tags" style="margin-top: 2rem;">
-                        <span class="project-tag">Human-Centered Design</span>
-                        <span class="project-tag">Cognitive Engineering</span>
-                        <span class="project-tag">AI Safety</span>
-                        <span class="project-tag">Medical Devices</span>
-                        <span class="project-tag">Research Methodology</span>
-                    </div>
-                </div>
-                
-                <div class="about-image fade-in delay-1" style="background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%); height: 300px; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; color: white;">
-                    <i class="fas fa-user-circle" style="font-size: 5rem;"></i>
-                </div>
-            </div>
-        </div>
-    </section>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+// Progress bar
+window.addEventListener("scroll", () => {
+const st = document.documentElement.scrollTop || document.body.scrollTop;
+const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+const bar = document.getElementById("progressBar");
+if (bar) bar.style.width = (h ? (st / h) * 100 : 0) + "%";
+});
 
-    <!-- Contact Section -->
-    <section id="contact" style="background: white;">
-        <div class="container">
-            <div class="section-title">
-                <h2>Get In Touch</h2>
-                <p>Have a project in mind or want to discuss human factors and AI alignment? Reach out below.</p>
-            </div>
-            
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>contact@themagreen.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Location</h4>
-                            <p>Fairfax, Virginia</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-university"></i>
-                        <div>
-                            <h4>Education</h4>
-                            <p>George Mason University</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" class="form-control" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
-            </div>
-            
-            <div class="submission-results" id="submissionResults">
-                <h3>Form Submission Details</h3>
-                <div class="result-item">
-                    <span class="result-label">Name:</span>
-                    <span class="result-value" id="resultName"></span>
-                </div>
-                <div class="result-item">
-                    <span class="result-label">Email:</span>
-                    <span class="result-value" id="resultEmail"></span>
-                </div>
-                <div class="result-item">
-                    <span class="result-label">Subject:</span>
-                    <span class="result-value" id="resultSubject"></span>
-                </div>
-                <div class="result-item">
-                    <span class="result-label">Message:</span>
-                    <span class="result-value" id="resultMessage"></span>
-                </div>
-            </div>
-        </div>
-    </section>
+// Floating "Back to top"
+(function(){
+  const btn = document.getElementById('toTopBtn');
+  if (!btn) return;
+  const showAt = 600;
+  const onScroll = () => {
+    const y = window.pageYOffset || document.documentElement.scrollTop;
+    btn.classList.toggle('visible', y > showAt);
+  };
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+  btn.addEventListener('click', () => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) { window.scrollTo(0,0); }
+    else { window.scrollTo({ top:0, behavior:'smooth' }); }
+  });
+})();
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-container">
-                <!-- About Column -->
-                <div class="footer-col">
-                    <h3>Thema Green</h3>
-                    <p>Human Factors & AI Research Professional specializing in medical device software, research, and AI alignment. Bridging psychology, technology, and design.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
-                    </div>
-                </div>
-                
-                <!-- Quick Links Column -->
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#portfolio-tabs">Portfolio</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Expertise Column -->
-                <div class="footer-col">
-                    <h3>Areas of Expertise</h3>
-                    <ul>
-                        <li><a href="#">Human Factors Research</a></li>
-                        <li><a href="#">Medical Device UX</a></li>
-                        <li><a href="#">AI Alignment</a></li>
-                        <li><a href="#">Cognitive Psychology</a></li>
-                        <li><a href="#">Design Thinking</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Contact Column -->
-                <div class="footer-col">
-                    <h3>Contact Info</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>contact@themagreen.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Fairfax, Virginia</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-university"></i>
-                        <span>George Mason University</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 Thema Green. All Rights Reserved.</p>
-                <p>Designed and developed with a focus on human-centered principles.</p>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // Scroll progress bar
-        window.onscroll = function() {
-            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
-        };
 
-        // Particles.js configuration
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#047857" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#B7942C",
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: { enable: true, mode: "grab" },
-                    onclick: { enable: true, mode: "push" },
-                    resize: true
-                },
-                modes: {
-                    grab: { distance: 140, line_linked: { opacity: 1 } },
-                    push: { particles_nb: 4 }
-                }
-            },
-            retina_detect: true
-        });
+// Progress bar
+window.addEventListener("scroll", () => {
+const st = document.documentElement.scrollTop || document.body.scrollTop;
+const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+const bar = document.getElementById("progressBar");
+if (bar) bar.style.width = (h ? (st / h) * 100 : 0) + "%";
+});
+// Contact form
+const form = document.getElementById('contactForm');
+const results = document.getElementById('submissionResults');
+const title = document.getElementById('resultTitle');
+form && form.addEventListener('submit', async (e)=>{
+e.preventDefault();
+const fd = new FormData(form);
+const rn = document.getElementById('resultName');
+const re = document.getElementById('resultEmail');
+const rs = document.getElementById('resultSubject');
+const rm = document.getElementById('resultMessage');
+if (rn) rn.textContent = fd.get('name') || '—';
+if (re) re.textContent = fd.get('email') || '—';
+if (rs) rs.textContent = fd.get('subject') || '—';
+if (rm) rm.textContent = fd.get('message') || '—';
 
-        // Mobile Navigation
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
+
+try{
+const res = await fetch(form.action, { method:'POST', body:fd, headers:{ 'Accept':'application/json' }});
+if (res.ok){
+if (title) title.textContent = 'Thanks! Your message was sent.';
+if (results) { results.style.display='block'; results.scrollIntoView({behavior:'smooth', block:'start'}); }
+form.reset();
+} else {
+let err = 'Could not send at the moment. Please try again.';
+try{ const data = await res.json(); if (data?.message) err = data.message; }catch{}
+if (title) title.textContent = 'Message not sent';
+if (rm) rm.textContent = err;
+if (results) results.style.display='block';
+}
+}catch{ form.submit(); }
+});
+
+
+// Floating "Back to top"
+(function(){
+const btn = document.getElementById('toTopBtn');
+if (!btn) return;
+const showAt = 600;
+const onScroll = () => {
+const y = window.pageYOffset || document.documentElement.scrollTop;
+btn.classList.toggle('visible', y > showAt);
+};
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+btn.addEventListener('click', () => {
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (prefersReduced) { window.scrollTo(0,0); }
+else { window.scrollTo({ top:0, behavior:'smooth' }); }
+});
+})();
+// Year
+(function(){ try { document.getElementById('year').textContent = new Date().getFullYear(); } catch(e) {} })();
+
+
+    // Progress bar
+    window.addEventListener("scroll", () => {
+      const st = document.documentElement.scrollTop || document.body.scrollTop;
+      const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById("progressBar").style.width = (h ? (st / h) * 100 : 0) + "%";
+    });
+
+    // Theme toggle
+    (function initTheme(){
+      const toggle = document.getElementById('themeToggle');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved = localStorage.getItem('theme');
+      const applyIcon = () => {
+        toggle.innerHTML = document.body.getAttribute('data-theme') === 'dark'
+          ? '<i class="fas fa-sun" aria-hidden="true"></i>'
+          : '<i class="fas fa-moon" aria-hidden="true"></i>';
+      };
+      if (saved) { if (saved === 'dark') document.body.setAttribute('data-theme','dark'); }
+      else if (prefersDark) { document.body.setAttribute('data-theme','dark'); }
+      applyIcon();
+      toggle.addEventListener('click', () => {
+        const dark = document.body.getAttribute('data-theme') === 'dark';
+        if (dark) { document.body.removeAttribute('data-theme'); localStorage.setItem('theme','light'); }
+        else { document.body.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); }
+        applyIcon();
+      });
+    })();
+
+    // Mobile nav with focus trap
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = navMenu.querySelectorAll('a, button');
+    let menuOpen = false;
+    let previousFocus = null;
+
+    function openMenu() {
+      navMenu.classList.add('active');
+      document.body.classList.add('no-scroll');
+      hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.innerHTML = '<i class="fas fa-xmark" aria-hidden="true"></i>';
+      menuOpen = true;
+      
+      previousFocus = document.activeElement;
+      navLinks[0].focus();
+      
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    function closeMenu() {
+      navMenu.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+      menuOpen = false;
+      
+      if (previousFocus) previousFocus.focus();
+      
+      document.removeEventListener('keydown', handleEscape);
+    }
+
+    function handleEscape(e) {
+      if (e.key === 'Escape' && menuOpen) {
+        closeMenu();
+      }
+    }
+
+    function handleTab(e) {
+      if (!menuOpen) return;
+      
+      if (e.key === 'Tab') {
+        const focusedElement = document.activeElement;
+        const firstElement = navLinks[0];
+        const lastElement = navLinks[navLinks.length - 1];
         
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.innerHTML = navMenu.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (navMenu.classList.contains('active')) {
-                        navMenu.classList.remove('active');
-                        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                }
-            });
-        });
+        if (e.shiftKey && focusedElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } 
+        else if (!e.shiftKey && focusedElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    }
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    hamburger.addEventListener('click', () => {
+      if (menuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
 
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (menuOpen) closeMenu();
+      });
+    });
+
+    document.addEventListener('keydown', handleTab);
+
+    // Smooth in-page links + close menu
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+          if (menuOpen) closeMenu();
+        }
+      });
+    });
+
+    // Scrollspy
+const sectionIds = ['home','portfolio-tabs','skills','about','contact'];
+const spyLinks = Array.from(document.querySelectorAll('.navlink'));
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+const id = entry.target.id;
+const link = spyLinks.find(a => a.getAttribute('href') === `#${id}`);
+if (link) {
+if (entry.isIntersecting) {
+spyLinks.forEach(l=>l.removeAttribute('aria-current'));
+link.setAttribute('aria-current','page');
+}
+}
+});
+}, { rootMargin:"-45% 0px -50% 0px", threshold:0 });
+sectionIds.forEach(id=>{ const s = document.getElementById(id); if (s) observer.observe(s); });
+
+
+
+
+
+    // Typewriter
+    class Typewriter{
+      constructor(el, words, wait=2600){ this.el=el; this.words=words; this.wait=+wait; this.txt=''; this.i=0; this.del=false; this.type(); }
+      type(){
+        const w=this.words[this.i % this.words.length];
+        this.txt = this.del ? w.substring(0,this.txt.length-1) : w.substring(0,this.txt.length+1);
+        this.el.textContent=this.txt;
+        let speed = this.del ? 70 : 140;
+        if (!this.del && this.txt===w){ speed=this.wait; this.del=true; }
+        else if (this.del && this.txt===''){ this.del=false; this.i++; speed=420; }
+        setTimeout(()=>this.type(),speed);
+      }
+    }
+    
+    const typewriterTarget = document.getElementById('typewriter-target');
+    const typewriterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          new Typewriter(typewriterTarget, [
+            'Human Factors','User Experience','Cognitive Psychology','UX Design','Frontend Development','AI Integration','Accessibility','Inclusive Design'
+          ], 2000);
+          typewriterObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    typewriterObserver.observe(typewriterTarget);
+
+    // Particles initialization for all sections
+    const particlesConfig = {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#1a6546" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#d4af37",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    };
+
+    const sectionParticlesConfig = {
+      particles: {
+        number: { value: 20, density: { enable: true, value_area: 1000 } },
+        color: { value: "#1a6546" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2, random: true },
+        size: { value: 2, random: true },
+        line_linked: { 
+          enable: true, 
+          distance: 150, 
+          color: "#d4af37", 
+          opacity: 0.15, 
+          width: 0.8 
+        },
+        move: { 
+          enable: true, 
+          speed: 0.5, 
+          random: true, 
+          out_mode: "out" 
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: { 
+          onhover: { 
+            enable: true, 
+            mode: "grab",
+            parallax: { enable: true, force: 300, smooth: 10 }
+          }, 
+          onclick: { enable: false }, 
+          resize: true 
+        },
+        modes: { 
+          grab: { 
+            distance: 300, 
+            line_linked: { opacity: 0.3 } 
+          } 
+        }
+      },
+      retina_detect: true
+    };
+
+    let particlesInitialized = false;
+    const particlesElements = [
+      { id: 'particles-js', config: particlesConfig },
+      { id: 'particles-portfolio', config: sectionParticlesConfig },
+      { id: 'particles-skills', config: sectionParticlesConfig },
+      { id: 'particles-about', config: sectionParticlesConfig },
+      { id: 'particles-contact', config: sectionParticlesConfig }
+    ];
+
+    // Initialize particles when in view
+    const initializeParticles = (elementId, config) => {
+      const reducedData = window.matchMedia('(prefers-reduced-data: reduce)').matches;
+      if (!reducedData && window.particlesJS) {
+        window.particlesJS(elementId, config);
+        return true;
+      }
+      return false;
+    };
+
+    // Set up Intersection Observers for each particles container
+    particlesElements.forEach(particleElement => {
+      const element = document.getElementById(particleElement.id);
+      if (element) {
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !particleElement.initialized) {
+              particleElement.initialized = initializeParticles(particleElement.id, particleElement.config);
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        observer.observe(element);
+      }
+    });
 
-        // Observe elements with fade-in class
-        document.querySelectorAll('.fade-in').forEach(el => {
-            el.style.opacity = 0;
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(el);
+
+    // Tabs
+    const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
+    const panels = {
+      projects: document.getElementById('panel-projects'),
+      education: document.getElementById('panel-education'),
+      additional: document.getElementById('panel-additional')
+    };
+    function activateTab(id){
+      tabBtns.forEach(b => { b.setAttribute('aria-selected', String(b.dataset.tab===id)); });
+      Object.entries(panels).forEach(([k,el]) => el.classList.toggle('active', k===id));
+    }
+    tabBtns.forEach((btn, idx) => {
+      btn.dataset.tab = btn.id.replace('tab-','');
+      btn.addEventListener('click', ()=>activateTab(btn.dataset.tab));
+      btn.addEventListener('keydown', e => {
+        if (e.key==='ArrowRight' || e.key==='ArrowLeft'){
+          e.preventDefault();
+          const dir = e.key==='ArrowRight'?1:-1;
+          const next = tabBtns[(idx+dir+tabBtns.length)%tabBtns.length];
+          next.focus(); activateTab(next.dataset.tab);
+        }
+      });
+    });
+
+    // Filters (projects)
+    const pButtons = document.querySelectorAll('#panel-projects .filter-btn');
+    const cards = document.querySelectorAll('#projectsGrid .card');
+    pButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        pButtons.forEach(b=>b.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        const f = btn.dataset.filter;
+        cards.forEach(c=>{
+          const show = f==='all' || c.getAttribute('data-category')===f;
+          c.style.display = show?'block':'none';
         });
-
-        // 3D card effect on mouse move
-        document.querySelectorAll('.card-3d').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const angleY = (x - centerX) / 25;
-                const angleX = (centerY - y) / 25;
-                
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
-        });
-
-        // Project filter functionality
-        const projectFilterButtons = document.querySelectorAll('.project-filter .filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        projectFilterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Update active button
-                projectFilterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                const filter = button.getAttribute('data-filter');
-                
-                // Filter project cards
-                projectCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Education timeline interaction
-        document.querySelectorAll('.timeline-content').forEach(content => {
-            content.addEventListener('click', function() {
-                this.classList.toggle('active');
-                
-                // Close other open items
-                document.querySelectorAll('.timeline-content').forEach(item => {
-                    if (item !== this) {
-                        item.classList.remove('active');
-                    }
-                });
-            });
-        });
-
-        // Education filter
-        const filterButtons = document.querySelectorAll('.education-filter .filter-btn');
-        const timelineItems = document.querySelectorAll('.timeline-item');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Update active button
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                const filter = button.getAttribute('data-filter');
-                
-                // Filter items
-                timelineItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Tab functionality
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Update active button
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                // Show corresponding content
-                const tabId = button.getAttribute('data-tab');
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === `${tabId}-tab`) {
-                        content.classList.add('active');
-                    }
-                });
-            });
-        });
-
-        // Contact form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Display results
-            document.getElementById('resultName').textContent = name;
-            document.getElementById('resultEmail').textContent = email;
-            document.getElementById('resultSubject').textContent = subject;
-            document.getElementById('resultMessage').textContent = message;
-            
-            // Show results section
-            document.getElementById('submissionResults').style.display = 'block';
-            
-            // Scroll to results
-            document.getElementById('submissionResults').scrollIntoView({ behavior: 'smooth' });
-            
-            // Reset form
-            this.reset();
-        });
-    </script>
+      });
+    });
+// Year
+(function(){ try { document.getElementById('year').textContent = new Date().getFullYear(); } catch(e) {} })();
+  </script>
 </body>
 </html>
