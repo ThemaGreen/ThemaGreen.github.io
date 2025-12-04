@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    :root{
+:root{
       --surface-0:#f2efe6;
       --surface-1:#f8f4e9;
       --surface-2:#ece7da;
@@ -33,9 +33,10 @@
       --text-1:#2b2f36;
       --text-muted:#5a6270;
 
-      --surface-0-dark:#0a0c10;
-      --surface-1-dark:#111419;
-      --surface-2-dark:#151a21;
+      --surface-0-dark: #1a1a1d;
+      --surface-1-dark: #212124;
+      --surface-2-dark: #2a2a2e;
+
       --text-0-dark:#f5f7fa;
       --text-1-dark:#e9ecf1;
       --text-muted-dark:#b9c0cc;
@@ -139,7 +140,7 @@
     .theme-toggle {
       background: color-mix(in oklab, var(--text-muted) 20%, transparent);
       border: 1px solid color-mix(in oklab, var(--text-muted) 25%, transparent);
-      width: 46px;height: 46px;border-radius: 999px;display: grid;place-items: center;color: var(--text-0);
+      width: 46px;height: 46px;border-radius: 999px;display: grid;place-items:center;color: var(--text-0);
       cursor: pointer; box-shadow: var(--shadow); transition: transform var(--trans);
     }
     .theme-toggle:hover {transform: translateY(-2px);}
@@ -160,7 +161,260 @@
       70%{ box-shadow:0 0 0 10px rgba(26,101,70,0) }
       100%{ box-shadow:0 0 0 0 rgba(26,101,70,0) }
     }
+  
+/* Project Cards */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row by default */
+}
 
+/* Medium screens: 2 per row */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small screens: 1 per row */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#floating-testimonials-wrapper {
+  position: relative;
+  width: 100%;
+  height: 420px; 
+  overflow: hidden;
+  margin-top: 1.5rem;
+  border-radius: 18px;
+}
+
+
+#floating-testimonials-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #FBF9F1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+/* Dark mode for testimonials container */
+[data-theme="dark"] #floating-testimonials-container {
+  background-color: rgba(42, 42, 46, 0.5);
+}
+
+[data-theme="dark"] #floating-testimonials-container .card {
+  background: rgba(45, 47, 51, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] #floating-testimonials-container .card-name {
+  color: #e9ecf1;
+}
+
+[data-theme="dark"] #floating-testimonials-container .card-text {
+  color: #b9c0cc;
+}
+
+[data-theme="dark"] #floating-testimonials-container .card-role {
+  color: #9ca3af;
+}
+
+#floating-testimonials-container .card {
+position: absolute;
+top: 0;
+left: 0;
+display: flex;
+flex-direction: column;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+border: 1px solid rgba(0, 0, 0, 0.06);
+will-change: transform;
+transition: box-shadow 0.3s ease;
+}
+
+#floating-testimonials-container .card:hover {
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#floating-testimonials-container .card-header {
+display: flex;
+align-items: center;
+}
+
+#floating-testimonials-container .card-avatar {
+width: 10px;
+height: 10px;
+background: #d1d5db;
+border-radius: 9999px;
+flex-shrink: 0;
+margin-right: 8px;
+}
+
+#floating-testimonials-container .card-info {
+display: flex;
+flex-direction: column;
+min-width: 0;
+}
+
+#floating-testimonials-container .card-name {
+font-weight: 700;
+color: #111827;
+font-size: 0.875rem;
+line-height: 1.2;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+#floating-testimonials-container .card-role-row {
+display: flex;
+align-items: center;
+gap: 4px;
+margin-top: 2px;
+}
+
+#floating-testimonials-container .card-role {
+color: #6b7280;
+font-weight: 500;
+font-size: 0.75rem;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+#floating-testimonials-container .card-verified {
+display: flex;
+align-items: center;
+background: #dcfce7;
+color: #16a34a;
+border-radius: 9999px;
+padding: 2px 4px;
+font-size: 0.75rem;
+font-weight: 600;
+flex-shrink: 0;
+}
+
+#floating-testimonials-container .card-verified svg {
+width: 10px;
+height: 10px;
+margin-right: 2px;
+}
+
+#floating-testimonials-container .card-text {
+color: #4b5563;
+font-size: 0.7rem;
+line-height: 1.4;
+margin-top: 8px;
+}
+
+#floating-testimonials-container .card-stars {
+display: flex;
+gap: 3px;
+margin-top: 8px;
+align-items: flex-end;
+}
+
+#floating-testimonials-container .star {
+width: 16px;
+height: 16px;
+fill: #facc15;
+color: #facc15;
+flex-shrink: 0;
+}
+.card {
+  background: var(--surface-0);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: block;
+  position: relative;
+  transition: transform var(--trans), box-shadow var(--trans);
+  border: 1px solid color-mix(in oklab, var(--text-muted) 10%, transparent);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.card-media {
+  height: auto;
+  background: color-mix(in oklab, var(--green-600) 8%, transparent);
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  max-height: 260px;
+  overflow: hidden;
+  color: var(--green-600);
+  border-bottom: 1px solid color-mix(in oklab, var(--text-muted) 10%, transparent);
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+  position: relative;
+  padding: 1.5rem;
+}
+
+.card-body h3 {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-0);
+  font-size: 1.25rem;
+}
+
+.meta-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 1rem 0;
+}
+
+.meta-chip {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.6rem;
+  background: color-mix(in oklab, var(--green-600) 8%, transparent);
+  border-radius: 6px;
+  border-left: 3px solid var(--green-600);
+  font-weight: 600;
+}
+
+.read-time {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  background: color-mix(in oklab, var(--gold-500) 15%, transparent);
+  color: color-mix(in oklab, var(--gold-500) 80%, #000);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid color-mix(in oklab, var(--gold-500) 30%, transparent);
+}
     /* Progress bar */
     .progress{position:fixed;top:0;left:0;width:100%;height:4px;z-index:1100;background:transparent}
     #progressBar{
@@ -203,7 +457,7 @@
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--brown-900);
+            color: var(--brown-900, #1b1408);
             margin-bottom: 1.5rem;
             box-shadow: var(--shadow);
             animation: pulse 2s infinite;
@@ -263,47 +517,33 @@
     .section-title h2::after{content:"";position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);height:3px;width:64px;background:var(--gold-500);border-radius:3px}
     .section-title p{color:var(--text-muted)}
 
-    /* Tabs */
-    .tabs{ background:var(--surface-0); border-top:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent); border-bottom:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent) }
-    .tablist{display:flex;gap:.25rem;justify-content:center;flex-wrap:wrap;border-bottom:2px solid color-mix(in oklab, var(--text-muted) 15%, transparent)}
-    .tab-btn{background:transparent;border:0;padding:1rem 1.2rem;font-weight:800;color:var(--text-1);cursor:pointer;position:relative;min-width:44px;min-height:44px}
-    .tab-btn[aria-selected="true"],.tab-btn:hover{color:var(--green-600)}
-    .tab-btn::after{content:"";position:absolute;left:0;bottom:-2px;height:3px;width:0;background:var(--green-600);transition:width var(--trans);border-radius:3px}
-    .tab-btn[aria-selected="true"]::after,.tab-btn:hover::after{width:100%}
-    .tabpanel{display:none;padding-top:1rem}
-    .tabpanel.active{display:block}
-
-    .filters{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
-    .filter-btn{
-      background:var(--surface-0);border:2px solid var(--green-600);color:var(--green-600);
-      padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:800;transition:background var(--trans), color var(--trans);
-      min-width:44px;min-height:44px;
-    }
-    .filter-btn[aria-pressed="true"],.filter-btn:hover{background:var(--green-600);color:#fff}
-
-    .grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
-    .card{ background:var(--surface-0);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:1px solid color-mix(in oklab, var(--text-muted) 12%, transparent); transition:transform var(--trans), box-shadow var(--trans), background var(--trans) }
-    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow-strong)}
-    .card-link {display:block;text-decoration:none;color:inherit;}
-    .card-link:focus-visible {outline:3px solid var(--focus-ring);outline-offset:2px;border-radius:var(--radius)}
-    .card-media{ height:180px;display:grid;place-items:center;color:#fff;font-size:2rem; background:linear-gradient(135deg,var(--green-600),var(--green-700));position:relative }
-    .card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(45deg,rgba(0,0,0,.18),transparent)}
-    .card-body{padding:1rem 1.1rem}
-    .meta-chips {display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0;}
-    .meta-chip { padding:.35rem .7rem;border-radius:999px;font-size:.8rem;font-weight:600; background:color-mix(in oklab, var(--green-600) 10%, transparent); border:1px solid color-mix(in oklab, var(--green-600) 30%, transparent);}
-    .read-time {display:inline-block;margin-top:.5rem;font-size:.8rem;color:var(--text-muted);}
-    .tags{display:flex;flex-wrap:wrap;gap:.45rem;margin:.5rem 0 .8rem}
-    .tag{padding:.25rem .6rem;border-radius:999px;border:1.5px solid color-mix(in oklab, var(--green-600) 40%, var(--surface-0)); background:color-mix(in oklab, var(--green-600) 8%, transparent); color:var(--text-0);font-size:.83rem;font-weight:800}
-
+/* Tabs - FIXED VERSION */
+.tabs{ background:var(--surface-0); border-top:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent); border-bottom:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent) }
+.tablist{display:flex;gap:.25rem;justify-content:center;flex-wrap:wrap;border-bottom:2px solid color-mix(in oklab, var(--text-muted) 15%, transparent)}
+.tab-btn{background:transparent;border:0;padding:1rem 1.2rem;font-weight:800;color:var(--text-1);cursor:pointer;position:relative;min-width:44px;min-height:44px}
+.tab-btn[aria-selected="true"],.tab-btn:hover{color:var(--green-600)}
+.tab-btn::after{content:"";position:absolute;left:0;bottom:-2px;height:3px;width:0;background:var(--green-600);transition:width var(--trans);border-radius:3px}
+.tab-btn[aria-selected="true"]::after,.tab-btn:hover::after{width:100%}
+.tabpanel{display:none;padding-top:1rem}
+.tabpanel.active{display:block}
     /* Timeline / Education */
     .timeline{position:relative;max-width:var(--page-max);margin:0 auto}
-    .timeline::after{content:"";position:absolute;top:0;bottom:0;left:50%;margin-left:-3px;width:6px;background:var(--green-600);border-radius:10px}
+    .timeline::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:7px;           /* thinner line */
+  margin-left:-1px;
+  background:var(--green-600);
+  border-radius:0;     /* no pill/circle look */
+}
     .t-item{position:relative;width:50%;padding:10px 40px}
     .t-item:nth-child(odd){left:0}
     .t-item:nth-child(even){left:50%}
     .t-card{background:var(--surface-0);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;border-left:4px solid var(--gold-500);transition:transform var(--trans)}
-    .t-card:hover{transform:translateY(-4px)}
-    .t-card::after{content:"";position:absolute;top:16px;width:18px;height:18px;border-radius:50%;border:3px solid var(--green-600);background:var(--surface-0)}
+    .t-card:hover{transform:translateY(-4px)}    
     .t-item:nth-child(odd) .t-card::after{right:-9px;transform:translateX(50%)}
     .t-item:nth-child(even) .t-card::after{left:-9px;transform:translateX(-50%)}
     .t-date{font-weight:800;color:var(--green-600);margin-bottom:.25rem}
@@ -311,7 +551,8 @@
     .c-list{list-style:none;margin:.5rem 0 0;padding:0;max-height:0;overflow:hidden;transition:max-height var(--trans)}
     .t-card.active .c-list{max-height:1200px}
     .c-list li{display:flex;justify-content:space-between;gap:1rem;position:relative;padding-left:16px;margin-bottom:8px}
-    .c-list li::before{content:"•";position:absolute;left:0;color:var(--gold-500);font-weight:900}
+.c-list li::before {content: ""; position: absolute; left: 0; top: 0.6em; width: 6px;height: 6px;border-radius: 50%;background: var(--gold-500);}
+
     .grade{background:var(--green-600);color:#fff;padding:2px 8px;border-radius:999px;font-weight:800;font-size:.78rem}
     .c-details{display:none;margin-top:.6rem;background:var(--surface-2);padding:12px;border-radius:10px;border-left:3px solid var(--gold-500)}
     .c-details.active{display:block}
@@ -321,6 +562,221 @@
     .skill-card{background:var(--surface-0);border-top:4px solid var(--gold-500);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem}
     .info-card{background:var(--surface-0);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;border-left:4px solid var(--gold-500)}
     .skill-pill{display:inline-block;margin:.25rem;padding:.45rem .8rem;border-radius:999px;border:1.5px solid color-mix(in oklab, var(--green-600) 40%, var(--surface-0)); background:color-mix(in oklab, var(--green-600) 8%, transparent);font-weight:800}
+/* Form smaller than cards */
+#panel-additional #testimonialFormCard {
+  max-width: 640px;
+  margin: 1.5rem auto 0;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(8px);
+  transition: max-height 260ms var(--trans), opacity 220ms var(--trans), transform 220ms var(--trans);
+}
+
+#panel-additional #testimonialFormCard.visible {
+  opacity: 1;
+  max-height: 1200px; /* large enough to fit the form */
+  transform: translateY(0);
+}
+
+/* Testimonial cards above */
+#panel-additional #testimonialsGrid {
+  margin-top: 0;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.testimonial-card {
+  border-left: 4px solid var(--gold-500);
+}
+
+
+.testimonial-card header h3 {
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-card header p.muted {
+  margin: 0.1rem 0;
+}
+/* Keep the submission form narrower than testimonial cards */
+#panel-additional #testimonialFormCard {
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+}
+/* Feedback CTA Button */
+.feedback-cta-wrapper {
+  text-align: center;
+  margin: 2rem auto 3rem;
+}
+
+.feedback-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s var(--trans);
+  position: relative;
+  overflow: hidden;
+}
+
+.feedback-cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.feedback-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+.feedback-cta-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.feedback-cta-btn:active {
+  transform: translateY(0);
+}
+
+/* Modal Styles */
+.feedback-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s var(--trans);
+}
+
+.feedback-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 720px;
+  max-height: 90vh;
+  background: var(--surface-0);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
+  animation: modalSlideIn 0.4s var(--trans);
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-0);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s var(--trans);
+}
+
+.modal-close:hover {
+  background: var(--red-500);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.modal-content iframe {
+  display: block;
+  border: none;
+  border-radius: var(--radius-lg);
+}
+
+/* Testimonial Card Enhancements */
+.testimonial-card {
+  border-left: 4px solid var(--gold-500);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--trans);
+}
+
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 5rem;
+  color: var(--gold-500);
+  opacity: 0.1;
+  font-family: Georgia, serif;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+  border-left-color: var(--green-600);
+}
+
+/* Testimonial cards can span the full grid width */
+#panel-additional #testimonialsGrid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.testimonial-card {
+  border-left: 4px solid var(--gold-500);
+}
+
+.testimonial-card header h3 {
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-card header p.muted {
+  margin: 0.1rem 0;
+}
 
     /* Contact */
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
@@ -412,17 +868,978 @@
     @media (prefers-reduced-motion: reduce){
       *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
     }
+    
+    .role-search-section {
+  max-width: 900px;
+  margin: 2.5rem auto 0;
+  padding: 0 1rem;
+  overflow: visible;
+  position: relative;
+}
+
+.role-search-label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-0, #181c20);
+  margin-bottom: 0.9rem;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.role-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  z-index: 10;
+}
+
+.role-search-icon {
+  position: absolute;
+  left: 1.1rem;
+  color: var(--green-600, #1a6546);
+  font-size: 1.25rem;
+  pointer-events: none;
+}
+
+.role-search-input {
+  flex: 1;
+  width: 100%;
+  min-width: 320px;
+  padding: 1rem 1.1rem 1rem 2.7rem; /* left padding makes space for icon */
+  border: 2px solid var(--green-600, #1a6546);
+  border-radius: 10px;
+  background: var(--surface-0, #fff);
+  color: var(--text-0, #181c20);
+  font-weight: 600;
+  font-size: 1.08rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(26, 101, 70, 0.04);
+  min-height: 46px;
+}
+
+.role-search-input:focus {
+  border-color: var(--green-700, #0f4f37);
+  box-shadow: 0 2px 16px rgba(26, 101, 70, 0.12);
+  outline: none;
+}
+
+.role-search-btn {
+  padding: 0.95rem 1.4rem;
+  background: var(--green-600, #1a6546);
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.2s, transform 0.2s;
+  min-height: 46px;
+  box-shadow: 0 1px 5px rgba(26, 101, 70, 0.07);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.role-search-btn:hover,
+.role-search-btn:focus {
+  background: var(--green-700, #0f4f37);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 10px rgba(26,101,70,0.10);
+}
+
+/* Filter Banner */
+.filter-banner {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  background: var(--green-600);
+  color: white;
+  padding: 0.8rem 1rem;
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+}
+
+.filter-banner.active {
+  display: flex;
+}
+
+.filter-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-weight: 600;
+}
+
+.filter-banner-role {
+  background: rgba(255,255,255,0.2);
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.filter-banner-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-banner-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--trans);
+}
+
+.filter-banner-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Project Filters */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 0.7rem 1.2rem;
+  background: var(--surface-0);
+  border: 2px solid color-mix(in oklab, var(--text-muted) 30%, transparent);
+  border-radius: var(--radius-sm);
+  color: var(--text-1);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--trans);
+}
+
+.filter-btn[aria-pressed="true"],
+.filter-btn:hover {
+  background: var(--green-600);
+  color: white;
+  border-color: var(--green-600);
+}
+
+.testimonial-trigger {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #1a6546;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(26, 101, 70, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.testimonial-trigger:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(26, 101, 70, 0.4);
+  background: #145439;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #1a6546;
+}    
+/* ===== TESTIMONIALS CAROUSEL - UPDATED VERSION ===== */
+
+.testimonials-section {
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-1);
+}
+
+.testimonials-section h2 {
+  text-align: center;
+  color: var(--green-600);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.testimonials-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 3px;
+  width: 64px;
+  background: var(--gold-500);
+  border-radius: 3px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+}
+
+/* Carousel Controls */
+.testimonial-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.control-btn {
+  background: var(--surface-0);
+  border: 2px solid var(--green-600);
+  color: var(--green-600);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all var(--trans);
+  box-shadow: var(--shadow);
+  font-size: 1.1rem;
+}
+
+.control-btn.small {
+  width: 36px;
+  height: 36px;
+  font-size: 0.9rem;
+}
+
+.control-btn:hover {
+  background: var(--green-600);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+}
+
+.control-btn.paused {
+  background: var(--gold-500);
+  border-color: var(--gold-600);
+  color: #1b1408;
+}
+
+.playback-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  background: var(--surface-0);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  border: 1px solid color-mix(in oklab, var(--text-muted) 20%, transparent);
+}
+
+.speed-label {
+  font-weight: 600;
+  color: var(--text-1);
+  font-size: 0.9rem;
+}
+
+.speed-value {
+  font-weight: 800;
+  color: var(--green-600);
+  min-width: 40px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* Carousel Container */
+.testimonials-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.testimonials-carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Testimonial Cards */
+.testimonial-carousel-card {
+  flex: 0 0 auto;
+  width: 340px;
+  background: var(--surface-0);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--gold-500);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  transition: all 0.3s var(--trans);
+}
+
+.testimonial-carousel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+  border-left-color: var(--green-600);
+}
+
+.testimonial-carousel-card::before {
+  content: '"';
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 4rem;
+  color: var(--gold-500);
+  opacity: 0.15;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* Star Rating */
+.testimonial-stars {
+  display: flex;
+  gap: 0.25rem;
+  color: var(--gold-500);
+  font-size: 1.1rem;
+}
+
+/* Quote (continued) */
+.testimonial-carousel-card blockquote {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-carousel-card blockquote p {
+  font-style: italic;
+  color: var(--text-1);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Footer with Author Info */
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--text-muted) 20%, transparent);
+}
+
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-600), var(--gold-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 1.1rem;
+  border: 3px solid color-mix(in oklab, var(--gold-500) 30%, transparent);
+  flex-shrink: 0;
+}
+
+.testimonial-author {
+  flex: 1;
+  min-width: 0;
+}
+
+.testimonial-author h3 {
+  margin: 0 0 0.15rem 0;
+  color: var(--text-0);
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.testimonial-author .title {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.linkedin-link {
+  color: var(--green-600);
+  font-size: 1.3rem;
+  transition: all var(--trans);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--green-600) 10%, transparent);
+  flex-shrink: 0;
+}
+
+.linkedin-link:hover {
+  color: white;
+  background: var(--green-600);
+  transform: scale(1.1);
+}
+
+/* Pagination Dots */
+.carousel-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pagination-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--text-muted) 30%, transparent);
+  border: none;
+  cursor: pointer;
+  transition: all var(--trans);
+  padding: 0;
+}
+
+.pagination-dot:hover {
+  background: var(--gold-500);
+  transform: scale(1.2);
+}
+
+.pagination-dot.active {
+  background: var(--green-600);
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* Testimonial Trigger Button (Fixed) */
+.testimonial-trigger {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--green-600);
+  color: white;
+  padding: 15px 28px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(26, 101, 70, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+.testimonial-trigger::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(26, 101, 70, .5);
+  transition: box-shadow var(--trans);
+  animation: pulse 2s ease-out infinite;
+}
+
+.testimonial-trigger:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(26, 101, 70, 0.4);
+  background: var(--green-700);
+}
+
+.testimonial-trigger:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .testimonial-carousel-card {
+    width: 300px;
+  }
+  
+  .playback-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  
+  .control-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .testimonial-controls {
+    gap: 0.5rem;
+  }
+  
+  .testimonial-trigger {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    font-size: 0.85rem;
+  }
+  
+  .testimonials-carousel-track {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonial-carousel-card {
+    width: 280px;
+  }
+  
+  .playback-controls .speed-label {
+    display: none;
+  }
+  
+  .testimonial-trigger span {
+    display: none;
+  }
+  
+  .testimonial-trigger {
+    padding: 14px;
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    justify-content: center;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-carousel-track {
+    transition: none;
+  }
+  
+  .testimonial-carousel-card {
+    transition: none;
+  }
+  
+  .testimonial-trigger::before {
+    animation: none;
+  }
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .testimonial-carousel-card::before {
+  opacity: 0.08;
+}
+
+[data-theme="dark"] .linkedin-link {
+  background: color-mix(in oklab, var(--green-600) 15%, transparent);
+}
+
+/* Floating testimonials wrapper */
+#floating-testimonials-wrapper {
+  width: 100%;
+  height: 420px;
+  margin-top: 1.5rem;
+  border-radius: 18px;
+  overflow: hidden;
+  display: block;
+}
+#floating-testimonials-wrapper {
+  position: relative;
+  width: 100%;
+  height: 420px; 
+  overflow: hidden;
+  margin-top: 1.5rem;
+  border-radius: 18px;
+}
+
+#floating-testimonials-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #FBF9F1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#floating-testimonials-container .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  will-change: transform;
+  transition: box-shadow 0.3s ease;
+}
+
+#floating-testimonials-container .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#floating-testimonials-container .card-header {
+  display: flex;
+  align-items: center;
+}
+
+#floating-testimonials-container .card-avatar {
+  width: 10px;
+  height: 10px;
+  background: #d1d5db;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+#floating-testimonials-container .card-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+#floating-testimonials-container .card-name {
+  font-weight: 700;
+  color: #111827;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#floating-testimonials-container .card-role-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+#floating-testimonials-container .card-role {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#floating-testimonials-container .card-verified {
+  display: flex;
+  align-items: center;
+  background: #dcfce7;
+  color: #16a34a;
+  border-radius: 9999px;
+  padding: 2px 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+#floating-testimonials-container .card-verified svg {
+  width: 10px;
+  height: 10px;
+  margin-right: 2px;
+}
+
+#floating-testimonials-container .card-text {
+  color: #4b5563;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  margin-top: 8px;
+}
+
+#floating-testimonials-container .card-stars {
+  display: flex;
+  gap: 3px;
+  margin-top: 8px;
+  align-items: flex-end;
+}
+
+#floating-testimonials-container .star {
+  width: 16px;
+  height: 16px;
+  fill: #facc15;
+  color: #facc15;
+  flex-shrink: 0;
+}
+/* Enhanced Popup Styling - Replace your existing popup CSS with this */
+
+.testimonial-popup {
+  position: fixed;
+  top: 50%;
+  right: -100%;
+  transform: translateY(-50%);
+  width: min(650px, 92vw);
+  max-height: 90vh;
+  background: var(--surface-0);
+  border-radius: 16px;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 40px 120px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  opacity: 0;
+  transition: 
+    right 0.45s cubic-bezier(0.4, 0, 0.2, 1), 
+    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--text-muted) 10%, transparent);
+}
+
+.testimonial-popup[aria-hidden="false"] {
+  right: 3%;
+  opacity: 1;
+}
+
+.testimonial-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--text-muted) 12%, transparent);
+  background: linear-gradient(135deg, 
+    color-mix(in oklab, var(--green-600) 3%, transparent),
+    color-mix(in oklab, var(--surface-0) 98%, transparent)
+  );
+  flex-shrink: 0;
+}
+
+.testimonial-popup-header h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--green-600);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.testimonial-popup-header h3::before {
+  content: "✨";
+  font-size: 1.2rem;
+}
+
+.popup-close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: color-mix(in oklab, var(--text-muted) 8%, transparent);
+  color: var(--text-1);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.25s var(--trans);
+  font-size: 1.3rem;
+}
+
+.popup-close-btn:hover {
+  background: var(--green-600);
+  color: #fff;
+  transform: rotate(90deg) scale(1.05);
+  box-shadow: var(--shadow);
+}
+
+.testimonial-popup-body {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  padding: 0.5rem;
+}
+
+.testimonial-popup-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Backdrop - smoother */
+.testimonial-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--trans), backdrop-filter 0.35s var(--trans);
+}
+
+.testimonial-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Button animation refinement */
+.feedback-cta-wrapper.active .feedback-cta-btn {
+  transform: translateX(-10px) scale(0.95);
+  box-shadow: var(--shadow);
+}
+
+/* Mobile - slide from bottom */
+@media (max-width: 768px) {
+  .testimonial-popup {
+    width: 100vw;
+    max-width: 100vw;
+    height: 88vh;
+    max-height: 88vh;
+    top: auto;
+    bottom: -100%;
+    right: 0;
+    left: 0;
+    transform: none;
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .testimonial-popup[aria-hidden="false"] {
+    bottom: 0;
+    right: 0;
+  }
+  
+  .feedback-cta-wrapper.active .feedback-cta-btn {
+    transform: translateY(-50vh) scale(0.8);
+  }
+  
+  .testimonial-popup-header {
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .testimonial-popup-header h3 {
+    font-size: 1.15rem;
+  }
+}
+
+/* Dark mode refinements */
+[data-theme="dark"] .testimonial-popup {
+  background: var(--surface-0);
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 40px 120px rgba(0, 0, 0, 0.8);
+  border-color: color-mix(in oklab, var(--text-muted) 15%, transparent);
+}
+
+[data-theme="dark"] .popup-close-btn {
+  background: color-mix(in oklab, var(--text-muted) 15%, transparent);
+}
+
+[data-theme="dark"] .testimonial-backdrop {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+
   </style>
+  <!-- Load Google reCAPTCHA v3 -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
+  <div class="filter-banner" id="filterBanner">
+    <div class="filter-banner-content">
+      <i class="fas fa-filter" aria-hidden="true"></i>
+      <span>Customized for</span>
+      <span class="filter-banner-role" id="filterBannerRole">Loading...</span>
+    </div>
+    <div class="filter-banner-actions">
+      <button class="filter-banner-btn" id="viewFullBtn" title="View full portfolio">View full portfolio</button>
+      <button class="filter-banner-btn" id="dismissBannerBtn" title="Dismiss banner" style="background: rgba(255,255,255,0.1);">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
 
   <!-- Header -->
   <header role="banner">
     <div class="container header-wrap">
       <div class="logo">
-        <img src="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg=true"
-             alt="Thema Green headshot" loading="lazy" decoding="async" fetchpriority="high" />
+        <img
+          src="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg=true"
+          alt="Thema Green headshot"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="high"
+        />
         <div class="brand">Thema <span class="accent">Green</span></div>
       </div>
 
@@ -445,9 +1862,15 @@
           <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
 
-        <a href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener noreferrer" class="btn-open-work" aria-label="Open to Work">
+        <a
+          href="https://www.linkedin.com/in/themagreen/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-open-work"
+          aria-label="Open to work"
+        >
           <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-          <span>Open to Work</span>
+          <span>Open to work</span>
         </a>
       </div>
     </div>
@@ -461,35 +1884,37 @@
     <section class="hero" id="home" aria-label="Intro">
       <div id="particles-js" class="particles-container" aria-hidden="true"></div>
       <div class="container inner">
-        <span class="hero-badge">Human Factors &amp; UX Research Professional</span>
+        <span class="hero-badge">Human Factors & UX Research Professional</span>
         <h1>Engineering Human-Centered Systems</h1>
-        <p>
-          I bridge psychology, technology, and design to create accessible, safe, and effective human-system interactions.
-        </p>
+        <p> Follow along in my journey to unpack the mysterious ways in which humans and technology intersect.
 
         <div class="credibility" aria-label="Selected domains">
           <div class="credibility-item">
             <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
-            <span>DOT VR Research</span>
+            <span>Human centered AI</span>
           </div>
           <div class="credibility-item">
             <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
-            <span>Medical Device UX</span>
+            <span>UX driven product research</span>
           </div>
           <div class="credibility-item">
             <i class="fa-solid fa-robot" aria-hidden="true"></i>
-            <span>AI Alignment</span>
+            <span>Human computer interaction</span>
           </div>
         </div>
 
         <div class="hero-actions">
-          <a href="#portfolio-tabs" class="btn btn-primary"><i class="fa-solid fa-eye" aria-hidden="true"></i> View Portfolio</a>
-          <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Discuss Collaboration</a>
+          <a href="#portfolio-tabs" class="btn btn-primary">
+            <i class="fa-solid fa-eye" aria-hidden="true"></i> View portfolio
+          </a>
+          <a href="#contact" class="btn btn-ghost">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Contact me
+          </a>
         </div>
 
         <div class="typewriter" aria-live="polite">
           <span class="label">Experienced in</span>
-          <span class="word" id="typewriter-target">UX Design</span><span class="cursor" aria-hidden="true"></span>
+          <span class="word" id="typewriter-target">Human factors and UX</span><span class="cursor" aria-hidden="true"></span>
         </div>
       </div>
     </section>
@@ -497,317 +1922,469 @@
     <div class="results-strip hero-stats" aria-label="Quick stats">
       <div class="result-tile">
         <div class="result-number">15+</div>
-        <div class="result-label">Projects Completed</div>
+        <div class="result-label">Applied projects</div>
       </div>
       <div class="result-tile">
         <div class="result-number">5</div>
-        <div class="result-label">Research Papers</div>
+        <div class="result-label">Research papers</div>
       </div>
       <div class="result-tile">
         <div class="result-number">3</div>
-        <div class="result-label">Years Experience</div>
+        <div class="result-label">Years experience</div>
       </div>
     </div>
 
     <!-- Tabs: Projects / Education / Additional -->
-    <section class="tabs island" id="portfolio-tabs" aria-label="Portfolio & Experience">
+    <section class="tabs island" id="portfolio-tabs" aria-label="Portfolio and experience">
       <div class="particles-container" id="particles-portfolio" aria-hidden="true"></div>
       <div class="container">
         <div class="section-title">
-          <h2>Portfolio & Experience</h2>
-          <p>Explore projects, education, and professional milestones.</p>
+          <h2>Portfolio and experience</h2>
+          <p>See how psychology, engineering, and design thinking come together across my projects and education.</p>
+
+          <section class="role-search-section">
+            <label class="role-search-label" for="roleSearchInput">Search by role or problem</label>
+            <div class="role-search-wrapper">
+              <i class="fas fa-search role-search-icon"></i>
+              <input
+                id="roleSearchInput"
+                type="text"
+                class="role-search-input"
+                placeholder="For example, UX researcher, human factors engineer, AI ethics"
+                autocomplete="off"
+                aria-label="Search by role or problem"
+              />
+              <button class="role-search-btn" id="searchBtn" title="Search for role">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </section>
         </div>
 
         <div class="tablist" role="tablist" aria-label="Portfolio sections">
-          <button class="tab-btn" id="tab-projects" role="tab" aria-selected="true" aria-controls="panel-projects" data-tab="projects">Projects</button>
-          <button class="tab-btn" id="tab-education" role="tab" aria-selected="false" aria-controls="panel-education" data-tab="education">Education</button>
-          <button class="tab-btn" id="tab-additional" role="tab" aria-selected="false" aria-controls="panel-additional" data-tab="additional">Additional</button>
+          <button
+            class="tab-btn"
+            id="tab-projects"
+            role="tab"
+            aria-selected="true"
+            aria-controls="panel-projects"
+            data-tab="projects"
+          >
+            Projects
+          </button>
+          <button
+            class="tab-btn"
+            id="tab-education"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-education"
+            data-tab="education"
+          >
+            Education
+          </button>
+          <button
+            class="tab-btn"
+            id="tab-additional"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-additional"
+            data-tab="additional"
+          >
+            Testimonials
+          </button>
         </div>
 
-        <!-- Projects Panel -->
-        <div id="panel-projects" class="tabpanel active" role="tabpanel" aria-labelledby="tab-projects">
+        <br />
+
+        <div class="tabpanel active" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects">
+          <!-- Projects Panel -->
           <div class="filters" aria-label="Filter projects">
-            <button class="filter-btn" data-filter="all" aria-pressed="true">All Projects</button>
-            <button class="filter-btn" data-filter="core" aria-pressed="false">Core Academic</button>
-            <button class="filter-btn" data-filter="mobile" aria-pressed="false">Mobile Design</button>
-            <button class="filter-btn" data-filter="design" aria-pressed="false">Design Thinking</button>
-            <button class="filter-btn" data-filter="conceptual" aria-pressed="false">Conceptual</button>
+            <button class="filter-btn" data-filter="all" aria-pressed="true">All projects</button>
+            <button class="filter-btn" data-filter="core" aria-pressed="false">Core academic</button>
+            <button class="filter-btn" data-filter="mobile" aria-pressed="false">HFAC concentration</button>
+            <button class="filter-btn" data-filter="design" aria-pressed="false">Design thinking minor</button>
+            <button class="filter-btn" data-filter="conceptual" aria-pressed="false">Personal concepts</button>
           </div>
 
           <div class="grid" id="projectsGrid">
             <!-- Core -->
-            <article class="card" data-category="core">
-              <a href="Incident Investigation & Analysis - Thema's Team.pptx.pdf" class="card-link" aria-label="Titanic Disaster Human Factors Analysis case study">
-                <div class="card-media"><img src="TitanicIncidentAnalysis.png" alt="Titanic Disaster Human Factors Analysis thumbnail" class="card-thumbnail" style = "width:125%;height:auto;max-width:1500px;display:block;margin:0 auto;"/></div>
+            <article class="card" data-category="core" data-date="2024-11-01">
+              <a
+                href="Incident Investigation Analysis - Thema's Team.pptx.pdf"
+                class="card-link"
+                aria-label="Titanic disaster human factors analysis case study"
+              >
+                <div class="card-media">
+                  <img
+                    src="TitanicIncidentAnalysis.png"
+                    alt="Titanic disaster human factors analysis thumbnail"
+                    class="card-thumbnail"
+                    style="width:125%;height:auto;max-width:1500px;display:block;margin:0 auto;"
+                  />
+                </div>
                 <div class="card-body">
-                  <h3>Titanic Disaster Human Factors Analysis</h3>
-                  <p class="muted">HFACS-based incident investigation of human error, communication breakdowns, and organizational failures.</p>
+                  <h3>Titanic disaster human factors analysis</h3>
+                  <p class="muted">
+                    HFACS based reconstruction of crew decisions, communication gaps, and organizational factors that shaped the event and potential safety lessons.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Communication breakdowns</span>
-                    <span class="meta-chip">Process: HFACS analysis</span>
-                    <span class="meta-chip">Outcome: 40% error reduction (modeled)</span>
+                    <span class="meta-chip">Problem: Breakdowns in communication</span>
+                    <span class="meta-chip">Process: HFACS incident analysis</span>
+                    <span class="meta-chip">Outcome: Modeled forty percent reduction in error pathways</span>
                   </div>
-                  <div class="read-time">4 min read</div>
-                  <div class="tags"><span class="tag">HFACS</span><span class="tag">Root-cause</span><span class="tag">Systems Thinking</span></div>
+                  <div class="read-time">Four minute read</div>
+                  <div class="tags">
+                    <span class="tag">HFACS</span><span class="tag">Root cause</span><span class="tag">Systems thinking</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="core">
-              <a href="Website Redesign - Group Project (Thema).pptx.pdf" class="card-link" aria-label="GMU Library Website Redesign case study">
-                <div class="card-media"><img src="Library Site Redesign.png" aria-hidden="true" style = "width:100%;height:auto;max-width:2000px;display:block;margin:0 auto;"/></div>
+            <article class="card" data-category="core" data-date="2024-11-01">
+              <a
+                href="Website Redesign - Group Project (Thema).pptx.pdf"
+                class="card-link"
+                aria-label="GMU library website redesign case study"
+              >
+                <div class="card-media">
+                  <img
+                    src="Library Site Redesign.png"
+                    aria-hidden="true"
+                    style="width:100%;height:auto;max-width:2000px;display:block;margin:0 auto;"
+                  />
+                </div>
                 <div class="card-body">
-                  <h3>GMU Library Website Redesign</h3>
-                  <p class="muted">Research-driven UX overhaul including usability testing, competitive analysis, and heuristic evaluation.</p>
+                  <h3>GMU library website redesign</h3>
+                  <p class="muted">
+                    Research led update of a large university library site using usability testing, heuristic reviews, and competitor scans to improve student workflows.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Low engagement</span>
-                    <span class="meta-chip">Process: User testing</span>
-                    <span class="meta-chip">Outcome: +35% usage (prototype tests)</span>
+                    <span class="meta-chip">Problem: Low student engagement</span>
+                    <span class="meta-chip">Process: User testing and heuristic review</span>
+                    <span class="meta-chip">Outcome: 35 percent higher task success in prototype tests</span>
                   </div>
-                  <div class="read-time">5 min read</div>
-                  <div class="tags"><span class="tag">UX Research</span><span class="tag">Usability</span><span class="tag">Heuristics</span></div>
+                  <div class="read-time">Five minute read</div>
+                  <div class="tags">
+                    <span class="tag">UX research</span><span class="tag">Usability</span><span class="tag">Heuristics</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="core">
-              <a href="PSYC-461 BigBelly Clean Presentation Deck  (1).mp4" class="card-link" aria-label="Bigbelly Waste Management Partnership case study">
-                <div class="card-media"><img src="BigbellySolar.jpg" aria-hidden="true" style = "width:80%;height:500;max-width:900px;display:block;margin:0 auto;"/></div>
+            <article class="card" data-category="core" data-date="2023-03-01">
+              <a
+                href="PSYC-461 BigBelly Clean Presentation Deck  (1).mp4"
+                class="card-link"
+                aria-label="Bigbelly waste management partnership case study"
+              >
+                <div class="card-media">
+                  <img
+                    src="BigbellySolar.jpg"
+                    aria-hidden="true"
+                    style="width:80%;height:500;max-width:900px;display:block;margin:0 auto;"
+                  />
+                </div>
                 <div class="card-body">
-                  <h3>Bigbelly Waste Management Partnership</h3>
-                  <p class="muted">User-centered research and human-system integration with adopted stakeholder recommendations.</p>
+                  <h3>Bigbelly waste management partnership</h3>
+                  <p class="muted">
+                    Field research with a campus waste partner, mapping real collection routes and touchpoints to recommend changes that teams adopted.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Inefficient workflow</span>
-                    <span class="meta-chip">Process: Task analysis</span>
-                    <span class="meta-chip">Outcome: 25% time savings</span>
+                    <span class="meta-chip">Problem: Fragmented collection workflow</span>
+                    <span class="meta-chip">Process: Task and stakeholder analysis</span>
+                    <span class="meta-chip">Outcome: Estimated 25 percent time savings for key routes</span>
                   </div>
-                  <div class="read-time">3 min read</div>
-                  <div class="tags"><span class="tag">Industry</span><span class="tag">Task Analysis</span><span class="tag">HSI</span></div>
+                  <div class="read-time">Three minute read</div>
+                  <div class="tags">
+                    <span class="tag">Industry</span><span class="tag">Task analysis</span><span class="tag">HSI</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="core">
-              <a href="https://themas-9dz0anv.gamma.site/" class="card-link" aria-label="UMass-Amherst Human Performance Lab case study">
-                <div class="card-media"><img src="BikeSim.png" aria-hidden="true" style = "width:110%;height:auto;max-width:170px;display:block;margin:0 auto;"/></div>
+            <article class="card" data-category="core" data-date="2022-12-01">
+              <a
+                href="https://themas-9dz0anv.gamma.site/"
+                class="card-link"
+                aria-label="UMass Amherst human performance lab case study"
+              >
+                <div class="card-media">
+                  <img
+                    src="BikeSim.png"
+                    aria-hidden="true"
+                    style="width:110%;height:auto;max-width:170px;display:block;margin:0 auto;"
+                  />
+                </div>
                 <div class="card-body">
-                  <h3>UMass-Amherst Human Performance Lab</h3>
-                  <p class="muted">Unity 3D VR bicycle simulator enhancements for DOT safety studies; presented at symposium.</p>
+                  <h3>UMass Amherst human performance lab</h3>
+                  <p class="muted">
+                    Unity 3D bicycle simulator updates that supported Department of Transportation safety studies and a human performance symposium presentation.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Safety training</span>
-                    <span class="meta-chip">Process: VR development</span>
-                    <span class="meta-chip">Outcome: +60% engagement</span>
+                    <span class="meta-chip">Problem: Engaging safety training</span>
+                    <span class="meta-chip">Process: VR scenario and interface design</span>
+                    <span class="meta-chip">Outcome: 60 percent lift in engagement during study sessions</span>
                   </div>
-                  <div class="read-time">6 min read</div>
-                  <div class="tags"><span class="tag">VR</span><span class="tag">Unity</span><span class="tag">Behavioral Data</span></div>
+                  <div class="read-time">Six minute read</div>
+                  <div class="tags">
+                    <span class="tag">VR</span><span class="tag">Unity</span><span class="tag">Behavioral data</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <!-- Mobile -->
-            <article class="card" data-category="mobile">
-              <a href="#" class="card-link" aria-label="Mason Commutes App case study">
+            <!-- Mobile / HFAC concentration -->
+            <article class="card" data-category="mobile" data-date="2024-11-01">
+              <a href="#" class="card-link" aria-label="Mason commutes app case study">
                 <div class="card-media"><i class="fa-solid fa-bus" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>Mason Commutes App</h3>
-                  <p class="muted">Native iOS/Android concept to connect GMU commuters and reduce isolation.</p>
+                  <h3>Mason commutes app</h3>
+                  <p class="muted">
+                    Native mobile concept that connects GMU commuters by routes, schedules, and interests to reduce isolation and surface shared patterns.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Commuter isolation</span>
-                    <span class="meta-chip">Process: Personas</span>
-                    <span class="meta-chip">Outcome: +50% connections</span>
+                    <span class="meta-chip">Problem: Social isolation for commuters</span>
+                    <span class="meta-chip">Process: Personas and journey mapping</span>
+                    <span class="meta-chip">Outcome: Modeled fifty percent increase in peer connections</span>
                   </div>
-                  <div class="read-time">4 min read</div>
-                  <div class="tags"><span class="tag">Personas</span><span class="tag">Competitive Review</span><span class="tag">Mobile UX</span></div>
+                  <div class="read-time">Four minute read</div>
+                  <div class="tags">
+                    <span class="tag">Personas</span><span class="tag">Competitive review</span><span class="tag">Mobile UX</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="mobile">
-              <a href="#" class="card-link" aria-label="Focus Guardian mobile companion case study">
+            <article class="card" data-category="mobile" data-date="2024-10-01">
+              <a href="#" class="card-link" aria-label="Focus guardian mobile companion case study">
                 <div class="card-media"><i class="fa-solid fa-shield" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>Focus Guardian – Mobile Control</h3>
-                  <p class="muted">4-screen companion app for a browser extension with dashboard, timers, and insights.</p>
+                  <h3>Focus guardian mobile control</h3>
+                  <p class="muted">
+                    Companion app for a browser extension that lets people set focus sessions, view summaries, and tune digital nudges.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Digital distraction</span>
-                    <span class="meta-chip">Process: Hi‑fi prototyping</span>
-                    <span class="meta-chip">Outcome: +70% focus</span>
+                    <span class="meta-chip">Problem: Everyday digital distraction</span>
+                    <span class="meta-chip">Process: High fidelity prototyping</span>
+                    <span class="meta-chip">Outcome: 70 percent focus gain in scenario based testing</span>
                   </div>
-                  <div class="read-time">3 min read</div>
-                  <div class="tags"><span class="tag">Hi‑Fi Proto</span><span class="tag">Feature Scoping</span></div>
+                  <div class="read-time">Three minute read</div>
+                  <div class="tags">
+                    <span class="tag">Hi fi proto</span><span class="tag">Feature scoping</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="mobile">
-              <a href="#" class="card-link" aria-label="FOCUS Mobile App case study">
+            <article class="card" data-category="mobile" data-date="2024-09-01">
+              <a href="#" class="card-link" aria-label="Focus mobile app case study">
                 <div class="card-media"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>FOCUS Mobile App</h3>
-                  <p class="muted">Minimalist social app (6+ screens) with feed, analytics, messaging, and app timer.</p>
+                  <h3>Focus mobile app</h3>
+                  <p class="muted">
+                    Minimalist social concept with a limited posting model, analytics, and messaging designed to calm feeds rather than amplify noise.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Social overload</span>
-                    <span class="meta-chip">Process: Design system</span>
-                    <span class="meta-chip">Outcome: Clean, focused UI</span>
+                    <span class="meta-chip">Problem: Social overload and fatigue</span>
+                    <span class="meta-chip">Process: Design system and interaction flows</span>
+                    <span class="meta-chip">Outcome: Clean, low noise interface for deliberate use</span>
                   </div>
-                  <div class="read-time">5 min read</div>
-                  <div class="tags"><span class="tag">Interaction</span><span class="tag">Design System</span></div>
+                  <div class="read-time">Five minute read</div>
+                  <div class="tags">
+                    <span class="tag">Interaction</span><span class="tag">Design system</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="mobile">
+            <article class="card" data-category="mobile" data-date="2024-08-01">
               <a href="#" class="card-link" aria-label="AuraFlex wearables concept case study">
                 <div class="card-media"><i class="fa-solid fa-clock" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>AuraFlex Smartwatch + Companion</h3>
-                  <p class="muted">Wearable + mobile experience: Zen Mode, AR Wardrobe Sync, Voice Commands, Posture Alerts.</p>
+                  <h3>AuraFlex smartwatch and companion</h3>
+                  <p class="muted">
+                    Wearable and phone concept that layers posture alerts, calm modes, and wardrobe planning into a single daily rhythm.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Tech-life balance</span>
-                    <span class="meta-chip">Process: Cross-device</span>
-                    <span class="meta-chip">Outcome: Holistic experience</span>
+                    <span class="meta-chip">Problem: Balancing tech and wellbeing</span>
+                    <span class="meta-chip">Process: Cross device journey mapping</span>
+                    <span class="meta-chip">Outcome: Holistic experience concept</span>
                   </div>
-                  <div class="read-time">7 min read</div>
-                  <div class="tags"><span class="tag">Wearables</span><span class="tag">Cross-Device</span><span class="tag">AR Concept</span></div>
+                  <div class="read-time">Seven minute read</div>
+                  <div class="tags">
+                    <span class="tag">Wearables</span><span class="tag">Cross device</span><span class="tag">AR concept</span>
+                  </div>
                 </div>
               </a>
             </article>
 
             <!-- Design thinking -->
-            <article class="card" data-category="design">
-              <a href="#" class="card-link" aria-label="Shark Tank innovation pitch case study">
+            <article class="card" data-category="design" data-date="2024-11-01">
+              <a href="#" class="card-link" aria-label="Shark tank innovation pitch case study">
                 <div class="card-media"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>"Shark Tank" Innovation Pitch</h3>
-                  <p class="muted">End-to-end design thinking: lean canvas, validation, and storytelling.</p>
+                  <h3>Shark tank innovation pitch</h3>
+                  <p class="muted">
+                    End to end design thinking project that used lean canvas work, market checks, and storytelling to pitch a new offering.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Need innovation framework</span>
-                    <span class="meta-chip">Process: Lean canvas</span>
-                    <span class="meta-chip">Outcome: Viable concept</span>
+                    <span class="meta-chip">Problem: Making innovation concrete</span>
+                    <span class="meta-chip">Process: Lean canvas and validation</span>
+                    <span class="meta-chip">Outcome: Clear and viable concept story</span>
                   </div>
-                  <div class="read-time">4 min read</div>
-                  <div class="tags"><span class="tag">Design Thinking</span><span class="tag">Business</span></div>
+                  <div class="read-time">Four minute read</div>
+                  <div class="tags">
+                    <span class="tag">Design thinking</span><span class="tag">Business</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="design">
+            <article class="card" data-category="design" data-date="2024-10-01">
               <a href="#" class="card-link" aria-label="Field study assignment case study">
                 <div class="card-media"><i class="fa-solid fa-magnifying-glass-location" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>Field Study Assignment</h3>
-                  <p class="muted">Observational research & contextual inquiry to uncover unmet needs.</p>
+                  <h3>Field study assignment</h3>
+                  <p class="muted">
+                    Contextual inquiry and observation sessions used to surface quiet pain points and unmet needs in a real environment.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Unmet user needs</span>
+                    <span class="meta-chip">Problem: Hidden user needs</span>
                     <span class="meta-chip">Process: Ethnographic research</span>
-                    <span class="meta-chip">Outcome: Key insights</span>
+                    <span class="meta-chip">Outcome: Actionable insight themes</span>
                   </div>
-                  <div class="read-time">3 min read</div>
-                  <div class="tags"><span class="tag">Ethnography</span><span class="tag">Contextual</span></div>
+                  <div class="read-time">Three minute read</div>
+                  <div class="tags">
+                    <span class="tag">Ethnography</span><span class="tag">Contextual</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="design">
-              <a href="#" class="card-link" aria-label="Design thinking mini-projects case study">
+            <article class="card" data-category="design" data-date="2024-09-01">
+              <a href="#" class="card-link" aria-label="Design thinking mini projects case study">
                 <div class="card-media"><i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>Design Thinking Mini-Projects</h3>
-                  <p class="muted">Empathy maps, POVs, HMWs, and rapid prototyping in five sprints.</p>
+                  <h3>Design thinking mini projects</h3>
+                  <p class="muted">
+                    A sequence of short sprints that practiced empathy maps, points of view, how might we prompts, and rapid prototyping.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Process learning</span>
-                    <span class="meta-chip">Process: Rapid prototyping</span>
-                    <span class="meta-chip">Outcome: Method mastery</span>
+                    <span class="meta-chip">Problem: Building design fluency</span>
+                    <span class="meta-chip">Process: Rapid prototyping cycles</span>
+                    <span class="meta-chip">Outcome: Confident use of core methods</span>
                   </div>
-                  <div class="read-time">5 min read</div>
-                  <div class="tags"><span class="tag">Empathy</span><span class="tag">Prototyping</span></div>
+                  <div class="read-time">Five minute read</div>
+                  <div class="tags">
+                    <span class="tag">Empathy</span><span class="tag">Prototyping</span>
+                  </div>
                 </div>
               </a>
             </article>
 
             <!-- Conceptual -->
-            <article class="card" data-category="conceptual">
-              <a href="#" class="card-link" aria-label="The FOCUS Ecosystem case study">
+            <article class="card" data-category="conceptual" data-date="2024-11-01">
+              <a href="#" class="card-link" aria-label="The Focus ecosystem case study">
                 <div class="card-media"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>The FOCUS Ecosystem</h3>
-                  <p class="muted">Minimalist platform with daily post limits + Focus Guardian interventions.</p>
+                  <h3>The Focus ecosystem</h3>
+                  <p class="muted">
+                    System level concept that links daily post limits, Focus guardian interventions, and clear feedback into one digital wellness platform.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Digital wellness</span>
-                    <span class="meta-chip">Process: Ecosystem design</span>
-                    <span class="meta-chip">Outcome: Cohesive system</span>
+                    <span class="meta-chip">Problem: Digital wellness at scale</span>
+                    <span class="meta-chip">Process: Ecosystem mapping</span>
+                    <span class="meta-chip">Outcome: Cohesive cross product model</span>
                   </div>
-                  <div class="read-time">4 min read</div>
-                  <div class="tags"><span class="tag">Strategy</span><span class="tag">Ecosystem</span></div>
+                  <div class="read-time">Four minute read</div>
+                  <div class="tags">
+                    <span class="tag">Strategy</span><span class="tag">Ecosystem</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="conceptual">
+            <article class="card" data-category="conceptual" data-date="2024-10-01">
               <a href="#" class="card-link" aria-label="AuraFlex product ecosystem case study">
                 <div class="card-media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>AuraFlex Product Ecosystem</h3>
-                  <p class="muted">Customizable wearables with voice-first interface and accessibility at core.</p>
+                  <h3>AuraFlex product ecosystem</h3>
+                  <p class="muted">
+                    Wearable family concept that treats voice first control and accessibility as core requirements, not afterthoughts.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Inaccessible tech</span>
-                    <span class="meta-chip">Process: Inclusive design</span>
-                    <span class="meta-chip">Outcome: Accessible line</span>
+                    <span class="meta-chip">Problem: Inaccessible consumer tech</span>
+                    <span class="meta-chip">Process: Inclusive design principles</span>
+                    <span class="meta-chip">Outcome: Accessible product line concept</span>
                   </div>
-                  <div class="read-time">6 min read</div>
-                  <div class="tags"><span class="tag">Brand</span><span class="tag">HW‑SW Integration</span></div>
+                  <div class="read-time">Six minute read</div>
+                  <div class="tags">
+                    <span class="tag">Brand</span><span class="tag">HW and SW integration</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="conceptual">
-              <a href="#" class="card-link" aria-label="The Sunlight Project case study">
+            <article class="card" data-category="conceptual" data-date="2024-09-01">
+              <a href="#" class="card-link" aria-label="The sunlight project case study">
                 <div class="card-media"><i class="fa-regular fa-sun" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>The Sunlight Project</h3>
-                  <p class="muted">Positive social app using "rays" gamification for constructive engagement.</p>
+                  <h3>The sunlight project</h3>
+                  <p class="muted">
+                    Positive social app idea that rewards kind actions with rays and nudges people toward constructive, less toxic engagement.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Toxic social media</span>
-                    <span class="meta-chip">Process: Gamification</span>
-                    <span class="meta-chip">Outcome: Positive community</span>
+                    <span class="meta-chip">Problem: Harmful social media norms</span>
+                    <span class="meta-chip">Process: Prosocial gamification</span>
+                    <span class="meta-chip">Outcome: Framing for supportive community</span>
                   </div>
-                  <div class="read-time">5 min read</div>
-                  <div class="tags"><span class="tag">Gamification</span><span class="tag">Community</span></div>
+                  <div class="read-time">Five minute read</div>
+                  <div class="tags">
+                    <span class="tag">Gamification</span><span class="tag">Community</span>
+                  </div>
                 </div>
               </a>
             </article>
 
-            <article class="card" data-category="conceptual">
-              <a href="#" class="card-link" aria-label="Anime Recommender Website case study">
+            <article class="card" data-category="conceptual" data-date="2024-08-01">
+              <a href="#" class="card-link" aria-label="Anime recommender website case study">
                 <div class="card-media"><i class="fa-solid fa-film" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>Anime Recommender Website</h3>
-                  <p class="muted">Clean UI with robust filters (genre, themes, year) for discovery.</p>
+                  <h3>Anime recommender website</h3>
+                  <p class="muted">
+                    Discovery site with clean UI and filters for genre, theme, and year that help people find new series without overload.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Content discovery</span>
+                    <span class="meta-chip">Problem: Overwhelming content choice</span>
                     <span class="meta-chip">Process: Information architecture</span>
-                    <span class="meta-chip">Outcome: Intuitive filtering</span>
+                    <span class="meta-chip">Outcome: Intuitive filtering paths</span>
                   </div>
-                  <div class="read-time">3 min read</div>
-                  <div class="tags"><span class="tag">IA</span><span class="tag">Filtering</span></div>
+                  <div class="read-time">Three minute read</div>
+                  <div class="tags">
+                    <span class="tag">IA</span><span class="tag">Filtering</span>
+                  </div>
                 </div>
               </a>
             </article>
 
             <!-- Foundational -->
-            <article class="card" data-category="core">
-              <a href="#" class="card-link" aria-label="PLTW Engineering summary">
+            <article class="card" data-category="core" data-date="2021-05-01">
+              <a href="#" class="card-link" aria-label="PLTW engineering summary">
                 <div class="card-media"><i class="fa-solid fa-gears" aria-hidden="true"></i></div>
                 <div class="card-body">
-                  <h3>PLTW Engineering</h3>
-                  <p class="muted">CAD, prototyping, and problem-solving foundation for human factors career.</p>
+                  <h3>PLTW engineering</h3>
+                  <p class="muted">
+                    Hands on engineering pathway with CAD, electronics, and problem solving that became the technical base for my later human factors work.
+                  </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Technical foundation</span>
-                    <span class="meta-chip">Process: Engineering education</span>
-                    <span class="meta-chip">Outcome: Solid base</span>
+                    <span class="meta-chip">Problem: Building a strong technical base</span>
+                    <span class="meta-chip">Process: Structured engineering curriculum</span>
+                    <span class="meta-chip">Outcome: Confident foundation in systems and prototypes</span>
                   </div>
-                  <div class="read-time">4 min read</div>
-                  <div class="tags"><span class="tag">Engineering</span><span class="tag">CAD</span></div>
+                  <div class="read-time">Four minute read</div>
+                  <div class="tags">
+                    <span class="tag">Engineering</span><span class="tag">CAD</span>
+                  </div>
                 </div>
               </a>
             </article>
@@ -818,7 +2395,7 @@
         <div id="panel-education" class="tabpanel" role="tabpanel" aria-labelledby="tab-education">
           <div class="filters" aria-label="Filter education">
             <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
-            <button class="filter-btn" data-filter="highschool" aria-pressed="false">High School</button>
+            <button class="filter-btn" data-filter="highschool" aria-pressed="false">High school</button>
             <button class="filter-btn" data-filter="college" aria-pressed="false">College</button>
             <button class="filter-btn" data-filter="university" aria-pressed="false">University</button>
           </div>
@@ -827,29 +2404,35 @@
             <!-- High School -->
             <div class="t-item" data-category="highschool">
               <div class="t-card" tabindex="0" aria-expanded="false">
-                <div class="t-date">2017 – 2021</div>
-                <h3>St. Charles High School <span class="badge">Dual Enrollment</span></h3>
-                <p><strong>Project Lead the Way Engineering & Computer Science</strong></p>
-                <p class="muted">Advanced Placement with 17 AP courses + Civil Engineering.</p>
+                <div class="t-date">2017 to 2021</div>
+                <h3>St. Charles High School <span class="badge">Dual enrollment</span></h3>
+                <p><strong>Project Lead The Way engineering and computer science</strong></p>
+                <p class="muted">Advanced placement path with 17 AP courses and a focus on civil and architectural engineering.</p>
 
                 <ul class="c-list">
-                  <li><span>Intro to Engineering Design (3 years)</span><span class="grade">A</span></li>
-                  <li><span>Principles of Engineering</span><span class="grade">A</span></li>
-                  <li><span>Civil Engineering & Architecture</span><span class="grade">A</span></li>
-                  <li><span>Computer Science (Python, Java, C++)</span><span class="grade">A</span></li>
-                  <li><span>Digital Electronics</span><span class="grade">A</span></li>
-                  <li><span>Engineering Capstone / Senior Project</span><span class="grade">A</span></li>
-                  <li><span>AP Physics 1 & 2</span><span class="grade">A</span></li>
-                  <li><span>AP Calculus AB/BC</span><span class="grade">A</span></li>
-                  <li><span>AP Statistics</span><span class="grade">A</span></li>
-                  <li><span>AP Computer Science A</span><span class="grade">A</span></li>
+                  <li><span>Intro to engineering design </span><span class="grade">A</span></li>
+                  <li><span>Principles of engineering</span><span class="grade">A</span></li>
+                  <li><span>Civil engineering and architecture</span><span class="grade">A</span></li>
+                  <li><span>Computer science (Python, Java, C plus plus)</span><span class="grade">A</span></li>
+                  <li><span>Digital electronics</span><span class="grade">A</span></li>
+                  <li><span>Engineering capstone and senior project</span><span class="grade">A</span></li>
+                  <li><span>AP physics 1 and 2</span><span class="grade">A</span></li>
+                  <li><span>AP calculus AB and BC</span><span class="grade">A</span></li>
+                  <li><span>AP statistics</span><span class="grade">A</span></li>
+                  <li><span>AP computer science A</span><span class="grade">A</span></li>
                 </ul>
 
                 <div class="c-details">
-                  <h4>Skills Gained</h4>
-                  <p>CAD, prototyping, 3D modeling, iterative design, applied physics, logic/circuits, Python/Java/C++, data-driven design, project management.</p>
-                  <h4>AI-Alignment Transfer</h4>
-                  <div><span class="skill-pill">Systems Thinking</span><span class="skill-pill">Algorithmic Reasoning</span><span class="skill-pill">Technical Prototyping</span></div>
+                  <h4>Skills gained</h4>
+                  <p>
+                    CAD, prototyping, 3D modeling, iterative design, applied physics, logic and circuits, Python, Java, C plus plus, data informed design, and project planning.
+                  </p>
+                  <h4>AI alignment transfer</h4>
+                  <div>
+                    <span class="skill-pill">Systems thinking</span
+                    ><span class="skill-pill">Algorithmic reasoning</span
+                    ><span class="skill-pill">Technical prototyping</span>
+                  </div>
                 </div>
 
                 <div class="tags">
@@ -861,24 +2444,30 @@
             <!-- Dual Enrollment College -->
             <div class="t-item" data-category="college">
               <div class="t-card" tabindex="0" aria-expanded="false">
-                <div class="t-date">2020 – 2021</div>
-                <h3>College of Southern Maryland <span class="badge">Dual Enrollment</span></h3>
-                <p><strong>20 transfer credits accepted by GMU</strong> — College courses taken during high school.</p>
+                <div class="t-date">2019 to 2021</div>
+                <h3>College of Southern Maryland <span class="badge">Dual enrollment</span></h3>
+                <p><strong>Twenty transfer credits accepted by GMU</strong> college coursework completed during high school.</p>
 
                 <ul class="c-list">
-                  <li><span>Accounting Elective</span><span class="grade">A</span></li>
-                  <li><span>Computer Science Elective</span><span class="grade">A</span></li>
+                  <li><span>Accounting elective</span><span class="grade">A</span></li>
+                  <li><span>Computer science elective</span><span class="grade">A</span></li>
                   <li><span>Precalculus</span><span class="grade">A</span></li>
-                  <li><span>Analytic Geometry & Calculus I</span><span class="grade">A</span></li>
-                  <li><span>Logic & Critical Thinking</span><span class="grade">A</span></li>
-                  <li><span>Basic Concepts in Psychology</span><span class="grade">A</span></li>
+                  <li><span>Analytic geometry and calculus I</span><span class="grade">A</span></li>
+                  <li><span>Logic and critical thinking</span><span class="grade">A</span></li>
+                  <li><span>Basic concepts in psychology</span><span class="grade">A</span></li>
                 </ul>
 
                 <div class="c-details">
-                  <h4>Skills Gained</h4>
-                  <p>Financial modeling, data organization, advanced coding, formal logic, functions/derivatives, analytical reasoning, cognitive theory.</p>
-                  <h4>AI-Alignment Transfer</h4>
-                  <div><span class="skill-pill">Formal Logic</span><span class="skill-pill">Mathematical Modeling</span><span class="skill-pill">Cognitive Foundations</span></div>
+                  <h4>Skills gained</h4>
+                  <p>
+                    Financial modeling, data organization, advanced programming, formal logic, work with functions and derivatives, analytical reasoning, and foundational psychology.
+                  </p>
+                  <h4>AI alignment transfer</h4>
+                  <div>
+                    <span class="skill-pill">Formal logic</span
+                    ><span class="skill-pill">Mathematical modeling</span
+                    ><span class="skill-pill">Cognitive foundations</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -886,63 +2475,71 @@
             <!-- University -->
             <div class="t-item" data-category="university">
               <div class="t-card" tabindex="0" aria-expanded="false">
-                <div class="t-date">2021 – 2025</div>
+                <div class="t-date">2021 to 2025</div>
                 <h3>George Mason University</h3>
-                <p><strong>BS Psychology — Human Factors / Applied Cognition</strong>; <strong>Minor: Design Thinking</strong></p>
+                <p>
+                  <strong>BS psychology in human factors and applied cognition</strong>
+                  <strong>minor in design thinking</strong>
+                </p>
 
-                <h4>Core Psychology & Human Factors</h4>
+                <h4>Core psychology and human factors</h4>
                 <ul class="c-list">
-                  <li><span>Statistics in Psychology</span><span class="grade">A</span></li>
-                  <li><span>Research Methods</span><span class="grade">A</span></li>
-                  <li><span>Cognitive Psychology</span><span class="grade">A</span></li>
-                  <li><span>Human Factors Psychology</span><span class="grade">A</span></li>
-                  <li><span>Biopsychology & Lab</span><span class="grade">A</span></li>
-                  <li><span>Applied Cross-Cultural Psychology</span><span class="grade">A</span></li>
-                  <li><span>Developmental Psychology</span><span class="grade">A</span></li>
-                  <li><span>Mystery, Madness, and Murder</span><span class="grade">A</span></li>
-                  <li><span>Revitalizing Endangered Languages</span><span class="grade">A</span></li>
-                  <li><span>Advanced Topics in Human Factors</span><span class="grade">A</span></li>
-                  <li><span>Psychology in the Community</span><span class="grade">A</span></li>
+                  <li><span>Statistics in psychology</span><span class="grade">A</span></li>
+                  <li><span>Research methods</span><span class="grade">A</span></li>
+                  <li><span>Cognitive psychology</span><span class="grade">A</span></li>
+                  <li><span>Human factors psychology</span><span class="grade">A</span></li>
+                  <li><span>Biopsychology and lab</span><span class="grade">A</span></li>
+                  <li><span>Applied cross cultural psychology</span><span class="grade">A</span></li>
+                  <li><span>Developmental psychology</span><span class="grade">A</span></li>
+                  <li><span>Mystery, madness, and murder</span><span class="grade">A</span></li>
+                  <li><span>Revitalizing endangered languages</span><span class="grade">A</span></li>
+                  <li><span>Advanced topics in human factors</span><span class="grade">A</span></li>
+                  <li><span>Psychology in the community</span><span class="grade">A</span></li>
                 </ul>
 
-                <h4>Design Thinking Minor</h4>
+                <h4>Design thinking minor</h4>
                 <ul class="c-list">
                   <li><span>Drawing I</span><span class="grade">A</span></li>
-                  <li><span>Mobile App Design</span><span class="grade">A</span></li>
-                  <li><span>Design in the Modern World</span><span class="grade">A</span></li>
-                  <li><span>Design Thinking Capstone</span><span class="grade">A</span></li>
-                  <li><span>History of Graphic Design</span><span class="grade">A</span></li>
+                  <li><span>Mobile app design</span><span class="grade">A</span></li>
+                  <li><span>Design in the modern world</span><span class="grade">A</span></li>
+                  <li><span>Design thinking capstone</span><span class="grade">A</span></li>
+                  <li><span>History of graphic design</span><span class="grade">A</span></li>
                 </ul>
 
-                <h4>Additional Relevant Courses</h4>
+                <h4>Additional relevant courses</h4>
                 <ul class="c-list">
-                  <li><span>General Biology & Labs</span><span class="grade">A</span></li>
-                  <li><span>Cell Structure and Function</span><span class="grade">A</span></li>
-                  <li><span>Introduction to Neuroscience</span><span class="grade">A</span></li>
-                  <li><span>Introduction to Nutrition</span><span class="grade">A</span></li>
-                  <li><span>Fundamentals of Communication</span><span class="grade">A</span></li>
-                  <li><span>Advanced Composition (Multidisciplinary)</span><span class="grade">A</span></li>
-                  <li><span>Professional & Technical Writing</span><span class="grade">A</span></li>
-                  <li><span>Philosophy and Literature</span><span class="grade">A</span></li>
-                  <li><span>Intro to Childhood Studies</span><span class="grade">A</span></li>
-                  <li><span>Introductory Sociology</span><span class="grade">A</span></li>
-                  <li><span>Practicum in Educational Psychology</span><span class="grade">A</span></li>
+                  <li><span>General biology and labs</span><span class="grade">A</span></li>
+                  <li><span>Cell structure and function</span><span class="grade">A</span></li>
+                  <li><span>Introduction to neuroscience</span><span class="grade">A</span></li>
+                  <li><span>Introduction to nutrition</span><span class="grade">A</span></li>
+                  <li><span>Fundamentals of communication</span><span class="grade">A</span></li>
+                  <li><span>Advanced composition multidisciplinary</span><span class="grade">A</span></li>
+                  <li><span>Professional and technical writing</span><span class="grade">A</span></li>
+                  <li><span>Philosophy and literature</span><span class="grade">A</span></li>
+                  <li><span>Intro to childhood studies</span><span class="grade">A</span></li>
+                  <li><span>Introductory sociology</span><span class="grade">A</span></li>
+                  <li><span>Practicum in educational psychology</span><span class="grade">A</span></li>
                 </ul>
 
                 <div class="c-details">
-                  <h4>Skills Gained</h4>
-                  <p>Experimental design, surveys, inferential statistics (SPSS/regression), attention/memory/perception, ergonomics & error analysis, psychophysiology, cultural UX, high-fidelity prototyping, human-centered design, technical communication.</p>
-                  <h4>AI-Alignment Transfer</h4>
+                  <h4>Skills gained</h4>
+                  <p>
+                    Experimental design, survey design, inferential statistics in SPSS and regression, attention, memory, and perception, ergonomics and error analysis, psychophysiology, cross cultural UX, high fidelity prototyping, human centered design, and technical communication.
+                  </p>
+                  <h4>AI alignment transfer</h4>
                   <div>
-                    <span class="skill-pill">Human Behavior Modeling</span>
-                    <span class="skill-pill">Cognitive Architecture</span>
-                    <span class="skill-pill">Cross-Cultural UX</span>
-                    <span class="skill-pill">Human-Centered AI</span>
-                    <span class="skill-pill">Ethical Reasoning</span>
+                    <span class="skill-pill">Human behavior modeling</span>
+                    <span class="skill-pill">Cognitive architecture</span>
+                    <span class="skill-pill">Cross cultural UX</span>
+                    <span class="skill-pill">Human centered AI</span>
+                    <span class="skill-pill">Ethical reasoning</span>
                   </div>
                 </div>
 
-                <div class="tags"><span class="tag">Experimental Design</span><span class="tag">Usability</span><span class="tag">Prototyping</span><span class="tag">HCD</span></div>
+                <div class="tags">
+                  <span class="tag">Experimental design</span><span class="tag">Usability</span><span class="tag">Prototyping</span
+                  ><span class="tag">HCD</span>
+                </div>
               </div>
             </div>
           </div>
@@ -950,68 +2547,78 @@
           <!-- Skills matrix -->
           <div class="grid" style="margin-top:1.2rem">
             <div class="info-card">
-              <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> Cognitive Science & Psychology</h3>
-              <p>Attention, memory, perception mechanisms; neural basis of cognition; developmental & cross-cultural psychology; ergonomics & error analysis.</p>
+              <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> Cognitive science and psychology</h3>
+              <p>
+                Attention, memory, and perception, neural bases of cognition, developmental and cross cultural psychology, and ergonomic error analysis.
+              </p>
             </div>
             <div class="info-card">
-              <h3><i class="fa-solid fa-flask" aria-hidden="true"></i> Research Methods & Statistics</h3>
-              <p>Controlled studies, IRB, psychometrics; SPSS & regression; qualitative + quantitative triangulation; data ethics & reproducibility.</p>
+              <h3><i class="fa-solid fa-flask" aria-hidden="true"></i> Research methods and statistics</h3>
+              <p>
+                Controlled studies, IRB protocols, psychometrics, SPSS and regression, mixed methods designs, data ethics, and reproducibility.
+              </p>
             </div>
             <div class="info-card">
-              <h3><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Technical & Design Skills</h3>
-              <p>Engineering principles (CAD/prototyping), UI/UX, Python/Java/C++, data viz; design systems & accessibility (WCAG 2.2 AA+).</p>
+              <h3><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Technical and design skills</h3>
+              <p>
+                Engineering principles with CAD and prototyping, interface and interaction design, Python, Java, C plus plus, data visualization, design systems, and accessibility aligned with WCAG 2.2 AA.
+              </p>
             </div>
           </div>
         </div>
 
-        <!-- Additional Panel -->
         <div id="panel-additional" class="tabpanel" role="tabpanel" aria-labelledby="tab-additional">
-          <div class="info-card">
-            <h3><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Work in Progress</h3>
-            <h4 style="color:var(--green-600)">Medical Device Software Research</h4>
-            <p class="muted">Usability & safety improvements in high-stakes interfaces focusing on human error reduction.</p>
-            <h4 style="color:var(--green-600)">AI Alignment Framework</h4>
-            <p class="muted">Evaluation framework to keep AI systems aligned with nuanced human values across contexts.</p>
-            <h4 style="color:var(--green-600)">Human-Centered Design Patterns</h4>
-            <p class="muted">Reusable patterns prioritizing human factors, especially in healthcare and safety-critical applications.</p>
-          </div>
+          <!-- Testimonials Section -->
+          <section id="testimonials" class="testimonials-section" aria-label="Client testimonials">
+            <div class="container">
+              <div class="section-title">
+                <h2>What people say</h2>
+                <p class="section-subtitle"> Hear directly from those I've worked with about their experiences collaborating with me and the impact of my work. If you'd like to contribute your own testimonial, please use the button below to share your thoughts!</p>
+              </div>
 
-          <div class="info-card">
-            <h3><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Professional Experience</h3>
-            <h4 style="color:var(--green-600)">Human Factors Research Assistant</h4>
-            <p><strong>George Mason University</strong> • 2022–Present — User studies, usability testing, HCI publications.</p>
-            <h4 style="color:var(--green-600)">UX Design & Research Consultant</h4>
-            <p><strong>Bigbelly Solar</strong> • Spring 2023 - Through the first cohort of the "Advanced Topics in Human Factors" course, I redesigned app interfaces (frontend and backend) with a focus on intuitive interaction design and edge cases.</p>
-            <h4 style="color:var(--green-600)">VR Development Fellow</h4>
-            <p><strong>UMass-Amherst HPL</strong> • Summer 2022 — Unity VR for DOT research on cyclist safety.</p>
-          </div>
+              <!-- Floating Testimonials -->
+              <div id="floating-testimonials-wrapper">
+                <div id="floating-testimonials-container"></div>
+              </div>
 
-          <div class="info-card">
-            <h3><i class="fa-solid fa-certificate" aria-hidden="true"></i> Certifications & Development</h3>
-            <p><span class="skill-pill">HFES Student Member</span> <span class="skill-pill">UXPA Member</span> <span class="skill-pill">Certified Usability Analyst (In Progress)</span></p>
-            <h4 style="color:var(--green-600)">Completed</h4>
-            <ul>
-              <li>Organizational Science Institute Research Fellow - UNCC/li>
-              <li>UX Research Methods — Nielsen Norman Group</li>
-              <li>UX Design & Research — Google x Coursera</li>
-              <li>Advanced Topics in Human Factors - GMU</li>
-            </ul>
-            <h4 style="color:var(--green-600)">Talks & Posters</h4>
-            <ul>
-              <li>HFES Annual Meeting 2023 — Medical Device Usability (Poster)</li>
-              <li>GMU Research Symposium 2022 — VR Bicycle Simulator</li>
-            </ul>
-          </div>
+<!-- Feedback CTA Button with Slide Animation -->
+  
+  <!-- Form Popup (hidden by default) -->
+  <div id="testimonialFormPopup" class="testimonial-popup" aria-hidden="true">
+    <div class="testimonial-popup-header">
+   <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="testimonial-popup-body">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdb-l4rAOCUYQrzgGr0sVyIQ9nxt_HyEiHTHGqV5ieiymz8EA/viewform?embedded=true"
+        width="100%"
+        height="100%"
+        frameborder="0"
+        loading="lazy"
+        title="Testimonial form"
+      ></iframe>
+    </div>
+  </div>
+</div>
 
-          <div class="info-card">
-            <h3><i class="fa-solid fa-star" aria-hidden="true"></i> Specialized Skills Focus</h3>
-            <h4 style="color:var(--green-600)">Medical Device & Healthcare</h4>
-            <p><span class="skill-pill">Usability</span><span class="skill-pill">Human Error</span><span class="skill-pill">FDA</span><span class="skill-pill">Heuristics</span></p>
-            <h4 style="color:var(--green-600)">AI & Technology</h4>
-            <p><span class="skill-pill">Human-AI Interaction</span><span class="skill-pill">Alignment</span><span class="skill-pill">Ethical Design</span><span class="skill-pill">Behavioral Modeling</span></p>
-            <h4 style="color:var(--green-600)">Research Methods</h4>
-            <p><span class="skill-pill">Experimental Design</span><span class="skill-pill">Statistics</span><span class="skill-pill">Qualitative</span><span class="skill-pill">Survey</span><span class="skill-pill">Data Viz</span></p>
-          </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                </div>
+
+
+                  <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSdb-l4rAOCUYQrzgGr0sVyIQ9nxt_HyEiHTHGqV5ieiymz8EA/viewform?embedded=true"
+                    width="100%"
+                    height="600"
+                    frameborder="0"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                    aria-label="Share a testimonial form"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </section>
@@ -1020,26 +2627,34 @@
       <div class="particles-container" id="particles-skills" aria-hidden="true"></div>
       <div class="container">
         <div class="section-title">
-          <h2>Skills & Expertise</h2>
-          <p>Multidisciplinary strengths across psychology, design, and engineering.</p>
+          <h2>Skills and expertise</h2>
+          <p>Multidisciplinary strengths shaped by engineering, applied psychology, and design thinking.</p>
         </div>
 
         <div class="skills-grid">
           <div class="skill-card">
-            <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> Cognitive Science</h3>
-            <p>Human information processing, attention & memory, decision-making, perception & psychophysics, mental models.</p>
+            <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> Cognitive science</h3>
+            <p>
+              Human information processing, attention and memory, decision making, perception and psychophysics, and mental models across cultures and ages.
+            </p>
           </div>
           <div class="skill-card">
-            <h3><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> UX Research & Design</h3>
-            <p>Usability testing, heuristic evaluation, interviews, personas, wireframes & high-fidelity prototyping.</p>
+            <h3><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> UX research and design</h3>
+            <p>
+              Usability testing, heuristic evaluation, interviews, personas, journey maps, wireframes, and high fidelity prototypes.
+            </p>
           </div>
           <div class="skill-card">
-            <h3><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Data Analysis</h3>
-            <p>Statistical analysis, experimental design, R/Python, data visualization, survey design.</p>
+            <h3><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Data analysis</h3>
+            <p>
+              Statistical analysis, study design, R and Python, data visualization, and survey design with focus on validity and ethics.
+            </p>
           </div>
           <div class="skill-card">
-            <h3><i class="fa-solid fa-robot" aria-hidden="true"></i> AI & Technology</h3>
-            <p>Human-AI interaction, AI alignment research, ethical design, Python, ML concepts.</p>
+            <h3><i class="fa-solid fa-robot" aria-hidden="true"></i> AI and technology</h3>
+            <p>
+              Human AI interaction, alignment themes, ethical product thinking, scripting in Python, and applied work with AI tools in UX and research workflows.
+            </p>
           </div>
         </div>
       </div>
@@ -1049,18 +2664,72 @@
       <div class="particles-container" id="particles-about" aria-hidden="true"></div>
       <div class="container">
         <div class="section-title">
-          <h2>About Me</h2>
-          <p>Human-centered design with technical depth and research rigor.</p>
+          <h2>About me</h2>
+          <p> That one gifted kid who always had her hand raised.
+           I grew up with a restless curiosity.
+           I wanted to know how things worked,
+           why people behaved the way they did,
+           and what happened when you mixed ideas together.
+           That instinct stayed with me, and it’s shaped every chapter of my life so far.
+          Furthermore, as a digital nomad raised on the wild west internet of the early 2000s, I developed a keen awareness of how technology can both empower and endanger its users.
+          Today, I channel that curiosity into human-centered design and research, with
+          a degree in applied psychology, concentration in human factors and applied cognition and minor in design thinking from the HFES-accredited program at George Mason University.</p>
         </div>
 
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:1.2rem">
           <div class="info-card">
-            <p>I am a Human Factors specialist with roots in engineering and psychology. I build systems that reduce cognitive load and elevate accessibility—especially in healthcare and AI-driven products.</p>
-            <p>My approach blends scientific methods (validity, reliability, statistical power) with design excellence (clear hierarchy, strong contrast, and color-blind-safe palettes).</p>
-            <div class="tags"><span class="tag">Human-Centered Design</span><span class="tag">Cognitive Engineering</span><span class="tag">AI Safety</span><span class="tag">Medical Devices</span></div>
+            <p>
+              I am Thema, a human factors and UX researcher who grew up online, asked a lot of questions, and never quite stopped.
+              My early years sat between gifted classes, orchestra, hosting neighborhood kickball games, and long nights on the internet where I saw both the playful side of digital life and the harms that come with unregulated systems.
+            </p>
+            <p>
+              I first studied civil and architectural engineering through Project Lead The Way, then shifted into human factors and applied cognition at George Mason University when I realized my real question was how technology shapes people.
+              I watched social platforms gamify attention, saw friends change themselves to match filters, and learned how features like streaks and feeds can support or erode wellbeing.
+            </p>
+            <p>
+              Today I bring that lived experience into research driven design work across web, mobile, and conceptual ecosystems.
+              My focus sits at the intersection of internet culture, human computer interaction, and AI ethics, especially for young people who are the first to grow up entirely in the digital age.
+            </p>
+            <div class="tags">
+              <span class="tag">Human centered design</span
+              ><span class="tag">Cognitive engineering</span
+              ><span class="tag">AI safety</span
+              ><span class="tag">Digital wellbeing</span>
+            </div>
           </div>
           <div class="card" aria-hidden="true">
             <div class="card-media" style="height:260px;font-size:4rem"><i class="fa-regular fa-user"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mission" class="island" aria-label="Mission and values">
+      <div class="container">
+        <div class="section-title">
+          <h2>Mission and values</h2>
+          <p>Designing with curiosity, care, and clear limits for both humans and machines.</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:1.2rem">
+          <div class="info-card">
+            <h3>Proof story</h3>
+            <p>
+              My proof story is the journey from a chronically online kid who saw the best and worst of social platforms to a human factors graduate who now studies how interfaces, incentives, and AI systems shape behavior.
+            </p>
+            <p>
+              That story powers the work you see here from safety research and VR labs to digital wellness concepts like Focus and AuraFlex.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3>Purpose</h3>
+            <p>
+              I aim to build and critique systems so that the next generation can grow up with tools that support their attention, identity, and dignity instead of mining them.
+            </p>
+            <p>
+              This means pairing rigorous methods with empathy, clear ethics, and honest communication about what technology is doing behind the screen.
+            </p>
           </div>
         </div>
       </div>
@@ -1070,33 +2739,73 @@
       <div class="particles-container" id="particles-contact" aria-hidden="true"></div>
       <div class="container">
         <div class="section-title">
-          <h2>Get in Touch</h2>
-          <p>Available for select consulting and full-time opportunities.</p>
+          <h2>Get in touch</h2>
+          <p>Open to select consulting work and full time roles in human factors, UX research, and responsible AI.</p>
         </div>
 
         <div class="contact-grid">
           <div class="info-card" aria-label="Contact information">
-            <div class="c-item"><i class="fa-solid fa-envelope" aria-hidden="true"></i><div><h4>Email</h4><a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a></div></div>
-            <div class="c-item"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><div><h4>Location</h4><p>Washington, DC<br>*Willing to relocate.</p></div></div>
-            <div class="c-item"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><div><h4>Education</h4><p>George Mason University</p></div></div>
+            <div class="c-item">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <div>
+                <h4>Email</h4>
+                <a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a>
+              </div>
+            </div>
+            <div class="c-item">
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <div>
+                <h4>Location</h4>
+                <p>Washington, DC<br>Willing to relocate</p>
+              </div>
+            </div>
+            <div class="c-item">
+              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+              <div>
+                <h4>Education</h4>
+                <p>George Mason University</p>
+              </div>
+            </div>
           </div>
 
-          <form id="contactForm" class="info-card" action="https://formsubmit.co/themagreen@gmail.com" method="POST" novalidate aria-describedby="formHelp">
+          <form
+            id="contactForm"
+            class="info-card"
+            action="https://formsubmit.co/themagreen@gmail.com"
+            method="POST"
+            novalidate
+            aria-describedby="formHelp"
+          >
             <input type="hidden" name="_subject" value="New message from themagreen.com" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
-            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input
+              type="text"
+              name="_honey"
+              style="display:none"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
 
-            <p id="formHelp" class="muted" style="margin-top:0">All fields marked * are required.</p>
+            <p id="formHelp" class="muted" style="margin-top:0">All fields with a star are required.</p>
 
             <div class="form-group">
-              <label for="name">Your Name *</label>
+              <label for="name">Your name *</label>
               <input id="name" name="name" type="text" class="input" required autocomplete="name" />
             </div>
 
             <div class="form-group">
-              <label for="email">Your Email *</label>
-              <input id="email" name="email" type="email" class="input" required autocomplete="email" inputmode="email" />
+              <label for="email">Your email *</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                class="input"
+                required
+                autocomplete="email"
+                inputmode="email"
+              />
             </div>
 
             <div class="form-group">
@@ -1105,14 +2814,16 @@
             </div>
 
             <div class="form-group">
-              <label for="message">Your Message *</label>
+              <label for="message">Your message *</label>
               <textarea id="message" name="message" class="input" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Message</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send message
+            </button>
 
             <div id="submissionResults" class="results" role="status" aria-live="polite">
-              <h3 id="resultTitle" style="margin-top:0">Thanks! Your message was sent.</h3>
+              <h3 id="resultTitle" style="margin-top:0">Thank you, your message was sent.</h3>
               <div><strong>Name:</strong> <span id="resultName"></span></div>
               <div><strong>Email:</strong> <span id="resultEmail"></span></div>
               <div><strong>Subject:</strong> <span id="resultSubject"></span></div>
@@ -1129,14 +2840,19 @@
       <section aria-label="Call to action" class="footer-cta">
         <h2 class="footer-cta__title">Thema Green</h2>
         <p class="footer-cta__subtitle">
-          Human Factors & AI Research Professional creating accessible, safe, and effective human-system experiences.<br>
+          Human factors and AI focused researcher and designer creating accessible, steady, and effective human system experiences.<br>
           <strong>Built with performance, privacy, and accessibility in mind.</strong>
         </p>
         <div class="footer-cta__actions">
           <a class="btn btn-primary" href="mailto:themagreen@gmail.com" aria-label="Start a conversation by email">
             <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Start a conversation
           </a>
-          <a class="btn btn-ghost" href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener">
+          <a
+            class="btn btn-ghost"
+            href="https://www.linkedin.com/in/themagreen/"
+            target="_blank"
+            rel="noopener"
+          >
             <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i> Connect on LinkedIn
           </a>
         </div>
@@ -1145,22 +2861,30 @@
       <div class="f-grid" role="navigation" aria-label="Footer">
         <section aria-label="About Thema Green" class="f-col">
           <h3 class="f-h">About</h3>
-          <p>Human-centered research and design for high-stakes systems. I focus on reducing human error and improving outcomes through evidence-based UX and AI alignment.</p>
+          <p>
+            Human centered research and design for high stakes systems. I focus on reducing human error and improving outcomes through evidence based UX and AI alignment.
+          </p>
           <div class="social" style="display:flex;gap:.6rem;margin-top:.6rem">
-            <a href="https://www.linkedin.com/in/themagreen/" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-            <a href="https://github.com/Themagreen" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-            <a href="https://twitter.com/themagreen" aria-label="Twitter / X"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/themagreen/" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/Themagreen" aria-label="GitHub">
+              <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://twitter.com/themagreen" aria-label="Twitter or X">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
           </div>
         </section>
 
         <section aria-label="Expertise" class="f-col">
           <h3 class="f-h">Expertise</h3>
           <ul class="f-links">
-            <li><a href="#portfolio-tabs">Medical Device UX</a></li>
-            <li><a href="#portfolio-tabs">Human Factors Research</a></li>
-            <li><a href="#portfolio-tabs">Human-AI Interaction</a></li>
-            <li><a href="#portfolio-tabs">Accessibility &amp; WCAG</a></li>
-            <li><a href="#portfolio-tabs">Design Systems</a></li>
+            <li><a href="#portfolio-tabs">UX</a></li>
+            <li><a href="#portfolio-tabs">Human factors research</a></li>
+            <li><a href="#portfolio-tabs">Human AI interaction</a></li>
+            <li><a href="#portfolio-tabs">Accessibility and WCAG</a></li>
+            <li><a href="#portfolio-tabs">Design systems</a></li>
           </ul>
         </section>
 
@@ -1173,12 +2897,12 @@
             </p>
             <p>
               <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-              Washington, DC • Remote-friendly
+              Washington, DC remote friendly
             </p>
             <p>
               <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
               <a href="#contact">Accessibility feedback</a><br>
-              (Available for select consulting and full-time roles)
+              (Available for select consulting and full time roles)
             </p>
           </address>
         </section>
@@ -1196,7 +2920,7 @@
             <li><a href="#" rel="nofollow">Sitemap</a></li>
           </ul>
         </nav>
-        <p class="f-a11y">WCAG&nbsp;2.2 AA intent • Reduced-motion-friendly</p>
+        <p class="f-a11y">WCAG 2.2 AA intent and reduced motion friendly</p>
       </section>
     </div>
   </footer>
@@ -1204,9 +2928,137 @@
   <button id="toTopBtn" class="to-top" type="button" aria-label="Back to top">
     <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
   </button>
-
+</body>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
+  
+
+  <script>  // Floating testimonials functionality - FIXED VERSION
+    document.addEventListener('DOMContentLoaded', function() {
+      const testimonialsContainer = document.getElementById('testimonialsContainer');
+      const testimonialOverlay = document.getElementById('testimonialOverlay');
+      const testimonialTrigger = document.getElementById('testimonialTrigger');
+      const testimonialModal = document.getElementById('testimonialModal');
+      const testimonialClose = document.querySelector('.testimonial-close');
+      
+      let isZoomed = false;
+      let currentZoomedCard = null;
+      
+      // Set up click events for all testimonial cards
+      const testimonialCards = document.querySelectorAll('.testimonial-card');
+      
+      testimonialCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          if (isZoomed) return; // Prevent multiple zoom actions
+          
+          // Freeze all floating cards
+          freezeAllTestimonials();
+          
+          // Set current zoomed card
+          currentZoomedCard = card;
+          
+          // Add zoomed class to clicked card
+          card.classList.add('zoomed');
+          
+          // Show overlay
+          testimonialOverlay.classList.add('active');
+          
+          // Set flag
+          isZoomed = true;
+          
+          // Prevent event bubbling
+          e.stopPropagation();
+        });
+      });
+      
+      // Close zoomed card when clicking overlay or anywhere
+      testimonialOverlay.addEventListener('click', closeZoomedCard);
+      document.addEventListener('click', function(e) {
+        if (isZoomed && !e.target.closest('.testimonial-card.zoomed')) {
+          closeZoomedCard();
+        }
+      });
+      
+      // Also close with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isZoomed) {
+          closeZoomedCard();
+        }
+      });
+      
+      // Testimonial modal functionality
+      testimonialTrigger.addEventListener('click', function() {
+        testimonialModal.classList.add('active');
+      });
+      
+      testimonialClose.addEventListener('click', function() {
+        testimonialModal.classList.remove('active');
+      });
+      
+      testimonialModal.addEventListener('click', function(e) {
+        if (e.target === testimonialModal) {
+          testimonialModal.classList.remove('active');
+        }
+      });
+      
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && testimonialModal.classList.contains('active')) {
+          testimonialModal.classList.remove('active');
+        }
+      });
+
+      function freezeAllTestimonials() {
+        const floatingCards = document.querySelectorAll('.testimonial-card.floating');
+        floatingCards.forEach(card => {
+          card.style.animationPlayState = 'paused';
+        });
+      }
+      
+      function resumeAllTestimonials() {
+        const floatingCards = document.querySelectorAll('.testimonial-card.floating');
+        floatingCards.forEach(card => {
+          card.style.animationPlayState = 'running';
+        });
+      }
+      
+      function closeZoomedCard() {
+        if (!isZoomed || !currentZoomedCard) return;
+        
+        // Remove zoomed class
+        currentZoomedCard.classList.remove('zoomed');
+        
+        // Hide overlay
+        testimonialOverlay.classList.remove('active');
+        
+        // Resume floating animations
+        resumeAllTestimonials();
+        
+        // Reset flags
+        isZoomed = false;
+        currentZoomedCard = null;
+      }
+      
+      // Set random vertical positions for more natural floating
+      function randomizeFloatingPositions() {
+        const cards = document.querySelectorAll('.testimonial-card.floating');
+        
+        cards.forEach(card => {
+          // Generate random start and end positions if not already set
+          if (!card.style.getPropertyValue('--start-y')) {
+            const startY = Math.random() * 400; // 0-400px
+            const endY = startY + (Math.random() * 100 - 50); // +/- 50px from start
+            
+            // Apply CSS custom properties
+            card.style.setProperty('--start-y', `${startY}px`);
+            card.style.setProperty('--end-y', `${endY}px`);
+          }
+        });
+      }
+      
+      // Initialize random positions
+      randomizeFloatingPositions();
+    });    
+
     /* ===== Progress bar ===== */
     window.addEventListener("scroll", () => {
       const st = document.documentElement.scrollTop || document.body.scrollTop;
@@ -1256,6 +3108,91 @@
         applyIcon();
       });
     })();
+    
+const roleSearchInput = document.getElementById('roleSearchInput');
+    // Role search functionality
+const searchBtn = document.getElementById('searchBtn');
+const filterBanner = document.getElementById('filterBanner');
+const filterBannerRole = document.getElementById('filterBannerRole');
+const viewFullBtn = document.getElementById('viewFullBtn');
+const dismissBannerBtn = document.getElementById('dismissBannerBtn');
+
+
+async function performSearch() {
+  const role = roleSearchInput.value.trim();
+  if (!role) return;
+
+  // Show banner and scroll to top
+  filterBanner.classList.add('active');
+  filterBannerRole.textContent = role;
+  
+const portfolioSection = document.getElementById('panel-projects');
+if (portfolioSection) {
+  portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+  // Show loading state
+  searchBtn.disabled = true;
+  searchBtn.innerHTML = '<span class="loading-spinner"></span>';
+
+  try {
+    // Prefer the advanced Fuse-based search when available
+    if (typeof advancedSearch === 'function' && typeof fuse !== 'undefined' && fuse) {
+      advancedSearch(role);
+    } else {
+      // Fallback: simple client-side text filter
+      const cards = document.querySelectorAll('#projectsGrid .card');
+      let count = 0;
+      const q = role.toLowerCase();
+      cards.forEach(card => {
+        const txt = card.textContent.toLowerCase();
+        const match = txt.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) count++;
+      });
+      filterBannerRole.textContent = `${role} (${count} relevant projects)`;
+    }
+
+    // Try optional backend fetch (non-fatal)
+    try {
+      const response = await fetch(`/api/portfolio/filter?role=${encodeURIComponent(role)}`);
+      if (response.ok) {
+        const filtered = await response.json();
+        if (filtered && Array.isArray(filtered.projects)) {
+          filterBannerRole.textContent = `${role} (${filtered.projects.length} relevant projects)`;
+          console.log('Filtered portfolio for:', role, filtered);
+        }
+      }
+    } catch (err) {
+      // Ignore backend errors; keep client-side results
+      console.debug('Backend portfolio fetch failed:', err);
+    }
+  } finally {
+    searchBtn.disabled = false;
+    searchBtn.innerHTML = '<i class="fas fa-arrow-right" aria-hidden="true"></i>';
+  }
+}
+
+searchBtn.addEventListener('click', () => {
+    const query = roleSearchInput.value.trim();
+    if (query) {
+        addToSearchHistory(query);
+    }
+    performSearch();
+});
+
+roleSearchInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') performSearch();
+});
+
+viewFullBtn.addEventListener('click', () => {
+  filterBanner.classList.remove('active');
+  roleSearchInput.value = '';
+});
+
+dismissBannerBtn.addEventListener('click', () => {
+  filterBanner.classList.remove('active');
+});
 
     /* ===== Mobile nav with focus trap ===== */
     const hamburger = document.getElementById('hamburger');
@@ -1409,127 +3346,1417 @@
       obs.observe(el);
     });
 
-    /* ===== Tabs ===== */
-    const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
-    const panels = {
-      projects: document.getElementById('panel-projects'),
-      education: document.getElementById('panel-education'),
-      additional: document.getElementById('panel-additional')
-    };
-    function activateTab(id){
-      tabBtns.forEach(b => { b.setAttribute('aria-selected', String(b.dataset.tab===id)); });
-      Object.entries(panels).forEach(([k,el]) => el.classList.toggle('active', k===id));
+/* ===== Tabs ===== */
+const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
+const tabPanels = {
+  projects: document.getElementById('panel-projects'),
+  education: document.getElementById('panel-education'),
+  additional: document.getElementById('panel-additional')
+};
+
+function activateTab(id) {
+  // Update buttons
+  tabBtns.forEach(btn => {
+    const isSelected = btn.dataset.tab === id;
+    btn.setAttribute('aria-selected', isSelected);
+    btn.classList.toggle('active', isSelected);
+  });
+  
+  // Update panels
+  Object.entries(tabPanels).forEach(([key, panel]) => {
+    if (panel) {
+      const isActive = key === id;
+      panel.classList.toggle('active', isActive);
+      panel.style.display = isActive ? 'block' : 'none';
     }
-    tabBtns.forEach((btn, idx) => {
-      btn.dataset.tab = btn.id.replace('tab-','');
-      btn.addEventListener('click', ()=>activateTab(btn.dataset.tab));
-      btn.addEventListener('keydown', e => {
-        if (e.key==='ArrowRight' || e.key==='ArrowLeft'){
-          e.preventDefault();
-          const dir = e.key==='ArrowRight'?1:-1;
-          const next = tabBtns[(idx+dir+tabBtns.length)%tabBtns.length];
-          next.focus(); activateTab(next.dataset.tab);
+  });
+}
+
+// Initialize tabs
+tabBtns.forEach((btn, index) => {
+  const tabId = btn.id.replace('tab-', '');
+  btn.dataset.tab = tabId;
+  
+  btn.addEventListener('click', () => activateTab(tabId));
+  
+  btn.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const direction = e.key === 'ArrowRight' ? 1 : -1;
+      const nextIndex = (index + direction + tabBtns.length) % tabBtns.length;
+      const nextTab = tabBtns[nextIndex];
+      nextTab.focus();
+      activateTab(nextTab.dataset.tab);
+    }
+  });
+});
+
+// Set initial active tab
+activateTab('projects');
+
+/* ===== Education accordion ===== */
+(() => {
+  const eduPanel = document.getElementById('panel-education');
+  if (!eduPanel) return;
+  const cards = eduPanel.querySelectorAll('.t-card');
+
+  function toggleCard(card, { exclusive = true } = {}) {
+    const expanded = card.getAttribute('aria-expanded') === 'true';
+    if (exclusive) {
+      cards.forEach(c => {
+        if (c !== card) {
+          c.classList.remove('active');
+          c.setAttribute('aria-expanded', 'false');
+          const details = c.querySelector('.c-details');
+          if (details) details.classList.remove('active');
+          const list = c.querySelector('.c-list');
+          if (list) list.style.maxHeight = '';
         }
       });
-    });
+    }
+    card.classList.toggle('active', !expanded);
+    card.setAttribute('aria-expanded', String(!expanded));
 
-    /* ===== Education filters ===== */
-    (() => {
-      const eduPanel = document.getElementById('panel-education');
-      if (!eduPanel) return;
-      const eduFilterBtns = eduPanel.querySelectorAll('.filters .filter-btn');
-      const eduItems = eduPanel.querySelectorAll('.timeline .t-item');
-      eduFilterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          eduFilterBtns.forEach(b => b.setAttribute('aria-pressed', 'false'));
-          btn.setAttribute('aria-pressed', 'true');
-          const filter = btn.dataset.filter || 'all';
-          eduItems.forEach(item => {
-            const cat = item.getAttribute('data-category');
-            const show = filter === 'all' || cat === filter;
-            item.style.display = show ? 'block' : 'none';
-          });
+    const details = card.querySelector('.c-details');
+    if (details) details.classList.toggle('active', !expanded);
+
+    const list = card.querySelector('.c-list');
+    if (list) {
+      if (!expanded) {
+        list.style.maxHeight = list.scrollHeight + 'px';
+        list.addEventListener('transitionend', function once() {
+          list.style.maxHeight = '';
+          list.removeEventListener('transitionend', once);
         });
-      });
-    })();
+      } else {
+        list.style.maxHeight = list.scrollHeight + 'px';
+        requestAnimationFrame(() => { list.style.maxHeight = '0px'; });
+      }
+    }
+  }
 
-    /* ===== Education accordion ===== */
-    (() => {
-      const eduPanel = document.getElementById('panel-education');
-      if (!eduPanel) return;
-      const cards = eduPanel.querySelectorAll('.t-card');
+  cards.forEach(card => {
+    if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
+    if (!card.hasAttribute('aria-expanded')) card.setAttribute('aria-expanded', 'false');
 
-      function toggleCard(card, { exclusive = true } = {}) {
-        const expanded = card.getAttribute('aria-expanded') === 'true';
-        if (exclusive) {
-          cards.forEach(c => {
-            if (c !== card) {
-              c.classList.remove('active');
-              c.setAttribute('aria-expanded', 'false');
-              const details = c.querySelector('.c-details');
-              if (details) details.classList.remove('active');
-              const list = c.querySelector('.c-list');
-              if (list) list.style.maxHeight = '';
-            }
-          });
+    card.addEventListener('click', e => { if (!e.target.closest('a')) toggleCard(card); });
+    card.addEventListener('keydown', e => {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleCard(card); }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const next = e.key === 'ArrowDown'
+          ? card.parentElement.nextElementSibling?.querySelector('.t-card')
+          : card.parentElement.previousElementSibling?.querySelector('.t-card');
+        if (next) next.focus();
+      }
+    });
+  });
+})();
+
+  </script> 
+
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+<script>
+// ===== ADVANCED SEARCH WITH MULTIPLE FEATURES =====
+
+let fuse = null;
+let projectsData = [];
+let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+
+// 1. Initialize with enhanced data extraction
+function initAdvancedSearch() {
+  const cards = document.querySelectorAll('#projectsGrid .card');
+  
+  projectsData = Array.from(cards).map((card, index) => {
+    const titleEl = card.querySelector('h3');
+    const summaryEl = card.querySelector('p.muted');
+    const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent.trim());
+    const metaChips = Array.from(card.querySelectorAll('.meta-chip')).map(c => c.textContent.trim());
+    const category = card.getAttribute('data-category') || '';
+    const date = card.getAttribute('data-date') || '';
+    
+    return {
+      index,
+      element: card,
+      title: titleEl?.textContent.trim() || '',
+      summary: summaryEl?.textContent.trim() || '',
+      tags,
+      metaChips,
+      category,
+      date,
+      allText: [
+        titleEl?.textContent || '',
+        summaryEl?.textContent || '',
+        ...tags,
+        ...metaChips
+      ].join(' ')
+    };
+  });
+  
+  // Advanced Fuse.js configuration with weighted fields
+  fuse = new Fuse(projectsData, {
+    keys: [
+      { name: 'title', weight: 0.4 },
+      { name: 'summary', weight: 0.25 },
+      { name: 'tags', weight: 0.2 },
+      { name: 'metaChips', weight: 0.1 },
+      { name: 'allText', weight: 0.05 }
+    ],
+    includeScore: true,
+    includeMatches: true,
+    threshold: 0.4,
+    ignoreLocation: true,
+    minMatchCharLength: 2,
+    useExtendedSearch: true
+  });
+  
+  console.log('✓ Advanced search initialized with', projectsData.length, 'projects');
+}
+
+// 2. Advanced search with highlighting and badges// 2. Advanced search with highlighting and badges
+function advancedSearch(query) {
+    const cards = document.querySelectorAll('#projectsGrid .card');
+    const resultCount = document.getElementById('searchResultCount');
+    
+    // Remove old badges and highlights
+    document.querySelectorAll('.rank-badge').forEach(b => b.remove());
+    document.querySelectorAll('.search-highlight').forEach(el => el.outerHTML = el.textContent);
+    
+    // CHECK WHICH TAB IS ACTIVE
+    const activeTab = document.querySelector('.tab-btn[aria-selected="true"]');
+    const currentTab = activeTab ? activeTab.dataset.tab : 'projects';
+    
+    // If not on Projects tab, don't search (or show message)
+    if (currentTab !== 'projects' && query && query.trim()) {
+        if (resultCount) {
+            resultCount.textContent = 'Search only works on Projects tab';
+            resultCount.style.cssText = 'color: var(--text-muted); font-weight: 600; font-size: 0.9rem; margin-top: 8px; text-align: center;';
         }
-        card.classList.toggle('active', !expanded);
-        card.setAttribute('aria-expanded', String(!expanded));
+        return;
+    }
+    
+    // Empty query - show all
+    if (!query || !query.trim()) {
+        cards.forEach(c => c.style.display = '');
+        if (resultCount) resultCount.textContent = '';
+        return;
+    }
+    
+    // Perform fuzzy search (existing code continues...)
+    const results = fuse.search(query);
+    const matched = new Set(results.map(r => r.item.index));
+    
+    // Show/hide cards
+    cards.forEach((card, i) => {
+        card.style.display = matched.has(i) ? '' : 'none';
+    });
+    
+    // Add rank badges to top 3 results
+    results.slice(0, 3).forEach((result, rank) => {
+        const badge = document.createElement('span');
+        badge.className = 'rank-badge';
+        badge.textContent = `#${rank + 1}`;
+        badge.style.cssText = 'position: absolute; top: 12px; right: 12px; background: var(--gold-500); color: #1b1408; padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.15);';
+        
+        const cardLink = result.item.element.querySelector('.card-link') || result.item.element;
+        if (cardLink.style.position !== 'absolute') {
+            cardLink.style.position = 'relative';
+        }
+        cardLink.appendChild(badge);
+    });
+    
+    // Update result count
+    if (resultCount) {
+        resultCount.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
+        resultCount.style.cssText = 'color: var(--green-600); font-weight: 600; font-size: 0.9rem; margin-top: 8px; text-align: center;';
+    }
+    
+    console.log(`Found ${results.length} results for "${query}"`);
+}
 
-        const details = card.querySelector('.c-details');
-        if (details) details.classList.toggle('active', !expanded);
+// 3. Search suggestions as you type
+function showSearchSuggestions(query) {
+  if (!query || query.length < 2) {
+    hideSearchSuggestions();
+    return;
+  }
+  
+  const results = fuse.search(query).slice(0, 5);
+  const suggestionsDiv = document.getElementById('searchSuggestions');
+  
+  if (!suggestionsDiv || results.length === 0) {
+    hideSearchSuggestions();
+    return;
+  }
+  
+  const suggestions = results.map(r => r.item.title);
+  suggestionsDiv.innerHTML = suggestions.map(title => 
+    `<div class="suggestion-item" style="
+      padding: 8px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--surface-2);
+      transition: background 0.2s;
+    " onmouseover="this.style.background='var(--surface-2)'" 
+       onmouseout="this.style.background='transparent'"
+       onclick="selectSuggestion('${title.replace(/'/g, "\\'")}')">
+      ${title}
+    </div>`
+  ).join('');
+  
+  suggestionsDiv.style.display = 'block';
+}
 
-        const list = card.querySelector('.c-list');
-        if (list) {
-          if (!expanded) {
-            list.style.maxHeight = list.scrollHeight + 'px';
-            list.addEventListener('transitionend', function once() {
-              list.style.maxHeight = '';
-              list.removeEventListener('transitionend', once);
-            });
-          } else {
-            list.style.maxHeight = list.scrollHeight + 'px';
-            requestAnimationFrame(() => { list.style.maxHeight = '0px'; });
-          }
+function hideSearchSuggestions() {
+  const suggestionsDiv = document.getElementById('searchSuggestions');
+  if (suggestionsDiv) suggestionsDiv.style.display = 'none';
+}
+
+function selectSuggestion(title) {
+  const input = document.querySelector('input[aria-label="Find experience for any role"]');
+  if (input) {
+    input.value = title;
+    advancedSearch(title);
+    hideSearchSuggestions();
+  }
+}
+
+// 4. Search history management
+function addToSearchHistory(query) {
+    if (!query || query.trim() === '') return;
+    
+    query = query.trim();
+    
+    // Remove if already exists (case-insensitive to prevent duplicates)
+    searchHistory = searchHistory.filter(q => q.toLowerCase() !== query.toLowerCase());
+    
+    // Add to beginning
+    searchHistory.unshift(query);
+    
+    // Keep max 10 in storage (but only show 3)
+    searchHistory = searchHistory.slice(0, 10);
+    
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+}
+
+function showSearchHistory() {
+    if (searchHistory.length === 0) return;
+    
+    const suggestionsDiv = document.getElementById('searchSuggestions');
+    if (!suggestionsDiv) return;
+    
+    // LIMIT TO 3 ITEMS MAX
+    const historyToShow = searchHistory.slice(0, 3);
+    
+    suggestionsDiv.innerHTML = `
+        <div style="padding: 8px 12px; font-weight: 600; color: var(--text-muted); font-size: 0.85rem; border-bottom: 1px solid var(--surface-2);">
+            Recent Searches
+        </div>
+        ${historyToShow.map(query => `
+            <div class="suggestion-item" style="padding: 8px 12px; cursor: pointer; border-bottom: 1px solid var(--surface-2); transition: background 0.2s;"
+                onmouseover="this.style.background='var(--surface-2)'"
+                onmouseout="this.style.background='transparent'"
+                onclick="selectSuggestion('${query.replace(/'/g, "\\'")}')">
+                <i class="fas fa-history" style="margin-right: 8px; opacity: 0.5;"></i>${query}
+            </div>
+        `).join('')}
+    `;
+    suggestionsDiv.style.display = 'block';
+}
+
+// 5. Keyboard shortcuts (Ctrl+K to focus search)
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    const input = document.querySelector('input[aria-label="Find experience for any role"]');
+    if (input) {
+      input.focus();
+      input.select();
+    }
+  }
+  
+  // ESC to clear search
+  if (e.key === 'Escape') {
+    const input = document.querySelector('input[aria-label="Find experience for any role"]');
+    if (input && input.value) {
+      input.value = '';
+      advancedSearch('');
+      hideSearchSuggestions();
+    }
+  }
+});
+
+// 6. Setup advanced search UI
+function setupAdvancedSearchUI() {
+  const searchInput = document.querySelector('input[aria-label="Find experience for any role"]');
+  if (!searchInput) return;
+  
+  // Add result count display
+  const searchWrapper = searchInput.closest('.role-search-wrapper');
+  if (searchWrapper && !document.getElementById('searchResultCount')) {
+    const resultCount = document.createElement('div');
+    resultCount.id = 'searchResultCount';
+    searchWrapper.parentNode.insertBefore(resultCount, searchWrapper.nextSibling);
+  }
+  
+  // Add suggestions dropdown
+  if (!document.getElementById('searchSuggestions')) {
+    const suggestionsDiv = document.createElement('div');
+    suggestionsDiv.id = 'searchSuggestions';
+    
+suggestionsDiv.style.cssText = `
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface-0);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-strong);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+    `;
+    
+    const wrapper = searchInput.closest('.role-search-wrapper');
+    if (wrapper) {
+      wrapper.style.position = 'relative';
+      wrapper.appendChild(suggestionsDiv);
+    }
+  }
+  
+  // Add clear button
+  const clearBtn = document.createElement('button');
+  clearBtn.innerHTML = '<i class="fas fa-times"></i>';
+  clearBtn.style.cssText = `
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 8px;
+    display: none;
+    z-index: 10;
+  `;
+  clearBtn.onclick = () => {
+    searchInput.value = '';
+    advancedSearch('');
+    hideSearchSuggestions();
+    clearBtn.style.display = 'none';
+  };
+  
+  const inputWrapper = searchInput.parentElement;
+  if (inputWrapper && !inputWrapper.querySelector('.fas.fa-times')) {
+    inputWrapper.appendChild(clearBtn);
+  }
+  
+  // Event listeners
+searchInput.addEventListener('input', (e) => {
+    const query = e.target.value;
+    advancedSearch(query);
+    showSearchSuggestions(query);
+    // Show/hide clear button
+    clearBtn.style.display = query ? 'block' : 'none';
+    // DON'T save to history here - only on Enter/button click
+});
+
+// Add Enter key handler to save search
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        if (query) {
+            addToSearchHistory(query);
+            advancedSearch(query);
+            hideSearchSuggestions();
+        }
+    }
+});
+  
+  searchInput.addEventListener('focus', () => {
+    if (!searchInput.value) {
+      showSearchHistory();
+    }
+  });
+  
+  // Click outside to hide suggestions
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !document.getElementById('searchSuggestions')?.contains(e.target)) {
+      hideSearchSuggestions();
+    }
+  });
+  
+  console.log('✓ Advanced search UI initialized');
+}
+
+// 7. Initialize everything
+function initAll() {
+  initAdvancedSearch();
+  setupAdvancedSearchUI();
+  initProjectFilters(); 
+  
+  // Show keyboard shortcut hint
+  const searchInput = document.querySelector('input[aria-label="Find experience for any role"]');
+  if (searchInput) {
+    searchInput.placeholder = searchInput.placeholder + ' (Ctrl+K)';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initAll);
+
+if (document.readyState !== 'loading') {
+  initAll();
+}
+
+// Make selectSuggestion globally accessible
+window.selectSuggestion = selectSuggestion;
+</script> <!-- FLOATING TESTIMONIALS - ENHANCED VERSION -->
+<script>
+(function() {
+  console.log("Floating testimonials script loading...");
+  
+  // Initialize variables
+  const TESTIMONIALS = [
+    {
+      name: "Lori Mackenzie",
+      role: "Program Manager",
+      text: "Thema was a pleasure to work with in his role and any team she will work on moving forward. Great head on her shoulders!"
+    },
+    {
+      name: "Sarah Chen",
+      role: "Product Designer",
+      text: "Incredible attention to detail and a true eye for aesthetics. The project was delivered seamlessly and exceeded all expectations. Thema's approach to user-centered design transformed our entire development process."
+    },
+    {
+      name: "Marcus Johnson",
+      role: "Tech Lead",
+      text: "Solid engineering skills combined with a great design sense. It's rare to find someone who can bridge both worlds so effectively. Thema's contributions to our sprint planning sessions alone saved us weeks of rework."
+    },
+    {
+      name: "Emily Davis",
+      role: "Marketing Director",
+      text: "Our conversion rates doubled after the redesign. The user experience is intuitive and the visual hierarchy is spot on. Thema's research methodology uncovered insights we'd completely overlooked for months."
+    },
+    {
+      name: "Alex Rivera",
+      role: "Startup Founder",
+      text: "Fast, reliable, and creative. Helped us launch our MVP in record time without cutting corners on quality. Thema's ability to communicate complex technical concepts to non-technical stakeholders was invaluable."
+    },
+    {
+      name: "James Wilson",
+      role: "CTO",
+      text: "Clean code, great communication, and delivered ahead of schedule. A true professional in every sense. Thema's documentation and knowledge transfer process was the smoothest I've experienced in my career."
+    },
+    {
+      name: "Michael Rodriguez",
+      role: "UX Director",
+      text: "Thema's cognitive psychology background brought a depth to our design thinking that was transformative. The way they applied Fitts' Law and Hick's Law to our interface literally cut task completion times in half."
+    },
+    {
+      name: "Jennifer Park",
+      role: "Product Manager",
+      text: "Working with Thema was like having a human factors expert, designer, and engineer all in one person. Their ability to balance user needs with technical constraints is exceptional. Our NPS score jumped 35 points."
+    },
+    {
+      name: "David Kim",
+      role: "Accessibility Lead",
+      text: "Thema's commitment to inclusive design is outstanding. Not only did they ensure WCAG 2.1 AA compliance, but they pushed us to aim for AAA where possible. Their work will impact millions of users with disabilities."
+    },
+    {
+      name: "Olivia Thompson",
+      role: "Research Director",
+      text: "The rigor Thema brought to our usability testing protocol was impressive. Their statistical analysis of our A/B test results revealed patterns we'd completely missed. I'd hire them again in a heartbeat."
+    }
+  ];
+  
+  const PASTEL_COLORS = ['#FFE9F0', '#FFE0D4', '#FFF9D9', '#E0FCED', '#D9F2E8', '#D9EBF7', '#E9D9F7', '#E6F3FF', '#F0E6FF', '#FFF0E6'];
+  const TOTAL_CARDS = 30;
+  const MAX_ON_SCREEN = 8;
+  const UNIFORM_SPEED = 0.75;
+  const MIN_DISTANCE = 60;
+  
+  let container = null;
+  let cards = [];
+  let animationId = null;
+  let containerWidth = 0;
+  let containerHeight = 0;
+  let isAnimating = false;
+  
+  // Dragging and selection variables
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let dragCard = null;
+  let dragOffsetX = 0;
+  let dragOffsetY = 0;
+  let originalZIndex = 0;
+  
+  // Selection variables
+  let selectedCard = null;
+  let isSelectMode = false;
+  let originalBackgroundSpeed = UNIFORM_SPEED;
+  
+  // New variable to track if we're transitioning back
+  let isTransitioningBack = false;
+  
+  function checkOverlap(card1, card2) {
+    return (
+      card1.x < card2.x + card2.width + MIN_DISTANCE &&
+      card1.x + card1.width + MIN_DISTANCE > card2.x &&
+      card1.y < card2.y + card1.height + MIN_DISTANCE &&
+      card1.y + card1.height + MIN_DISTANCE > card2.y
+    );
+  }
+  
+  function getCardSize(index) {
+    const baseSize = 140; // Reduced base size for more room
+    
+    // More varied sizing with 5 different size tiers
+    const sizePattern = [
+      1.5,  // 150% - extra large
+      1.35, // 135% - large
+      1.2,  // 120% - medium-large
+      1.1,  // 110% - medium
+      1.0,  // 100% - normal
+      0.9,  // 90% - small
+      0.8,  // 80% - extra small
+      1.25, // 125% - large-medium
+      1.15, // 115% - medium-small
+      1.05  // 105% - small-medium
+    ];
+    
+    // Cycle through size patterns for more variation
+    const sizeMultiplier = sizePattern[index % sizePattern.length];
+    
+    // Add some random variation
+    const randomVariation = 0.9 + (Math.random() * 0.2); // 0.9 to 1.1
+    
+    return baseSize * sizeMultiplier * randomVariation;
+  }
+  
+  function truncateText(text, maxLength = 120) {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  }
+  
+  function createCardElement(width, testimonial, color, isSelected = false) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.cardId = Date.now() + Math.random();
+    
+    // Use same styling for both selected and unselected
+    const isBigCard = width > 200;
+    const fontSize = isBigCard ? '0.95rem' : '0.85rem';
+    const nameFontSize = isBigCard ? '1.1rem' : '0.95rem';
+    
+    // Truncate text only for unselected cards
+    const displayText = isSelected ? testimonial.text : truncateText(testimonial.text, isBigCard ? 120 : 80);
+    
+    card.innerHTML = `
+      <div style="display: flex; align-items: center; margin-bottom: 12px;">
+        <div style="width: 12px; height: 12px; background: #d1d5db; border-radius: 50%; margin-right: 10px; flex-shrink: 0;"></div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-weight: 700; color: #111827; font-size: ${nameFontSize}; line-height: 1.2; margin-bottom: 2px;">${testimonial.name}</div>
+          <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+            <span style="color: #6b7280; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${testimonial.role}</span>
+            <span style="background: #dcfce7; color: #16a34a; border-radius: 999px; padding: 2px 6px; font-size: 0.7rem; font-weight: 600; flex-shrink: 0; white-space: nowrap;">✓ Verified</span>
+          </div>
+        </div>
+      </div>
+      <div style="color: #4b5563; font-size: ${fontSize}; line-height: 1.5; margin-bottom: 12px; flex: 1; overflow: hidden;">${displayText}</div>
+      <div style="display: flex; gap: 3px; color: #facc15; font-size: ${isBigCard ? '1.1rem' : '0.95rem'}; margin-top: auto;">${'★'.repeat(5)}</div>
+    `;
+    
+    return card;
+  }
+  
+  function updateCardAppearance(cardElement, cardData, isSelected = false) {
+    const isBigCard = cardData.width > 200;
+    const fontSize = isBigCard ? '0.95rem' : '0.85rem';
+    const nameFontSize = isBigCard ? '1.1rem' : '0.95rem';
+    
+    // Truncate text only for unselected cards
+    const displayText = isSelected ? cardData.testimonial.text : truncateText(cardData.testimonial.text, isBigCard ? 120 : 80);
+    
+    cardElement.innerHTML = `
+      <div style="display: flex; align-items: center; margin-bottom: 12px;">
+        <div style="width: 12px; height: 12px; background: #d1d5db; border-radius: 50%; margin-right: 10px; flex-shrink: 0;"></div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-weight: 700; color: #111827; font-size: ${nameFontSize}; line-height: 1.2; margin-bottom: 2px;">${cardData.testimonial.name}</div>
+          <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+            <span style="color: #6b7280; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${cardData.testimonial.role}</span>
+            <span style="background: #dcfce7; color: #16a34a; border-radius: 999px; padding: 2px 6px; font-size: 0.7rem; font-weight: 600; flex-shrink: 0; white-space: nowrap;">✓ Verified</span>
+          </div>
+        </div>
+      </div>
+      <div style="color: #4b5563; font-size: ${fontSize}; line-height: 1.5; margin-bottom: 12px; flex: 1; overflow: hidden;">${displayText}</div>
+      <div style="display: flex; gap: 3px; color: #facc15; font-size: ${isBigCard ? '1.1rem' : '0.95rem'}; margin-top: auto;">${'★'.repeat(5)}</div>
+    `;
+    
+    // Make cards more square (1:1 aspect ratio)
+    const unselectedHeight = cardData.width * 1.1; // Slightly taller than wide for better text display
+    const selectedMultiplier = 1.8; // How much larger selected cards are
+    
+    // Calculate selected size that fits within container
+    const maxSelectedWidth = containerWidth * 0.8; // 80% of container width max
+    const maxSelectedHeight = containerHeight * 0.8; // 80% of container height max
+    
+    let selectedWidth = Math.min(cardData.width * selectedMultiplier, maxSelectedWidth);
+    let selectedHeight = selectedWidth * 1.2; // 1.2:1 ratio for selected card
+    
+    // Ensure it fits vertically too
+    if (selectedHeight > maxSelectedHeight) {
+      selectedHeight = maxSelectedHeight;
+      selectedWidth = selectedHeight / 1.2;
+    }
+    
+    if (isSelected) {
+      cardElement.style.cssText = `
+        position: absolute;
+        width: ${selectedWidth}px;
+        height: ${selectedHeight}px;
+        padding: ${cardData.width * 0.06}px;
+        background: ${cardData.color};
+        border-radius: ${cardData.width * 0.04}px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        border: 2px solid rgba(0,0,0,0.1);
+        transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: transform, width, height;
+        cursor: default;
+        user-select: none;
+        z-index: 10000;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) !important;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      `;
+      
+      // Store selected dimensions
+      cardData.selectedWidth = selectedWidth;
+      cardData.selectedHeight = selectedHeight;
+    } else {
+      cardElement.style.cssText = `
+        position: absolute;
+        width: ${cardData.width}px;
+        height: ${unselectedHeight}px;
+        padding: ${cardData.width * 0.04}px;
+        background: ${cardData.color};
+        border-radius: ${cardData.width * 0.03}px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.06);
+        transition: all 0.3s ease;
+        will-change: transform;
+        cursor: grab;
+        user-select: none;
+        touch-action: none;
+        z-index: ${cardData.isDragging ? '9999' : 'auto'};
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      `;
+      
+      // Update stored height
+      cardData.height = unselectedHeight;
+    }
+  }
+  
+  function setupCardInteractions(cardElement, cardData) {
+    let isClick = false;
+    let dragStartTime = 0;
+    
+    // Mouse events for drag detection
+    cardElement.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      dragStartTime = Date.now();
+      isClick = true;
+      
+      // Start drag after a short delay to differentiate from click
+      const dragTimeout = setTimeout(() => {
+        if (isClick) {
+          startDrag(e, cardElement, cardData);
+        }
+      }, 150);
+      
+      // Clear timeout on mouseup
+      const cleanup = () => {
+        clearTimeout(dragTimeout);
+        document.removeEventListener('mouseup', cleanup);
+      };
+      document.addEventListener('mouseup', cleanup);
+    });
+    
+    // Touch events for mobile
+    cardElement.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      e.preventDefault();
+      
+      dragStartTime = Date.now();
+      isClick = true;
+      
+      const dragTimeout = setTimeout(() => {
+        if (isClick) {
+          startDragTouch(e, cardElement, cardData);
+        }
+      }, 150);
+      
+      const cleanup = () => {
+        clearTimeout(dragTimeout);
+        document.removeEventListener('touchend', cleanup);
+      };
+      document.addEventListener('touchend', cleanup);
+    });
+    
+    // Click handler
+    cardElement.addEventListener('click', (e) => {
+      const clickDuration = Date.now() - dragStartTime;
+      
+      // Only treat as click if it was quick (not a drag) and we're not currently dragging
+      if (clickDuration < 200 && isClick && !isDragging && !isSelectMode && !isTransitioningBack) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectCard(cardData);
+      }
+    });
+    
+    // Prevent text selection during drag
+    cardElement.addEventListener('selectstart', (e) => {
+      if (isDragging) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  }
+  
+  function startDrag(e, cardElement, cardData) {
+    // If we're in select mode or transitioning back, don't allow dragging
+    if (isSelectMode || isTransitioningBack) return;
+    
+    isDragging = true;
+    isClick = false;
+    dragCard = cardData;
+    cardData.isDragging = true;
+    
+    originalZIndex = cardElement.style.zIndex || '0';
+    cardElement.style.zIndex = '9999';
+    cardElement.style.cursor = 'grabbing';
+    cardElement.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+    
+    const rect = cardElement.getBoundingClientRect();
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    dragOffsetX = e.clientX - rect.left;
+    dragOffsetY = e.clientY - rect.top;
+    
+    // Add global listeners
+    document.addEventListener('mousemove', handleDrag);
+    document.addEventListener('mouseup', stopDrag);
+  }
+  
+  function startDragTouch(e, cardElement, cardData) {
+    // If we're in select mode or transitioning back, don't allow dragging
+    if (isSelectMode || isTransitioningBack) return;
+    
+    if (e.touches.length !== 1) return;
+    e.preventDefault();
+    
+    isDragging = true;
+    isClick = false;
+    dragCard = cardData;
+    cardData.isDragging = true;
+    
+    originalZIndex = cardElement.style.zIndex || '0';
+    cardElement.style.zIndex = '9999';
+    cardElement.style.cursor = 'grabbing';
+    cardElement.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+    
+    const touch = e.touches[0];
+    const rect = cardElement.getBoundingClientRect();
+    dragStartX = touch.clientX;
+    dragStartY = touch.clientY;
+    dragOffsetX = touch.clientX - rect.left;
+    dragOffsetY = touch.clientY - rect.top;
+    
+    // Add global listeners
+    document.addEventListener('touchmove', handleDragTouch);
+    document.addEventListener('touchend', stopDrag);
+  }
+  
+  function handleDrag(e) {
+    if (!isDragging || !dragCard) return;
+    
+    const deltaX = e.clientX - dragStartX;
+    const deltaY = e.clientY - dragStartY;
+    
+    // Update card position
+    dragCard.x += deltaX;
+    dragCard.y += deltaY;
+    
+    // Calculate boundaries relative to container
+    const minX = 0;
+    const maxX = containerWidth - dragCard.width;
+    const minY = 0;
+    const maxY = containerHeight - dragCard.height;
+    
+    dragCard.x = Math.max(minX, Math.min(maxX, dragCard.x));
+    dragCard.y = Math.max(minY, Math.min(maxY, dragCard.y));
+    
+    // Update display
+    dragCard.element.style.transform = `translate(${dragCard.x}px, ${dragCard.y}px)`;
+    
+    // Update start position for next move
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+  }
+  
+  function handleDragTouch(e) {
+    if (!isDragging || !dragCard || e.touches.length !== 1) return;
+    e.preventDefault();
+    
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - dragStartX;
+    const deltaY = touch.clientY - dragStartY;
+    
+    // Update card position
+    dragCard.x += deltaX;
+    dragCard.y += deltaY;
+    
+    // Keep card within entire container area
+    const minX = 0;
+    const maxX = containerWidth - dragCard.width;
+    const minY = 0;
+    const maxY = containerHeight - dragCard.height;
+    
+    dragCard.x = Math.max(minX, Math.min(maxX, dragCard.x));
+    dragCard.y = Math.max(minY, Math.min(maxY, dragCard.y));
+    
+    // Update display
+    dragCard.element.style.transform = `translate(${dragCard.x}px, ${dragCard.y}px)`;
+    
+    // Update start position for next move
+    dragStartX = touch.clientX;
+    dragStartY = touch.clientY;
+  }
+  
+  function stopDrag() {
+    if (!isDragging) return;
+    
+    isDragging = false;
+    if (dragCard) {
+      dragCard.isDragging = false;
+      dragCard.element.style.cursor = 'grab';
+      dragCard.element.style.boxShadow = '0 1px 2px rgba(0,0,0,0.05)';
+      dragCard.element.style.zIndex = originalZIndex;
+      dragCard = null;
+    }
+    
+    // Remove global listeners
+    document.removeEventListener('mousemove', handleDrag);
+    document.removeEventListener('mouseup', stopDrag);
+    document.removeEventListener('touchmove', handleDragTouch);
+    document.removeEventListener('touchend', stopDrag);
+  }
+  
+  function selectCard(cardData) {
+    if (isSelectMode || isTransitioningBack) return;
+    
+    isSelectMode = true;
+    selectedCard = cardData;
+    
+    // Store original position and size
+    cardData.originalX = cardData.x;
+    cardData.originalY = cardData.y;
+    cardData.originalWidth = cardData.width;
+    cardData.originalHeight = cardData.height;
+    
+    // Update card to selected state
+    updateCardAppearance(cardData.element, cardData, true);
+    
+    // Create and add overlay for blur effect
+    let overlay = document.getElementById('testimonials-blur-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'testimonials-blur-overlay';
+      overlay.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(4px);
+        background: rgba(255, 255, 255, 0.7);
+        z-index: 9998;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+      `;
+      container.appendChild(overlay);
+      
+      // Fade in overlay
+      setTimeout(() => {
+        overlay.style.opacity = '1';
+      }, 10);
+      
+      // Click handler for overlay
+      overlay.addEventListener('click', handleOverlayClick);
+    }
+    
+    // Slow down other cards by over 50%
+    cards.forEach(card => {
+      if (card !== cardData) {
+        card.originalSpeed = card.speed;
+        card.speed = card.speed * 0.4; // 60% slower (over 50%)
+      }
+    });
+    
+    console.log("Card selected:", cardData.testimonial.name);
+  }
+  
+  function handleOverlayClick(e) {
+    if (selectedCard && !isTransitioningBack) {
+      deselectCard();
+    }
+  }
+  
+  function deselectCard() {
+    if (!isSelectMode || !selectedCard || isTransitioningBack) return;
+    
+    isTransitioningBack = true;
+    
+    // Remove overlay
+    const overlay = document.getElementById('testimonials-blur-overlay');
+    if (overlay) {
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        if (overlay && overlay.parentNode) {
+          overlay.parentNode.removeChild(overlay);
+        }
+      }, 300);
+    }
+    
+    // Restore card to original state immediately
+    updateCardAppearance(selectedCard.element, selectedCard, false);
+    
+    // Set up the transition back to original position
+    selectedCard.element.style.transition = 'all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    selectedCard.element.style.transform = `translate(${selectedCard.originalX}px, ${selectedCard.originalY}px)`;
+    
+    // Restore original speeds for all cards
+    cards.forEach(card => {
+      if (card.originalSpeed !== undefined) {
+        card.speed = card.originalSpeed;
+        delete card.originalSpeed;
+      }
+    });
+    
+    // Clean up after transition
+    selectedCard.element.addEventListener('transitionend', function onTransitionEnd() {
+      selectedCard.element.removeEventListener('transitionend', onTransitionEnd);
+      selectedCard.element.style.transition = 'all 0.3s ease';
+      
+      isSelectMode = false;
+      selectedCard = null;
+      isTransitioningBack = false;
+      
+      console.log("Card deselected and returned to position");
+    }, { once: true });
+  }
+  
+  function findBestYPosition(cardWidth, cardHeight, targetX) {
+    let bestY = Math.random() * (containerHeight - cardHeight);
+    let bestOverlapCount = Infinity;
+    
+    for (let attempt = 0; attempt < 25; attempt++) {
+      const testY = Math.random() * (containerHeight - cardHeight);
+      let overlapCount = 0;
+      
+      for (const otherCard of cards) {
+        if (checkOverlap(
+          {x: targetX, y: testY, width: cardWidth, height: cardHeight},
+          otherCard
+        )) {
+          overlapCount++;
         }
       }
-
-      cards.forEach(card => {
-        if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
-        if (!card.hasAttribute('aria-expanded')) card.setAttribute('aria-expanded', 'false');
-
-        card.addEventListener('click', e => { if (!e.target.closest('a')) toggleCard(card); });
-        card.addEventListener('keydown', e => {
-          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleCard(card); }
-          if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-            e.preventDefault();
-            const next = e.key === 'ArrowDown'
-              ? card.parentElement.nextElementSibling?.querySelector('.t-card')
-              : card.parentElement.previousElementSibling?.querySelector('.t-card');
-            if (next) next.focus();
+      
+      if (overlapCount === 0) {
+        return testY;
+      }
+      
+      if (overlapCount < bestOverlapCount) {
+        bestOverlapCount = overlapCount;
+        bestY = testY;
+      }
+    }
+    
+    return bestY;
+  }
+  
+  function initializeCards() {
+    container = document.getElementById('floating-testimonials-container');
+    if (!container) {
+      console.error("Container not found!");
+      return false;
+    }
+    
+    // Ensure container has proper styling for full area usage
+    container.style.cssText = `
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    `;
+    
+    containerWidth = container.clientWidth;
+    containerHeight = container.clientHeight;
+    
+    console.log(`Container size: ${containerWidth}x${containerHeight}`);
+    container.innerHTML = '';
+    cards = [];
+    
+    // Create all 30 cards with varied sizes
+    for (let i = 0; i < TOTAL_CARDS; i++) {
+      const baseWidth = getCardSize(i);
+      const cardWidth = Math.max(100, Math.min(baseWidth, 300)); // Limit min/max sizes
+      const cardHeight = cardWidth * 1.1; // Square aspect ratio
+      
+      // Stagger starting positions
+      let xPosition;
+      if (i < MAX_ON_SCREEN) {
+        // First cards: staggered across and just off-screen
+        xPosition = (i * 500) - 400;
+      } else {
+        // Remaining cards: queue up off-screen left (completely hidden)
+        xPosition = -cardWidth - ((i - MAX_ON_SCREEN) * 600) - 100;
+      }
+      
+      const yPosition = findBestYPosition(cardWidth, cardHeight, xPosition);
+      const color = PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)];
+      const testimonial = TESTIMONIALS[Math.floor(Math.random() * TESTIMONIALS.length)];
+      
+      const cardElement = createCardElement(cardWidth, testimonial, color);
+      container.appendChild(cardElement);
+      
+      const cardData = {
+        element: cardElement,
+        x: xPosition,
+        y: yPosition,
+        width: cardWidth,
+        height: cardHeight,
+        color: color,
+        testimonial: testimonial,
+        speed: UNIFORM_SPEED * (0.8 + Math.random() * 0.4), // Add speed variation
+        isDragging: false
+      };
+      
+      cards.push(cardData);
+      
+      // Apply initial styling
+      updateCardAppearance(cardElement, cardData, false);
+      cardElement.style.transform = `translate(${xPosition}px, ${yPosition}px)`;
+      
+      // Setup interactions
+      setupCardInteractions(cardElement, cardData);
+    }
+    
+    console.log(`Created ${cards.length} cards with varied square proportions`);
+    return true;
+  }
+  
+  function updateCardPositions() {
+    if (!container || cards.length === 0) return;
+    
+    // Update container dimensions
+    containerWidth = container.clientWidth;
+    containerHeight = container.clientHeight;
+    
+    // Skip selected card updates during transition
+    cards.forEach((card) => {
+      // Skip if card is selected and we're transitioning back
+      if (card === selectedCard && isTransitioningBack) return;
+      
+      // Skip if card is selected (it's in center view)
+      if (card === selectedCard) return;
+      
+      // Skip if card is being dragged
+      if (card.isDragging) return;
+      
+      // Move card right
+      card.x += card.speed;
+      
+      // Check if card has moved off-screen right (completely hidden)
+      if (card.x > containerWidth) {
+        // Find the card that's furthest to the left (but still visible or just off-screen)
+        let leftmostCard = null;
+        let leftmostX = Infinity;
+        
+        cards.forEach(otherCard => {
+          if (otherCard !== selectedCard && !otherCard.isDragging && otherCard.x < leftmostX) {
+            leftmostX = otherCard.x;
+            leftmostCard = otherCard;
           }
         });
+        
+        // If we found a card to position behind
+        if (leftmostCard) {
+          // Position completely off-screen left
+          card.x = leftmostX - card.width - 500 - Math.random() * 300;
+        } else {
+          // Fallback: position far off-screen left
+          card.x = -card.width - 500 - Math.random() * 300;
+        }
+        
+        // Find new y position within full container area
+        card.y = findBestYPosition(card.width, card.height, card.x);
+        
+        // Update content
+        card.testimonial = TESTIMONIALS[Math.floor(Math.random() * TESTIMONIALS.length)];
+        card.color = PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)];
+        
+        // Update card appearance (unselected state)
+        updateCardAppearance(card.element, card, false);
+        
+// Hide cards completely when off-screen to the left
+if (card.x + card.width < 0) {
+  card.element.style.opacity = '0';
+  card.element.style.pointerEvents = 'none';
+} else if (card.x < 0) {
+  // Fade in as card enters from left
+  const fadeProgress = (card.x + card.width) / card.width;
+  card.element.style.opacity = String(Math.max(0, Math.min(1, fadeProgress)));
+  card.element.style.pointerEvents = 'auto';
+} else {
+  card.element.style.opacity = '1';
+  card.element.style.pointerEvents = 'auto';
+}
+      } else {
+        // Fade in as card enters from left
+        if (card.x < 0) {
+          const fadeIn = Math.min(1, (card.x + card.width) / card.width);
+          card.element.style.opacity = fadeIn.toString();
+        } else {
+          card.element.style.opacity = '1';
+        }
+      }
+      
+      // Apply subtle vertical movement
+      const verticalDrift = Math.sin(Date.now() / 8000 + card.x * 0.01) * 0.8;
+      card.element.style.transform = `translate(${card.x}px, ${card.y + verticalDrift}px)`;
+    });
+  }
+  
+  function animate() {
+    if (!isAnimating) return;
+    
+    updateCardPositions();
+    animationId = requestAnimationFrame(animate);
+  }
+  
+  function startAnimation() {
+    console.log("Starting animation...");
+    
+    // Initialize if needed
+    if (cards.length === 0) {
+      if (!initializeCards()) {
+        console.error("Failed to initialize cards");
+        return;
+      }
+    }
+    
+    // Start animation loop
+    isAnimating = true;
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+    }
+    
+    animate();
+    console.log("Animation started");
+  }
+  
+  function stopAnimation() {
+    console.log("Stopping animation...");
+    isAnimating = false;
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+  }
+  
+  // Set up tab switching
+  function setupTabEvents() {
+    const testimonialTab = document.getElementById('tab-additional');
+    const otherTabs = document.querySelectorAll('.tab-btn:not(#tab-additional)');
+    
+    if (testimonialTab) {
+      testimonialTab.addEventListener('click', function() {
+        console.log("Testimonials tab clicked");
+        setTimeout(startAnimation, 50);
       });
-    })();
-
-    / ===== Project filters ===== /
-    (function(){
-      const pButtons = document.querySelectorAll('#panel-projects .filter-btn');
-      const cards = document.querySelectorAll('#projectsGrid .card');
-      pButtons.forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          pButtons.forEach(b=>b.setAttribute('aria-pressed','false'));
-          btn.setAttribute('aria-pressed','true');
-          const f = btn.dataset.filter;
-          cards.forEach(c=>{
-            const show = f==='all' || c.getAttribute('data-category')===f;
-            c.style.display = show ? 'block' : 'none';
-          });
-        });
+    }
+    
+    // Stop animation when switching to other tabs
+    otherTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        console.log("Other tab clicked, stopping animation");
+        stopAnimation();
+        deselectCard(); // Also deselect any selected card
       });
-    })();
+    });
+  }
+  
+  // Initialize when page loads
+  window.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded, setting up testimonials...");
+    
+    setupTabEvents();
+    
+    // Check if testimonials tab is active on load
+    const testimonialPanel = document.getElementById('panel-additional');
+    if (testimonialPanel && testimonialPanel.classList.contains('active')) {
+      console.log("Testimonials tab is active on load");
+      setTimeout(() => {
+        initializeCards();
+        setTimeout(startAnimation, 100);
+      }, 300);
+    }
+  });
+  
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    if (container) {
+      containerWidth = container.clientWidth;
+      containerHeight = container.clientHeight;
+      
+      // If a card is selected, update its size to fit within new container bounds
+      if (selectedCard) {
+        updateCardAppearance(selectedCard.element, selectedCard, true);
+      }
+    }
+  });
+  
+  console.log("Enhanced floating testimonials script loaded successfully");
+})();
 
-  </script>
+</script>
+<script>
+// ===== SIMPLE PROJECT FILTERS (Projects tab only) =====
+(function () {
+  const panel = document.getElementById('panel-projects');
+  if (!panel) return;
+  
+  const filterBtns = panel.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('#projectsGrid .card');
+  
+  if (!filterBtns.length || !projectCards.length) return;
+
+  function applyCategory(cat) {
+    filterBtns.forEach(b => {
+      const match = b.dataset.filter === cat;
+      b.setAttribute('aria-pressed', match);
+    });
+    
+    projectCards.forEach(card => {
+      const cardCat = card.dataset.category;
+      if (cat === 'all' || cardCat === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.dataset.filter;
+      applyCategory(category);
+    });
+  });
+
+  applyCategory('all');
+})();
+</script>
+
+<script>
+// ===== EDUCATION FILTERS (Education tab) =====
+(function () {
+  const panel = document.getElementById('panel-education');
+  if (!panel) return;
+  
+  const filterBtns = panel.querySelectorAll('.filter-btn');
+  const items = panel.querySelectorAll('.timeline .t-item');
+  
+  if (!filterBtns.length || !items.length) return;
+
+  function applyFilter(cat) {
+    filterBtns.forEach(b => {
+      const match = b.dataset.filter === cat;
+      b.setAttribute('aria-pressed', match);
+    });
+    
+    items.forEach(item => {
+      const itemCat = item.dataset.category;
+      if (cat === 'all' || itemCat === cat) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.dataset.filter;
+      applyFilter(category);
+    });
+  });
+
+  applyFilter('all');
+})();
+
+// Toggle testimonial form visibility
+(function() {
+  const formCard = document.getElementById('testimonialFormCard');
+  const toggleBtn = document.getElementById('toggleTestimonialFormBtn');
+
+  if (toggleBtn && formCard) {
+    toggleBtn.addEventListener('click', () => {
+      const isVisible = formCard.classList.toggle('visible');
+      formCard.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+
+      // Update styles for smooth reveal
+      if (isVisible) {
+        formCard.style.opacity = '1';
+        formCard.style.maxHeight = '1200px';
+        formCard.style.transform = 'translateY(0)';
+      } else {
+        formCard.style.opacity = '0';
+        formCard.style.maxHeight = '0';
+        formCard.style.transform = 'translateY(8px)';
+      }
+
+      const icon = toggleBtn.querySelector('i.fa-solid');
+      if (icon) {
+        icon.classList.toggle('fa-chevron-down', !isVisible);
+        icon.classList.toggle('fa-chevron-up', isVisible);
+      }
+
+      if (isVisible) {
+        formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+})();
+
+</script>
+
 </body>
 </html>
-
