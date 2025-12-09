@@ -1,0 +1,5205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f2efe6" media="(prefers-color-scheme: light)">
+
+  <title>Thema Green | Human Factors, UX, & AI</title>
+  <meta name="description" content="Portfolio of Thema Green — Human Factors & UX professional bridging cognitive science, design, and AI to build accessible, high-performance systems." />
+  <link rel="canonical" href="#https://themagreen.github.io/" />
+
+  <meta property="og:title" content="Thema Green | Human Factors, UX, & AI" />
+  <meta property="og:description" content="Human-centered systems, research-driven design, and accessible engineering." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://themagreen.github.io/" />
+  <meta property="og:image" content="https://img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"></noscript>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+:root{
+      --surface-0:#f2efe6;
+      --surface-1:#f8f4e9;
+      --surface-2:#ece7da;
+      --text-0:#0e1116;
+      --text-1:#2b2f36;
+      --text-muted:#5a6270;
+
+      --surface-0-dark: #1a1a1d;
+      --surface-1-dark: #212124;
+      --surface-2-dark: #2a2a2e;
+
+      --text-0-dark:#f5f7fa;
+      --text-1-dark:#e9ecf1;
+      --text-muted-dark:#b9c0cc;
+
+      --green-600:#1a6546;
+      --green-700:#0f4f37;
+      --gold-500:#d4af37;
+      --gold-600:#bd9a2f;
+      --focus-ring:#3aa0ff;
+
+      --page-max:980px;
+      --radius:14px;
+      --radius-sm:10px;
+      --shadow:0 8px 24px rgba(0,0,0,.08);
+      --shadow-strong:0 14px 40px rgba(0,0,0,.18);
+      --nav-h:72px;
+
+      --trans:220ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    [data-theme="dark"]{
+      --surface-0:var(--surface-0-dark);
+      --surface-1:var(--surface-1-dark);
+      --surface-2:var(--surface-2-dark);
+      --text-0:var(--text-0-dark);
+      --text-1:var(--text-1-dark);
+      --text-muted:var(--text-muted-dark);
+      --shadow:0 12px 32px rgba(0,0,0,.6);
+      --shadow-strong:0 20px 60px rgba(0,0,0,.7);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px)}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      line-height:1.55;
+      color:var(--text-0);
+      background:var(--surface-1);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      transition:background-color var(--trans), color var(--trans);
+    }
+
+    .muted{color:var(--text-muted)}
+    .island { content-visibility: auto; contain-intrinsic-size: 800px; }
+
+    .skip-link{
+      position:absolute;left:12px;top:-40px;
+      background:var(--surface-0);color:var(--text-0);padding:8px 12px;border-radius:8px;
+      box-shadow:var(--shadow);
+      transition:top 160ms ease;z-index:1001;
+    }
+    .skip-link:focus{top:10px;outline:3px solid var(--focus-ring);outline-offset:2px}
+
+    :focus-visible{outline:3px solid var(--focus-ring);outline-offset:2px;border-radius:8px}
+
+    .container{max-width:var(--page-max);margin:0 auto;padding:0 1.2rem}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+      padding:.9rem 1.2rem;border:0;border-radius:var(--radius-sm);
+      font-weight:700;cursor:pointer;transition:transform var(--trans), box-shadow var(--trans), background var(--trans), color var(--trans);
+      box-shadow:var(--shadow);
+      text-decoration: none !important;
+    }
+    .btn-primary{background:var(--green-600);color:#fff}
+    .btn-primary:hover{background:var(--green-700);transform:translateY(-2px);box-shadow:var(--shadow-strong)}
+    .btn-ghost{background:transparent;border:2px solid var(--green-600);color:var(--green-600)}
+    .btn-ghost:hover{background:var(--green-600);color:#fff}
+    .btn-gold{background:var(--gold-500);color:#1b1408}
+    .btn-gold:hover{background:var(--gold-600)}
+
+    /* Header / Nav */
+    header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: var(--nav-h);
+      z-index: 1000;
+      background: color-mix(in oklab, var(--surface-0) 70%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid color-mix(in oklab, var(--text-muted) 20%, transparent);
+    }
+    
+    .header-wrap {height: 100%; display: flex; justify-content: space-between; align-items: center;}
+    .logo {display: flex; align-items: center; gap: .7rem;}
+    .logo img {width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(90,98,112,.2);}
+    .brand {font-weight: 800; color: var(--text-0);}
+    .accent {color: var(--green-600);}
+
+    nav ul {display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0;}
+    nav a {color: var(--text-1); text-decoration: none; font-weight: 700; letter-spacing: .2px; opacity: .9; position: relative; padding: .25rem 0;}
+    nav a:hover, nav a[aria-current="page"] {color: var(--text-0); opacity: 1;}
+    nav a::after {content: ""; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0; background: var(--green-600); transition: width var(--trans); border-radius: 3px;}
+    nav a:hover::after, nav a[aria-current="page"]::after {width: 100%;}
+
+    .header-actions {display: flex; align-items: center; gap: 0.5rem;}
+    .hamburger {display: none; background: transparent; border: 0; font-size: 1.4rem; color: var(--green-600); cursor: pointer; width: 44px; height: 44px; border-radius: var(--radius-sm);}
+    .theme-toggle {
+      background: color-mix(in oklab, var(--text-muted) 20%, transparent);
+      border: 1px solid color-mix(in oklab, var(--text-muted) 25%, transparent);
+      width: 46px;height: 46px;border-radius: 999px;display: grid;place-items:center;color: var(--text-0);
+      cursor: pointer; box-shadow: var(--shadow); transition: transform var(--trans);
+    }
+    .theme-toggle:hover {transform: translateY(-2px);}
+
+    .btn-open-work {
+      display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+      padding:.7rem 1rem;background:var(--green-600);color:#fff;border:0;border-radius:var(--radius-sm);
+      font-weight:700;cursor:pointer;text-decoration:none;position:relative;box-shadow:var(--shadow);
+      transition: transform var(--trans), box-shadow var(--trans), background var(--trans);
+    }
+    .btn-open-work:hover {background: var(--green-700);transform: translateY(-2px);box-shadow: var(--shadow-strong);}
+    .btn-open-work::before {
+      content:"";position:absolute;inset:-4px;border-radius:inherit;box-shadow:0 0 0 0 rgba(26,101,70,.5);
+      transition:box-shadow var(--trans);animation:pulse 2s ease-out infinite;
+    }
+    @keyframes pulse{
+      0%{ box-shadow:0 0 0 0 rgba(26,101,70,.45) }
+      70%{ box-shadow:0 0 0 10px rgba(26,101,70,0) }
+      100%{ box-shadow:0 0 0 0 rgba(26,101,70,0) }
+    }
+  
+/* Project Cards */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row by default */
+}
+
+/* Medium screens: 2 per row */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small screens: 1 per row */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#floating-testimonials-wrapper {
+  position: relative;
+  width: 100%;
+  height: 420px; 
+  overflow: hidden;
+  margin-top: 1.5rem;
+  border-radius: 18px;
+}
+
+
+#floating-testimonials-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #FBF9F1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+/* Dark mode for testimonials container */
+[data-theme="dark"] #floating-testimonials-container {
+  background-color: rgba(42, 42, 46, 0.5);
+}
+
+[data-theme="dark"] #floating-testimonials-container .card {
+  background: rgba(45, 47, 51, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] #floating-testimonials-container .card-name {
+  color: #e9ecf1;
+}
+
+[data-theme="dark"] #floating-testimonials-container .card-text {
+  color: #b9c0cc;
+}
+
+[data-theme="dark"] #floating-testimonials-container .card-role {
+  color: #9ca3af;
+}
+
+#floating-testimonials-container .card {
+position: absolute;
+top: 0;
+left: 0;
+display: flex;
+flex-direction: column;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+border: 1px solid rgba(0, 0, 0, 0.06);
+will-change: transform;
+transition: box-shadow 0.3s ease;
+}
+
+#floating-testimonials-container .card:hover {
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#floating-testimonials-container .card-header {
+display: flex;
+align-items: center;
+}
+
+#floating-testimonials-container .card-avatar {
+width: 10px;
+height: 10px;
+background: #d1d5db;
+border-radius: 9999px;
+flex-shrink: 0;
+margin-right: 8px;
+}
+
+#floating-testimonials-container .card-info {
+display: flex;
+flex-direction: column;
+min-width: 0;
+}
+
+#floating-testimonials-container .card-name {
+font-weight: 700;
+color: #111827;
+font-size: 0.875rem;
+line-height: 1.2;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+#floating-testimonials-container .card-role-row {
+display: flex;
+align-items: center;
+gap: 4px;
+margin-top: 2px;
+}
+
+#floating-testimonials-container .card-role {
+color: #6b7280;
+font-weight: 500;
+font-size: 0.75rem;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+#floating-testimonials-container .card-verified {
+display: flex;
+align-items: center;
+background: #dcfce7;
+color: #16a34a;
+border-radius: 9999px;
+padding: 2px 4px;
+font-size: 0.75rem;
+font-weight: 600;
+flex-shrink: 0;
+}
+
+#floating-testimonials-container .card-verified svg {
+width: 10px;
+height: 10px;
+margin-right: 2px;
+}
+
+#floating-testimonials-container .card-text {
+color: #4b5563;
+font-size: 0.7rem;
+line-height: 1.4;
+margin-top: 8px;
+}
+
+#floating-testimonials-container .card-stars {
+display: flex;
+gap: 3px;
+margin-top: 8px;
+align-items: flex-end;
+}
+
+#floating-testimonials-container .star {
+width: 16px;
+height: 16px;
+fill: #facc15;
+color: #facc15;
+flex-shrink: 0;
+}
+.card {
+  background: var(--surface-0);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: block;
+  position: relative;
+  transition: transform var(--trans), box-shadow var(--trans);
+  border: 1px solid color-mix(in oklab, var(--text-muted) 10%, transparent);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.card-media {
+  height: auto;
+  background: color-mix(in oklab, var(--green-600) 8%, transparent);
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  max-height: 260px;
+  overflow: hidden;
+  color: var(--green-600);
+  border-bottom: 1px solid color-mix(in oklab, var(--text-muted) 10%, transparent);
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+  position: relative;
+  padding: 1.5rem;
+}
+
+.card-body h3 {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-0);
+  font-size: 1.25rem;
+}
+
+.meta-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 1rem 0;
+}
+
+.meta-chip {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.6rem;
+  background: color-mix(in oklab, var(--green-600) 8%, transparent);
+  border-radius: 6px;
+  border-left: 3px solid var(--green-600);
+  font-weight: 600;
+}
+
+.read-time {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  background: color-mix(in oklab, var(--gold-500) 15%, transparent);
+  color: color-mix(in oklab, var(--gold-500) 80%, #000);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid color-mix(in oklab, var(--gold-500) 30%, transparent);
+}
+    /* Progress bar */
+    .progress{position:fixed;top:0;left:0;width:100%;height:4px;z-index:1100;background:transparent}
+    #progressBar{
+      height:100%;width:0;
+      background:linear-gradient(90deg,var(--gold-500),var(--green-600));
+      box-shadow:0 2px 6px rgba(0,0,0,.15);
+      transform-origin:left;
+      transition:width 120ms linear;
+    }
+    @media (prefers-reduced-motion: reduce){
+      #progressBar{transition:none}
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: calc(var(--nav-h) + 3rem) 0 4rem;
+      overflow: hidden;
+      background: linear-gradient(135deg, color-mix(in oklab, var(--green-600) 8%, transparent), color-mix(in oklab, var(--surface-1) 90%, transparent));
+    }
+    [data-theme="dark"] .hero {
+      background: linear-gradient(135deg, color-mix(in oklab, var(--green-600) 18%, transparent), color-mix(in oklab, var(--surface-1) 90%, transparent));
+    }
+    .hero .inner{ display:flex; flex-direction:column; align-items:center; text-align:center; position:relative; z-index:1;}
+    .pill{
+      display:inline-flex;align-items:center;gap:.5rem;background:var(--gold-500);color:#1b1408;
+      padding:.5rem 1rem;border-radius:999px;font-weight:800;box-shadow:var(--shadow);
+    }
+
+            .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+    .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--gold-500);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--brown-900, #1b1408);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            animation: pulse 2s infinite;
+        }
+
+           @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+    .hero h1 {
+      margin: .9rem 0 1rem;
+      font-size: clamp(2.1rem, 3.4vw, 3.4rem);
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--text-0), color-mix(in oklab, var(--text-0) 70%, var(--green-600)));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p {max-width: 760px; color: var(--text-1); font-size: 1.1rem;}
+
+    /* Hero stats */
+    .results-strip.hero-stats{
+      max-width:820px;margin:2rem auto 0;
+      display:grid;grid-template-columns:repeat(3, minmax(160px,1fr));
+      gap:1rem;justify-items:center;text-align:center;z-index:1;
+    }
+    @media (max-width: 720px){ .results-strip.hero-stats{ grid-template-columns:repeat(2,1fr);} }
+    @media (max-width: 460px){ .results-strip.hero-stats{ grid-template-columns:1fr;} }
+    .result-tile{ background:var(--surface-0);padding:1.5rem;border-radius:var(--radius); box-shadow:var(--shadow);text-align:center;border-top:4px solid var(--gold-500);}
+    .result-number{ font-size:2.5rem;font-weight:800;color:var(--green-600);line-height:1;margin-bottom:.5rem;}
+    .result-label{ font-size:.9rem;color:var(--text-muted);font-weight:600;}
+
+    /* Particles Canvas */
+    #particles-js{ position: absolute; inset: 0; z-index: 0; pointer-events: auto; }
+    .particles-container { position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.3;}
+    @media (prefers-reduced-data: reduce){ .particles-container { display:none !important } }
+
+    /* Credibility */
+    .credibility {display:flex;flex-wrap:wrap;gap:1rem;margin:1.5rem 0;}
+    .credibility-item {display:flex;align-items:center;gap:.5rem;font-weight:600;}
+    .credibility-item i {color:var(--gold-500);font-size:1.1rem;}
+
+    /* Typewriter */
+    .typewriter{margin-top:.6rem;display:inline-flex;align-items:baseline;gap:.35rem}
+    .typewriter .label{color:var(--text-muted);font-weight:700}
+    .typewriter .word{ padding:.2rem .5rem;border-radius:8px;background:color-mix(in oklab,var(--green-600) 8%, transparent); border:1px solid color-mix(in oklab,var(--green-600) 26%, transparent); color:var(--text-0);font-weight:800}
+    .cursor{display:inline-block;width:2px;height:1.2em;background:var(--text-0);animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+
+    section { position: relative; padding: 4rem 0; overflow: hidden; }
+    section > .container { position: relative; z-index: 2; }
+
+    .section-title{text-align:center;margin-bottom:3rem}
+    .section-title h2{
+      display:inline-block;font-size:clamp(1.6rem,2.6vw,2.4rem);color:var(--green-600);position:relative
+    }
+    .section-title h2::after{content:"";position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);height:3px;width:64px;background:var(--gold-500);border-radius:3px}
+    .section-title p{color:var(--text-muted)}
+
+/* Tabs - FIXED VERSION */
+.tabs{ background:var(--surface-0); border-top:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent); border-bottom:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent) }
+.tablist{display:flex;gap:.25rem;justify-content:center;flex-wrap:wrap;border-bottom:2px solid color-mix(in oklab, var(--text-muted) 15%, transparent)}
+.tab-btn{background:transparent;border:0;padding:1rem 1.2rem;font-weight:800;color:var(--text-1);cursor:pointer;position:relative;min-width:44px;min-height:44px}
+.tab-btn[aria-selected="true"],.tab-btn:hover{color:var(--green-600)}
+.tab-btn::after{content:"";position:absolute;left:0;bottom:-2px;height:3px;width:0;background:var(--green-600);transition:width var(--trans);border-radius:3px}
+.tab-btn[aria-selected="true"]::after,.tab-btn:hover::after{width:100%}
+.tabpanel{display:none;padding-top:1rem}
+.tabpanel.active{display:block}
+    /* Timeline / Education */
+    .timeline{position:relative;max-width:var(--page-max);margin:0 auto}
+    .timeline::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:7px;           /* thinner line */
+  margin-left:-1px;
+  background:var(--green-600);
+  border-radius:0;     /* no pill/circle look */
+}
+    .t-item{position:relative;width:50%;padding:10px 40px}
+    .t-item:nth-child(odd){left:0}
+    .t-item:nth-child(even){left:50%}
+    .t-card{background:var(--surface-0);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;border-left:4px solid var(--gold-500);transition:transform var(--trans)}
+    .t-card:hover{transform:translateY(-4px)}    
+    .t-item:nth-child(odd) .t-card::after{right:-9px;transform:translateX(50%)}
+    .t-item:nth-child(even) .t-card::after{left:-9px;transform:translateX(-50%)}
+    .t-date{font-weight:800;color:var(--green-600);margin-bottom:.25rem}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .55rem;border-radius:999px;background:var(--gold-500);color:#1b1408;font-weight:800}
+    .c-list{list-style:none;margin:.5rem 0 0;padding:0;max-height:0;overflow:hidden;transition:max-height var(--trans)}
+    .t-card.active .c-list{max-height:1200px}
+    .c-list li{display:flex;justify-content:space-between;gap:1rem;position:relative;padding-left:16px;margin-bottom:8px}
+.c-list li::before {content: ""; position: absolute; left: 0; top: 0.6em; width: 6px;height: 6px;border-radius: 50%;background: var(--gold-500);}
+
+    .grade{background:var(--green-600);color:#fff;padding:2px 8px;border-radius:999px;font-weight:800;font-size:.78rem}
+    .c-details{display:none;margin-top:.6rem;background:var(--surface-2);padding:12px;border-radius:10px;border-left:3px solid var(--gold-500)}
+    .c-details.active{display:block}
+
+    /* Skills / Cards */
+    .skills-grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+    .skill-card{background:var(--surface-0);border-top:4px solid var(--gold-500);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem}
+    .info-card{background:var(--surface-0);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem;border-left:4px solid var(--gold-500)}
+    .skill-pill{display:inline-block;margin:.25rem;padding:.45rem .8rem;border-radius:999px;border:1.5px solid color-mix(in oklab, var(--green-600) 40%, var(--surface-0)); background:color-mix(in oklab, var(--green-600) 8%, transparent);font-weight:800}
+/* Form smaller than cards */
+#panel-additional #testimonialFormCard {
+  max-width: 640px;
+  margin: 1.5rem auto 0;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(8px);
+  transition: max-height 260ms var(--trans), opacity 220ms var(--trans), transform 220ms var(--trans);
+}
+
+#panel-additional #testimonialFormCard.visible {
+  opacity: 1;
+  max-height: 1200px; /* large enough to fit the form */
+  transform: translateY(0);
+}
+
+/* Testimonial cards above */
+#panel-additional #testimonialsGrid {
+  margin-top: 0;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.testimonial-card {
+  border-left: 4px solid var(--gold-500);
+}
+
+
+.testimonial-card header h3 {
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-card header p.muted {
+  margin: 0.1rem 0;
+}
+/* Keep the submission form narrower than testimonial cards */
+#panel-additional #testimonialFormCard {
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+}
+/* Feedback CTA Button */
+.feedback-cta-wrapper {
+  text-align: center;
+  margin: 2rem auto 3rem;
+}
+
+.feedback-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s var(--trans);
+  position: relative;
+  overflow: hidden;
+}
+
+.feedback-cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.feedback-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+.feedback-cta-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.feedback-cta-btn:active {
+  transform: translateY(0);
+}
+
+/* Modal Styles */
+.feedback-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s var(--trans);
+}
+
+.feedback-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 720px;
+  max-height: 90vh;
+  background: var(--surface-0);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
+  animation: modalSlideIn 0.4s var(--trans);
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-0);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s var(--trans);
+}
+
+.modal-close:hover {
+  background: var(--red-500);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.modal-content iframe {
+  display: block;
+  border: none;
+  border-radius: var(--radius-lg);
+}
+
+/* Testimonial Card Enhancements */
+.testimonial-card {
+  border-left: 4px solid var(--gold-500);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--trans);
+}
+
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 5rem;
+  color: var(--gold-500);
+  opacity: 0.1;
+  font-family: Georgia, serif;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+  border-left-color: var(--green-600);
+}
+
+/* Testimonial cards can span the full grid width */
+#panel-additional #testimonialsGrid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.testimonial-card {
+  border-left: 4px solid var(--gold-500);
+}
+
+.testimonial-card header h3 {
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-card header p.muted {
+  margin: 0.1rem 0;
+}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    .c-item{display:flex;align-items:center;gap:.75rem;color:var(--text-1)}
+    .c-item i{color:var(--green-600)}
+    .form-group{margin-bottom:1rem}
+    label{font-weight:800;color:var(--text-0);display:inline-block;margin-bottom:.3rem}
+    .input{ width:100%;padding:.8rem 1rem;border-radius:var(--radius-sm);border:1.5px solid color-mix(in oklab, var(--text-muted) 30%, transparent); background:var(--surface-0);color:var(--text-0);transition:border-color var(--trans), box-shadow var(--trans) }
+    .input:focus{outline:none;border-color:var(--green-600);box-shadow:0 0 0 4px color-mix(in oklab, var(--green-600) 20%, transparent)}
+    textarea.input{min-height:150px;resize:vertical}
+    .results{display:none;margin-top:1rem;background:var(--surface-0);border-left:4px solid var(--green-600);padding:1rem;border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    /* Footer */
+    .site-footer{background:var(--surface-0);border-top:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent);color:var(--text-1);padding:3rem 0 1.5rem}
+    .f-grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .f-grid h3{color:var(--green-600);margin-bottom:.8rem;}
+    .social a{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:999px;background:color-mix(in oklab, var(--green-600) 10%, transparent);color:var(--text-0);transition:transform var(--trans), background var(--trans); text-decoration: none;}
+    .social a:hover{transform:translateY(-2px);background:var(--gold-500);color:#1b1408}
+    .footer-cta{ display:grid;gap:.8rem;align-items:center;grid-template-columns:1fr;row-gap:.6rem; padding:1.25rem 1rem;margin-bottom:1.25rem;border-radius:14px; background:color-mix(in oklab, var(--green-600) 10%, transparent); border:1px solid color-mix(in oklab, var(--green-600) 25%, transparent)}
+    .footer-cta__title{margin:0;color:var(--green-600);font-size:clamp(1.15rem,2.4vw,1.35rem)}
+    .footer-cta__subtitle{margin:0;color:var(--text-1)}
+    .footer-cta__actions{display:flex;gap:.6rem;flex-wrap:wrap}
+    .f-h{color:var(--green-600);margin:.2rem 0 .5rem}
+    .f-links{list-style:none;padding:0;margin:0}
+    .f-links li+li{margin-top:.4rem}
+    .f-links a{color:var(--text-1);text-decoration:none;font-weight:700}
+    .f-links a:hover{color:var(--text-0)}
+    .f-address{font-style:normal}
+    .f-address p{margin:.4rem 0}
+    .f-meta{ margin-top:1rem;padding-top:1rem; border-top:1px solid color-mix(in oklab, var(--text-muted) 15%, transparent); display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;color:var(--text-muted)}
+    .f-copy{margin:0}
+    .f-legal{display:flex;gap:.9rem;list-style:none;margin:0;padding:0}
+    .f-a11y{margin:0}
+
+    /* Back to top */
+    .to-top{
+      position:fixed; right:20px; bottom:22px; z-index:1100;
+      width:52px; height:52px; border-radius:999px; border:0;
+      display:grid; place-items:center; cursor:pointer;
+      background:var(--green-600); color:#fff; box-shadow:var(--shadow-strong);
+      transition:opacity var(--trans), transform var(--trans), box-shadow var(--trans);
+      opacity:0; pointer-events:none; transform:translateY(8px);
+    }
+    .to-top.visible{ opacity:1; pointer-events:auto; transform:translateY(0) }
+    .to-top:hover{ background:var(--green-700) }
+    .to-top:focus-visible{ outline:3px solid var(--focus-ring); outline-offset:3px }
+    .to-top::before{
+      content:""; position:absolute; inset:-4px; border-radius:inherit;
+      box-shadow:0 0 0 0 rgba(26,101,70,.5); transition:box-shadow var(--trans);
+      animation:topring 2.4s ease-out infinite;
+    }
+    @keyframes topring{
+      0%{ box-shadow:0 0 0 0 rgba(26,101,70,.45) }
+      70%{ box-shadow:0 0 0 14px rgba(26,101,70,0) }
+      100%{ box-shadow:0 0 0 0 rgba(26,101,70,0) }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .to-top::before{ animation:none }
+    }
+
+    /* Responsive */
+    @media (max-width:992px){
+      .timeline::after{left:32px}
+      .t-item{width:100%;left:0 !important;padding-left:72px;padding-right:16px}
+      .t-card::after{left:16px !important;right:auto !important;transform:translateX(-50%)}
+      .contact-grid{grid-template-columns:1fr}
+    }
+    @media (max-width: 820px) {
+      .header-actions { gap: 0.25rem; }
+      .hamburger { display: grid; place-items: center; }
+      .btn-open-work { display: none; }
+      nav ul {
+        position: fixed; top: var(--nav-h); left: 0; right: 0;
+        transform: translateY(-8px); opacity: 0; pointer-events: none;
+        display: flex; flex-direction: column; gap: .75rem;
+        background: var(--surface-0); padding: 1rem 1.2rem 1.4rem;
+        border-bottom: 1px solid color-mix(in oklab, var(--text-muted) 20%, transparent);
+        box-shadow: var(--shadow); max-height: 80vh; overflow: auto;
+        transition: transform var(--trans), opacity var(--trans);
+      }
+      nav ul.active { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      body.no-scroll { overflow: hidden; }
+      .nav-menu .btn-otw { display: none; }
+    }
+    @media (max-width: 600px) {
+      .credibility {flex-direction: column; align-items: flex-start;}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+    }
+    
+    .role-search-section {
+  max-width: 900px;
+  margin: 2.5rem auto 0;
+  padding: 0 1rem;
+  overflow: visible;
+  position: relative;
+}
+
+.role-search-label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-0, #181c20);
+  margin-bottom: 0.9rem;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.role-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  z-index: 10;
+}
+
+.role-search-icon {
+  position: absolute;
+  left: 1.1rem;
+  color: var(--green-600, #1a6546);
+  font-size: 1.25rem;
+  pointer-events: none;
+}
+
+.role-search-input {
+  flex: 1;
+  width: 100%;
+  min-width: 320px;
+  padding: 1rem 1.1rem 1rem 2.7rem; /* left padding makes space for icon */
+  border: 2px solid var(--green-600, #1a6546);
+  border-radius: 10px;
+  background: var(--surface-0, #fff);
+  color: var(--text-0, #181c20);
+  font-weight: 600;
+  font-size: 1.08rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(26, 101, 70, 0.04);
+  min-height: 46px;
+}
+
+.role-search-input:focus {
+  border-color: var(--green-700, #0f4f37);
+  box-shadow: 0 2px 16px rgba(26, 101, 70, 0.12);
+  outline: none;
+}
+
+.role-search-btn {
+  padding: 0.95rem 1.4rem;
+  background: var(--green-600, #1a6546);
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.2s, transform 0.2s;
+  min-height: 46px;
+  box-shadow: 0 1px 5px rgba(26, 101, 70, 0.07);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.role-search-btn:hover,
+.role-search-btn:focus {
+  background: var(--green-700, #0f4f37);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 10px rgba(26,101,70,0.10);
+}
+
+/* Filter Banner */
+.filter-banner {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  background: var(--green-600);
+  color: white;
+  padding: 0.8rem 1rem;
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+}
+
+.filter-banner.active {
+  display: flex;
+}
+
+.filter-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-weight: 600;
+}
+
+.filter-banner-role {
+  background: rgba(255,255,255,0.2);
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.filter-banner-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-banner-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background var(--trans);
+}
+
+.filter-banner-btn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Project Filters */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 0.7rem 1.2rem;
+  background: var(--surface-0);
+  border: 2px solid color-mix(in oklab, var(--text-muted) 30%, transparent);
+  border-radius: var(--radius-sm);
+  color: var(--text-1);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--trans);
+}
+
+.filter-btn[aria-pressed="true"],
+.filter-btn:hover {
+  background: var(--green-600);
+  color: white;
+  border-color: var(--green-600);
+}
+
+.testimonial-trigger {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #1a6546;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(26, 101, 70, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.testimonial-trigger:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(26, 101, 70, 0.4);
+  background: #145439;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #1a6546;
+}    
+/* ===== TESTIMONIALS CAROUSEL - UPDATED VERSION ===== */
+
+.testimonials-section {
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-1);
+}
+
+.testimonials-section h2 {
+  text-align: center;
+  color: var(--green-600);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.testimonials-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 3px;
+  width: 64px;
+  background: var(--gold-500);
+  border-radius: 3px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+}
+
+/* Carousel Controls */
+.testimonial-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.control-btn {
+  background: var(--surface-0);
+  border: 2px solid var(--green-600);
+  color: var(--green-600);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all var(--trans);
+  box-shadow: var(--shadow);
+  font-size: 1.1rem;
+}
+
+.control-btn.small {
+  width: 36px;
+  height: 36px;
+  font-size: 0.9rem;
+}
+
+.control-btn:hover {
+  background: var(--green-600);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+}
+
+.control-btn.paused {
+  background: var(--gold-500);
+  border-color: var(--gold-600);
+  color: #1b1408;
+}
+
+.playback-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  background: var(--surface-0);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  border: 1px solid color-mix(in oklab, var(--text-muted) 20%, transparent);
+}
+
+.speed-label {
+  font-weight: 600;
+  color: var(--text-1);
+  font-size: 0.9rem;
+}
+
+.speed-value {
+  font-weight: 800;
+  color: var(--green-600);
+  min-width: 40px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* Carousel Container */
+.testimonials-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.testimonials-carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Testimonial Cards */
+.testimonial-carousel-card {
+  flex: 0 0 auto;
+  width: 340px;
+  background: var(--surface-0);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--gold-500);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  transition: all 0.3s var(--trans);
+}
+
+.testimonial-carousel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+  border-left-color: var(--green-600);
+}
+
+.testimonial-carousel-card::before {
+  content: '"';
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 4rem;
+  color: var(--gold-500);
+  opacity: 0.15;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* Star Rating */
+.testimonial-stars {
+  display: flex;
+  gap: 0.25rem;
+  color: var(--gold-500);
+  font-size: 1.1rem;
+}
+
+/* Quote (continued) */
+.testimonial-carousel-card blockquote {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-carousel-card blockquote p {
+  font-style: italic;
+  color: var(--text-1);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Footer with Author Info */
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--text-muted) 20%, transparent);
+}
+
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-600), var(--gold-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 1.1rem;
+  border: 3px solid color-mix(in oklab, var(--gold-500) 30%, transparent);
+  flex-shrink: 0;
+}
+
+.testimonial-author {
+  flex: 1;
+  min-width: 0;
+}
+
+.testimonial-author h3 {
+  margin: 0 0 0.15rem 0;
+  color: var(--text-0);
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.testimonial-author .title {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.linkedin-link {
+  color: var(--green-600);
+  font-size: 1.3rem;
+  transition: all var(--trans);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--green-600) 10%, transparent);
+  flex-shrink: 0;
+}
+
+.linkedin-link:hover {
+  color: white;
+  background: var(--green-600);
+  transform: scale(1.1);
+}
+
+/* Pagination Dots */
+.carousel-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pagination-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--text-muted) 30%, transparent);
+  border: none;
+  cursor: pointer;
+  transition: all var(--trans);
+  padding: 0;
+}
+
+.pagination-dot:hover {
+  background: var(--gold-500);
+  transform: scale(1.2);
+}
+
+.pagination-dot.active {
+  background: var(--green-600);
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* Testimonial Trigger Button (Fixed) */
+.testimonial-trigger {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--green-600);
+  color: white;
+  padding: 15px 28px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(26, 101, 70, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+.testimonial-trigger::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(26, 101, 70, .5);
+  transition: box-shadow var(--trans);
+  animation: pulse 2s ease-out infinite;
+}
+
+.testimonial-trigger:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(26, 101, 70, 0.4);
+  background: var(--green-700);
+}
+
+.testimonial-trigger:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .testimonial-carousel-card {
+    width: 300px;
+  }
+  
+  .playback-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  
+  .control-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .testimonial-controls {
+    gap: 0.5rem;
+  }
+  
+  .testimonial-trigger {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    font-size: 0.85rem;
+  }
+  
+  .testimonials-carousel-track {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonial-carousel-card {
+    width: 280px;
+  }
+  
+  .playback-controls .speed-label {
+    display: none;
+  }
+  
+  .testimonial-trigger span {
+    display: none;
+  }
+  
+  .testimonial-trigger {
+    padding: 14px;
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    justify-content: center;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-carousel-track {
+    transition: none;
+  }
+  
+  .testimonial-carousel-card {
+    transition: none;
+  }
+  
+  .testimonial-trigger::before {
+    animation: none;
+  }
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .testimonial-carousel-card::before {
+  opacity: 0.08;
+}
+
+[data-theme="dark"] .linkedin-link {
+  background: color-mix(in oklab, var(--green-600) 15%, transparent);
+}
+
+/* Floating testimonials wrapper */
+#floating-testimonials-wrapper {
+  width: 100%;
+  height: 420px;
+  margin-top: 1.5rem;
+  border-radius: 18px;
+  overflow: hidden;
+  display: block;
+}
+#floating-testimonials-wrapper {
+  position: relative;
+  width: 100%;
+  height: 420px; 
+  overflow: hidden;
+  margin-top: 1.5rem;
+  border-radius: 18px;
+}
+
+#floating-testimonials-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #FBF9F1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#floating-testimonials-container .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  will-change: transform;
+  transition: box-shadow 0.3s ease;
+}
+
+#floating-testimonials-container .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#floating-testimonials-container .card-header {
+  display: flex;
+  align-items: center;
+}
+
+#floating-testimonials-container .card-avatar {
+  width: 10px;
+  height: 10px;
+  background: #d1d5db;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+#floating-testimonials-container .card-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+#floating-testimonials-container .card-name {
+  font-weight: 700;
+  color: #111827;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#floating-testimonials-container .card-role-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+#floating-testimonials-container .card-role {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#floating-testimonials-container .card-verified {
+  display: flex;
+  align-items: center;
+  background: #dcfce7;
+  color: #16a34a;
+  border-radius: 9999px;
+  padding: 2px 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+#floating-testimonials-container .card-verified svg {
+  width: 10px;
+  height: 10px;
+  margin-right: 2px;
+}
+
+#floating-testimonials-container .card-text {
+  color: #4b5563;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  margin-top: 8px;
+}
+
+#floating-testimonials-container .card-stars {
+  display: flex;
+  gap: 3px;
+  margin-top: 8px;
+  align-items: flex-end;
+}
+
+#floating-testimonials-container .star {
+  width: 16px;
+  height: 16px;
+  fill: #facc15;
+  color: #facc15;
+  flex-shrink: 0;
+}
+/* Enhanced Popup Styling - Replace your existing popup CSS with this */
+
+.testimonial-popup {
+  position: fixed;
+  top: 50%;
+  right: -100%;
+  transform: translateY(-50%);
+  width: min(650px, 92vw);
+  max-height: 90vh;
+  background: var(--surface-0);
+  border-radius: 16px;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 40px 120px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  opacity: 0;
+  transition: 
+    right 0.45s cubic-bezier(0.4, 0, 0.2, 1), 
+    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--text-muted) 10%, transparent);
+}
+
+.testimonial-popup[aria-hidden="false"] {
+  right: 3%;
+  opacity: 1;
+}
+
+.testimonial-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--text-muted) 12%, transparent);
+  background: linear-gradient(135deg, 
+    color-mix(in oklab, var(--green-600) 3%, transparent),
+    color-mix(in oklab, var(--surface-0) 98%, transparent)
+  );
+  flex-shrink: 0;
+}
+
+.testimonial-popup-header h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--green-600);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.testimonial-popup-header h3::before {
+  content: "✨";
+  font-size: 1.2rem;
+}
+
+.popup-close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: color-mix(in oklab, var(--text-muted) 8%, transparent);
+  color: var(--text-1);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.25s var(--trans);
+  font-size: 1.3rem;
+}
+
+.popup-close-btn:hover {
+  background: var(--green-600);
+  color: #fff;
+  transform: rotate(90deg) scale(1.05);
+  box-shadow: var(--shadow);
+}
+
+.testimonial-popup-body {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  padding: 0.5rem;
+}
+
+.testimonial-popup-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Backdrop - smoother */
+.testimonial-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--trans), backdrop-filter 0.35s var(--trans);
+}
+
+.testimonial-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Button animation refinement */
+.feedback-cta-wrapper.active .feedback-cta-btn {
+  transform: translateX(-10px) scale(0.95);
+  box-shadow: var(--shadow);
+}
+
+/* Mobile - slide from bottom */
+@media (max-width: 768px) {
+  .testimonial-popup {
+    width: 100vw;
+    max-width: 100vw;
+    height: 88vh;
+    max-height: 88vh;
+    top: auto;
+    bottom: -100%;
+    right: 0;
+    left: 0;
+    transform: none;
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .testimonial-popup[aria-hidden="false"] {
+    bottom: 0;
+    right: 0;
+  }
+  
+  .feedback-cta-wrapper.active .feedback-cta-btn {
+    transform: translateY(-50vh) scale(0.8);
+  }
+  
+  .testimonial-popup-header {
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .testimonial-popup-header h3 {
+    font-size: 1.15rem;
+  }
+}
+
+/* Dark mode refinements */
+[data-theme="dark"] .testimonial-popup {
+  background: var(--surface-0);
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 40px 120px rgba(0, 0, 0, 0.8);
+  border-color: color-mix(in oklab, var(--text-muted) 15%, transparent);
+}
+
+[data-theme="dark"] .popup-close-btn {
+  background: color-mix(in oklab, var(--text-muted) 15%, transparent);
+}
+
+[data-theme="dark"] .testimonial-backdrop {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* ===== JOB MATCH PAGE SYSTEM ===== */
+.site-shell {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#page-track {
+  display: flex;
+  width: 200vw;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+
+.page-view {
+  width: auto;
+  height: 100%;
+  flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.site-shell.job-mode #page-track {
+  transform: translateX(-50%);
+}
+
+/* Job Match Page Styles */
+#job-match-page {
+  background: var(--surface-1);
+  padding-top: var(--nav-h);
+}
+
+#job-match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--surface-2);
+}
+
+#job-input {
+  width: 100%;
+  min-height: 200px;
+  padding: 20px;
+  border: 2px solid var(--surface-2);
+  border-radius: var(--radius);
+  background: var(--surface-0);
+  color: var(--text-0);
+  font-size: 16px;
+  line-height: 1.6;
+  resize: vertical;
+  margin-bottom: 20px;
+  font-family: inherit;
+}
+
+#job-input:focus {
+  outline: none;
+  border-color: var(--green-600);
+  box-shadow: 0 0 0 3px rgba(26, 101, 70, 0.1);
+}
+
+.job-actions {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+#job-back-button {
+  padding: 12px 24px;
+  background: var(--green-600);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#job-back-button:hover {
+  background: var(--green-700);
+  transform: translateY(-2px);
+}
+
+#match-summary {
+  background: var(--surface-0);
+  padding: 24px;
+  border-radius: var(--radius);
+  margin-bottom: 30px;
+  box-shadow: var(--shadow);
+}
+
+#job-chat {
+  background: var(--surface-0);
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.job-chat-message {
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: var(--surface-1);
+  border-left: 4px solid transparent;
+}
+
+.job-chat-message.positive {
+  border-left-color: var(--green-600);
+}
+
+.job-chat-message.neutral {
+  border-left-color: var(--gold-500);
+}
+
+.job-chat-message.system {
+  border-left-color: var(--text-muted);
+}
+
+/* Job Match Score Styles */
+.score-display {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.score-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: conic-gradient(var(--green-600) 0% var(--score-percent, 0%), var(--surface-2) var(--score-percent, 0%) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.score-circle::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--surface-0);
+}
+
+.score-number {
+  position: relative;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--green-600);
+  z-index: 1;
+}
+
+.score-label {
+  flex: 1;
+}
+
+.score-label h4 {
+  margin: 0 0 5px 0;
+  color: var(--text-0);
+}
+
+.score-label p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Match breakdown */
+.match-breakdown {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--surface-2);
+}
+
+.match-category {
+  margin-bottom: 15px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.category-name {
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.category-score {
+  font-weight: 700;
+  color: var(--green-600);
+}
+
+.progress-bar {
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--green-600);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Supporting items */
+.supporting-items {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--surface-2);
+}
+
+.item-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--gold-500);
+  color: #1b1408;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #job-match-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .job-actions {
+    flex-wrap: wrap;
+  }
+  
+  .score-display {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+/* Job match actions */
+.job-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+/* Primary: Score my fit */
+.btn-score-fit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.7rem 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  background: linear-gradient(135deg, var(--green-600), var(--green-700));
+  box-shadow: 0 10px 30px rgba(26, 101, 70, 0.35);
+  transform: translateY(0);
+  transition: transform var(--trans), box-shadow var(--trans), background var(--trans);
+}
+
+.btn-score-fit i {
+  font-size: 1rem;
+}
+
+.btn-score-fit:hover {
+  background: linear-gradient(135deg, var(--green-700), var(--green-800));
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(26, 101, 70, 0.45);
+}
+
+.btn-score-fit:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(26, 101, 70, 0.3);
+}
+
+/* Ghost: Clear scores */
+.btn-clear-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  padding: 0.65rem 1.2rem;
+  border: 1px solid color-mixin(oklab, var(--text-muted) 16%, transparent);
+  background: color-mixin(oklab, var(--surface-0) 92%, transparent);
+  color: var(--text-1);
+  font-weight: 600;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  transition: background var(--trans), border-color var(--trans), color var(--trans), transform var(--trans), box-shadow var(--trans);
+}
+
+.btn-clear-score i {
+  font-size: 0.9rem;
+}
+
+.btn-clear-score:hover {
+  background: color-mixin(oklab, var(--surface-1) 90%, transparent);
+  border-color: color-mixin(oklab, var(--green-600) 18%, transparent);
+  color: var(--green-700);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.btn-clear-score:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Compact layout on mobile */
+@media (max-width: 640px) {
+  .job-actions {
+    gap: 0.5rem;
+  }
+
+  .btn-score-fit,
+  .btn-clear-score {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .btn-clear-score span {
+    white-space: nowrap;
+  }
+}
+
+/* Dark mode tweaks */
+[data-theme="dark"] .btn-clear-score {
+  background: color-mixin(oklab, var(--surface-0) 90%, transparent);
+  border-color: color-mixin(oklab, var(--text-muted) 22%, transparent);
+}
+
+[data-theme="dark"] .btn-clear-score:hover {
+  background: color-mixin(oklab, var(--surface-1) 92%, transparent);
+}
+
+
+  </style>
+  <!-- Load Google reCAPTCHA v3 -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+  <!-- TWO-PAGE SYSTEM WRAPPER -->
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="filter-banner" id="filterBanner">
+    <div class="filter-banner-content">
+      <i class="fas fa-filter" aria-hidden="true"></i>
+      <span>Customized for</span>
+      <span class="filter-banner-role" id="filterBannerRole">Loading...</span>
+    </div>
+    <div class="filter-banner-actions">
+      <button class="filter-banner-btn" id="viewFullBtn" title="View full portfolio">View full portfolio</button>
+      <button class="filter-banner-btn" id="dismissBannerBtn" title="Dismiss banner" style="background: rgba(255,255,255,0.1);">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header role="banner">
+    <div class="container header-wrap">
+      <div class="logo">
+        <img
+          src="//img1.wsimg.com/isteam/ip/053e8308-98f4-48ed-9757-f05267658253/1000005403.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:365,h:365,cg=true"
+          alt="Thema Green headshot"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <div class="brand">Thema <span class="accent">Green</span></div>
+      </div>
+
+      <nav aria-label="Primary">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="navlink">Home</a></li>
+          <li><a href="#skills" class="navlink">Skills</a></li>
+          <li><a href="#about" class="navlink">About</a></li>
+          <li><a href="#contact" class="navlink">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <a
+          href="https://www.linkedin.com/in/themagreen/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-open-work"
+          aria-label="Open to work"
+        >
+          <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+          <span>Open to work</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress bar -->
+  <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="home" aria-label="Intro">
+      <div id="particles-js" class="particles-container" aria-hidden="true"></div>
+      <div class="container inner">
+        <span class="hero-badge">Human Factors & UX Research Professional</span>
+        <h1>Engineering Human-Centered Systems</h1>
+        <p> Follow along in my journey to unpack the mysterious ways in which humans and technology intersect.
+
+        <div class="credibility" aria-label="Selected domains">
+          <div class="credibility-item">
+            <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+            <span>Human centered AI</span>
+          </div>
+          <div class="credibility-item">
+            <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
+            <span>UX driven product research</span>
+          </div>
+          <div class="credibility-item">
+            <i class="fa-solid fa-robot" aria-hidden="true"></i>
+            <span>Human computer interaction</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#job-match-header" class="btn btn-primary">
+            <i class="fa-solid fa-eye" aria-hidden="true"></i> Job Matching
+          </a>
+          <a href="#contact" class="btn btn-ghost">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Contact me
+          </a>
+        </div>
+
+        <div class="typewriter" aria-live="polite">
+          <span class="label">Experienced in</span>
+          <span class="word" id="typewriter-target">Human factors and UX</span><span class="cursor" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="results-strip hero-stats" aria-label="Quick stats">
+      <div class="result-tile">
+        <div class="result-number">15+</div>
+        <div class="result-label">Applied projects</div>
+      </div>
+      <div class="result-tile">
+        <div class="result-number">5</div>
+        <div class="result-label">Research papers</div>
+      </div>
+      <div class="result-tile">
+        <div class="result-number">3</div>
+        <div class="result-label">Years experience</div>
+      </div>
+    </div>
+
+<section id="job-matcher" aria-label="Job description matcher">
+  <!-- PAGE 2: JOB MATCH PAGE -->
+  <div class="page-view" id="job-match-page" aria-hidden="true">
+    <div class="container">
+      <!-- Job Match Header -->
+      <div id="job-match-header">
+        <div><p style="color: transparent;"> . </p>
+          <h2 style="color: var(--green-600);">Job Match Explorer</h2>
+          <p class="muted">Paste a job description to see how my portfolio aligns with the role.</p>
+        </div>
+<a
+        <button href = "index.html#:~:text=Portfolio%20and%20experience" id="job-back-button" class="btn btn-primary" >
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Portfolio
+        </button></a>
+      </div>
+      
+      <!-- Job Input Area -->
+      <textarea 
+        id="job-input"
+        placeholder="Paste a job description here from LinkedIn or any job board."
+        aria-label="Paste job description"
+      ></textarea>
+     
+      <div class="job-actions">
+  <button id="job-score-button" class="btn btn-primary btn-score-fit" type="button">
+    <i class="fas fa-chart-line" aria-hidden="true"></i>
+    <span>Score my fit</span>
+  </button>
+
+  <button id="filter-reset" class="btn btn-ghost btn-clear-score" type="button">
+    <i class="fas fa-rotate-right" aria-hidden="true"></i>
+    <span>Clear scores</span>
+  </button>
+</div>
+
+      
+      <!-- Match Summary -->
+      <div id="match-summary">
+        <p>Paste a job description above to see your match score and detailed analysis.</p>
+      </div>
+      
+      <!-- Chat Analysis -->
+      <div id="job-chat">
+        <div class="job-chat-message system">
+          <p><strong>Ready to analyze job descriptions.</strong> Paste one above to get started!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- Close site-shell -->
+</section>
+
+    <section id="skills" class="island" aria-label="Skills">
+      <div class="particles-container" id="particles-skills" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-title">
+          <h2>Skills and expertise</h2>
+          <p>Multidisciplinary strengths shaped by engineering, applied psychology, and design thinking.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> Cognitive science</h3>
+            <p>
+              Human information processing, attention and memory, decision making, perception and psychophysics, and mental models across cultures and ages.
+            </p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> UX research and design</h3>
+            <p>
+              Usability testing, heuristic evaluation, interviews, personas, journey maps, wireframes, and high fidelity prototypes.
+            </p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Data analysis</h3>
+            <p>
+              Statistical analysis, study design, R and Python, data visualization, and survey design with focus on validity and ethics.
+            </p>
+          </div>
+          <div class="skill-card">
+            <h3><i class="fa-solid fa-robot" aria-hidden="true"></i> AI and technology</h3>
+            <p>
+              Human AI interaction, alignment themes, ethical product thinking, scripting in Python, and applied work with AI tools in UX and research workflows.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="island" aria-label="About">
+      <div class="particles-container" id="particles-about" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-title">
+          <h2>About me</h2>
+
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:1.2rem">
+          <div class="info-card">
+            <p>
+              Hello and welcome! I'm Thema, a human factors and UX researcher who grew up online, asked a lot of questions, and never quite stopped.
+              My early years sat between gifted classes, orchestra, hosting neighborhood kickball games, and long nights on the internet where I saw both the playful side of digital life and the harms that come with unregulated systems.
+            </p>
+            <div class="tags">
+              <span class="tag">Human centered design</span
+              ><span class="tag">Cognitive engineering</span
+              ><span class="tag">AI safety</span
+              ><span class="tag">Digital wellbeing</span>
+            </div>
+          </div>
+          <div class="card" aria-hidden="true">
+            <div class="card-media" style="height:260px;font-size:4rem"><i class="fa-regular fa-user"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="section-title">
+          <h2>Mission and values</h2>
+          <p>Designing with curiosity, care, and clear limits for both humans and machines.</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:1.2rem">
+          <div class="info-card">
+            <h3>Background</h3>
+            
+            <p>
+              I first studied civil and architectural engineering through Project Lead The Way, then shifted into human factors and applied cognition at George Mason University when I realized my real question was how technology shapes people.
+              I watched social platforms gamify attention, saw friends change themselves to match filters, and learned how features like streaks and feeds can support or erode wellbeing.
+            </p>
+            <p>
+              Today I bring that lived experience into research driven design work across web, mobile, and conceptual ecosystems.
+              My focus sits at the intersection of internet culture, human computer interaction, and AI ethics, especially for young people who are the first to grow up entirely in the digital age.
+            </p>
+
+          </div>
+
+          <div class="info-card">
+            <h3>Purpose</h3>
+            <p>
+              I aim to build and critique systems so that the next generation can grow up with tools that support their attention, identity, and dignity instead of mining them.
+            </p>
+            <p>
+              This means pairing rigorous methods with empathy, clear ethics, and honest communication about what technology is doing behind the screen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="island" aria-label="Contact">
+      <div class="particles-container" id="particles-contact" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-title">
+          <h2>Get in touch</h2>
+          <p>Open to select volunteer projects and full time roles in human-computer interaction, UX research, and responsible AI.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="info-card" aria-label="Contact information">
+            <div class="c-item">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <div>
+                <h4>Email</h4>
+                <a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a>
+              </div>
+            </div>
+            <div class="c-item">
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <div>
+                <h4>Location</h4>
+                <p>Washington, DC<br>Willing to relocate</p>
+              </div>
+            </div>
+            <div class="c-item">
+              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+              <div>
+                <h4>Education</h4>
+                <p>George Mason University</p>
+              </div>
+            </div>
+          </div>
+
+          <form
+            id="contactForm"
+            class="info-card"
+            action="https://formsubmit.co/themagreen@gmail.com"
+            method="POST"
+            novalidate
+            aria-describedby="formHelp"
+          >
+            <input type="hidden" name="_subject" value="New message from themagreen.com" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input
+              type="text"
+              name="_honey"
+              style="display:none"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+
+            <p id="formHelp" class="muted" style="margin-top:0">All fields with a star are required.</p>
+
+            <div class="form-group">
+              <label for="name">Your name *</label>
+              <input id="name" name="name" type="text" class="input" required autocomplete="name" />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Your email *</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                class="input"
+                required
+                autocomplete="email"
+                inputmode="email"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text" class="input" />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Your message *</label>
+              <textarea id="message" name="message" class="input" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send message
+            </button>
+
+            <div id="submissionResults" class="results" role="status" aria-live="polite">
+              <h3 id="resultTitle" style="margin-top:0">Thank you, your message was sent.</h3>
+              <div><strong>Name:</strong> <span id="resultName"></span></div>
+              <div><strong>Email:</strong> <span id="resultEmail"></span></div>
+              <div><strong>Subject:</strong> <span id="resultSubject"></span></div>
+              <div><strong>Message:</strong> <span id="resultMessage"></span></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo" class="site-footer">
+    <div class="container">
+      <section aria-label="Call to action" class="footer-cta">
+        <h2 class="footer-cta__title">Thema Green</h2>
+        <p class="footer-cta__subtitle">
+          Human-Centered AI focused researcher and designer creating accessible, steady, and effective human system experiences.<br>
+          <strong>Built with performance, privacy, and accessibility in mind.</strong>
+        </p>
+        <div class="footer-cta__actions">
+          <a class="btn btn-primary" href="mailto:themagreen@gmail.com" aria-label="Start a conversation by email">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Start a conversation
+          </a>
+          <a
+            class="btn btn-ghost"
+            href="https://www.linkedin.com/in/themagreen/"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i> Connect on LinkedIn
+          </a>
+        </div>
+      </section>
+
+      <div class="f-grid" role="navigation" aria-label="Footer">
+        <section aria-label="About Thema Green" class="f-col">
+          <h3 class="f-h">About</h3>
+          <p>
+            Human centered research and design for high stakes systems. I focus on reducing human error and improving outcomes through evidence based UX and AI alignment.
+          </p>
+          <div class="social" style="display:flex;gap:.6rem;margin-top:.6rem">
+            <a href="https://www.linkedin.com/in/themagreen/" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/Themagreen" aria-label="GitHub">
+              <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://twitter.com/themagreen" aria-label="Twitter or X">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+          </div>
+        </section>
+
+        <section aria-label="Expertise" class="f-col">
+          <h3 class="f-h">Expertise</h3>
+          <ul class="f-links">
+            <li><a href="#portfolio-tabs">UX</a></li>
+            <li><a href="#portfolio-tabs">Human factors research</a></li>
+            <li><a href="#portfolio-tabs">Human AI interaction</a></li>
+            <li><a href="#portfolio-tabs">Accessibility and WCAG</a></li>
+            <li><a href="#portfolio-tabs">Design systems</a></li>
+          </ul>
+        </section>
+
+        <section aria-label="Contact information" class="f-col">
+          <h3 class="f-h">Contact</h3>
+          <address class="f-address">
+            <p>
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a>
+            </p>
+            <p>
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              Washington, DC remote friendly
+            </p>
+            <p>
+              <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
+              <a href="#contact">Accessibility feedback</a><br>
+              (Available for select consulting and full time roles)
+            </p>
+          </address>
+        </section>
+      </div>
+
+      <section class="f-meta" aria-label="Legal and metadata">
+        <p class="f-copy">
+          <span>&copy; <span id="year"></span> Thema Green.</span>
+          <span>All rights reserved.</span>
+        </p>
+        <nav aria-label="Legal">
+          <ul class="f-legal">
+            <li><a href="#" rel="nofollow">Privacy</a></li>
+            <li><a href="#" rel="nofollow">Terms</a></li>
+            <li><a href="#" rel="nofollow">Sitemap</a></li>
+          </ul>
+        </nav>
+        <p class="f-a11y">WCAG 2.2 AA intent and reduced motion friendly</p>
+      </section>
+    </div>
+  </footer>
+
+  <button id="toTopBtn" class="to-top" type="button" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+</body>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
+
+  <script>  // Floating testimonials functionality - FIXED VERSION
+    document.addEventListener('DOMContentLoaded', function() {
+      const testimonialsContainer = document.getElementById('testimonialsContainer');
+      const testimonialOverlay = document.getElementById('testimonialOverlay');
+      const testimonialTrigger = document.getElementById('testimonialTrigger');
+      const testimonialModal = document.getElementById('testimonialModal');
+      const testimonialClose = document.querySelector('.testimonial-close');
+      
+      let isZoomed = false;
+      let currentZoomedCard = null;
+      
+      // Set up click events for all testimonial cards
+      const testimonialCards = document.querySelectorAll('.testimonial-card');
+      
+      testimonialCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          if (isZoomed) return; // Prevent multiple zoom actions
+          
+          // Freeze all floating cards
+          freezeAllTestimonials();
+          
+          // Set current zoomed card
+          currentZoomedCard = card;
+          
+          // Add zoomed class to clicked card
+          card.classList.add('zoomed');
+          
+          // Show overlay
+          testimonialOverlay.classList.add('active');
+          
+          // Set flag
+          isZoomed = true;
+          
+          // Prevent event bubbling
+          e.stopPropagation();
+        });
+      });
+      
+      // Close zoomed card when clicking overlay or anywhere
+      testimonialOverlay.addEventListener('click', closeZoomedCard);
+      document.addEventListener('click', function(e) {
+        if (isZoomed && !e.target.closest('.testimonial-card.zoomed')) {
+          closeZoomedCard();
+        }
+      });
+      
+      // Also close with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isZoomed) {
+          closeZoomedCard();
+        }
+      });
+      
+      // Testimonial modal functionality
+      testimonialTrigger.addEventListener('click', function() {
+        testimonialModal.classList.add('active');
+      });
+      
+      testimonialClose.addEventListener('click', function() {
+        testimonialModal.classList.remove('active');
+      });
+      
+      testimonialModal.addEventListener('click', function(e) {
+        if (e.target === testimonialModal) {
+          testimonialModal.classList.remove('active');
+        }
+      });
+      
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && testimonialModal.classList.contains('active')) {
+          testimonialModal.classList.remove('active');
+        }
+      });
+
+      function freezeAllTestimonials() {
+        const floatingCards = document.querySelectorAll('.testimonial-card.floating');
+        floatingCards.forEach(card => {
+          card.style.animationPlayState = 'paused';
+        });
+      }
+      
+      function resumeAllTestimonials() {
+        const floatingCards = document.querySelectorAll('.testimonial-card.floating');
+        floatingCards.forEach(card => {
+          card.style.animationPlayState = 'running';
+        });
+      }
+      
+      function closeZoomedCard() {
+        if (!isZoomed || !currentZoomedCard) return;
+        
+        // Remove zoomed class
+        currentZoomedCard.classList.remove('zoomed');
+        
+        // Hide overlay
+        testimonialOverlay.classList.remove('active');
+        
+        // Resume floating animations
+        resumeAllTestimonials();
+        
+        // Reset flags
+        isZoomed = false;
+        currentZoomedCard = null;
+      }
+      
+      // Set random vertical positions for more natural floating
+      function randomizeFloatingPositions() {
+        const cards = document.querySelectorAll('.testimonial-card.floating');
+        
+        cards.forEach(card => {
+          // Generate random start and end positions if not already set
+          if (!card.style.getPropertyValue('--start-y')) {
+            const startY = Math.random() * 400; // 0-400px
+            const endY = startY + (Math.random() * 100 - 50); // +/- 50px from start
+            
+            // Apply CSS custom properties
+            card.style.setProperty('--start-y', `${startY}px`);
+            card.style.setProperty('--end-y', `${endY}px`);
+          }
+        });
+      }
+      
+      // Initialize random positions
+      randomizeFloatingPositions();
+    });    
+
+    /* ===== Progress bar ===== */
+    window.addEventListener("scroll", () => {
+      const st = document.documentElement.scrollTop || document.body.scrollTop;
+      const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const bar = document.getElementById("progressBar");
+      if (bar) bar.style.width = (h ? (st / h) * 100 : 0) + "%";
+    }, { passive: true });
+
+    /* ===== Back to top ===== */
+    (function(){
+      const btn = document.getElementById('toTopBtn');
+      if (!btn) return;
+      const showAt = 600;
+      const onScroll = () => {
+        const y = window.pageYOffset || document.documentElement.scrollTop;
+        btn.classList.toggle('visible', y > showAt);
+      };
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+      btn.addEventListener('click', () => {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) window.scrollTo(0,0);
+        else window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    })();
+
+    /* ===== Year ===== */
+    (function(){ try { document.getElementById('year').textContent = new Date().getFullYear(); } catch(e) {} })();
+
+    /* ===== Theme toggle ===== */
+    (function initTheme(){
+      const toggle = document.getElementById('themeToggle');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved = localStorage.getItem('theme');
+      const applyIcon = () => {
+        toggle.innerHTML = document.body.getAttribute('data-theme') === 'dark'
+          ? '<i class="fas fa-sun" aria-hidden="true"></i>'
+          : '<i class="fas fa-moon" aria-hidden="true"></i>';
+      };
+      if (saved) { if (saved === 'dark') document.body.setAttribute('data-theme','dark'); }
+      else if (prefersDark) { document.body.setAttribute('data-theme','dark'); }
+      applyIcon();
+      toggle.addEventListener('click', () => {
+        const dark = document.body.getAttribute('data-theme') === 'dark';
+        if (dark) { document.body.removeAttribute('data-theme'); localStorage.setItem('theme','light'); }
+        else { document.body.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); }
+        applyIcon();
+      });
+    })();
+    
+const roleSearchInput = document.getElementById('roleSearchInput');
+    // Role search functionality
+const searchBtn = document.getElementById('searchBtn');
+const filterBanner = document.getElementById('filterBanner');
+const filterBannerRole = document.getElementById('filterBannerRole');
+const viewFullBtn = document.getElementById('viewFullBtn');
+const dismissBannerBtn = document.getElementById('dismissBannerBtn');
+
+
+async function performSearch() {
+  const role = roleSearchInput.value.trim();
+  if (!role) return;
+
+  // Show banner and scroll to top
+  filterBanner.classList.add('active');
+  filterBannerRole.textContent = role;
+  
+const portfolioSection = document.getElementById('panel-projects');
+if (portfolioSection) {
+  portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+  // Show loading state
+  searchBtn.disabled = true;
+  searchBtn.innerHTML = '<span class="loading-spinner"></span>';
+
+  try {
+    // Prefer the advanced Fuse-based search when available
+    if (typeof advancedSearch === 'function' && typeof fuse !== 'undefined' && fuse) {
+      advancedSearch(role);
+    } else {
+      // Fallback: simple client-side text filter
+      const cards = document.querySelectorAll('#projectsGrid .card');
+      let count = 0;
+      const q = role.toLowerCase();
+      cards.forEach(card => {
+        const txt = card.textContent.toLowerCase();
+        const match = txt.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) count++;
+      });
+      filterBannerRole.textContent = `${role} (${count} relevant projects)`;
+    }
+
+    // Try optional backend fetch (non-fatal)
+    try {
+      const response = await fetch(`/api/portfolio/filter?role=${encodeURIComponent(role)}`);
+      if (response.ok) {
+        const filtered = await response.json();
+        if (filtered && Array.isArray(filtered.projects)) {
+          filterBannerRole.textContent = `${role} (${filtered.projects.length} relevant projects)`;
+          console.log('Filtered portfolio for:', role, filtered);
+        }
+      }
+    } catch (err) {
+      // Ignore backend errors; keep client-side results
+      console.debug('Backend portfolio fetch failed:', err);
+    }
+  } finally {
+    searchBtn.disabled = false;
+    searchBtn.innerHTML = '<i class="fas fa-arrow-right" aria-hidden="true"></i>';
+  }
+}
+
+searchBtn.addEventListener('click', () => {
+    const query = roleSearchInput.value.trim();
+    if (query) {
+        addToSearchHistory(query);
+    }
+    performSearch();
+});
+
+roleSearchInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') performSearch();
+});
+
+viewFullBtn.addEventListener('click', () => {
+  filterBanner.classList.remove('active');
+  roleSearchInput.value = '';
+});
+
+dismissBannerBtn.addEventListener('click', () => {
+  filterBanner.classList.remove('active');
+});
+
+    /* ===== Mobile nav with focus trap ===== */
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = navMenu.querySelectorAll('a, button');
+    let menuOpen = false;
+    let previousFocus = null;
+
+    function openMenu() {
+      navMenu.classList.add('active');
+      document.body.classList.add('no-scroll');
+      hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.innerHTML = '<i class="fas fa-xmark" aria-hidden="true"></i>';
+      menuOpen = true;
+      previousFocus = document.activeElement;
+      navLinks[0].focus();
+      document.addEventListener('keydown', handleEscape);
+    }
+    function closeMenu() {
+      navMenu.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+      menuOpen = false;
+      if (previousFocus) previousFocus.focus();
+      document.removeEventListener('keydown', handleEscape);
+    }
+    function handleEscape(e) { if (e.key === 'Escape' && menuOpen) closeMenu(); }
+    function handleTab(e) {
+      if (!menuOpen || e.key !== 'Tab') return;
+      const firstElement = navLinks[0];
+      const lastElement = navLinks[navLinks.length - 1];
+      if (e.shiftKey && document.activeElement === firstElement) { e.preventDefault(); lastElement.focus(); }
+      else if (!e.shiftKey && document.activeElement === lastElement) { e.preventDefault(); firstElement.focus(); }
+    }
+    hamburger.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
+    navLinks.forEach(link => link.addEventListener('click', () => { if (menuOpen) closeMenu(); }));
+    document.addEventListener('keydown', handleTab);
+
+    /* ===== Smooth in-page links + close menu ===== */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+          if (menuOpen) closeMenu();
+        }
+      });
+    });
+
+    /* ===== Scrollspy ===== */
+    const sectionIds = ['home','portfolio-tabs','skills','about','contact'];
+    const spyLinks = Array.from(document.querySelectorAll('.navlink'));
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const id = entry.target.id;
+        const link = spyLinks.find(a => a.getAttribute('href') === `#${id}`);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          spyLinks.forEach(l=>l.removeAttribute('aria-current'));
+          link.setAttribute('aria-current','page');
+        }
+      });
+    }, { rootMargin:"-45% 0px -50% 0px", threshold:0 });
+    sectionIds.forEach(id=>{ const s = document.getElementById(id); if (s) observer.observe(s); });
+
+    /* ===== Typewriter ===== */
+    class Typewriter{
+      constructor(el, words, wait=2600){ this.el=el; this.words=words; this.wait=+wait; this.txt=''; this.i=0; this.del=false; this.type(); }
+      type(){
+        const w=this.words[this.i % this.words.length];
+        this.txt = this.del ? w.substring(0,this.txt.length-1) : w.substring(0,this.txt.length+1);
+        this.el.textContent=this.txt;
+        let speed = this.del ? 70 : 140;
+        if (!this.del && this.txt===w){ speed=this.wait; this.del=true; }
+        else if (this.del && this.txt===''){ this.del=false; this.i++; speed=420; }
+        setTimeout(()=>this.type(),speed);
+      }
+    }
+    const typewriterTarget = document.getElementById('typewriter-target');
+    const typewriterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          new Typewriter(typewriterTarget, [
+            'Human Factors','User Experience','Cognitive Psychology','UX Design','Frontend Development','AI Integration','Accessibility','Inclusive Design'
+          ], 2000);
+          typewriterObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    typewriterObserver.observe(typewriterTarget);
+
+    /* ===== Particles ===== */
+    const particlesConfig = {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#1a6546" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#d4af37", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out", bounce: false }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
+        modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+      },
+      retina_detect: true
+    };
+    const sectionParticlesConfig = {
+      particles: {
+        number: { value: 20, density: { enable: true, value_area: 1000 } },
+        color: { value: "#1a6546" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2, random: true },
+        size: { value: 2, random: true },
+        line_linked: { enable: true, distance: 150, color: "#d4af37", opacity: 0.15, width: 0.8 },
+        move: { enable: true, speed: 0.5, random: true, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: { onhover: { enable: true, mode: "grab", parallax: { enable: true, force: 300, smooth: 10 } }, onclick: { enable: false }, resize: true },
+        modes: { grab: { distance: 300, line_linked: { opacity: 0.3 } } }
+      },
+      retina_detect: true
+    };
+    const particlesElements = [
+      { id: 'particles-js', config: particlesConfig },
+      { id: 'particles-portfolio', config: sectionParticlesConfig },
+      { id: 'particles-skills', config: sectionParticlesConfig },
+      { id: 'particles-about', config: sectionParticlesConfig },
+      { id: 'particles-contact', config: sectionParticlesConfig }
+    ];
+    const initializeParticles = (elementId, config) => {
+      const reducedData = window.matchMedia('(prefers-reduced-data: reduce)').matches;
+      if (!reducedData && window.particlesJS) { window.particlesJS(elementId, config); return true; }
+      return false;
+    };
+    particlesElements.forEach(p => {
+      const el = document.getElementById(p.id);
+      if (!el) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !p.initialized) p.initialized = initializeParticles(p.id, p.config);
+        });
+      }, { threshold: 0.1 });
+      obs.observe(el);
+    });
+
+/* ===== Tabs ===== */
+const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
+const tabPanels = {
+  projects: document.getElementById('panel-projects'),
+  education: document.getElementById('panel-education'),
+  additional: document.getElementById('panel-additional')
+};
+
+function activateTab(id) {
+  // Update buttons
+  tabBtns.forEach(btn => {
+    const isSelected = btn.dataset.tab === id;
+    btn.setAttribute('aria-selected', isSelected);
+    btn.classList.toggle('active', isSelected);
+  });
+  
+  // Update panels
+  Object.entries(tabPanels).forEach(([key, panel]) => {
+    if (panel) {
+      const isActive = key === id;
+      panel.classList.toggle('active', isActive);
+      panel.style.display = isActive ? 'block' : 'none';
+    }
+  });
+}
+
+// Initialize tabs
+tabBtns.forEach((btn, index) => {
+  const tabId = btn.id.replace('tab-', '');
+  btn.dataset.tab = tabId;
+  
+  btn.addEventListener('click', () => activateTab(tabId));
+  
+  btn.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const direction = e.key === 'ArrowRight' ? 1 : -1;
+      const nextIndex = (index + direction + tabBtns.length) % tabBtns.length;
+      const nextTab = tabBtns[nextIndex];
+      nextTab.focus();
+      activateTab(nextTab.dataset.tab);
+    }
+  });
+});
+
+// Set initial active tab
+activateTab('projects');
+
+/* ===== Education accordion ===== */
+(() => {
+  const eduPanel = document.getElementById('panel-education');
+  if (!eduPanel) return;
+  const cards = eduPanel.querySelectorAll('.t-card');
+
+  function toggleCard(card, { exclusive = true } = {}) {
+    const expanded = card.getAttribute('aria-expanded') === 'true';
+    if (exclusive) {
+      cards.forEach(c => {
+        if (c !== card) {
+          c.classList.remove('active');
+          c.setAttribute('aria-expanded', 'false');
+          const details = c.querySelector('.c-details');
+          if (details) details.classList.remove('active');
+          const list = c.querySelector('.c-list');
+          if (list) list.style.maxHeight = '';
+        }
+      });
+    }
+    card.classList.toggle('active', !expanded);
+    card.setAttribute('aria-expanded', String(!expanded));
+
+    const details = card.querySelector('.c-details');
+    if (details) details.classList.toggle('active', !expanded);
+
+    const list = card.querySelector('.c-list');
+    if (list) {
+      if (!expanded) {
+        list.style.maxHeight = list.scrollHeight + 'px';
+        list.addEventListener('transitionend', function once() {
+          list.style.maxHeight = '';
+          list.removeEventListener('transitionend', once);
+        });
+      } else {
+        list.style.maxHeight = list.scrollHeight + 'px';
+        requestAnimationFrame(() => { list.style.maxHeight = '0px'; });
+      }
+    }
+  }
+
+  cards.forEach(card => {
+    if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
+    if (!card.hasAttribute('aria-expanded')) card.setAttribute('aria-expanded', 'false');
+
+    card.addEventListener('click', e => { if (!e.target.closest('a')) toggleCard(card); });
+    card.addEventListener('keydown', e => {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleCard(card); }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const next = e.key === 'ArrowDown'
+          ? card.parentElement.nextElementSibling?.querySelector('.t-card')
+          : card.parentElement.previousElementSibling?.querySelector('.t-card');
+        if (next) next.focus();
+      }
+    });
+  });
+})();
+
+  </script> 
+
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+<script>
+// ===== ADVANCED SEARCH WITH MULTIPLE FEATURES =====
+
+let fuse = null;
+let projectsData = [];
+let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+
+// 1. Initialize with enhanced data extraction
+function initAdvancedSearch() {
+  const cards = document.querySelectorAll('#projectsGrid .card');
+  
+  projectsData = Array.from(cards).map((card, index) => {
+    const titleEl = card.querySelector('h3');
+    const summaryEl = card.querySelector('p.muted');
+    const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent.trim());
+    const metaChips = Array.from(card.querySelectorAll('.meta-chip')).map(c => c.textContent.trim());
+    const category = card.getAttribute('data-category') || '';
+    const date = card.getAttribute('data-date') || '';
+    
+    return {
+      index,
+      element: card,
+      title: titleEl?.textContent.trim() || '',
+      summary: summaryEl?.textContent.trim() || '',
+      tags,
+      metaChips,
+      category,
+      date,
+      allText: [
+        titleEl?.textContent || '',
+        summaryEl?.textContent || '',
+        ...tags,
+        ...metaChips
+      ].join(' ')
+    };
+  });
+  
+  // Advanced Fuse.js configuration with weighted fields
+  fuse = new Fuse(projectsData, {
+    keys: [
+      { name: 'title', weight: 0.4 },
+      { name: 'summary', weight: 0.25 },
+      { name: 'tags', weight: 0.2 },
+      { name: 'metaChips', weight: 0.1 },
+      { name: 'allText', weight: 0.05 }
+    ],
+    includeScore: true,
+    includeMatches: true,
+    threshold: 0.4,
+    ignoreLocation: true,
+    minMatchCharLength: 2,
+    useExtendedSearch: true
+  });
+  
+  console.log('✓ Advanced search initialized with', projectsData.length, 'projects');
+}
+
+// 2. Advanced search with highlighting and badges// 2. Advanced search with highlighting and badges
+function advancedSearch(query) {
+    const cards = document.querySelectorAll('#projectsGrid .card');
+    const resultCount = document.getElementById('searchResultCount');
+    
+    // Remove old badges and highlights
+    document.querySelectorAll('.rank-badge').forEach(b => b.remove());
+    document.querySelectorAll('.search-highlight').forEach(el => el.outerHTML = el.textContent);
+    
+    // CHECK WHICH TAB IS ACTIVE
+    const activeTab = document.querySelector('.tab-btn[aria-selected="true"]');
+    const currentTab = activeTab ? activeTab.dataset.tab : 'projects';
+    
+    // If not on Projects tab, don't search (or show message)
+    if (currentTab !== 'projects' && query && query.trim()) {
+        if (resultCount) {
+            resultCount.textContent = 'Search only works on Projects tab';
+            resultCount.style.cssText = 'color: var(--text-muted); font-weight: 600; font-size: 0.9rem; margin-top: 8px; text-align: center;';
+        }
+        return;
+    }
+    
+    // Empty query - show all
+    if (!query || !query.trim()) {
+        cards.forEach(c => c.style.display = '');
+        if (resultCount) resultCount.textContent = '';
+        return;
+    }
+    
+    // Perform fuzzy search (existing code continues...)
+    const results = fuse.search(query);
+    const matched = new Set(results.map(r => r.item.index));
+    
+    // Show/hide cards
+    cards.forEach((card, i) => {
+        card.style.display = matched.has(i) ? '' : 'none';
+    });
+    
+    // Add rank badges to top 3 results
+    results.slice(0, 3).forEach((result, rank) => {
+        const badge = document.createElement('span');
+        badge.className = 'rank-badge';
+        badge.textContent = `#${rank + 1}`;
+        badge.style.cssText = 'position: absolute; top: 12px; right: 12px; background: var(--gold-500); color: #1b1408; padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.15);';
+        
+        const cardLink = result.item.element.querySelector('.card-link') || result.item.element;
+        if (cardLink.style.position !== 'absolute') {
+            cardLink.style.position = 'relative';
+        }
+        cardLink.appendChild(badge);
+    });
+    
+    // Update result count
+    if (resultCount) {
+        resultCount.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
+        resultCount.style.cssText = 'color: var(--green-600); font-weight: 600; font-size: 0.9rem; margin-top: 8px; text-align: center;';
+    }
+    
+    console.log(`Found ${results.length} results for "${query}"`);
+}
+
+// 3. Search suggestions as you type
+function showSearchSuggestions(query) {
+  if (!query || query.length < 2) {
+    hideSearchSuggestions();
+    return;
+  }
+  
+  const results = fuse.search(query).slice(0, 5);
+  const suggestionsDiv = document.getElementById('searchSuggestions');
+  
+  if (!suggestionsDiv || results.length === 0) {
+    hideSearchSuggestions();
+    return;
+  }
+  
+  const suggestions = results.map(r => r.item.title);
+  suggestionsDiv.innerHTML = suggestions.map(title => 
+    `<div class="suggestion-item" style="
+      padding: 8px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--surface-2);
+      transition: background 0.2s;
+    " onmouseover="this.style.background='var(--surface-2)'" 
+       onmouseout="this.style.background='transparent'"
+       onclick="selectSuggestion('${title.replace(/'/g, "\\'")}')">
+      ${title}
+    </div>`
+  ).join('');
+  
+  suggestionsDiv.style.display = 'block';
+}
+
+function hideSearchSuggestions() {
+  const suggestionsDiv = document.getElementById('searchSuggestions');
+  if (suggestionsDiv) suggestionsDiv.style.display = 'none';
+}
+
+function selectSuggestion(title) {
+  const input = document.querySelector('input[aria-label="Find experience for any role"]');
+  if (input) {
+    input.value = title;
+    advancedSearch(title);
+    hideSearchSuggestions();
+  }
+}
+
+// 4. Search history management
+function addToSearchHistory(query) {
+    if (!query || query.trim() === '') return;
+    
+    query = query.trim();
+    
+    // Remove if already exists (case-insensitive to prevent duplicates)
+    searchHistory = searchHistory.filter(q => q.toLowerCase() !== query.toLowerCase());
+    
+    // Add to beginning
+    searchHistory.unshift(query);
+    
+    // Keep max 10 in storage (but only show 3)
+    searchHistory = searchHistory.slice(0, 10);
+    
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+}
+
+function showSearchHistory() {
+    if (searchHistory.length === 0) return;
+    
+    const suggestionsDiv = document.getElementById('searchSuggestions');
+    if (!suggestionsDiv) return;
+    
+    // LIMIT TO 3 ITEMS MAX
+    const historyToShow = searchHistory.slice(0, 3);
+    
+    suggestionsDiv.innerHTML = `
+        <div style="padding: 8px 12px; font-weight: 600; color: var(--text-muted); font-size: 0.85rem; border-bottom: 1px solid var(--surface-2);">
+            Recent Searches
+        </div>
+        ${historyToShow.map(query => `
+            <div class="suggestion-item" style="padding: 8px 12px; cursor: pointer; border-bottom: 1px solid var(--surface-2); transition: background 0.2s;"
+                onmouseover="this.style.background='var(--surface-2)'"
+                onmouseout="this.style.background='transparent'"
+                onclick="selectSuggestion('${query.replace(/'/g, "\\'")}')">
+                <i class="fas fa-history" style="margin-right: 8px; opacity: 0.5;"></i>${query}
+            </div>
+        `).join('')}
+    `;
+    suggestionsDiv.style.display = 'block';
+}
+
+// 5. Keyboard shortcuts (Ctrl+K to focus search)
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    const input = document.querySelector('input[aria-label="Find experience for any role"]');
+    if (input) {
+      input.focus();
+      input.select();
+    }
+  }
+  
+  // ESC to clear search
+  if (e.key === 'Escape') {
+    const input = document.querySelector('input[aria-label="Find experience for any role"]');
+    if (input && input.value) {
+      input.value = '';
+      advancedSearch('');
+      hideSearchSuggestions();
+    }
+  }
+});
+
+// 6. Setup advanced search UI
+function setupAdvancedSearchUI() {
+  const searchInput = document.querySelector('input[aria-label="Find experience for any role"]');
+  if (!searchInput) return;
+  
+  // Add result count display
+  const searchWrapper = searchInput.closest('.role-search-wrapper');
+  if (searchWrapper && !document.getElementById('searchResultCount')) {
+    const resultCount = document.createElement('div');
+    resultCount.id = 'searchResultCount';
+    searchWrapper.parentNode.insertBefore(resultCount, searchWrapper.nextSibling);
+  }
+  
+  // Add suggestions dropdown
+  if (!document.getElementById('searchSuggestions')) {
+    const suggestionsDiv = document.createElement('div');
+    suggestionsDiv.id = 'searchSuggestions';
+    
+suggestionsDiv.style.cssText = `
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface-0);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-strong);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+    `;
+    
+    const wrapper = searchInput.closest('.role-search-wrapper');
+    if (wrapper) {
+      wrapper.style.position = 'relative';
+      wrapper.appendChild(suggestionsDiv);
+    }
+  }
+  
+  // Add clear button
+  const clearBtn = document.createElement('button');
+  clearBtn.innerHTML = '<i class="fas fa-times"></i>';
+  clearBtn.style.cssText = `
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 8px;
+    display: none;
+    z-index: 10;
+  `;
+  clearBtn.onclick = () => {
+    searchInput.value = '';
+    advancedSearch('');
+    hideSearchSuggestions();
+    clearBtn.style.display = 'none';
+  };
+  
+  const inputWrapper = searchInput.parentElement;
+  if (inputWrapper && !inputWrapper.querySelector('.fas.fa-times')) {
+    inputWrapper.appendChild(clearBtn);
+  }
+  
+  // Event listeners
+searchInput.addEventListener('input', (e) => {
+    const query = e.target.value;
+    advancedSearch(query);
+    showSearchSuggestions(query);
+    // Show/hide clear button
+    clearBtn.style.display = query ? 'block' : 'none';
+    // DON'T save to history here - only on Enter/button click
+});
+
+// Add Enter key handler to save search
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        if (query) {
+            addToSearchHistory(query);
+            advancedSearch(query);
+            hideSearchSuggestions();
+        }
+    }
+});
+  
+  searchInput.addEventListener('focus', () => {
+    if (!searchInput.value) {
+      showSearchHistory();
+    }
+  });
+  
+  // Click outside to hide suggestions
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !document.getElementById('searchSuggestions')?.contains(e.target)) {
+      hideSearchSuggestions();
+    }
+  });
+  
+  console.log('✓ Advanced search UI initialized');
+}
+
+// 7. Initialize everything
+function initAll() {
+  initAdvancedSearch();
+  setupAdvancedSearchUI();
+  initProjectFilters(); 
+  
+  // Show keyboard shortcut hint
+  const searchInput = document.querySelector('input[aria-label="Find experience for any role"]');
+  if (searchInput) {
+    searchInput.placeholder = searchInput.placeholder + ' (Ctrl+K)';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initAll);
+
+if (document.readyState !== 'loading') {
+  initAll();
+}
+
+// Make selectSuggestion globally accessible
+window.selectSuggestion = selectSuggestion;
+</script> <!-- FLOATING TESTIMONIALS - ENHANCED VERSION -->
+<script>
+(function() {
+  console.log("Floating testimonials script loading...");
+  
+  // Initialize variables
+  const TESTIMONIALS = [
+
+    {
+      name: "Keyshawn Kindall",
+      role: "Designer",
+      relationship: "Friend/Colleague",
+      timeframe: "12/06/2025",
+      text: "She's definitely a generational talent. Especially in today&#039;s world.",
+      link: "www.linkedin.com/in/keyshawnkindall"
+    },
+
+
+    
+  ];
+  
+  const PASTEL_COLORS = ['#FFE9F0', '#FFE0D4', '#FFF9D9', '#E0FCED', '#D9F2E8', '#D9EBF7', '#E9D9F7', '#E6F3FF', '#F0E6FF', '#FFF0E6'];
+  const TOTAL_CARDS = 30;
+  const MAX_ON_SCREEN = 8;
+  const UNIFORM_SPEED = 0.75;
+  const MIN_DISTANCE = 60;
+  
+  let container = null;
+  let cards = [];
+  let animationId = null;
+  let containerWidth = 0;
+  let containerHeight = 0;
+  let isAnimating = false;
+  
+  // Dragging and selection variables
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let dragCard = null;
+  let dragOffsetX = 0;
+  let dragOffsetY = 0;
+  let originalZIndex = 0;
+  
+  // Selection variables
+  let selectedCard = null;
+  let isSelectMode = false;
+  let originalBackgroundSpeed = UNIFORM_SPEED;
+  
+  // New variable to track if we're transitioning back
+  let isTransitioningBack = false;
+  
+  function checkOverlap(card1, card2) {
+    return (
+      card1.x < card2.x + card2.width + MIN_DISTANCE &&
+      card1.x + card1.width + MIN_DISTANCE > card2.x &&
+      card1.y < card2.y + card1.height + MIN_DISTANCE &&
+      card1.y + card1.height + MIN_DISTANCE > card2.y
+    );
+  }
+  
+  function getCardSize(index) {
+    const baseSize = 140; // Reduced base size for more room
+    
+    // More varied sizing with 5 different size tiers
+    const sizePattern = [
+      1.5,  // 150% - extra large
+      1.35, // 135% - large
+      1.2,  // 120% - medium-large
+      1.1,  // 110% - medium
+      1.0,  // 100% - normal
+      0.9,  // 90% - small
+      0.8,  // 80% - extra small
+      1.25, // 125% - large-medium
+      1.15, // 115% - medium-small
+      1.05  // 105% - small-medium
+    ];
+    
+    // Cycle through size patterns for more variation
+    const sizeMultiplier = sizePattern[index % sizePattern.length];
+    
+    // Add some random variation
+    const randomVariation = 0.9 + (Math.random() * 0.2); // 0.9 to 1.1
+    
+    return baseSize * sizeMultiplier * randomVariation;
+  }
+  
+  function truncateText(text, maxLength = 120) {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  }
+  
+  function createCardElement(width, testimonial, color, isSelected = false) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.cardId = Date.now() + Math.random();
+    
+    // Use same styling for both selected and unselected
+    const isBigCard = width > 200;
+    const fontSize = isBigCard ? '0.95rem' : '0.85rem';
+    const nameFontSize = isBigCard ? '1.1rem' : '0.95rem';
+    
+    // Truncate text only for unselected cards
+    const displayText = isSelected ? testimonial.text : truncateText(testimonial.text, isBigCard ? 120 : 80);
+    
+    card.innerHTML = `
+      <div style="display: flex; align-items: center; margin-bottom: 12px;">
+        <div style="width: 12px; height: 12px; background: #d1d5db; border-radius: 50%; margin-right: 10px; flex-shrink: 0;"></div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-weight: 700; color: #111827; font-size: ${nameFontSize}; line-height: 1.2; margin-bottom: 2px;">${testimonial.name}</div>
+          <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+            <span style="color: #6b7280; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${testimonial.role}</span>
+            <span style="background: #dcfce7; color: #16a34a; border-radius: 999px; padding: 2px 6px; font-size: 0.7rem; font-weight: 600; flex-shrink: 0; white-space: nowrap;">✓ Verified</span>
+          </div>
+        </div>
+      </div>
+      <div style="color: #4b5563; font-size: ${fontSize}; line-height: 1.5; margin-bottom: 12px; flex: 1; overflow: hidden;">${displayText}</div>
+      <div style="display: flex; gap: 3px; color: #facc15; font-size: ${isBigCard ? '1.1rem' : '0.95rem'}; margin-top: auto;">${'★'.repeat(5)}</div>
+    `;
+    
+    return card;
+  }
+  
+  function updateCardAppearance(cardElement, cardData, isSelected = false) {
+    const isBigCard = cardData.width > 200;
+    const fontSize = isBigCard ? '0.95rem' : '0.85rem';
+    const nameFontSize = isBigCard ? '1.1rem' : '0.95rem';
+    
+    // Truncate text only for unselected cards
+    const displayText = isSelected ? cardData.testimonial.text : truncateText(cardData.testimonial.text, isBigCard ? 120 : 80);
+    
+    cardElement.innerHTML = `
+      <div style="display: flex; align-items: center; margin-bottom: 12px;">
+        <div style="width: 12px; height: 12px; background: #d1d5db; border-radius: 50%; margin-right: 10px; flex-shrink: 0;"></div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-weight: 700; color: #111827; font-size: ${nameFontSize}; line-height: 1.2; margin-bottom: 2px;">${cardData.testimonial.name}</div>
+          <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+            <span style="color: #6b7280; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${cardData.testimonial.role}</span>
+            <span style="background: #dcfce7; color: #16a34a; border-radius: 999px; padding: 2px 6px; font-size: 0.7rem; font-weight: 600; flex-shrink: 0; white-space: nowrap;">✓ Verified</span>
+          </div>
+        </div>
+      </div>
+      <div style="color: #4b5563; font-size: ${fontSize}; line-height: 1.5; margin-bottom: 12px; flex: 1; overflow: hidden;">${displayText}</div>
+      <div style="display: flex; gap: 3px; color: #facc15; font-size: ${isBigCard ? '1.1rem' : '0.95rem'}; margin-top: auto;">${'★'.repeat(5)}</div>
+    `;
+    
+    // Make cards more square (1:1 aspect ratio)
+    const unselectedHeight = cardData.width * 1.1; // Slightly taller than wide for better text display
+    const selectedMultiplier = 1.8; // How much larger selected cards are
+    
+    // Calculate selected size that fits within container
+    const maxSelectedWidth = containerWidth * 0.8; // 80% of container width max
+    const maxSelectedHeight = containerHeight * 0.8; // 80% of container height max
+    
+    let selectedWidth = Math.min(cardData.width * selectedMultiplier, maxSelectedWidth);
+    let selectedHeight = selectedWidth * 1.2; // 1.2:1 ratio for selected card
+    
+    // Ensure it fits vertically too
+    if (selectedHeight > maxSelectedHeight) {
+      selectedHeight = maxSelectedHeight;
+      selectedWidth = selectedHeight / 1.2;
+    }
+    
+    if (isSelected) {
+      cardElement.style.cssText = `
+        position: absolute;
+        width: ${selectedWidth}px;
+        height: ${selectedHeight}px;
+        padding: ${cardData.width * 0.06}px;
+        background: ${cardData.color};
+        border-radius: ${cardData.width * 0.04}px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        border: 2px solid rgba(0,0,0,0.1);
+        transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: transform, width, height;
+        cursor: default;
+        user-select: none;
+        z-index: 10000;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) !important;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      `;
+      
+      // Store selected dimensions
+      cardData.selectedWidth = selectedWidth;
+      cardData.selectedHeight = selectedHeight;
+    } else {
+      cardElement.style.cssText = `
+        position: absolute;
+        width: ${cardData.width}px;
+        height: ${unselectedHeight}px;
+        padding: ${cardData.width * 0.04}px;
+        background: ${cardData.color};
+        border-radius: ${cardData.width * 0.03}px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.06);
+        transition: all 0.3s ease;
+        will-change: transform;
+        cursor: grab;
+        user-select: none;
+        touch-action: none;
+        z-index: ${cardData.isDragging ? '9999' : 'auto'};
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      `;
+      
+      // Update stored height
+      cardData.height = unselectedHeight;
+    }
+  }
+  
+  function setupCardInteractions(cardElement, cardData) {
+    let isClick = false;
+    let dragStartTime = 0;
+    
+    // Mouse events for drag detection
+    cardElement.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      dragStartTime = Date.now();
+      isClick = true;
+      
+      // Start drag after a short delay to differentiate from click
+      const dragTimeout = setTimeout(() => {
+        if (isClick) {
+          startDrag(e, cardElement, cardData);
+        }
+      }, 150);
+      
+      // Clear timeout on mouseup
+      const cleanup = () => {
+        clearTimeout(dragTimeout);
+        document.removeEventListener('mouseup', cleanup);
+      };
+      document.addEventListener('mouseup', cleanup);
+    });
+    
+    // Touch events for mobile
+    cardElement.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      e.preventDefault();
+      
+      dragStartTime = Date.now();
+      isClick = true;
+      
+      const dragTimeout = setTimeout(() => {
+        if (isClick) {
+          startDragTouch(e, cardElement, cardData);
+        }
+      }, 150);
+      
+      const cleanup = () => {
+        clearTimeout(dragTimeout);
+        document.removeEventListener('touchend', cleanup);
+      };
+      document.addEventListener('touchend', cleanup);
+    });
+    
+    // Click handler
+    cardElement.addEventListener('click', (e) => {
+      const clickDuration = Date.now() - dragStartTime;
+      
+      // Only treat as click if it was quick (not a drag) and we're not currently dragging
+      if (clickDuration < 200 && isClick && !isDragging && !isSelectMode && !isTransitioningBack) {
+        e.preventDefault();
+        e.stopPropagation();
+        selectCard(cardData);
+      }
+    });
+    
+    // Prevent text selection during drag
+    cardElement.addEventListener('selectstart', (e) => {
+      if (isDragging) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  }
+  
+  function startDrag(e, cardElement, cardData) {
+    // If we're in select mode or transitioning back, don't allow dragging
+    if (isSelectMode || isTransitioningBack) return;
+    
+    isDragging = true;
+    isClick = false;
+    dragCard = cardData;
+    cardData.isDragging = true;
+    
+    originalZIndex = cardElement.style.zIndex || '0';
+    cardElement.style.zIndex = '9999';
+    cardElement.style.cursor = 'grabbing';
+    cardElement.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+    
+    const rect = cardElement.getBoundingClientRect();
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    dragOffsetX = e.clientX - rect.left;
+    dragOffsetY = e.clientY - rect.top;
+    
+    // Add global listeners
+    document.addEventListener('mousemove', handleDrag);
+    document.addEventListener('mouseup', stopDrag);
+  }
+  
+  function startDragTouch(e, cardElement, cardData) {
+    // If we're in select mode or transitioning back, don't allow dragging
+    if (isSelectMode || isTransitioningBack) return;
+    
+    if (e.touches.length !== 1) return;
+    e.preventDefault();
+    
+    isDragging = true;
+    isClick = false;
+    dragCard = cardData;
+    cardData.isDragging = true;
+    
+    originalZIndex = cardElement.style.zIndex || '0';
+    cardElement.style.zIndex = '9999';
+    cardElement.style.cursor = 'grabbing';
+    cardElement.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+    
+    const touch = e.touches[0];
+    const rect = cardElement.getBoundingClientRect();
+    dragStartX = touch.clientX;
+    dragStartY = touch.clientY;
+    dragOffsetX = touch.clientX - rect.left;
+    dragOffsetY = touch.clientY - rect.top;
+    
+    // Add global listeners
+    document.addEventListener('touchmove', handleDragTouch);
+    document.addEventListener('touchend', stopDrag);
+  }
+  
+  function handleDrag(e) {
+    if (!isDragging || !dragCard) return;
+    
+    const deltaX = e.clientX - dragStartX;
+    const deltaY = e.clientY - dragStartY;
+    
+    // Update card position
+    dragCard.x += deltaX;
+    dragCard.y += deltaY;
+    
+    // Calculate boundaries relative to container
+    const minX = 0;
+    const maxX = containerWidth - dragCard.width;
+    const minY = 0;
+    const maxY = containerHeight - dragCard.height;
+    
+    dragCard.x = Math.max(minX, Math.min(maxX, dragCard.x));
+    dragCard.y = Math.max(minY, Math.min(maxY, dragCard.y));
+    
+    // Update display
+    dragCard.element.style.transform = `translate(${dragCard.x}px, ${dragCard.y}px)`;
+    
+    // Update start position for next move
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+  }
+  
+  function handleDragTouch(e) {
+    if (!isDragging || !dragCard || e.touches.length !== 1) return;
+    e.preventDefault();
+    
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - dragStartX;
+    const deltaY = touch.clientY - dragStartY;
+    
+    // Update card position
+    dragCard.x += deltaX;
+    dragCard.y += deltaY;
+    
+    // Keep card within entire container area
+    const minX = 0;
+    const maxX = containerWidth - dragCard.width;
+    const minY = 0;
+    const maxY = containerHeight - dragCard.height;
+    
+    dragCard.x = Math.max(minX, Math.min(maxX, dragCard.x));
+    dragCard.y = Math.max(minY, Math.min(maxY, dragCard.y));
+    
+    // Update display
+    dragCard.element.style.transform = `translate(${dragCard.x}px, ${dragCard.y}px)`;
+    
+    // Update start position for next move
+    dragStartX = touch.clientX;
+    dragStartY = touch.clientY;
+  }
+  
+  function stopDrag() {
+    if (!isDragging) return;
+    
+    isDragging = false;
+    if (dragCard) {
+      dragCard.isDragging = false;
+      dragCard.element.style.cursor = 'grab';
+      dragCard.element.style.boxShadow = '0 1px 2px rgba(0,0,0,0.05)';
+      dragCard.element.style.zIndex = originalZIndex;
+      dragCard = null;
+    }
+    
+    // Remove global listeners
+    document.removeEventListener('mousemove', handleDrag);
+    document.removeEventListener('mouseup', stopDrag);
+    document.removeEventListener('touchmove', handleDragTouch);
+    document.removeEventListener('touchend', stopDrag);
+  }
+  
+  function selectCard(cardData) {
+    if (isSelectMode || isTransitioningBack) return;
+    
+    isSelectMode = true;
+    selectedCard = cardData;
+    
+    // Store original position and size
+    cardData.originalX = cardData.x;
+    cardData.originalY = cardData.y;
+    cardData.originalWidth = cardData.width;
+    cardData.originalHeight = cardData.height;
+    
+    // Update card to selected state
+    updateCardAppearance(cardData.element, cardData, true);
+    
+    // Create and add overlay for blur effect
+    let overlay = document.getElementById('testimonials-blur-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'testimonials-blur-overlay';
+      overlay.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(4px);
+        background: rgba(255, 255, 255, 0.7);
+        z-index: 9998;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+      `;
+      container.appendChild(overlay);
+      
+      // Fade in overlay
+      setTimeout(() => {
+        overlay.style.opacity = '1';
+      }, 10);
+      
+      // Click handler for overlay
+      overlay.addEventListener('click', handleOverlayClick);
+    }
+    
+    // Slow down other cards by over 50%
+    cards.forEach(card => {
+      if (card !== cardData) {
+        card.originalSpeed = card.speed;
+        card.speed = card.speed * 0.4; // 60% slower (over 50%)
+      }
+    });
+    
+    console.log("Card selected:", cardData.testimonial.name);
+  }
+  
+  function handleOverlayClick(e) {
+    if (selectedCard && !isTransitioningBack) {
+      deselectCard();
+    }
+  }
+  
+  function deselectCard() {
+    if (!isSelectMode || !selectedCard || isTransitioningBack) return;
+    
+    isTransitioningBack = true;
+    
+    // Remove overlay
+    const overlay = document.getElementById('testimonials-blur-overlay');
+    if (overlay) {
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        if (overlay && overlay.parentNode) {
+          overlay.parentNode.removeChild(overlay);
+        }
+      }, 300);
+    }
+    
+    // Restore card to original state immediately
+    updateCardAppearance(selectedCard.element, selectedCard, false);
+    
+    // Set up the transition back to original position
+    selectedCard.element.style.transition = 'all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    selectedCard.element.style.transform = `translate(${selectedCard.originalX}px, ${selectedCard.originalY}px)`;
+    
+    // Restore original speeds for all cards
+    cards.forEach(card => {
+      if (card.originalSpeed !== undefined) {
+        card.speed = card.originalSpeed;
+        delete card.originalSpeed;
+      }
+    });
+    
+    // Clean up after transition
+    selectedCard.element.addEventListener('transitionend', function onTransitionEnd() {
+      selectedCard.element.removeEventListener('transitionend', onTransitionEnd);
+      selectedCard.element.style.transition = 'all 0.3s ease';
+      
+      isSelectMode = false;
+      selectedCard = null;
+      isTransitioningBack = false;
+      
+      console.log("Card deselected and returned to position");
+    }, { once: true });
+  }
+  
+  function findBestYPosition(cardWidth, cardHeight, targetX) {
+    let bestY = Math.random() * (containerHeight - cardHeight);
+    let bestOverlapCount = Infinity;
+    
+    for (let attempt = 0; attempt < 25; attempt++) {
+      const testY = Math.random() * (containerHeight - cardHeight);
+      let overlapCount = 0;
+      
+      for (const otherCard of cards) {
+        if (checkOverlap(
+          {x: targetX, y: testY, width: cardWidth, height: cardHeight},
+          otherCard
+        )) {
+          overlapCount++;
+        }
+      }
+      
+      if (overlapCount === 0) {
+        return testY;
+      }
+      
+      if (overlapCount < bestOverlapCount) {
+        bestOverlapCount = overlapCount;
+        bestY = testY;
+      }
+    }
+    
+    return bestY;
+  }
+  
+  function initializeCards() {
+    container = document.getElementById('floating-testimonials-container');
+    if (!container) {
+      console.error("Container not found!");
+      return false;
+    }
+    
+    // Ensure container has proper styling for full area usage
+    container.style.cssText = `
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    `;
+    
+    containerWidth = container.clientWidth;
+    containerHeight = container.clientHeight;
+    
+    console.log(`Container size: ${containerWidth}x${containerHeight}`);
+    container.innerHTML = '';
+    cards = [];
+    
+    // Create all 30 cards with varied sizes
+    for (let i = 0; i < TOTAL_CARDS; i++) {
+      const baseWidth = getCardSize(i);
+      const cardWidth = Math.max(100, Math.min(baseWidth, 300)); // Limit min/max sizes
+      const cardHeight = cardWidth * 1.1; // Square aspect ratio
+      
+      // Stagger starting positions
+      let xPosition;
+      if (i < MAX_ON_SCREEN) {
+        // First cards: staggered across and just off-screen
+        xPosition = (i * 500) - 400;
+      } else {
+        // Remaining cards: queue up off-screen left (completely hidden)
+        xPosition = -cardWidth - ((i - MAX_ON_SCREEN) * 600) - 100;
+      }
+      
+      const yPosition = findBestYPosition(cardWidth, cardHeight, xPosition);
+      const color = PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)];
+      const testimonial = TESTIMONIALS[Math.floor(Math.random() * TESTIMONIALS.length)];
+      
+      const cardElement = createCardElement(cardWidth, testimonial, color);
+      container.appendChild(cardElement);
+      
+      const cardData = {
+        element: cardElement,
+        x: xPosition,
+        y: yPosition,
+        width: cardWidth,
+        height: cardHeight,
+        color: color,
+        testimonial: testimonial,
+        speed: UNIFORM_SPEED * (0.8 + Math.random() * 0.4), // Add speed variation
+        isDragging: false
+      };
+      
+      cards.push(cardData);
+      
+      // Apply initial styling
+      updateCardAppearance(cardElement, cardData, false);
+      cardElement.style.transform = `translate(${xPosition}px, ${yPosition}px)`;
+      
+      // Setup interactions
+      setupCardInteractions(cardElement, cardData);
+    }
+    
+    console.log(`Created ${cards.length} cards with varied square proportions`);
+    return true;
+  }
+  
+  function updateCardPositions() {
+    if (!container || cards.length === 0) return;
+    
+    // Update container dimensions
+    containerWidth = container.clientWidth;
+    containerHeight = container.clientHeight;
+    
+    // Skip selected card updates during transition
+    cards.forEach((card) => {
+      // Skip if card is selected and we're transitioning back
+      if (card === selectedCard && isTransitioningBack) return;
+      
+      // Skip if card is selected (it's in center view)
+      if (card === selectedCard) return;
+      
+      // Skip if card is being dragged
+      if (card.isDragging) return;
+      
+      // Move card right
+      card.x += card.speed;
+      
+      // Check if card has moved off-screen right (completely hidden)
+      if (card.x > containerWidth) {
+        // Find the card that's furthest to the left (but still visible or just off-screen)
+        let leftmostCard = null;
+        let leftmostX = Infinity;
+        
+        cards.forEach(otherCard => {
+          if (otherCard !== selectedCard && !otherCard.isDragging && otherCard.x < leftmostX) {
+            leftmostX = otherCard.x;
+            leftmostCard = otherCard;
+          }
+        });
+        
+        // If we found a card to position behind
+        if (leftmostCard) {
+          // Position completely off-screen left
+          card.x = leftmostX - card.width - 500 - Math.random() * 300;
+        } else {
+          // Fallback: position far off-screen left
+          card.x = -card.width - 500 - Math.random() * 300;
+        }
+        
+        // Find new y position within full container area
+        card.y = findBestYPosition(card.width, card.height, card.x);
+        
+        // Update content
+        card.testimonial = TESTIMONIALS[Math.floor(Math.random() * TESTIMONIALS.length)];
+        card.color = PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)];
+        
+        // Update card appearance (unselected state)
+        updateCardAppearance(card.element, card, false);
+        
+// Hide cards completely when off-screen to the left
+if (card.x + card.width < 0) {
+  card.element.style.opacity = '0';
+  card.element.style.pointerEvents = 'none';
+} else if (card.x < 0) {
+  // Fade in as card enters from left
+  const fadeProgress = (card.x + card.width) / card.width;
+  card.element.style.opacity = String(Math.max(0, Math.min(1, fadeProgress)));
+  card.element.style.pointerEvents = 'auto';
+} else {
+  card.element.style.opacity = '1';
+  card.element.style.pointerEvents = 'auto';
+}
+      } else {
+        // Fade in as card enters from left
+        if (card.x < 0) {
+          const fadeIn = Math.min(1, (card.x + card.width) / card.width);
+          card.element.style.opacity = fadeIn.toString();
+        } else {
+          card.element.style.opacity = '1';
+        }
+      }
+      
+      // Apply subtle vertical movement
+      const verticalDrift = Math.sin(Date.now() / 8000 + card.x * 0.01) * 0.8;
+      card.element.style.transform = `translate(${card.x}px, ${card.y + verticalDrift}px)`;
+    });
+  }
+  
+  function animate() {
+    if (!isAnimating) return;
+    
+    updateCardPositions();
+    animationId = requestAnimationFrame(animate);
+  }
+  
+  function startAnimation() {
+    console.log("Starting animation...");
+    
+    // Initialize if needed
+    if (cards.length === 0) {
+      if (!initializeCards()) {
+        console.error("Failed to initialize cards");
+        return;
+      }
+    }
+    
+    // Start animation loop
+    isAnimating = true;
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+    }
+    
+    animate();
+    console.log("Animation started");
+  }
+  
+  function stopAnimation() {
+    console.log("Stopping animation...");
+    isAnimating = false;
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+  }
+  
+  // Set up tab switching
+  function setupTabEvents() {
+    const testimonialTab = document.getElementById('tab-additional');
+    const otherTabs = document.querySelectorAll('.tab-btn:not(#tab-additional)');
+    
+    if (testimonialTab) {
+      testimonialTab.addEventListener('click', function() {
+        console.log("Testimonials tab clicked");
+        setTimeout(startAnimation, 50);
+      });
+    }
+    
+    // Stop animation when switching to other tabs
+    otherTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        console.log("Other tab clicked, stopping animation");
+        stopAnimation();
+        deselectCard(); // Also deselect any selected card
+      });
+    });
+  }
+  
+  // Initialize when page loads
+  window.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded, setting up testimonials...");
+    
+    setupTabEvents();
+    
+    // Check if testimonials tab is active on load
+    const testimonialPanel = document.getElementById('panel-additional');
+    if (testimonialPanel && testimonialPanel.classList.contains('active')) {
+      console.log("Testimonials tab is active on load");
+      setTimeout(() => {
+        initializeCards();
+        setTimeout(startAnimation, 100);
+      }, 300);
+    }
+  });
+  
+  // Handle window resize
+  window.addEventListener('resize', function() {
+    if (container) {
+      containerWidth = container.clientWidth;
+      containerHeight = container.clientHeight;
+      
+      // If a card is selected, update its size to fit within new container bounds
+      if (selectedCard) {
+        updateCardAppearance(selectedCard.element, selectedCard, true);
+      }
+    }
+  });
+  
+  console.log("Enhanced floating testimonials script loaded successfully");
+})();
+
+</script>
+<script>
+// ===== SIMPLE PROJECT FILTERS (Projects tab only) =====
+(function () {
+  const panel = document.getElementById('panel-projects');
+  if (!panel) return;
+  
+  const filterBtns = panel.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('#projectsGrid .card');
+  
+  if (!filterBtns.length || !projectCards.length) return;
+
+  function applyCategory(cat) {
+    filterBtns.forEach(b => {
+      const match = b.dataset.filter === cat;
+      b.setAttribute('aria-pressed', match);
+    });
+    
+    projectCards.forEach(card => {
+      const cardCat = card.dataset.category;
+      if (cat === 'all' || cardCat === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.dataset.filter;
+      applyCategory(category);
+    });
+  });
+
+  applyCategory('all');
+})();
+</script>
+
+<script>
+// ===== EDUCATION FILTERS (Education tab) =====
+(function () {
+  const panel = document.getElementById('panel-education');
+  if (!panel) return;
+  
+  const filterBtns = panel.querySelectorAll('.filter-btn');
+  const items = panel.querySelectorAll('.timeline .t-item');
+  
+  if (!filterBtns.length || !items.length) return;
+
+  function applyFilter(cat) {
+    filterBtns.forEach(b => {
+      const match = b.dataset.filter === cat;
+      b.setAttribute('aria-pressed', match);
+    });
+    
+    items.forEach(item => {
+      const itemCat = item.dataset.category;
+      if (cat === 'all' || itemCat === cat) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.dataset.filter;
+      applyFilter(category);
+    });
+  });
+
+  applyFilter('all');
+})();
+
+// Toggle testimonial form visibility
+(function() {
+  const formCard = document.getElementById('testimonialFormCard');
+  const toggleBtn = document.getElementById('toggleTestimonialFormBtn');
+
+  if (toggleBtn && formCard) {
+    toggleBtn.addEventListener('click', () => {
+      const isVisible = formCard.classList.toggle('visible');
+      formCard.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+
+      // Update styles for smooth reveal
+      if (isVisible) {
+        formCard.style.opacity = '1';
+        formCard.style.maxHeight = '1200px';
+        formCard.style.transform = 'translateY(0)';
+      } else {
+        formCard.style.opacity = '0';
+        formCard.style.maxHeight = '0';
+        formCard.style.transform = 'translateY(8px)';
+      }
+
+      const icon = toggleBtn.querySelector('i.fa-solid');
+      if (icon) {
+        icon.classList.toggle('fa-chevron-down', !isVisible);
+        icon.classList.toggle('fa-chevron-up', isVisible);
+      }
+
+      if (isVisible) {
+        formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+})();
+// ===== ADVANCED JOB MATCHING SYSTEM =====
+(function () {
+  // Scoring weights
+  const WEIGHTS = {
+    required: 0.40,
+    preferred: 0.20,
+    responsibilities: 0.15,
+    tools: 0.10,
+    competencies: 0.10,
+    bonus: 0.05
+  };
+
+  // Skill transfer mapping
+  const TRANSFER_MAP = {
+    'human factors': ['ergonomics', 'cognitive', 'applied psychology', 'usability', 'user research'],
+    'ux research': ['user experience', 'usability testing', 'participant', 'user testing', 'heuristic evaluation'],
+    'ai': ['machine learning', 'ml', 'data science', 'models', 'nlp', 'artificial intelligence'],
+    'design': ['product design', 'interaction design', 'visual design', 'ui/ux', 'prototyping'],
+    'psychology': ['cognitive psychology', 'behavioral', 'mental models', 'decision making'],
+    'research': ['data analysis', 'statistics', 'methodology', 'experimental design', 'hypothesis'],
+    'engineering': ['systems', 'prototyping', 'cad', 'technical', 'development']
+  };
+
+  // Utility functions
+  function tokenize(text) {
+    if (!text) return [];
+    return text
+      .toLowerCase()
+      .replace(/[\u2018\u2019\u201c\u201d]/g,"'")
+      .replace(/[^\w\s\/\-\+\.#]/g,' ')
+      .split(/\s+/)
+      .filter(Boolean);
+  }
+
+  function normalizePhrase(p) { 
+    return (p||'').toLowerCase().replace(/\s+/g,' ').trim(); 
+  }
+
+  function jaccardSimilarity(aTokens, bTokens) {
+    const A = new Set(aTokens);
+    const B = new Set(bTokens);
+    let intersection = 0;
+    for (const x of A) if (B.has(x)) intersection++;
+    const union = new Set([...A, ...B]).size || 1;
+    return intersection / union;
+  }
+
+  // Scrape portfolio from your existing site
+  function scrapePortfolioFromDOM() {
+    const items = { 
+      projects: [], 
+      education: [], 
+      experience: [], 
+      certifications: [], 
+      skills: [] 
+    };
+
+    // Scrape projects from your cards
+    const projectCards = document.querySelectorAll('#projectsGrid .card');
+    projectCards.forEach(card => {
+      const title = card.querySelector('h3')?.textContent?.trim() || '';
+      const description = card.querySelector('p.muted')?.textContent?.trim() || '';
+      const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent.trim()).join(', ');
+      const metaChips = Array.from(card.querySelectorAll('.meta-chip')).map(c => c.textContent.trim()).join(', ');
+      
+      if (title) {
+        items.projects.push(`${title}. ${description} ${tags} ${metaChips}`);
+      }
+    });
+
+    // Scrape education from timeline
+    const educationItems = document.querySelectorAll('.t-card');
+    educationItems.forEach(item => {
+      const text = item.textContent?.trim() || '';
+      if (text.length > 50) {
+        items.education.push(text);
+      }
+    });
+
+    // Scrape skills from skills section
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach(card => {
+      const text = card.textContent?.trim() || '';
+      if (text) items.skills.push(text);
+    });
+
+    // Scrape experience from about section and cards
+    const aboutSection = document.querySelector('#about .info-card');
+    if (aboutSection) {
+      items.experience.push(aboutSection.textContent.trim());
+    }
+
+    // Add your certifications
+    items.certifications.push('Human Factors and Applied Cognition (HFES-accredited)');
+    items.certifications.push('Design Thinking Minor');
+    items.certifications.push('Project Lead The Way Engineering');
+items.certifications.push(
+  // Academic & HF foundations
+  'B.S. Psychology, Human Factors and Applied Cognition (HFES-accredited, George Mason University)',
+  'Design Thinking Minor (Human-Centered Innovation & Prototyping)',
+  'Project Lead The Way Engineering Pathway (CAD, electronics, systems engineering)',
+
+  // AI + Technical training
+  'Google AI Essentials Certificate (Techsgiving / Urban League cohort)',
+  'OpenAI API & LLM Integration (self-directed, production deployment)',
+  'Full-Stack AI Application Development (independent project-based)',
+  
+  // Research, ethics & safety
+  'Human Subjects Research / IRB Training (lab & field studies)',
+  'Psychological Research Methods Certification (inferential & multivariate methods)',
+  'AI Safety & Ethics Short-Form Training (alignment-informed product design)',
+
+  // UX/Design credentials
+  'Design Thinking & Human-Centered Design (Stanford-style methodology)',
+  'Information Architecture & Interaction Design Foundations (self-directed, portfolio-verified)',
+
+  // Domain-specific
+  'Cognitive Ergonomics & Safety-Critical System Design (university coursework)',
+  'Applied Attention & Human Error Analysis (controlled-lab coursework)',
+
+  // -----------------------------
+  // COMPLETED COURSERA PROGRAMS
+  // -----------------------------
+  'Google UX Design Professional Certificate',
+  'Google AI Essentials Specialization Certificate',
+    'Human Factors in AI (Duke University) – Completed',
+    'Agile Project Management (Google) – Completed',
+
+  // Individual UX design courses
+  'Foundations of User Experience (UX) Design',
+  'Start the UX Design Process: Empathize, Define, and Ideate',
+  'Build Wireframes and Low-Fidelity Prototypes',
+  'Conduct UX Research and Test Early Concepts',
+  'Create High-Fidelity Designs and Prototypes in Figma',
+  'Build Dynamic User Interfaces (UI) for Websites',
+  'Design a User Experience for Social Good & Prepare for Jobs',
+  'Accelerate Your Job Search with AI',
+
+  // Google AI Essentials courses
+  'Introduction to AI',
+  'Maximize Productivity With AI Tools',
+  'Discover the Art of Prompting',
+  'Use AI Responsibly',
+  'Stay Ahead of the AI Curve',
+
+  // Google Project Management series
+  'Foundations of Project Management',
+  'Project Initiation: Starting a Successful Project',
+  'Project Planning: Putting It All Together',
+  'Project Execution: Running the Project',
+  'Accelerate Your Job Search with AI (Project Management version)',
+
+  // Additional Google courses
+  'Google Advanced Data Analytics Capstone',
+  'The Nuts and Bolts of Machine Learning',
+  'Google Prompting Essentials',
+  'Google AI Essentials',
+  'Google Agile Essentials',
+  'Technical Support Fundamentals',
+  'Foundations of Cybersecurity',
+  'Foundations of Digital Marketing and E-commerce',
+
+  // -----------------------------
+  // IN-PROGRESS COURSERA COURSES
+  // -----------------------------
+  'Introduction to AI and Machine Learning on Google Cloud – In Progress',
+  'Managing Machine Learning Projects (Duke University) – In Progress',
+  'Machine Learning Foundations for Product Managers (Duke University) – In Progress',
+  'Capstone: Applying Project Management in the Real World (Google) – In Progress',
+  'Prompt Engineering with Llama 2 & 3 (DeepLearning.AI) – In Progress'
+);
+
+    // Add hardcoded skills based on your site
+    items.skills.push(
+
+  // -----------------------------
+  // HUMAN FACTORS, HCI, COGNITION
+  // -----------------------------
+  'Human Factors Research',
+  'Cognitive Psychology',
+  'Human–Computer Interaction (HCI)',
+  'Perception and Psychophysics',
+  'Attention, Memory, and Mental Workload',
+  'Decision-Making and Risk Perception',
+  'Human Error Analysis (SHE, HFACS-lite)',
+  'Ergonomics and Biomechanics (foundational)',
+  'Behavioral Analysis and Applied Cognition',
+  'Situation Awareness and Cognitive Modeling',
+  'Mental Models Across Ages, Cultures, and Experience Levels',
+
+  // -----------------------------
+  // UX RESEARCH & DESIGN
+  // -----------------------------
+  'UX Research',
+  'UX Design',
+  'Mixed-Methods Research (Qual+Quant)',
+  'Heuristic Evaluation',
+  'Usability Testing (remote + in-person)',
+  'Contextual Inquiry',
+  'User Interviews',
+  'Affinity Mapping',
+  'Empathy Mapping',
+  'Personas',
+  'Journey Mapping',
+  'Service Blueprinting',
+  'Task Analysis',
+  'Stakeholder Analysis',
+  'Information Architecture',
+  'Interaction Design',
+  'Wireframing',
+  'Low-Fidelity Prototyping',
+  'High-Fidelity Prototyping',
+  'Design Systems',
+  'UI Pattern Libraries',
+  'Content Design & UX Writing',
+
+  // Coursera-specific UX additions
+  'UX Process End-to-End (Google UX Framework)',
+  'Design for Social Good',
+  'Responsive Web Design Prototyping',
+  'Portfolio Development for UX Roles',
+
+  // -----------------------------
+  // DATA, EXPERIMENTATION & ANALYSIS
+  // -----------------------------
+  'Experimental Design (within, between, mixed)',
+  'Psychometrics & Survey Design',
+  'Statistical Analysis',
+  'ANOVA and Regression',
+  'Quantitative Modeling for HF/UX',
+  'R Programming',
+  'Python Programming',
+  'SPSS Analysis',
+  'Data Cleaning and Preprocessing',
+  'Data Visualization',
+  'Behavioral Data Interpretation',
+  'AI-Augmented Research Workflows',
+
+  // Google Data Analytics / Machine Learning additions
+  'ML Problem Framing',
+  'Model Evaluation Fundamentals',
+  'Predictive Analytics Foundations',
+  'Intro Machine Learning (Google Cloud)',
+  'Cloud-Based AI Concepts (GCP)',
+
+  // -----------------------------
+  // AI, LLMs, MACHINE LEARNING
+  // -----------------------------
+  'Human-Centered AI',
+  'Human–AI Interaction',
+  'AI Ethics and Safety',
+  'Alignment-Informed Product Design',
+  'Applied AI in UX Research',
+  'Large Language Model Integration',
+  'Prompt Engineering',
+  'Prompt Chaining',
+  'API Integration for LLM Systems',
+  'Recommender System Concepts',
+  'Bias Testing & Responsible AI Use',
+
+  // New AI / Prompting skills (Coursera)
+  'Responsible AI Use',
+  'Generative AI Productivity',
+  'AI Tools for Accelerating Workflows',
+  'LLaMA Prompt Engineering',
+  'Grok/ChatGPT Prompt Optimization',
+
+  // -----------------------------
+  // PROJECT MANAGEMENT & AGILE
+  // -----------------------------
+  'Project Management Foundations',
+  'Project Initiation',
+  'Requirements Gathering',
+  'Project Planning & Scheduling',
+  'Risk Management',
+  'Stakeholder Management',
+  'Cross-Functional Collaboration',
+  'Agile Methodologies',
+  'Scrum Foundations',
+  'Project Execution & Monitoring',
+
+  // New PM skills from Coursera courses
+  'Agile Project Management',
+  'Gantt Charts & Work Breakdown Structures',
+  'Project Documentation',
+  'Status Reporting',
+  'Scope & Constraint Management',
+
+  // -----------------------------
+  // TECHNICAL, PROTOTYPING & ENGINEERING
+  // -----------------------------
+  'Figma',
+  'Advanced Figma Prototyping',
+  'Unity 3D',
+  'CAD Prototyping',
+  'VR Interaction Design',
+  'Front-End Prototyping (HTML/CSS/JS)',
+  'REST API Integration',
+  'Usability Testing Platforms',
+  'Survey Tools (Qualtrics, Google Forms)',
+  'Analytics Tools',
+
+  // Google Tech Support / Cybersecurity / IT Foundations
+  'Technical Troubleshooting',
+  'Systems Fundamentals',
+  'Networking Basics',
+  'Threat Awareness (basic cybersecurity)',
+  'Ticketing & Support Workflows',
+
+  // Digital Marketing (Google)
+  'Foundations of SEO & Web Analytics',
+  'Intro to Digital Commerce',
+  'Marketing Funnel Fundamentals',
+
+  // -----------------------------
+  // ACCESSIBILITY & SYSTEMS THINKING
+  // -----------------------------
+  'Accessibility (WCAG 2.2 AA Intent)',
+  'Inclusive Design',
+  'Designing for Neurodiversity',
+  'Reduced-Motion Interaction Patterns',
+  'Systems Thinking',
+  'Ecosystem Mapping',
+  'Service Design',
+
+  // -----------------------------
+  // DOMAIN-SPECIFIC (FROM PORTFOLIO)
+  // -----------------------------
+  'Safety-Critical UX',
+  'Digital Wellness UX',
+  'Behavior Change & Prosocial Gamification',
+  'Cross-Device Experience Design',
+  'Wearable UX',
+  'Recommender System UX',
+  'Community Platform UX',
+  'Content Moderation UX Principles'
+    );
+
+    return items;
+  }
+
+  // Parse job description
+  function parseJobDescription(jobText) {
+    const lines = jobText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    const categories = {
+      required: [],
+      preferred: [],
+      responsibilities: [],
+      tools: [],
+      competencies: [],
+      bonus: []
+    };
+
+    let currentCategory = 'bonus';
+    
+    lines.forEach(line => {
+      const lowerLine = line.toLowerCase();
+      
+      // Detect category headers
+      if (/(required|must have|minimum|qualifications)/i.test(lowerLine) && 
+          !/(preferred|nice to have)/i.test(lowerLine)) {
+        currentCategory = 'required';
+        return;
+      }
+      if (/(preferred|nice to have|plus)/i.test(lowerLine)) {
+        currentCategory = 'preferred';
+        return;
+      }
+      if (/(responsibilities|duties|you will|what you'll)/i.test(lowerLine)) {
+        currentCategory = 'responsibilities';
+        return;
+      }
+      if (/(tools|software|proficient|experience with)/i.test(lowerLine)) {
+        currentCategory = 'tools';
+        return;
+      }
+      if (/(skills|competencies|abilities|soft skills)/i.test(lowerLine)) {
+        currentCategory = 'competencies';
+        return;
+      }
+      
+      // Remove bullet points and clean up
+      const cleanLine = line.replace(/^[\-\*•\u2022]\s*/, '').trim();
+      if (cleanLine.length > 3) {
+        categories[currentCategory].push(cleanLine);
+      }
+    });
+
+    // Remove duplicates
+    Object.keys(categories).forEach(key => {
+      categories[key] = [...new Set(categories[key])];
+    });
+
+    return categories;
+  }
+
+  // Calculate match between requirement and portfolio items
+  function calculateMatch(requirement, portfolioItems) {
+    const reqTokens = tokenize(requirement);
+    let bestMatch = { score: 0, item: null, type: null };
+    
+    // Check each portfolio category
+    Object.keys(portfolioItems).forEach(category => {
+      portfolioItems[category].forEach(item => {
+        const itemTokens = tokenize(item);
+        const similarity = jaccardSimilarity(reqTokens, itemTokens);
+        
+        // Check for transferable skills
+        let transferBonus = 0;
+        Object.entries(TRANSFER_MAP).forEach(([skill, synonyms]) => {
+          const skillPattern = new RegExp(`\\b(${[skill, ...synonyms].join('|')})\\b`, 'i');
+          if (skillPattern.test(item) && skillPattern.test(requirement)) {
+            transferBonus += 0.3;
+          }
+        });
+        
+        const totalScore = Math.min(1, similarity + transferBonus);
+        
+        if (totalScore > bestMatch.score) {
+          bestMatch = {
+            score: totalScore,
+            item: item.substring(0, 150) + (item.length > 150 ? '...' : ''),
+            type: category,
+            requirement: requirement
+          };
+        }
+      });
+    });
+    
+    return bestMatch;
+  }
+
+  // Main match calculation function
+  function calculateJobMatch(jobText) {
+    const portfolio = scrapePortfolioFromDOM();
+    const jobCategories = parseJobDescription(jobText);
+    
+    const results = {
+      overallScore: 0,
+      categoryScores: {},
+      matches: [],
+      recommendations: []
+    };
+    
+    let totalWeightedScore = 0;
+    let totalWeight = 0;
+    
+    // Calculate score for each category
+    Object.keys(jobCategories).forEach(category => {
+      const requirements = jobCategories[category];
+      if (requirements.length === 0) {
+        results.categoryScores[category] = 100; // Perfect if no requirements
+        return;
+      }
+      
+      let categoryScore = 0;
+      const categoryMatches = [];
+      
+      requirements.forEach(req => {
+        const match = calculateMatch(req, portfolio);
+        if (match.score > 0.1) { // Only count meaningful matches
+          categoryScore += match.score * 100;
+          categoryMatches.push({
+            requirement: req,
+            matchScore: Math.round(match.score * 100),
+            portfolioItem: match.item,
+            portfolioType: match.type,
+            isStrongMatch: match.score >= 0.7
+          });
+        }
+      });
+      
+      const avgScore = requirements.length > 0 ? categoryScore / requirements.length : 0;
+      results.categoryScores[category] = Math.round(avgScore);
+      results.matches.push(...categoryMatches);
+      
+      // Add to weighted total
+      if (WEIGHTS[category]) {
+        totalWeightedScore += avgScore * WEIGHTS[category];
+        totalWeight += WEIGHTS[category];
+      }
+    });
+    
+    // Calculate overall score
+    results.overallScore = Math.round(totalWeightedScore / (totalWeight || 1));
+    
+    // Generate recommendations
+    generateRecommendations(results, jobCategories);
+    
+    return results;
+  }
+
+  // Generate recommendations based on match results
+  function generateRecommendations(results, jobCategories) {
+    const recs = [];
+    
+    // Check required qualifications
+    const requiredMatches = results.matches.filter(m => 
+      m.requirement.toLowerCase().includes('required') || 
+      m.requirement.toLowerCase().includes('must')
+    );
+    
+    const strongRequiredMatches = requiredMatches.filter(m => m.isStrongMatch);
+    if (strongRequiredMatches.length === 0 && requiredMatches.length > 0) {
+      recs.push("Consider adding more specific examples of required qualifications in your portfolio.");
+    }
+    
+    // Check for missing tools/technologies
+    const tools = jobCategories.tools || [];
+    const matchedTools = results.matches.filter(m => 
+      tools.some(tool => m.portfolioItem.toLowerCase().includes(tool.toLowerCase()))
+    );
+    
+    if (tools.length > 0 && matchedTools.length < tools.length * 0.5) {
+      recs.push("Highlight your experience with specific tools mentioned in the job description.");
+    }
+    
+    // General recommendations based on score
+    if (results.overallScore < 40) {
+      recs.push("Focus on developing skills mentioned in the 'required' and 'preferred' sections.");
+    } else if (results.overallScore < 70) {
+      recs.push("Good match! Emphasize your relevant projects and experience in your application.");
+    } else {
+      recs.push("Excellent match! Prepare specific examples from your portfolio for interviews.");
+    }
+    
+    results.recommendations = recs;
+  }
+
+  // Display functions
+  function displayMatchResults(results) {
+    const summaryEl = document.getElementById('match-summary');
+    if (!summaryEl) return;
+    
+    const overallScore = results.overallScore;
+    const categoryScores = results.categoryScores;
+    const matches = results.matches;
+    
+    // Group matches by type
+    const projectMatches = matches.filter(m => m.portfolioType === 'projects');
+    const educationMatches = matches.filter(m => m.portfolioType === 'education');
+    const skillMatches = matches.filter(m => m.portfolioType === 'skills');
+    
+    summaryEl.innerHTML = `
+      <div class="score-display">
+        <div class="score-circle" style="--score-percent: ${overallScore}%">
+          <span class="score-number">${overallScore}%</span>
+        </div>
+        <div class="score-label">
+          <h4>${overallScore >= 80 ? 'Excellent Match' : overallScore >= 60 ? 'Strong Match' : overallScore >= 40 ? 'Good Match' : 'Limited Match'}</h4>
+          <p>Mathematically calculated based on your portfolio content matching the job requirements.</p>
+        </div>
+      </div>
+      
+      <div class="match-breakdown">
+        <h4 style="margin-bottom: 15px;">Breakdown by Category</h4>
+        ${Object.entries(categoryScores).map(([category, score]) => `
+          <div class="match-category">
+            <div class="category-header">
+              <span class="category-name">${category.charAt(0).toUpperCase() + category.slice(1)}</span>
+              <span class="category-score">${score}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${score}%"></div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      
+      ${projectMatches.length > 0 ? `
+        <div class="supporting-items">
+          <h4>Relevant Projects (${projectMatches.length})</h4>
+          <ul style="margin: 10px 0; padding-left: 20px;">
+            ${projectMatches.slice(0, 5).map(match => `
+              <li style="margin-bottom: 8px;">
+                <span class="item-badge">Project</span>
+                <strong>${match.matchScore}% match:</strong> ${match.portfolioItem}
+                <div style="font-size: 0.9em; color: var(--text-muted); margin-top: 2px;">
+                  Supports: ${match.requirement}
+                </div>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      ` : ''}
+      
+      ${educationMatches.length > 0 ? `
+        <div class="supporting-items">
+          <h4>Relevant Education & Certifications (${educationMatches.length})</h4>
+          <ul style="margin: 10px 0; padding-left: 20px;">
+            ${educationMatches.slice(0, 3).map(match => `
+              <li style="margin-bottom: 8px;">
+                <span class="item-badge">${match.portfolioType === 'education' ? 'Education' : 'Certification'}</span>
+                <strong>${match.matchScore}% match:</strong> ${match.portfolioItem}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      ` : ''}
+      
+      ${skillMatches.length > 0 ? `
+        <div class="supporting-items">
+          <h4>Key Skills Matched (${skillMatches.length})</h4>
+          <div style="margin: 10px 0; display: flex; flex-wrap: wrap; gap: 8px;">
+            ${skillMatches.slice(0, 10).map(match => `
+              <span style="background: var(--green-600); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.9em;">
+                ${match.portfolioItem.split(':')[0] || match.portfolioItem}
+              </span>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+    `;
+  }
+
+  function displayChatAnalysis(results) {
+    const chatEl = document.getElementById('job-chat');
+    if (!chatEl) return;
+    
+    const messages = [];
+    
+    // System message
+    messages.push({
+      type: 'system',
+      text: `<strong>Analysis Complete</strong><br>
+            Overall match: <strong>${results.overallScore}%</strong><br>
+            Matched ${results.matches.length} requirements from your portfolio.`
+    });
+    
+    // Positive matches
+    const strongMatches = results.matches.filter(m => m.isStrongMatch);
+    if (strongMatches.length > 0) {
+      messages.push({
+        type: 'positive',
+        text: `<strong>✓ Strong Matches Found (${strongMatches.length})</strong><br>
+              ${strongMatches.slice(0, 3).map(m => 
+                `• ${m.portfolioType}: "${m.portfolioItem.substring(0, 80)}..."`
+              ).join('<br>')}`
+      });
+    }
+    
+    // Recommendations
+    if (results.recommendations.length > 0) {
+      messages.push({
+        type: 'neutral',
+        text: `<strong>Recommendations</strong><br>
+              ${results.recommendations.map(rec => `• ${rec}`).join('<br>')}`
+      });
+    }
+    
+    // Missing areas
+    const lowCategories = Object.entries(results.categoryScores)
+      .filter(([cat, score]) => score < 50 && cat !== 'bonus')
+      .map(([cat]) => cat);
+    
+    if (lowCategories.length > 0) {
+      messages.push({
+        type: 'neutral',
+        text: `<strong>Areas to Strengthen</strong><br>
+              Consider adding more content related to: ${lowCategories.join(', ')}`
+      });
+    }
+    
+    // Build chat HTML
+    chatEl.innerHTML = messages.map(msg => `
+      <div class="job-chat-message ${msg.type}">
+        ${msg.text}
+      </div>
+    `).join('');
+  }
+
+  // Expose to global scope
+  window.calculateMatchScore = calculateJobMatch;
+  window.displayMatchResults = displayMatchResults;
+  window.displayChatAnalysis = displayChatAnalysis;
+
+})();
+
+// ===== JOB MATCH UI INTEGRATION =====
+document.addEventListener('DOMContentLoaded', function() {
+  // Create site-shell wrapper if not exists
+  if (!document.getElementById('siteShell')) {
+    const bodyContent = document.body.innerHTML;
+    document.body.innerHTML = `
+      <div class="site-shell" id="siteShell">
+        <div class="page-view" id="main-page">
+          ${bodyContent}
+        </div>
+        <div class="page-view" id="job-match-page" aria-hidden="true">
+          <!-- Job match page content will be injected -->
+        </div>
+      </div>
+    `;
+  }
+
+  // Add Job Match button to header
+  const headerActions = document.querySelector('.header-actions');
+  if (headerActions && !document.getElementById('jobMatchToggle')) {
+    const jobMatchBtn = document.createElement('button');
+    jobMatchBtn.id = 'jobMatchToggle';
+    jobMatchBtn.className = 'btn-ghost';
+    jobMatchBtn.style.cssText = 'display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;';
+    jobMatchBtn.innerHTML = '<i class="fas fa-search" aria-hidden="true"></i><span>Job Match</span>';
+    headerActions.insertBefore(jobMatchBtn, headerActions.firstChild);
+  }
+
+  const siteShell = document.getElementById('siteShell');
+  const jobMatchPage = document.getElementById('job-match-page');
+  const jobMatchToggle = document.getElementById('jobMatchToggle');
+  const jobBackButton = document.getElementById('job-back-button');
+  const jobScoreButton = document.getElementById('job-score-button');
+  const filterReset = document.getElementById('filter-reset');
+  const jobInput = document.getElementById('job-input');
+  const matchSummary = document.getElementById('match-summary');
+  const jobChat = document.getElementById('job-chat');
+
+  // Toggle to Job Match view
+  if (jobMatchToggle) {
+    jobMatchToggle.addEventListener('click', function() {
+      siteShell.classList.add('job-mode');
+      jobMatchPage.setAttribute('aria-hidden', 'false');
+      
+      setTimeout(() => {
+        if (jobInput) jobInput.focus();
+      }, 300);
+    });
+  }
+  
+  // Return to main view
+  if (jobBackButton) {
+    jobBackButton.addEventListener('click', function() {
+      siteShell.classList.remove('job-mode');
+      jobMatchPage.setAttribute('aria-hidden', 'true');
+    });
+  }
+  
+  // Analyze job description
+  if (jobScoreButton) {
+    jobScoreButton.addEventListener('click', function() {
+      const jobText = jobInput.value.trim();
+      if (!jobText) {
+        matchSummary.innerHTML = '<p style="color: var(--text-muted);">Please paste a job description first.</p>';
+        return;
+      }
+      
+      // Show loading
+      matchSummary.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Analyzing job description against your portfolio...</p>';
+      jobChat.innerHTML = '<div class="job-chat-message system"><p><i class="fas fa-spinner fa-spin"></i> Processing...</p></div>';
+      
+      // Calculate match
+      setTimeout(() => {
+        try {
+          const results = window.calculateMatchScore(jobText);
+          window.displayMatchResults(results);
+          window.displayChatAnalysis(results);
+        } catch (error) {
+          console.error('Error analyzing job:', error);
+          matchSummary.innerHTML = '<p style="color: var(--text-muted);">Error analyzing job description. Please try again.</p>';
+          jobChat.innerHTML = '<div class="job-chat-message system"><p>Analysis failed. Please try again.</p></div>';
+        }
+      }, 800);
+    });
+  }
+  
+  // Clear button
+  if (filterReset) {
+    filterReset.addEventListener('click', function() {
+      if (jobInput) jobInput.value = '';
+      if (matchSummary) matchSummary.innerHTML = '<p>Paste a job description above to see your match score and detailed analysis.</p>';
+      if (jobChat) jobChat.innerHTML = '<div class="job-chat-message system"><p><strong>Ready to analyze job descriptions.</strong> Paste one above to get started!</p></div>';
+    });
+  }
+  
+  // Close with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && siteShell.classList.contains('job-mode')) {
+      siteShell.classList.remove('job-mode');
+      if (jobMatchPage) jobMatchPage.setAttribute('aria-hidden', 'true');
+    }
+  });
+});
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>
