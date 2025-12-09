@@ -1808,12 +1808,366 @@ flex-shrink: 0;
   background: rgba(0, 0, 0, 0.8);
 }
 
+/* ===== JOB MATCH PAGE SYSTEM ===== */
+.site-shell {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#page-track {
+  display: flex;
+  width: 200vw;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+
+.page-view {
+  width: auto;
+  height: 100%;
+  flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.site-shell.job-mode #page-track {
+  transform: translateX(-50%);
+}
+
+/* Job Match Page Styles */
+#job-match-page {
+  background: var(--surface-1);
+  padding-top: var(--nav-h);
+}
+
+#job-match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--surface-2);
+}
+
+#job-input {
+  width: 100%;
+  min-height: 200px;
+  padding: 20px;
+  border: 2px solid var(--surface-2);
+  border-radius: var(--radius);
+  background: var(--surface-0);
+  color: var(--text-0);
+  font-size: 16px;
+  line-height: 1.6;
+  resize: vertical;
+  margin-bottom: 20px;
+  font-family: inherit;
+}
+
+#job-input:focus {
+  outline: none;
+  border-color: var(--green-600);
+  box-shadow: 0 0 0 3px rgba(26, 101, 70, 0.1);
+}
+
+.job-actions {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+#job-back-button {
+  padding: 12px 24px;
+  background: var(--green-600);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#job-back-button:hover {
+  background: var(--green-700);
+  transform: translateY(-2px);
+}
+
+#match-summary {
+  background: var(--surface-0);
+  padding: 24px;
+  border-radius: var(--radius);
+  margin-bottom: 30px;
+  box-shadow: var(--shadow);
+}
+
+#job-chat {
+  background: var(--surface-0);
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.job-chat-message {
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: var(--surface-1);
+  border-left: 4px solid transparent;
+}
+
+.job-chat-message.positive {
+  border-left-color: var(--green-600);
+}
+
+.job-chat-message.neutral {
+  border-left-color: var(--gold-500);
+}
+
+.job-chat-message.system {
+  border-left-color: var(--text-muted);
+}
+
+/* Job Match Score Styles */
+.score-display {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.score-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: conic-gradient(var(--green-600) 0% var(--score-percent, 0%), var(--surface-2) var(--score-percent, 0%) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.score-circle::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--surface-0);
+}
+
+.score-number {
+  position: relative;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--green-600);
+  z-index: 1;
+}
+
+.score-label {
+  flex: 1;
+}
+
+.score-label h4 {
+  margin: 0 0 5px 0;
+  color: var(--text-0);
+}
+
+.score-label p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Match breakdown */
+.match-breakdown {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--surface-2);
+}
+
+.match-category {
+  margin-bottom: 15px;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.category-name {
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.category-score {
+  font-weight: 700;
+  color: var(--green-600);
+}
+
+.progress-bar {
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--green-600);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Supporting items */
+.supporting-items {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--surface-2);
+}
+
+.item-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--gold-500);
+  color: #1b1408;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #job-match-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .job-actions {
+    flex-wrap: wrap;
+  }
+  
+  .score-display {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+/* Job match actions */
+.job-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+/* Primary: Score my fit */
+.btn-score-fit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.7rem 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  background: linear-gradient(135deg, var(--green-600), var(--green-700));
+  box-shadow: 0 10px 30px rgba(26, 101, 70, 0.35);
+  transform: translateY(0);
+  transition: transform var(--trans), box-shadow var(--trans), background var(--trans);
+}
+
+.btn-score-fit i {
+  font-size: 1rem;
+}
+
+.btn-score-fit:hover {
+  background: linear-gradient(135deg, var(--green-700), var(--green-800));
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(26, 101, 70, 0.45);
+}
+
+.btn-score-fit:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(26, 101, 70, 0.3);
+}
+
+/* Ghost: Clear scores */
+.btn-clear-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  padding: 0.65rem 1.2rem;
+  border: 1px solid color-mixin(oklab, var(--text-muted) 16%, transparent);
+  background: color-mixin(oklab, var(--surface-0) 92%, transparent);
+  color: var(--text-1);
+  font-weight: 600;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  transition: background var(--trans), border-color var(--trans), color var(--trans), transform var(--trans), box-shadow var(--trans);
+}
+
+.btn-clear-score i {
+  font-size: 0.9rem;
+}
+
+.btn-clear-score:hover {
+  background: color-mixin(oklab, var(--surface-1) 90%, transparent);
+  border-color: color-mixin(oklab, var(--green-600) 18%, transparent);
+  color: var(--green-700);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.btn-clear-score:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Compact layout on mobile */
+@media (max-width: 640px) {
+  .job-actions {
+    gap: 0.5rem;
+  }
+
+  .btn-score-fit,
+  .btn-clear-score {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .btn-clear-score span {
+    white-space: nowrap;
+  }
+}
+
+/* Dark mode tweaks */
+[data-theme="dark"] .btn-clear-score {
+  background: color-mixin(oklab, var(--surface-0) 90%, transparent);
+  border-color: color-mixin(oklab, var(--text-muted) 22%, transparent);
+}
+
+[data-theme="dark"] .btn-clear-score:hover {
+  background: color-mixin(oklab, var(--surface-1) 92%, transparent);
+}
+
 
   </style>
   <!-- Load Google reCAPTCHA v3 -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
+  <!-- TWO-PAGE SYSTEM WRAPPER -->
   <a href="#main" class="skip-link">Skip to content</a>
   <div class="filter-banner" id="filterBanner">
     <div class="filter-banner-content">
@@ -1861,17 +2215,9 @@ flex-shrink: 0;
         <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
           <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
-
-        <a
-          href="https://www.linkedin.com/in/themagreen/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn-open-work"
-          aria-label="Open to work"
-        >
-          <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-          <span>Open to work</span>
-        </a>
+         <a href="jobMatch.html#:~:text=Years%20experience-,.,-Job%20Match%20Explorer" class="btn btn-primary">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Job Match
+</a>
       </div>
     </div>
   </header>
@@ -1994,23 +2340,22 @@ flex-shrink: 0;
           </button>
         </div>
 
-        <br />
 
         <div class="tabpanel active" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects">
           <!-- Projects Panel -->
           <div class="filters" aria-label="Filter projects">
             <button class="filter-btn" data-filter="all" aria-pressed="true">All projects</button>
-            <button class="filter-btn" data-filter="core" aria-pressed="false">Core academic</button>
-            <button class="filter-btn" data-filter="mobile" aria-pressed="false">HFAC concentration</button>
-            <button class="filter-btn" data-filter="design" aria-pressed="false">Design thinking minor</button>
-            <button class="filter-btn" data-filter="conceptual" aria-pressed="false">Personal concepts</button>
+            <button class="filter-btn" data-filter="core" aria-pressed="false">Core Academic</button>
+            <button class="filter-btn" data-filter="mobile" aria-pressed="false">HF Concentration</button>
+            <button class="filter-btn" data-filter="design" aria-pressed="false">Design Thinking Minor</button>
+            <button class="filter-btn" data-filter="conceptual" aria-pressed="false">Personal Concepts</button>
           </div>
 
           <div class="grid" id="projectsGrid">
-            <!-- Core -->
+            <!-- Core -->            
             <article class="card" data-category="core" data-date="2024-11-01">
               <a
-                href="Incident Investigation Analysis - Thema's Team.pptx.pdf"
+               href="projects/titanic-incident-analysis.html"
                 class="card-link"
                 aria-label="Titanic disaster human factors analysis case study"
               >
@@ -2025,16 +2370,16 @@ flex-shrink: 0;
                 <div class="card-body">
                   <h3>Titanic disaster human factors analysis</h3>
                   <p class="muted">
-                    HFACS based reconstruction of crew decisions, communication gaps, and organizational factors that shaped the event and potential safety lessons.
+                    Human Factors-based reconstruction of crew decisions, communication gaps, and organizational factors that shaped the event and potential safety lessons.
                   </p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Breakdowns in communication</span>
-                    <span class="meta-chip">Process: HFACS incident analysis</span>
+                    <span class="meta-chip">Problem: Cross-Teams Communication, Equipment Funding, Leadership Oversight </span>
+                    <span class="meta-chip">Process: HF Incident Investigation & Analysis</span>
                     <span class="meta-chip">Outcome: Modeled forty percent reduction in error pathways</span>
                   </div>
                   <div class="read-time">Four minute read</div>
                   <div class="tags">
-                    <span class="tag">HFACS</span><span class="tag">Root cause</span><span class="tag">Systems thinking</span>
+                    <span class="tag">Swiss Cheese Framework</span><span class="tag">Root cause</span><span class="tag">Systems thinking</span>
                   </div>
                 </div>
               </a>
@@ -2347,21 +2692,32 @@ flex-shrink: 0;
             </article>
 
             <article class="card" data-category="conceptual" data-date="2024-08-01">
-              <a href="#" class="card-link" aria-label="Anime recommender website case study">
-                <div class="card-media"><i class="fa-solid fa-film" aria-hidden="true"></i></div>
+              <a href="https://your-anime-list-mogbohxv.taskade.app/" class="card-link" aria-label="Anime recommender website case study">
+                <div class="card-media">
+                  <img
+                    src="yal.png"
+                    alt="Titanic disaster human factors analysis thumbnail"
+                    class="card-thumbnail"
+                    style="width:100%;height:auto;max-width:600px;display:block;margin: auto;"
+                /></i></div>
                 <div class="card-body">
-                  <h3>Anime recommender website</h3>
+                  <h3>AI Anime recommender website</h3>
                   <p class="muted">
-                    Discovery site with clean UI and filters for genre, theme, and year that help people find new series without overload.
-                  </p>
+                   MyAnimeList and AniList, two of the largest anime catalog platforms, still rely on early-2000s information architecture and UI paradigms. Their workflows require excessive cognitive load, their recommendation logic is opaque, and they lack modern personalization, intelligent search, and social interaction mechanics. Users in my qualitative survey described the platforms as “dated,” “clunky,” and “confusing,” with a desire for AI-enhanced discovery and a more community-driven experience.</p>
                   <div class="meta-chips">
-                    <span class="meta-chip">Problem: Overwhelming content choice</span>
-                    <span class="meta-chip">Process: Information architecture</span>
-                    <span class="meta-chip">Outcome: Intuitive filtering paths</span>
-                  </div>
-                  <div class="read-time">Three minute read</div>
+  <span class="meta-chip">
+    Problem: Outdated UI/IA patterns, high cognitive load, user frustration w/ generic recommendations, limited community features.</span>
+
+  <span class="meta-chip">
+    Process: Competitive audit/analysis, qualitative survey to identify user personas, scalable interaction models for filtering, navigation, and social engagement. <br> Rebuilt core information architecture using Canva, Figma, and Miro.<br>
+Engineered a multi-layer AI system: custom ML model, automated chatbot, and LLM (Grok/ChatGPT) API integration.</span>
+
+  <span class="meta-chip">
+    <strong>Outcome:</strong> Produced a modern, intuitive AI tool and social media platform that significantly reduced cognitive load.
+ </span>  </div>
+                  <div class="read-time">Five minute read</div>
                   <div class="tags">
-                    <span class="tag">IA</span><span class="tag">Filtering</span>
+                    <span class="tag">IA</span><span class="tag">AI Engineering</span><span class="tag">ML</span>
                   </div>
                 </div>
               </a>
@@ -2665,30 +3021,12 @@ flex-shrink: 0;
       <div class="container">
         <div class="section-title">
           <h2>About me</h2>
-          <p> That one gifted kid who always had her hand raised.
-           I grew up with a restless curiosity.
-           I wanted to know how things worked,
-           why people behaved the way they did,
-           and what happened when you mixed ideas together.
-           That instinct stayed with me, and it’s shaped every chapter of my life so far.
-          Furthermore, as a digital nomad raised on the wild west internet of the early 2000s, I developed a keen awareness of how technology can both empower and endanger its users.
-          Today, I channel that curiosity into human-centered design and research, with
-          a degree in applied psychology, concentration in human factors and applied cognition and minor in design thinking from the HFES-accredited program at George Mason University.</p>
-        </div>
 
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:1.2rem">
           <div class="info-card">
             <p>
-              I am Thema, a human factors and UX researcher who grew up online, asked a lot of questions, and never quite stopped.
+              Hello and welcome! I'm Thema, a human factors and UX researcher who grew up online, asked a lot of questions, and never quite stopped.
               My early years sat between gifted classes, orchestra, hosting neighborhood kickball games, and long nights on the internet where I saw both the playful side of digital life and the harms that come with unregulated systems.
-            </p>
-            <p>
-              I first studied civil and architectural engineering through Project Lead The Way, then shifted into human factors and applied cognition at George Mason University when I realized my real question was how technology shapes people.
-              I watched social platforms gamify attention, saw friends change themselves to match filters, and learned how features like streaks and feeds can support or erode wellbeing.
-            </p>
-            <p>
-              Today I bring that lived experience into research driven design work across web, mobile, and conceptual ecosystems.
-              My focus sits at the intersection of internet culture, human computer interaction, and AI ethics, especially for young people who are the first to grow up entirely in the digital age.
             </p>
             <div class="tags">
               <span class="tag">Human centered design</span
@@ -2702,9 +3040,6 @@ flex-shrink: 0;
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="mission" class="island" aria-label="Mission and values">
       <div class="container">
         <div class="section-title">
           <h2>Mission and values</h2>
@@ -2713,13 +3048,17 @@ flex-shrink: 0;
 
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:1.2rem">
           <div class="info-card">
-            <h3>Proof story</h3>
+            <h3>Background</h3>
+            
             <p>
-              My proof story is the journey from a chronically online kid who saw the best and worst of social platforms to a human factors graduate who now studies how interfaces, incentives, and AI systems shape behavior.
+              I first studied civil and architectural engineering through Project Lead The Way, then shifted into human factors and applied cognition at George Mason University when I realized my real question was how technology shapes people.
+              I watched social platforms gamify attention, saw friends change themselves to match filters, and learned how features like streaks and feeds can support or erode wellbeing.
             </p>
             <p>
-              That story powers the work you see here from safety research and VR labs to digital wellness concepts like Focus and AuraFlex.
+              Today I bring that lived experience into research driven design work across web, mobile, and conceptual ecosystems.
+              My focus sits at the intersection of internet culture, human computer interaction, and AI ethics, especially for young people who are the first to grow up entirely in the digital age.
             </p>
+
           </div>
 
           <div class="info-card">
@@ -2740,7 +3079,7 @@ flex-shrink: 0;
       <div class="container">
         <div class="section-title">
           <h2>Get in touch</h2>
-          <p>Open to select consulting work and full time roles in human factors, UX research, and responsible AI.</p>
+          <p>Open to select volunteer projects and full time roles in human-computer interaction, UX research, and responsible AI.</p>
         </div>
 
         <div class="contact-grid">
@@ -2840,7 +3179,7 @@ flex-shrink: 0;
       <section aria-label="Call to action" class="footer-cta">
         <h2 class="footer-cta__title">Thema Green</h2>
         <p class="footer-cta__subtitle">
-          Human factors and AI focused researcher and designer creating accessible, steady, and effective human system experiences.<br>
+          Human-Centered AI focused researcher and designer creating accessible, steady, and effective human system experiences.<br>
           <strong>Built with performance, privacy, and accessibility in mind.</strong>
         </p>
         <div class="footer-cta__actions">
@@ -2928,6 +3267,7 @@ flex-shrink: 0;
   <button id="toTopBtn" class="to-top" type="button" aria-label="Back to top">
     <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
   </button>
+
 </body>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   
@@ -3823,56 +4163,18 @@ window.selectSuggestion = selectSuggestion;
   
   // Initialize variables
   const TESTIMONIALS = [
+
     {
-      name: "Lori Mackenzie",
-      role: "Program Manager",
-      text: "Thema was a pleasure to work with in his role and any team she will work on moving forward. Great head on her shoulders!"
+      name: "Keyshawn Kindall",
+      role: "Designer",
+      relationship: "Friend/Colleague",
+      timeframe: "12/06/2025",
+      text: "She's definitely a generational talent. Especially in today&#039;s world.",
+      link: "www.linkedin.com/in/keyshawnkindall"
     },
-    {
-      name: "Sarah Chen",
-      role: "Product Designer",
-      text: "Incredible attention to detail and a true eye for aesthetics. The project was delivered seamlessly and exceeded all expectations. Thema's approach to user-centered design transformed our entire development process."
-    },
-    {
-      name: "Marcus Johnson",
-      role: "Tech Lead",
-      text: "Solid engineering skills combined with a great design sense. It's rare to find someone who can bridge both worlds so effectively. Thema's contributions to our sprint planning sessions alone saved us weeks of rework."
-    },
-    {
-      name: "Emily Davis",
-      role: "Marketing Director",
-      text: "Our conversion rates doubled after the redesign. The user experience is intuitive and the visual hierarchy is spot on. Thema's research methodology uncovered insights we'd completely overlooked for months."
-    },
-    {
-      name: "Alex Rivera",
-      role: "Startup Founder",
-      text: "Fast, reliable, and creative. Helped us launch our MVP in record time without cutting corners on quality. Thema's ability to communicate complex technical concepts to non-technical stakeholders was invaluable."
-    },
-    {
-      name: "James Wilson",
-      role: "CTO",
-      text: "Clean code, great communication, and delivered ahead of schedule. A true professional in every sense. Thema's documentation and knowledge transfer process was the smoothest I've experienced in my career."
-    },
-    {
-      name: "Michael Rodriguez",
-      role: "UX Director",
-      text: "Thema's cognitive psychology background brought a depth to our design thinking that was transformative. The way they applied Fitts' Law and Hick's Law to our interface literally cut task completion times in half."
-    },
-    {
-      name: "Jennifer Park",
-      role: "Product Manager",
-      text: "Working with Thema was like having a human factors expert, designer, and engineer all in one person. Their ability to balance user needs with technical constraints is exceptional. Our NPS score jumped 35 points."
-    },
-    {
-      name: "David Kim",
-      role: "Accessibility Lead",
-      text: "Thema's commitment to inclusive design is outstanding. Not only did they ensure WCAG 2.1 AA compliance, but they pushed us to aim for AAA where possible. Their work will impact millions of users with disabilities."
-    },
-    {
-      name: "Olivia Thompson",
-      role: "Research Director",
-      text: "The rigor Thema brought to our usability testing protocol was impressive. Their statistical analysis of our A/B test results revealed patterns we'd completely missed. I'd hire them again in a heartbeat."
-    }
+
+
+    
   ];
   
   const PASTEL_COLORS = ['#FFE9F0', '#FFE0D4', '#FFF9D9', '#E0FCED', '#D9F2E8', '#D9EBF7', '#E9D9F7', '#E6F3FF', '#F0E6FF', '#FFF0E6'];
@@ -4757,6 +5059,11 @@ if (card.x + card.width < 0) {
 })();
 
 </script>
+
+
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
