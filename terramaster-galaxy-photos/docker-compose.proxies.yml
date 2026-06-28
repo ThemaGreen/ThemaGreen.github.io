@@ -1,0 +1,40 @@
+# Optional/advanced: generate phone-sized proxies and sync them to the phone.
+# See docs/nas-photo-architecture.md (Section 3).
+#
+#   docker-compose -f docker-compose.proxies.yml run --rm proxy-gen   # build proxies
+#   docker-compose -f docker-compose.proxies.yml up -d syncthing      # sync to phone
+
+name: galaxy-proxies
+
+services:
+  proxy-gen:
+    build: ./proxies
+    environment:
+      # Container paths: /Volume1 is mounted read-only at /src.
+      SRC_DIRS: "/src/Photos /src/My_Photos /src/homes"
+      OUT_DIR: "/out"
+      PHOTO_LONG_EDGE: "2048"
+      PHOTO_QUALITY: "72"
+      VIDEO_HEIGHT: "720"
+      VIDEO_CRF: "30"
+    volumes:
+      - /Volume1:/src:ro
+      - ${MOBILE_GALLERY:-/Volume1/public/Docker/galaxy/mobile-gallery}:/out
+    restart: "no"
+
+  syncthing:
+    image: syncthing/syncthing:latest
+    container_name: galaxy_syncthing
+    hostname: tnas
+    environment:
+      - PUID=0
+      - PGID=0
+    volumes:
+      - ${MOBILE_GALLERY:-/Volume1/public/Docker/galaxy/mobile-gallery}:/var/syncthing/mobile-gallery
+      - /Volume1/public/Docker/galaxy/syncthing-config:/var/syncthing/config
+    ports:
+      - "8384:8384"        # web UI -> http://<nas-ip>:8384
+      - "22000:22000/tcp"  # sync protocol
+      - "22000:22000/udp"
+      - "21027:21027/udp"  # discovery
+    restart: unless-stopped

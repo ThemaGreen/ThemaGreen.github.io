@@ -1,0 +1,82 @@
+# Terramaster Galaxy Photos — full stack for TOS 6 / F4-425 (Intel N95, x86-64)
+#
+# Layer 1: Immich (server + ML + postgres + redis) does ingestion, EXIF,
+#          face recognition and CLIP similarity embeddings.
+# Layer 2: galaxy-ui is the custom "floating galaxies" frontend that reads
+#          the Immich API and renders the Scribblenauts-style visualization.
+#
+# Usage on the NAS:
+#   1. Copy .env.example to .env and edit the paths/passwords.
+#   2. In TOS 6, make sure the Docker app is installed.
+#   3. docker compose up -d
+#   4. Open http://<nas-ip>:2283 to set up Immich + point it at your photos,
+#      then create an API key (Account Settings -> API Keys).
+#   5. Put that key in .env (IMMICH_API_KEY) and: docker compose up -d galaxy-ui
+#   6. Open http://<nas-ip>:8080 for the galaxy UI.
+
+name: galaxy-photos
+
+services:
+  immich-server:
+    container_name: immich_server
+    image: ghcr.io/immich-app/immich-server:release
+    volumes:
+      - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      - ${PHOTO_LIBRARY}:/usr/src/app/external:ro   # your existing NAS photo folder, read-only
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    ports:
+      - "2283:2283"
+    depends_on:
+      - redis
+      - database
+    restart: unless-stopped
+    # N95 is modest; keep the server from starving the ML container.
+    mem_limit: 3g
+
+  immich-machine-learning:
+    container_name: immich_machine_learning
+    # CPU-only image — correct for the N95 (no discrete GPU).
+    image: ghcr.io/immich-app/immich-machine-learning:release
+    volumes:
+      - model-cache:/cache
+    env_file:
+      - .env
+    restart: unless-stopped
+    mem_limit: 3g
+
+  redis:
+    container_name: immich_redis
+    image: docker.io/redis:6.2-alpine
+    healthcheck:
+      test: redis-cli ping || exit 1
+    restart: unless-stopped
+
+  database:
+    container_name: immich_postgres
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE_NAME}
+    volumes:
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  galaxy-ui:
+    container_name: galaxy_ui
+    build: ./galaxy-ui
+    environment:
+      # The browser talks to Immich through the UI's nginx reverse proxy,
+      # so we don't expose the API key to the client.
+      IMMICH_URL: http://immich-server:2283
+      IMMICH_API_KEY: ${IMMICH_API_KEY}
+    ports:
+      - "8088:80"
+    depends_on:
+      - immich-server
+    restart: unless-stopped
+
+volumes:
+  model-cache:
