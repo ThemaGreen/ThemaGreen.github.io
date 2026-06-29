@@ -15,7 +15,9 @@ export const DEFAULTS = {
   autoOrbit: true,      // gentle camera rotation
   density: 'comfortable', // 'comfortable' | 'compact' -> sprite size
   mascot: true,         // show Stella
-  palette: 'nebula',    // galaxy color palette (see store/palettes.js)
+  palette: 'nebula',    // galaxy/cloud color palette (see store/palettes.js)
+  sound: false,         // theme music (your uploaded mp3)
+  menuStyle: 'sheet',   // how panels open on phones: 'sheet' (bottom) | 'drawer' (side)
 };
 
 export function loadSettings() {

@@ -1,11 +1,26 @@
 import { PALETTES } from '../store/palettes.js';
 
-// Slide-in settings panel: appearance, data source, galaxy look, about.
+// Slide-in / bottom-sheet settings panel: appearance, data source, galaxy look.
+// The "Wedding" source is whatever the build is configured to serve
+// (Drive/manifest); "My Immich" switches to the personal live login.
+const ENV_SOURCE = import.meta.env.VITE_DEFAULT_SOURCE;
+const WEDDING_SOURCE = ['drive', 'manifest'].includes(ENV_SOURCE) ? ENV_SOURCE : 'drive';
 
 const THEMES = [
   { id: 'dark', label: 'Dark' },
   { id: 'light', label: 'Light' },
   { id: 'auto', label: 'Auto' },
+];
+
+const SOURCES = [
+  { id: 'demo', label: 'Demo' },
+  { id: WEDDING_SOURCE, label: 'Wedding' },
+  { id: 'live', label: 'My Immich' },
+];
+
+const MENU_STYLES = [
+  { id: 'sheet', label: 'Bottom' },
+  { id: 'drawer', label: 'Side' },
 ];
 
 function Row({ label, hint, children }) {
@@ -38,20 +53,46 @@ function Toggle({ on, onChange }) {
 }
 
 export default function SettingsPanel({ open, settings, update, reset, onClose, stats, account, onLogout }) {
+  const sourceVal = SOURCES.some((s) => s.id === settings.source) ? settings.source : 'demo';
   return (
-    <div className={`settings ${open ? 'open' : ''}`} role="dialog" aria-label="Settings">
+    <div className={`settings menu-${settings.menuStyle || 'sheet'} ${open ? 'open' : ''}`} role="dialog" aria-label="Settings">
       <header>
+        <span className="sheet-grip" aria-hidden="true" />
         <h3>Settings</h3>
         <button className="close" onClick={onClose} aria-label="Close">×</button>
       </header>
       <div className="body">
         <section>
+          <h4>Library</h4>
+          <Row label="Source" hint="demo · the wedding · your Immich">
+            <Seg value={sourceVal} options={SOURCES} onChange={(v) => update({ source: v })} />
+          </Row>
+          {settings.source === 'live' && account && (
+            <div className="account-row">
+              <span className="account-who">● {account.name || account.email}</span>
+              <button className="ghost-btn slim" onClick={onLogout}>Sign out</button>
+            </div>
+          )}
+          <p className="note">
+            {settings.source === 'demo' ? 'A built-in sample library — no server needed.'
+              : settings.source === 'live' ? 'Your own Immich account — only your media and what was shared with you.'
+                : 'The shared wedding gallery.'}
+          </p>
+        </section>
+
+        <section>
           <h4>Appearance</h4>
           <Row label="Theme">
             <Seg value={settings.theme} options={THEMES} onChange={(v) => update({ theme: v })} />
           </Row>
-          <Row label="Star mascot" hint="Stella, your guide">
+          <Row label="Menus open from" hint="on phones / tablets">
+            <Seg value={settings.menuStyle || 'sheet'} options={MENU_STYLES} onChange={(v) => update({ menuStyle: v })} />
+          </Row>
+          <Row label="Star mascot" hint="Stella — drag her anywhere">
             <Toggle on={settings.mascot} onChange={(v) => update({ mascot: v })} />
+          </Row>
+          <Row label="Theme music" hint="plays your gallery track">
+            <Toggle on={settings.sound} onChange={(v) => update({ sound: v })} />
           </Row>
           <div className="set-row col">
             <div className="set-label">Galaxy palette<span className="set-hint">your universe’s colors</span></div>
@@ -71,28 +112,6 @@ export default function SettingsPanel({ open, settings, update, reset, onClose, 
               ))}
             </div>
           </div>
-        </section>
-
-        <section>
-          <h4>Data source</h4>
-          <Row label="Library">
-            <Seg
-              value={settings.source}
-              options={[{ id: 'demo', label: 'Demo' }, { id: 'live', label: 'My Immich' }]}
-              onChange={(v) => update({ source: v })}
-            />
-          </Row>
-          <p className="note">
-            {settings.source === 'demo'
-              ? 'Exploring a built-in sample library — no server needed.'
-              : 'Signed in to your own Immich account — you only see your media and what friends shared with you.'}
-          </p>
-          {settings.source === 'live' && account && (
-            <div className="account-row">
-              <span className="account-who">● {account.name || account.email}</span>
-              <button className="ghost-btn slim" onClick={onLogout}>Sign out</button>
-            </div>
-          )}
         </section>
 
         <section>
@@ -117,7 +136,6 @@ export default function SettingsPanel({ open, settings, update, reset, onClose, 
           <dl className="meta">
             <dt>Photos</dt><dd>{stats?.photos?.toLocaleString() ?? '—'}</dd>
             <dt>Galaxies</dt><dd>{stats?.galaxies ?? '—'}</dd>
-            <dt>Mode</dt><dd>{settings.source === 'demo' ? 'Demo library' : 'Immich (live)'}</dd>
           </dl>
           <button className="ghost-btn" onClick={reset}>Reset to defaults</button>
         </section>

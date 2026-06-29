@@ -1,27 +1,25 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig({
-  // Host under a subpath (e.g. ThemaGreen.com/galaxy/) by building with
-  // VITE_BASE=/galaxy/ . Defaults to root for the NAS deployment.
-  base: process.env.VITE_BASE || '/',
-  plugins: [react()],
-  // Force a single Three.js instance. react-force-graph-3d bundles its own
-  // copy of three; without deduping, our UnrealBloomPass (a different three
-  // build) gets added to the force-graph's composer and throws
-  // "determinantAffine is not a function" / "Multiple instances of Three.js".
-  resolve: {
-    dedupe: ['three'],
-  },
-  server: {
-    // In local dev, proxy /api and /immich to a running Immich instance.
-    // Set VITE_IMMICH_TARGET to your NAS, e.g. http://192.168.1.50:2283
-    proxy: {
-      '/immich': {
-        target: process.env.VITE_IMMICH_TARGET || 'http://localhost:2283',
-        changeOrigin: true,
-        rewrite: (p) => p.replace(/^\/immich/, ''),
+// Read VITE_* from the shell AND from .env / .env.production so a single
+// .env.production file is enough (no juggling shell variables).
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  return {
+    // Host under a subpath (e.g. themagreen.github.io/galaxy/) by setting
+    // VITE_BASE=/galaxy/ . Defaults to root for the NAS deployment.
+    base: env.VITE_BASE || '/',
+    plugins: [react()],
+    // Force a single Three.js instance (react-force-graph-3d bundles its own).
+    resolve: { dedupe: ['three'] },
+    server: {
+      proxy: {
+        '/immich': {
+          target: env.VITE_IMMICH_TARGET || 'http://localhost:2283',
+          changeOrigin: true,
+          rewrite: (p) => p.replace(/^\/immich/, ''),
+        },
       },
     },
-  },
+  };
 });

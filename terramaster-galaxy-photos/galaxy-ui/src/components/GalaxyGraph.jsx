@@ -2,20 +2,25 @@ import { useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle }
 import ForceGraph3D from 'react-force-graph-3d';
 import * as THREE from 'three';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { buildSkybox, buildWorld, spikeTexture, glowTexture } from '../three/cosmos.js';
+import { buildSkybox, buildWorld, buildClusterClouds, spikeTexture, glowTexture } from '../three/cosmos.js';
+import { getPalette } from '../store/palettes.js';
+import { start as startAmbient, stop as stopAmbient } from '../audio/ambient.js';
 
 // Hyperreal JWST-style deep field: black space, a dense starfield, soft nebula
 // clouds, diffraction-spike cluster cores and glowing photo-stars. Zoom in and
-// the photo-stars resolve into your actual images.
+// the photo-stars resolve into your actual images. As you zoom in the nebula
+// clouds fade and the image gains contrast, so close-ups read crisp.
 const GalaxyGraph = forwardRef(function GalaxyGraph(
-  { graph, query, onSelect, theme = 'dark', bloom = true, autoOrbit = true, density = 'comfortable' },
+  { graph, query, onSelect, theme = 'dark', bloom = true, autoOrbit = true, density = 'comfortable', palette = 'nebula', sound = false },
   ref,
 ) {
   const fgRef = useRef();
   const bloomRef = useRef(null);
   const cosmosRef = useRef(null);
+  const cloudsRef = useRef(null);
   const camRef = useRef(null);
   const rafRef = useRef(0);
+  const bloomOn = useRef(bloom);
   const texLoader = useMemo(() => new THREE.TextureLoader(), []);
   const texCache = useRef(new Map());
   const [size, setSize] = useState({ w: window.innerWidth, h: window.innerHeight });
@@ -42,24 +47,40 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
   useImperativeHandle(ref, () => ({
     fit: () => fgRef.current?.zoomToFit(700, 120),
     flyTo: (node) => flyTo(node),
+    // Glide to a node WITHOUT changing how far you're zoomed in. Keeps the exact
+    // current camera→target distance and viewing direction, just re-centres on
+    // the new node. Used by auto/tour mode so it never re-zooms on you.
+    panTo: (node) => panTo(node),
     setAutoRotate: (on) => { const c = fgRef.current?.controls(); if (c) c.autoRotate = on; },
+    // Dolly the camera toward/away from the orbit target. factor<1 = zoom in,
+    // factor>1 = zoom out. Gives reliable zoom on touch devices.
+    zoomBy: (factor) => {
+      const fg = fgRef.current; if (!fg) return;
+      const cam = fg.camera(); const t = fg.controls()?.target || { x: 0, y: 0, z: 0 };
+      fg.cameraPosition({
+        x: t.x + (cam.position.x - t.x) * factor,
+        y: t.y + (cam.position.y - t.y) * factor,
+        z: t.z + (cam.position.z - t.z) * factor,
+      }, t, 280);
+    },
   }));
 
   // One-time: forces, controls, deep-space backdrop, bloom.
   useEffect(() => {
     const fg = fgRef.current;
     if (!fg) return;
-    // Spread galaxies into distinct islands: strong repulsion between clusters,
-    // short/strong links so each galaxy's photos stay a tight ball.
-    fg.d3Force('charge')?.strength(-80);
+    // Loosely-coupled galaxies: gentle global repulsion + springy hub→photo
+    // links. Dragging a node mostly moves its own cluster, not the universe.
+    fg.d3Force('charge')?.strength(-38);
     const link = fg.d3Force('link');
-    if (link) link.distance(10).strength(1);
+    if (link) link.distance((l) => (l.hub ? 18 : 46)).strength(0.78);
 
     const c = fg.controls();
     if (c) {
       c.enableDamping = true; c.dampingFactor = 0.12; c.autoRotateSpeed = 0.4;
-      // Free, fluid zoom — no clamp that fights you / springs back.
-      c.minDistance = 1; c.maxDistance = Infinity; c.zoomSpeed = 1.1;
+      // Fluid zoom. A finite max stops the orbit controls drifting out to where
+      // float precision breaks and the view "bugs out" / goes blank on zoom-out.
+      c.minDistance = 6; c.maxDistance = 6000; c.zoomSpeed = 1.05;
     }
 
     const scene = fg.scene();
@@ -67,7 +88,11 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
       const cosmos = new THREE.Group();
       cosmos.name = 'cosmos';
       cosmos.add(buildSkybox()); // far sky — follows camera (never blank)
-      cosmos.add(buildWorld());  // mid/near stars + galaxies — fixed (parallax)
+      const world = buildWorld(); // mid/near stars + galaxies — fixed (parallax)
+      const clouds = buildClusterClouds(getPalette(palette)); // palette-tinted
+      world.add(clouds);
+      cloudsRef.current = clouds;
+      cosmos.add(world);
       scene.add(cosmos);
       cosmosRef.current = cosmos;
     }
@@ -92,18 +117,40 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
       bloomRef.current = pass;
     } catch { /* bloom optional */ }
 
-    // Continuous life: parallax drift, star twinkle and hero-star pulse.
+    // Continuous life: parallax drift, star twinkle and hero-star pulse, plus
+    // zoom-aware contrast (fade the nebula clouds + ease bloom/exposure as you
+    // fly in, so close-ups are crisp and high-contrast instead of cloud-washed).
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const start = performance.now();
+    const tmpTarget = new THREE.Vector3();
     const tick = () => {
       rafRef.current = requestAnimationFrame(tick);
       const cosmos = cosmosRef.current;
       if (!cosmos) return;
       const sky = cosmos.getObjectByName('skybox');
       const world = cosmos.getObjectByName('world');
-      // Only the FAR sky follows the camera (so it never goes blank). The world
-      // stays put, giving real parallax as you zoom and orbit.
       if (sky && camRef.current) sky.position.copy(camRef.current.position);
+
+      // --- zoom factor: 0 = fully zoomed in (close), 1 = far out ---
+      const ctrls = fgRef.current?.controls();
+      const cam2 = camRef.current;
+      let zf = 1;
+      if (cam2 && ctrls) {
+        tmpTarget.copy(ctrls.target);
+        const d = cam2.position.distanceTo(tmpTarget);
+        zf = Math.min(1, Math.max(0, (d - 70) / (360 - 70)));
+      }
+      // Fade the cluster clouds out as you zoom in (kills the "light cast").
+      if (cloudsRef.current) cloudsRef.current.children.forEach((o) => {
+        if (o.userData.baseOp == null) o.userData.baseOp = o.material.opacity;
+        o.material.opacity = o.userData.baseOp * (0.12 + 0.88 * zf);
+      });
+      // Higher contrast up close: ease exposure down + soften bloom.
+      const renderer2 = fgRef.current?.renderer();
+      if (renderer2) renderer2.toneMappingExposure = 0.92 + 0.23 * zf;
+      const pass = bloomRef.current;
+      if (pass) pass.strength = bloomOn.current ? (0.4 + 0.5 * zf) : 0;
+
       if (reduce) return;
       const t = (performance.now() - start) / 1000;
       if (sky) {
@@ -127,16 +174,31 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
   }, []);
 
   useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
+  useEffect(() => { bloomOn.current = bloom; }, [bloom]);
 
   useEffect(() => {
     const c = fgRef.current?.controls();
     if (c) c.autoRotate = autoOrbit;
   }, [autoOrbit]);
 
+  // Recolour the drifting clouds when the palette changes.
   useEffect(() => {
-    const pass = bloomRef.current;
-    if (pass) pass.strength = bloom ? 0.9 : 0;
-  }, [bloom]);
+    const world = cosmosRef.current?.getObjectByName('world');
+    if (!world) return;
+    if (cloudsRef.current) {
+      world.remove(cloudsRef.current);
+      cloudsRef.current.traverse((o) => { o.material?.map?.dispose?.(); o.material?.dispose?.(); });
+    }
+    const clouds = buildClusterClouds(getPalette(palette));
+    world.add(clouds);
+    cloudsRef.current = clouds;
+  }, [palette]);
+
+  // Ambient theme music (your uploaded mp3). Toggle from a user gesture.
+  useEffect(() => {
+    if (sound) startAmbient(); else stopAmbient();
+  }, [sound]);
+  useEffect(() => () => stopAmbient(), []);
 
   function flyTo(node) {
     if (!node) return;
@@ -146,6 +208,21 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
     fgRef.current?.cameraPosition(
       { x: (node.x || 0) * k, y: (node.y || 0) * k, z: (node.z || 0) * k }, node, 900,
     );
+  }
+
+  // Re-centre on a node while preserving the user's current zoom distance and
+  // view angle. We take the current camera→target offset vector and re-apply it
+  // around the new node, so the framing stays identical — only the subject moves.
+  function panTo(node) {
+    const fg = fgRef.current;
+    if (!fg || !node) return;
+    const cam = fg.camera();
+    const target = fg.controls()?.target || { x: 0, y: 0, z: 0 };
+    const ox = cam.position.x - target.x;
+    const oy = cam.position.y - target.y;
+    const oz = cam.position.z - target.z;
+    const nx = node.x || 0, ny = node.y || 0, nz = node.z || 0;
+    fg.cameraPosition({ x: nx + ox, y: ny + oy, z: nz + oz }, { x: nx, y: ny, z: nz }, 900);
   }
 
   const dim = (label) => q && !(label || '').toLowerCase().includes(q);
@@ -163,7 +240,6 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
       const ss = node.val * 3.4;
       star.scale.set(ss, ss, 1);
       group.add(star);
-      // label
       const label = makeTextSprite(`${node.label}  ·  ${node.count}`, faded);
       label.position.set(0, node.val * 1.4, 0);
       group.add(label);

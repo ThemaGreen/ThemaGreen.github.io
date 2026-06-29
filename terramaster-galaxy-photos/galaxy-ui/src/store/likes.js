@@ -59,6 +59,28 @@ export async function getLikes(ids) {
   return out;
 }
 
+// All likes at once → { [assetId]: { count, mine, who: [] } }. Used for the
+// Favorites filter and "favorited by" list.
+export async function getAllLikes() {
+  const me = getViewer();
+  if (useSupabase) {
+    try {
+      const r = await fetch(`${SB_URL}/rest/v1/likes?select=asset_id,viewer`, { headers: sbHeaders() });
+      if (r.ok) {
+        const map = {};
+        for (const row of await r.json()) {
+          const o = map[row.asset_id] || (map[row.asset_id] = { count: 0, mine: false, who: [] });
+          o.count += 1; o.who.push(row.viewer); if (row.viewer === me) o.mine = true;
+        }
+        return map;
+      }
+    } catch { /* fall through */ }
+  }
+  const all = localAll(); const map = {};
+  for (const [id, who] of Object.entries(all)) map[id] = { count: who.length, mine: who.includes(me), who };
+  return map;
+}
+
 export async function toggleLike(id) {
   const me = getViewer() || 'Guest';
   if (useSupabase) {

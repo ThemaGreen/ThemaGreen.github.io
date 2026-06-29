@@ -37,24 +37,46 @@ function placeKey(a) {
   return { key: city, label: country ? `${city}, ${country}` : city };
 }
 
-function thingKey(a) {
-  const c = a.category || a.exifInfo?.category;
-  return c ? { key: c, label: c } : { key: 'other', label: 'Uncategorized' };
+function typeKey(a) {
+  return a.type === 'VIDEO' ? { key: 'video', label: 'Videos' } : { key: 'photo', label: 'Photos' };
+}
+function cameraKey(a) {
+  const c = [a.exifInfo?.make, a.exifInfo?.model].filter(Boolean).join(' ').trim();
+  return c ? { key: c, label: c } : { key: 'unknown-cam', label: 'Unknown camera' };
 }
 
+// Multi-value groupers (an asset can belong to several): a photo with two
+// people appears in both their galaxies. Untagged photos return [] so they
+// don't clutter tag-based views.
+const multiKey = (arr, prefix) => (Array.isArray(arr) ? arr : []).filter(Boolean).map((v) => ({ key: `${prefix}:${v}`, label: v }));
+const peopleKey = (a) => multiKey((a.people || []).map((p) => p.name || p), 'person');
+const familyKey = (a) => multiKey(a.family, 'family');
+const labelKey  = (a) => multiKey([...(a.labels || []), ...(a.category && a.category !== 'Wedding' && a.category !== 'Drive' && a.category !== 'Album' ? [a.category] : [])], 'label');
+
 function grouperFor(mode, granularity) {
-  if (mode === 'places') return placeKey;
-  if (mode === 'things') return thingKey;
-  return (a) => timeKey(a, granularity); // default: time
+  switch (mode) {
+    case 'places': return placeKey;
+    case 'things': return labelKey;
+    case 'labels': return labelKey;
+    case 'people': return peopleKey;
+    case 'family': return familyKey;
+    case 'type':   return typeKey;
+    case 'camera': return cameraKey;
+    default:       return (a) => timeKey(a, granularity);
+  }
 }
 
 export function buildGraph(assets, { mode = 'time', granularity = 'month', thumbOf, palette }) {
   const grouper = grouperFor(mode, granularity);
   const clusters = new Map();
   for (const a of assets) {
-    const { key, label, order } = grouper(a);
-    if (!clusters.has(key)) clusters.set(key, { label, order: order ?? null, assets: [] });
-    clusters.get(key).assets.push(a);
+    const res = grouper(a);
+    const entries = Array.isArray(res) ? res : [res];
+    for (const { key, label, order } of entries) {
+      if (!key) continue;
+      if (!clusters.has(key)) clusters.set(key, { label, order: order ?? null, assets: [] });
+      clusters.get(key).assets.push(a);
+    }
   }
   return clustersToGraph(clusters, thumbOf, mode, getPalette(palette));
 }

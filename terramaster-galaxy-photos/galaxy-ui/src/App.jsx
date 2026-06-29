@@ -6,16 +6,42 @@ import Login from './components/Login.jsx';
 import { buildGraph, buildPeopleGraph, buildFriendsGraph } from './clustering/layout.js';
 import { getApi } from './api/source.js';
 import { useSettings, resolveTheme } from './store/settings.js';
-import { getLikes, toggleLike, getViewer, setViewer } from './store/likes.js';
+import { getLikes, getAllLikes, toggleLike, getViewer, setViewer } from './store/likes.js';
+import { setSfxEnabled, playTap, playMove } from './audio/sfx.js';
+import { fetchAllTags, addTag, removeTag, indexTags, KINDS } from './store/tags.js';
+import { listCollections, createCollection, deleteCollection, toggleInCollection, collectionsOf } from './store/collections.js';
+
+// Merge shared user-tags into an asset so the groupers/filters can use them.
+function enrich(a, byAsset) {
+  const t = byAsset.get(a.assetId || a.id) || {};
+  const tagPeople = (t.person || []).map((n) => ({ id: n, name: n }));
+  const people = [...(a.people || []), ...tagPeople.filter((tp) => !(a.people || []).some((p) => (p.name || p) === tp.name))];
+  return {
+    ...a,
+    people,
+    family: t.family || [],
+    labels: [...new Set([...(a.labels || []), ...(t.label || [])])],
+    exifInfo: { ...a.exifInfo, city: (t.place && t.place[0]) || a.exifInfo?.city },
+  };
+}
 
 // "Cluster by" — the spatial organizing principle for the galaxies.
-const MODES = [
+const ALL_MODES = [
   { id: 'time',    label: 'Time' },
   { id: 'people',  label: 'People' },
-  { id: 'places',  label: 'Places' },
-  { id: 'things',  label: 'Things' },
+  { id: 'family',  label: 'Family' },
+  { id: 'places',  label: 'Location' },
+  { id: 'things',  label: 'Labels' },
+  { id: 'camera',  label: 'Device' },
+  { id: 'type',    label: 'Type' },
   { id: 'friends', label: 'Friends' },
 ];
+
+// Optional gallery branding (public Drive build sets these); sensible wedding
+// defaults so it reads right even before the env vars are configured.
+const TITLE = import.meta.env.VITE_GALLERY_TITLE || 'Amira & Jacob’s Wedding';
+const SUBTITLE = import.meta.env.VITE_GALLERY_SUBTITLE || 'June 18, 2026 · Canada';
+if (typeof document !== 'undefined') document.title = TITLE;
 const GRANS = [
   { id: 'year',  label: 'Year' },
   { id: 'month', label: 'Month' },
@@ -53,7 +79,77 @@ export default function App() {
   const [isFull, setIsFull] = useState(false);
   const [friendsTick, setFriendsTick] = useState(0);
   const [account, setAccount] = useState(undefined); // undefined=checking, null=needs login, obj=signed in
+  const [tagRows, setTagRows] = useState([]);
+  const [likesMap, setLikesMap] = useState({});
+  const [tour, setTour] = useState(false);
+  const [shuffle, setShuffle] = useState(false);
+  const [collections, setCollections] = useState(() => listCollections());
+  const [activeCollection, setActiveCollection] = useState(null); // album id to filter to
+  const [showAlbums, setShowAlbums] = useState(false);
   const galaxyRef = useRef();
+  const tourRef = useRef({ order: [], i: -1 });
+
+  // Shared tags (people/family/location/labels) — loaded once, refreshed on edit.
+  const refreshTags = async () => { try { setTagRows(await fetchAllTags()); } catch { /* ignore */ } };
+  useEffect(() => { refreshTags(); }, []);
+
+  // Hearts → Favorites: load everyone's likes; refresh helper for after a heart.
+  const refreshLikes = async () => { try { setLikesMap(await getAllLikes()); } catch { /* ignore */ } };
+  useEffect(() => { refreshLikes(); }, []);
+
+  // Audio on/off follows the master "Ambient sound" setting (SFX use your files).
+  useEffect(() => { setSfxEnabled(settings.sound); }, [settings.sound]);
+
+  // Select a photo (with tap sound) — used by clicks and the tour.
+  const pickPhoto = (asset, moved) => {
+    if (asset) (moved ? playMove : playTap)();
+    setSelected(asset);
+  };
+
+  // Albums: refresh from the store after any change.
+  const refreshCollections = () => setCollections(listCollections());
+  const activeAlbum = collections.find((c) => c.id === activeCollection) || null;
+
+  // Close panels with Escape.
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      setShowSettings(false); setShowAbout(false); setSelected(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  // Auto-tour: hop photo→photo. Default order is cluster-by-cluster (the graph
+  // node order); Shuffle jumps around randomly. Each hop flies the camera,
+  // opens the photo, and plays your "move" sound.
+  const photoNodes = useMemo(() => graph.nodes.filter((n) => n.type === 'photo'), [graph]);
+  const step = (dir) => {
+    let order = tourRef.current.order;
+    if (!order.length) { order = shuffle ? [...photoNodes].sort(() => Math.random() - 0.5) : photoNodes; tourRef.current.order = order; }
+    if (!order.length) return;
+    const t = tourRef.current;
+    t.i = ((t.i + dir) % order.length + order.length) % order.length;
+    const node = order[t.i];
+    // Auto/tour mode keeps YOUR zoom level — pan to re-centre, don't re-zoom.
+    galaxyRef.current?.panTo(node);
+    pickPhoto(node.asset, true);
+  };
+  useEffect(() => {
+    if (!tour) return undefined;
+    tourRef.current = { order: shuffle ? [...photoNodes].sort(() => Math.random() - 0.5) : photoNodes, i: -1 };
+    if (!tourRef.current.order.length) { setTour(false); return undefined; }
+    step(1);
+    const id = setInterval(() => step(1), 4500);
+    return () => clearInterval(id);
+  }, [tour, shuffle, photoNodes]);
+  const tagIndex = useMemo(() => indexTags(tagRows), [tagRows]);
+
+  // The working asset set, enriched with shared tags.
+  const assets = useMemo(
+    () => (raw?.kind === 'assets' ? raw.assets.map((a) => enrich(a, tagIndex.byAsset)) : []),
+    [raw, tagIndex],
+  );
 
   // Validate the session whenever we're in Live mode.
   useEffect(() => {
@@ -113,18 +209,9 @@ export default function App() {
           const [friends, mine] = await Promise.all([api.fetchFriends(), api.fetchAssets({ max: 60 })]);
           const you = { id: 'you', me: true, name: 'You', palette: settings.palette, assets: mine.slice(0, 30) };
           if (!cancelled) setRaw({ kind: 'friends', friends: [you, ...friends] });
-        } else if (mode === 'people') {
-          const people = (await api.fetchPeople()).slice(0, 40);
-          const byPerson = new Map();
-          for (const p of people) {
-            const res = await api.searchAssets({ personIds: [p.id], size: 120 });
-            const assets = res.items ?? [];
-            if (assets.length) byPerson.set(p.id, { person: p, assets });
-          }
-          if (!cancelled) setRaw({ kind: 'people', byPerson });
         } else {
-          const assets = await api.fetchAssets({ max: 600 });
-          if (!cancelled) setRaw({ kind: 'assets', assets });
+          const list = await api.fetchAssets({ max: 5000 });
+          if (!cancelled) setRaw({ kind: 'assets', assets: list });
         }
       } catch (e) {
         if (!cancelled) { setRaw(null); setStatus(`Couldn’t reach the library — ${e.message}`); setBusy(false); }
@@ -156,51 +243,59 @@ export default function App() {
   useEffect(() => {
     if (!raw && !override) return;
     const q = query.trim().toLowerCase();
-    const favPass = (a) => !favOnly || a.isFavorite;
+    const favPass = (a) => !favOnly || (likesMap[a.assetId || a.id]?.count > 0);
     const textPass = (a) => override ? true : (!q || localMatch(a, q));
+    const albumIds = activeAlbum ? new Set(activeAlbum.assetIds) : null;
+    const albumPass = (a) => !albumIds || albumIds.has(a.assetId || a.id);
     const thumbOf = (a) => a.thumb || api.thumbUrl(a);
 
     let g, count;
     if (mode === 'friends' && raw?.kind === 'friends') {
       const friends = raw.friends
-        .map((f) => ({ ...f, palette: f.me ? settings.palette : f.palette, assets: f.assets.filter((a) => favPass(a) && textPass(a)) }))
+        .map((f) => ({ ...f, palette: f.me ? settings.palette : f.palette, assets: f.assets.filter((a) => favPass(a) && textPass(a) && albumPass(a)) }))
         .filter((f) => f.assets.length);
       g = buildFriendsGraph(friends, thumbOf);
       count = friends.reduce((n, f) => n + f.assets.length, 0);
-    } else if (mode === 'people') {
-      const byPerson = new Map();
-      if (override) {
-        for (const a of override.filter(favPass)) {
-          for (const p of (a.people || [])) {
-            if (!byPerson.has(p.id)) byPerson.set(p.id, { person: p, assets: [] });
-            byPerson.get(p.id).assets.push(a);
-          }
-        }
-      } else if (raw?.kind === 'people') {
-        for (const [id, v] of raw.byPerson) {
-          const assets = v.assets.filter((a) => favPass(a) && textPass(a));
-          if (assets.length) byPerson.set(id, { person: v.person, assets });
-        }
-      }
-      g = buildPeopleGraph(byPerson, thumbOf, settings.palette);
-      count = [...byPerson.values()].reduce((n, v) => n + v.assets.length, 0);
     } else {
-      const src = override ?? (raw?.kind === 'assets' ? raw.assets : []);
-      const assets = src.filter((a) => favPass(a) && textPass(a));
-      g = buildGraph(assets, { mode, granularity, thumbOf, palette: settings.palette });
-      count = assets.length;
+      const src = override ? override.map((a) => enrich(a, tagIndex.byAsset)) : assets;
+      const filtered = src.filter((a) => favPass(a) && textPass(a) && albumPass(a));
+      g = buildGraph(filtered, { mode, granularity, thumbOf, palette: settings.palette });
+      count = filtered.length;
     }
     setGraph(g);
     setBusy(false);
     const galaxies = g.nodes.filter((n) => n.type === 'hub').length;
     const noun = override ? 'results' : 'photos';
     setStatus(count ? `${count.toLocaleString()} ${noun} · ${galaxies} galaxies` : (override ? 'No matches — try another search' : 'No photos match — try clearing filters'));
-  }, [raw, override, query, favOnly, mode, granularity, api, settings.palette]);
+  }, [raw, assets, tagIndex, likesMap, override, query, favOnly, mode, granularity, api, settings.palette, activeAlbum]);
 
   const stats = useMemo(() => ({
     photos: graph.nodes.filter((n) => n.type === 'photo').length,
     galaxies: graph.nodes.filter((n) => n.type === 'hub').length,
   }), [graph]);
+
+  // Only offer filters the loaded metadata can actually sort by.
+  const visibleModes = useMemo(() => {
+    const a = assets;
+    const social = settings.source === 'demo' || settings.source === 'live';
+    const distinctCam = new Set(a.filter((x) => x.exifInfo?.make).map((x) => `${x.exifInfo.make} ${x.exifInfo.model}`));
+    const avail = {
+      time: true,
+      type: a.some((x) => x.type === 'VIDEO') && a.some((x) => x.type === 'IMAGE'),
+      camera: distinctCam.size > 1,
+      people: social || a.some((x) => x.people?.length),
+      family: a.some((x) => x.family?.length),
+      places: a.some((x) => x.exifInfo?.city),
+      things: a.some((x) => x.labels?.length),
+      friends: social,
+    };
+    return ALL_MODES.filter((m) => avail[m.id]);
+  }, [assets, settings.source]);
+
+  // If the current mode isn't available for this data, fall back to Time.
+  useEffect(() => {
+    if (visibleModes.length && !visibleModes.some((m) => m.id === mode)) setMode('time');
+  }, [visibleModes, mode]);
 
   const liveLink = settings.source === 'live' && selected ? api.immichAssetLink(selected) : null;
 
@@ -211,7 +306,11 @@ export default function App() {
   return (
     <>
       <div className="topbar">
-        <div className="brand"><span className="spark">✦</span> Galaxy <em>Photos</em></div>
+        <div className="brand">
+          <span className="spark">✦</span>{' '}
+          {TITLE ? <strong className="brand-title">{TITLE}</strong> : <>Galaxy <em>Photos</em></>}
+        </div>
+        {SUBTITLE && <div className="brand-sub">{SUBTITLE}</div>}
 
         <form className="cmd" onSubmit={runSearch}>
           <button type="submit" className="cmd-go" aria-label="Search"><SearchIcon /></button>
@@ -226,8 +325,8 @@ export default function App() {
 
         <div className="controls-row">
           <span className="row-label">Cluster by</span>
-          <div className="seg">
-            {MODES.map((m) => (
+          <div className="seg modes">
+            {visibleModes.map((m) => (
               <button key={m.id} className={`seg-btn ${mode === m.id ? 'active' : ''}`}
                 onClick={() => { setSelected(null); setMode(m.id); }}>{m.label}</button>
             ))}
@@ -241,6 +340,34 @@ export default function App() {
             </div>
           )}
           <button className={`chip fav ${favOnly ? 'active' : ''}`} onClick={() => setFavOnly((v) => !v)}>★ Favorites</button>
+
+          <div className="album-wrap">
+            <button className={`chip album ${activeAlbum ? 'active' : ''}`} onClick={() => setShowAlbums((v) => !v)}>
+              ❤ {activeAlbum ? activeAlbum.name : 'Albums'} ▾
+            </button>
+            {showAlbums && (
+              <div className="album-menu" role="menu">
+                <button className={`album-item ${!activeAlbum ? 'on' : ''}`} onClick={() => { setActiveCollection(null); setShowAlbums(false); }}>
+                  All photos
+                </button>
+                {collections.map((c) => (
+                  <div key={c.id} className={`album-item row ${activeCollection === c.id ? 'on' : ''}`}>
+                    <button className="album-pick" onClick={() => { setActiveCollection(c.id); setShowAlbums(false); }}>
+                      {c.name} <span className="album-count">{c.assetIds.length}</span>
+                    </button>
+                    <button className="album-del" title="Delete album"
+                      onClick={() => { deleteCollection(c.id); if (activeCollection === c.id) setActiveCollection(null); refreshCollections(); }}>×</button>
+                  </div>
+                ))}
+                <button className="album-new" onClick={() => {
+                  const name = (prompt('Name this album:') || '').trim();
+                  if (!name) return;
+                  const col = createCollection(name); refreshCollections(); setActiveCollection(col.id); setShowAlbums(false);
+                }}>＋ New album</button>
+              </div>
+            )}
+          </div>
+
           {mode === 'friends' && <button className="chip add" onClick={addPerson}>＋ Add person</button>}
         </div>
       </div>
@@ -254,14 +381,22 @@ export default function App() {
         <div className="modal-backdrop" onClick={() => setShowAbout(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <header>
-              <h3>About &amp; privacy</h3>
+              <h3>About this gallery</h3>
               <button className="close" onClick={() => setShowAbout(false)} aria-label="Close">×</button>
             </header>
             <div className="modal-body">
-              <p>A private family gallery of our shared photos &amp; videos.</p>
+              <p className="lead">Congratulations, Amira &amp; Jacob 💛</p>
+              <p>I built this little universe so the day wouldn’t live buried in a
+                camera roll. Each glowing galaxy is a cluster of our photos and
+                videos — drift through them, zoom into a memory, heart the ones you
+                love, and add names so we can all find each other again later.</p>
+              <p>What I hope you take from it: that an evening together can become a
+                place you can wander back into anytime. Tag yourself, build an album,
+                send it to someone who couldn’t make it. It was genuinely lovely
+                meeting everyone — thank you for letting me be part of it.</p>
+              <p className="sig">— with love, your friendly neighbourhood dev ✦</p>
               <p>If you’d prefer a photo or video of you not be shown here, or have
-                any concern about your media being shown publicly, please reach out
-                and I’ll remove it:</p>
+                any concern about your media, please reach out and I’ll remove it:</p>
               <p className="contact">
                 <a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a><br />
                 <a href="https://themagreen.com" target="_blank" rel="noreferrer">submit via the form on themagreen.com ↗</a>
@@ -276,10 +411,19 @@ export default function App() {
         <span className="hint">drag to orbit · scroll to zoom · click a photo for details</span>
       </div>
 
+      {/* Tour bar (bottom-center) */}
+      <div className="tourbar">
+        <button className="iconbtn" title="Previous" onClick={() => step(-1)}>‹</button>
+        <button className={`iconbtn ${tour ? 'on' : ''}`} title={tour ? 'Pause tour' : 'Play tour'}
+          onClick={() => setTour((t) => !t)}>{tour ? '❚❚' : '▶'}</button>
+        <button className="iconbtn" title="Next" onClick={() => step(1)}>›</button>
+        <button className={`iconbtn ${shuffle ? 'on' : ''}`} title="Shuffle (jump around)" onClick={() => setShuffle((s) => !s)}>⤨</button>
+      </div>
+
       <div className="controls">
+        <button className="iconbtn" title="Fit / reset view" onClick={() => galaxyRef.current?.fit()}><FitIcon /></button>
         <button className={`iconbtn ${settings.autoOrbit ? 'on' : ''}`} title="Auto-orbit"
           onClick={() => update({ autoOrbit: !settings.autoOrbit })}><OrbitIcon /></button>
-        <button className="iconbtn" title="Fit to view" onClick={() => galaxyRef.current?.fit()}><FitIcon /></button>
         <button className={`iconbtn ${isFull ? 'on' : ''}`} title="Fullscreen" onClick={toggleFullscreen}>
           {isFull ? <ExitFullscreenIcon /> : <FullscreenIcon />}
         </button>
@@ -289,11 +433,19 @@ export default function App() {
 
       <div className={`detail ${selected ? 'open' : ''}`}>
         <header>
+          <span className="sheet-grip" aria-hidden="true" />
           <h3>{selected?.originalFileName || 'Photo'}</h3>
           <button className="close" onClick={() => setSelected(null)} aria-label="Close">×</button>
         </header>
         {selected && (
-          <DetailBody selected={selected} api={api} liveLink={liveLink} onSearchTag={(t) => { setQuery(t); setTimeout(() => runSearch(), 0); }} />
+          <DetailBody selected={selected} api={api} liveLink={liveLink}
+            suggestions={tagIndex.suggestions}
+            onTagsChanged={refreshTags}
+            onLiked={refreshLikes}
+            collections={collections}
+            onCollectionsChanged={refreshCollections}
+            initialWho={(likesMap[selected.assetId || selected.id]?.who) || []}
+            onSearchTag={(t) => { setQuery(t); setTimeout(() => runSearch(), 0); }} />
         )}
       </div>
 
@@ -304,30 +456,26 @@ export default function App() {
 
       {settings.mascot && <Mascot />}
 
-      <GalaxyGraph ref={galaxyRef} graph={graph} query={query} onSelect={setSelected}
-        theme={theme} bloom={settings.bloom} autoOrbit={settings.autoOrbit} density={settings.density} />
+      <GalaxyGraph ref={galaxyRef} graph={graph} query={query} onSelect={(a) => pickPhoto(a, false)}
+        theme={theme} bloom={settings.bloom} autoOrbit={settings.autoOrbit} density={settings.density}
+        palette={settings.palette} sound={settings.sound} />
     </>
   );
 }
 
-const VIS = [
-  { id: 'private', label: 'Private' },
-  { id: 'friends', label: 'Friends' },
-  { id: 'sensitive', label: 'Sensitive' },
-];
-
-function DetailBody({ selected, api, liveLink, onSearchTag }) {
-  const [label, setLabel] = useState('');
-  const [labels, setLabels] = useState(() => (selected.labels || (selected.tags || []).map((t) => t.name || t.value) || []));
-  const [saving, setSaving] = useState(false);
-  const [vis, setVis] = useState(selected.visibility || 'private');
-  const [reveal, setReveal] = useState(false);
-  const [likes, setLikes] = useState({ count: 0, mine: false });
+function DetailBody({ selected, api, liveLink, suggestions, onTagsChanged, onSearchTag, onLiked, collections = [], onCollectionsChanged, initialWho = [] }) {
+  const assetId = selected.assetId || selected.id;
+  const myAlbums = collectionsOf(assetId);
+  const toggleAlbum = (id) => { toggleInCollection(id, assetId); onCollectionsChanged?.(); };
+  const addNewAlbum = () => {
+    const name = (prompt('Name a new album for this photo:') || '').trim();
+    if (!name) return;
+    createCollection(name, [assetId]); onCollectionsChanged?.();
+  };
+  const [likes, setLikes] = useState({ count: initialWho.length, mine: false, who: initialWho });
   useEffect(() => {
-    setLabels(selected.labels || (selected.tags || []).map((t) => t.name || t.value) || []);
-    setLabel(''); setVis(selected.visibility || 'private'); setReveal(false);
     let off = false;
-    getLikes([selected.id]).then((m) => { if (!off) setLikes(m[selected.id] || { count: 0, mine: false }); });
+    getLikes([selected.id]).then((m) => { if (!off) setLikes(m[selected.id] || { count: 0, mine: false, who: [] }); });
     return () => { off = true; };
   }, [selected]);
 
@@ -337,83 +485,102 @@ function DetailBody({ selected, api, liveLink, onSearchTag }) {
       if (!n) return;
       setViewer(n);
     }
-    const res = await toggleLike(selected.id);
-    setLikes(res);
+    setLikes(await toggleLike(selected.id));
+    onLiked?.();
   };
 
-  const addLabel = async (e) => {
-    e.preventDefault();
-    const name = label.trim();
-    if (!name) return;
-    setSaving(true);
-    try { await api.addLabel(selected.id, name); setLabels((ls) => [...new Set([...ls, name])]); setLabel(''); }
-    catch (err) { alert(`Couldn’t add label: ${err.message}`); }
-    finally { setSaving(false); }
-  };
-
-  const changeVis = async (v) => {
-    setVis(v);
-    try { await api.setVisibility?.(selected.id, v); selected.visibility = v; }
-    catch (err) { alert(`Couldn’t update visibility: ${err.message}`); }
-  };
-
-  const blurred = vis === 'sensitive' && !reveal;
   const video = selected.type === 'VIDEO';
   const vUrl = video ? api.videoUrl?.(selected) : '';
 
   return (
     <div className="body">
-      <div className={`photo-wrap ${blurred ? 'sensitive' : ''}`}>
+      <div className="photo-wrap">
         {video && selected.embed
           ? <iframe className="embed" src={selected.embed} title={selected.originalFileName} allow="autoplay; encrypted-media" allowFullScreen />
           : video && vUrl
             ? <video src={vUrl} poster={api.previewUrl(selected)} controls playsInline preload="metadata" />
             : <img src={api.previewUrl(selected)} alt={selected.originalFileName} loading="lazy" />}
         {video && !vUrl && !selected.embed && <span className="play-badge" title="Video">▶ {selected.duration || 'Video'}</span>}
-        {blurred && <button className="reveal" onClick={() => setReveal(true)}>Sensitive · tap to view</button>}
         <button className={`heart ${likes.mine ? 'liked' : ''}`} onClick={heart} title="Like" aria-label="Like">
           <HeartIcon filled={likes.mine} />{likes.count > 0 && <span>{likes.count}</span>}
         </button>
       </div>
       <dl className="meta">
         <dt>Taken</dt><dd>{fmtDate(selected)}</dd>
-        {selected.exifInfo?.city && <><dt>Place</dt><dd>{[selected.exifInfo.city, selected.exifInfo.country].filter(Boolean).join(', ')}</dd></>}
-        {selected.category && <><dt>Category</dt><dd>{selected.category}</dd></>}
-        {selected.people?.length > 0 && <><dt>People</dt><dd>{selected.people.map((p) => p.name).join(', ')}</dd></>}
-        {selected.exifInfo?.make && <><dt>Camera</dt><dd>{[selected.exifInfo.make, selected.exifInfo.model].filter(Boolean).join(' ')}</dd></>}
-        {selected.isFavorite && <><dt>Favorite</dt><dd>★ Yes</dd></>}
+        {selected.exifInfo?.make && <><dt>Device</dt><dd>{[selected.exifInfo.make, selected.exifInfo.model].filter(Boolean).join(' ')}</dd></>}
+        {video && selected.duration && <><dt>Length</dt><dd>{selected.duration}</dd></>}
+        {likes.who?.length > 0 && <><dt>♥ Favorited by</dt><dd>{likes.who.join(', ')}</dd></>}
       </dl>
 
-      <div className="labels">
-        <div className="labels-title">Labels</div>
-        <div className="label-chips">
-          {labels.length ? labels.map((l) => (
-            <button key={l} className="label-chip" onClick={() => onSearchTag(l)} title={`Search “${l}”`}>{l}</button>
-          )) : <span className="muted">No labels yet</span>}
-        </div>
-        <form className="label-add" onSubmit={addLabel}>
-          <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="Add a label (e.g. wedding)" />
-          <button type="submit" disabled={saving}>{saving ? '…' : 'Add'}</button>
-        </form>
-      </div>
-
-      <div className="labels">
-        <div className="labels-title">Visibility</div>
-        <div className="seg small vis">
-          {VIS.map((o) => (
-            <button key={o.id} className={`seg-btn ${vis === o.id ? 'active' : ''}`} onClick={() => changeVis(o.id)}>{o.label}</button>
+      <div className="albums-box">
+        <div className="labels-title">Albums</div>
+        <div className="album-chips">
+          {collections.map((c) => (
+            <button key={c.id} className={`album-chip ${myAlbums.includes(c.id) ? 'on' : ''}`} onClick={() => toggleAlbum(c.id)}>
+              {myAlbums.includes(c.id) ? '✓ ' : '＋ '}{c.name}
+            </button>
           ))}
+          <button className="album-chip new" onClick={addNewAlbum}>＋ New album</button>
         </div>
-        <p className="note">
-          {vis === 'private' && 'Only you can see this — never shared.'}
-          {vis === 'friends' && 'Visible to friends you’ve shared with.'}
-          {vis === 'sensitive' && 'Shared but blurred until tapped; hidden from your main timeline.'}
-        </p>
       </div>
 
-      {liveLink
-        ? <a className="open-immich" href={liveLink} target="_blank" rel="noreferrer">Open in Immich ↗</a>
-        : <div className="demo-tag">Demo photo · generated locally</div>}
+      <TagEditor selected={selected} suggestions={suggestions} onChange={onTagsChanged} onSearchTag={onSearchTag} />
+
+      {liveLink && <a className="open-immich" href={liveLink} target="_blank" rel="noreferrer">Open in Immich ↗</a>}
+    </div>
+  );
+}
+
+// Editable, shared tags for a photo: People / Family / Location / Labels.
+// Pre-filled suggestions (from existing tags + seeds) plus free write-in.
+function TagEditor({ selected, suggestions, onChange, onSearchTag }) {
+  const seed = () => ({
+    person: (selected.people || []).map((p) => p.name || p),
+    family: selected.family || [],
+    place: selected.exifInfo?.city ? [selected.exifInfo.city] : [],
+    label: selected.labels || [],
+  });
+  const [vals, setVals] = useState(seed);
+  const [inputs, setInputs] = useState({ person: '', family: '', place: '', label: '' });
+  useEffect(() => { setVals(seed()); setInputs({ person: '', family: '', place: '', label: '' }); }, [selected]);
+
+  const add = async (kind, value) => {
+    value = (value || '').trim();
+    if (!value || vals[kind].includes(value)) { setInputs((s) => ({ ...s, [kind]: '' })); return; }
+    setVals((v) => ({ ...v, [kind]: [...v[kind], value] }));
+    setInputs((s) => ({ ...s, [kind]: '' }));
+    selected[kind === 'place' ? '_place' : kind] = undefined; // local hint; real source is tags
+    try { await addTag(selected.assetId || selected.id, kind, value); onChange?.(); } catch { /* ignore */ }
+  };
+  const remove = async (kind, value) => {
+    setVals((v) => ({ ...v, [kind]: v[kind].filter((x) => x !== value) }));
+    try { await removeTag(selected.assetId || selected.id, kind, value); onChange?.(); } catch { /* ignore */ }
+  };
+
+  return (
+    <div className="tagger">
+      {KINDS.map((k) => (
+        <div className="labels" key={k.id}>
+          <div className="labels-title">{k.label}</div>
+          <div className="label-chips">
+            {vals[k.id].length ? vals[k.id].map((v) => (
+              <span key={v} className="label-chip editable">
+                <button className="chip-text" onClick={() => onSearchTag?.(v)} title={`Search “${v}”`}>{v}</button>
+                <button className="chip-x" onClick={() => remove(k.id, v)} aria-label="Remove">×</button>
+              </span>
+            )) : <span className="muted">None yet</span>}
+          </div>
+          <form className="label-add" onSubmit={(e) => { e.preventDefault(); add(k.id, inputs[k.id]); }}>
+            <input list={`sugg-${k.id}`} value={inputs[k.id]}
+              onChange={(e) => setInputs((s) => ({ ...s, [k.id]: e.target.value }))}
+              placeholder={`Add ${k.label.toLowerCase()}…`} />
+            <datalist id={`sugg-${k.id}`}>
+              {(suggestions?.[k.id] || []).map((s) => <option key={s} value={s} />)}
+            </datalist>
+            <button type="submit">Add</button>
+          </form>
+        </div>
+      ))}
     </div>
   );
 }

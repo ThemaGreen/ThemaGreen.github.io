@@ -115,9 +115,10 @@ export function buildBackgroundGalaxies({ count = 320, radius = 1900 } = {}) {
   return group;
 }
 
-// A billowing nebula cloud built from many additive colour blobs.
-function nebulaTexture(seed, hues) {
-  return cached(`neb:${seed}`, () => {
+// A billowing nebula cloud built from many additive colour blobs. Saturation
+// is kept low for an elegant, muted look; sat/light are tunable.
+function nebulaTexture(seed, hues, sat = 42, light = 62) {
+  return cached(`neb:${seed}:${hues.join(',')}:${sat}`, () => {
     const s = 512, c = document.createElement('canvas'); c.width = c.height = s;
     const x = c.getContext('2d');
     x.globalCompositeOperation = 'lighter';
@@ -126,8 +127,8 @@ function nebulaTexture(seed, hues) {
       const px = r() * s, py = r() * s, rad = 30 + r() * 150;
       const hue = hues[(r() * hues.length) | 0];
       const g = x.createRadialGradient(px, py, 0, px, py, rad);
-      g.addColorStop(0, `hsla(${hue},70%,60%,${0.05 + r() * 0.06})`);
-      g.addColorStop(1, `hsla(${hue},70%,60%,0)`);
+      g.addColorStop(0, `hsla(${hue},${sat}%,${light}%,${0.05 + r() * 0.06})`);
+      g.addColorStop(1, `hsla(${hue},${sat}%,${light}%,0)`);
       x.fillStyle = g; x.fillRect(0, 0, s, s);
     }
     // radial edge falloff so the billboard has no hard rectangular border
@@ -199,35 +200,37 @@ export function buildWorld() {
   const near = starLayer(800, 950, 13, 19); near.name = 'near';
   for (const l of [core, mid, near]) l.userData.baseOpacity = l.material.opacity;
   g.add(core, mid, near);
-  g.add(buildClusterClouds());
   g.add(buildBackgroundGalaxies({ count: 240, radius: 2600 }));
   g.add(buildHeroStars({ count: 16, radius: 1500 }));
   return g;
 }
 
 // Soft colour clouds that hug the cluster region near the origin, so each
-// galaxy sits inside drifting nebula — majestic, but low-opacity so the photos
-// still read. Multi-hue so they complement any chosen palette.
-export function buildClusterClouds() {
+// galaxy sits inside drifting nebula. These take their colour from the chosen
+// palette (this is what "changes colour" when you switch palettes), kept
+// low-saturation and low-opacity for an elegant look.
+export function buildClusterClouds(palette) {
+  const hues = (palette && palette.hues && palette.hues.length) ? palette.hues : [205, 270, 30];
+  const pick = (i) => [hues[i % hues.length], hues[(i + 1) % hues.length], hues[(i + 2) % hues.length]];
   const g = new THREE.Group();
   g.name = 'clusterClouds';
   const defs = [
-    { seed: 201, hues: [260, 300, 210], pos: [-130, 60, -40],  scale: 620, op: 0.16 },
-    { seed: 202, hues: [190, 210, 170], pos: [170, -50, 90],   scale: 680, op: 0.14 },
-    { seed: 203, hues: [18, 340, 40],   pos: [40, 150, -130],  scale: 560, op: 0.12 },
-    { seed: 204, hues: [280, 200, 320], pos: [-190, -130, 120],scale: 640, op: 0.12 },
-    { seed: 205, hues: [170, 205, 150], pos: [120, 120, 30],   scale: 540, op: 0.13 },
+    { seed: 201, pos: [-130, 60, -40],   scale: 620, op: 0.18 },
+    { seed: 202, pos: [170, -50, 90],    scale: 680, op: 0.16 },
+    { seed: 203, pos: [40, 150, -130],   scale: 560, op: 0.14 },
+    { seed: 204, pos: [-190, -130, 120], scale: 640, op: 0.14 },
+    { seed: 205, pos: [120, 120, 30],    scale: 540, op: 0.15 },
   ];
-  for (const d of defs) {
+  defs.forEach((d, i) => {
     const sp = new THREE.Sprite(new THREE.SpriteMaterial({
-      map: nebulaTexture(d.seed, d.hues), transparent: true, opacity: d.op,
+      map: nebulaTexture(d.seed, pick(i), 40, 64), transparent: true, opacity: d.op,
       depthWrite: false, blending: THREE.AdditiveBlending,
     }));
     sp.position.set(...d.pos);
     sp.scale.set(d.scale, d.scale, 1);
     sp.renderOrder = -7;
     g.add(sp);
-  }
+  });
   return g;
 }
 

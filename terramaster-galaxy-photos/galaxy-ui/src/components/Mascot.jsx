@@ -3,35 +3,43 @@ import { useEffect, useRef, useState } from 'react';
 // Stella — the star-photographer mascot.
 //
 // Uses your artwork at /stella.png (drop a transparent PNG into
-// galaxy-ui/public/stella.png). If it's missing, a simple friendly star is
-// shown so nothing looks broken.
+// galaxy-ui/public/stella.png). If it's missing, a friendly star is shown.
 //
-// Interactions: idle bob, subtle tilt toward the cursor, hover wiggle,
-// click -> rotating helpful tip, double-click -> happy spin.
+// Interactions: idle bob, subtle tilt toward the cursor, tap → rotating tip,
+// double-tap → happy spin, and you can DRAG her anywhere on screen — on drop
+// she plays one of several reaction animations (spin / bounce / wobble / flip).
 
 const TIPS = [
-  "Hi! I'm Stella ✨ Drag anywhere to orbit the galaxies.",
-  'Each glowing core is a galaxy — a cluster of your photos.',
-  'Try “Cluster by → People” to see everyone’s own galaxy.',
-  'Switch to “Places” to travel your photos by city. 🌍',
-  'Scroll to zoom. Click a photo-star for its details.',
-  'Tap the ☀️ in Settings for light mode.',
-  '★ Favorites filters down to the keepers.',
-  'Type in the search bar to spotlight matching photos.',
+  "Hi! I'm Stella ✨ Welcome to Amira & Jacob’s wedding gallery.",
+  'Drag to orbit the galaxies · scroll to zoom in.',
+  'Psst — you can drag me anywhere on screen. Try it!',
+  'Each glowing core is a galaxy of photos — tap one to explore.',
+  'Tap a photo to see it big, with the date and details.',
+  'Tap the ❤️ on a photo so the family sees what you love.',
+  'Open a photo to add tags: People, Family, Location, Labels.',
+  'Search a name like “Thema” to find every photo they’re tagged in.',
+  'Make an Album so you don’t have to search the same thing twice.',
 ];
+
+const REACTIONS = ['react-spin', 'react-bounce', 'react-wobble', 'react-flip'];
 
 export default function Mascot({ onTip }) {
   const ref = useRef(null);
   const artRef = useRef(null);
   const [tip, setTip] = useState(null);
-  const [spin, setSpin] = useState(false);
+  const [reaction, setReaction] = useState(null);
   const [useSvg, setUseSvg] = useState(false);
+  const [pos, setPos] = useState(null);   // {x,y} once dragged, else null (CSS default)
+  const [dragging, setDragging] = useState(false);
   const tipIdx = useRef(0);
   const hideTimer = useRef(null);
+  const reactTimer = useRef(null);
+  const drag = useRef(null);   // { offX, offY, moved, downAt }
 
-  // Gentle tilt toward the cursor for a touch of life.
+  // Gentle tilt toward the cursor for a touch of life (paused while dragging).
   useEffect(() => {
     const onMove = (e) => {
+      if (drag.current) return;
       const el = ref.current, art = artRef.current;
       if (!el || !art) return;
       const r = el.getBoundingClientRect();
@@ -45,6 +53,15 @@ export default function Mascot({ onTip }) {
     return () => window.removeEventListener('pointermove', onMove);
   }, []);
 
+  const react = () => {
+    const r = REACTIONS[(Math.random() * REACTIONS.length) | 0];
+    setReaction(null);
+    // next frame so the class re-triggers even if it's the same one
+    requestAnimationFrame(() => setReaction(r));
+    clearTimeout(reactTimer.current);
+    reactTimer.current = setTimeout(() => setReaction(null), 1100);
+  };
+
   const say = () => {
     const t = TIPS[tipIdx.current % TIPS.length];
     tipIdx.current += 1;
@@ -53,17 +70,53 @@ export default function Mascot({ onTip }) {
     clearTimeout(hideTimer.current);
     hideTimer.current = setTimeout(() => setTip(null), 5200);
   };
-  const cheer = () => { setSpin(true); setTimeout(() => setSpin(false), 800); };
+
+  // ---- drag handling ----
+  const onPointerDown = (e) => {
+    const el = ref.current; if (!el) return;
+    const r = el.getBoundingClientRect();
+    drag.current = { offX: e.clientX - r.left, offY: e.clientY - r.top, moved: 0, downAt: Date.now() };
+    el.setPointerCapture?.(e.pointerId);
+    setDragging(true);
+  };
+  const onPointerMove = (e) => {
+    const d = drag.current; if (!d) return;
+    d.moved += Math.abs(e.movementX) + Math.abs(e.movementY);
+    const size = ref.current?.offsetWidth || 96;
+    const x = Math.max(4, Math.min(window.innerWidth - size - 4, e.clientX - d.offX));
+    const y = Math.max(4, Math.min(window.innerHeight - size - 4, e.clientY - d.offY));
+    setPos({ x, y });
+  };
+  const onPointerUp = (e) => {
+    const d = drag.current; drag.current = null;
+    setDragging(false);
+    ref.current?.releasePointerCapture?.(e.pointerId);
+    if (!d) return;
+    if (d.moved < 6 && Date.now() - d.downAt < 350) {
+      say();           // treated as a tap
+    } else {
+      react();         // dropped after a drag → celebrate
+    }
+  };
+
+  const style = pos ? { left: pos.x, top: pos.y, right: 'auto', bottom: 'auto' } : undefined;
 
   return (
-    <div className="mascot" ref={ref}>
+    <div
+      className={`mascot ${dragging ? 'dragging' : ''} ${pos ? 'placed' : ''}`}
+      ref={ref}
+      style={style}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+    >
       {tip && <div className="mascot-bubble" role="status" onClick={() => setTip(null)}>{tip}</div>}
       <button
-        className={`mascot-btn ${spin ? 'spin' : ''}`}
-        onClick={say}
-        onDoubleClick={cheer}
-        aria-label="Stella — tap for a tip"
-        title="Tap me for a tip!"
+        className={`mascot-btn ${reaction || ''}`}
+        onDoubleClick={react}
+        aria-label="Stella — tap for a tip, drag to move"
+        title="Tap me for a tip — or drag me anywhere!"
       >
         <span className="mascot-art" ref={artRef}>
           {useSvg

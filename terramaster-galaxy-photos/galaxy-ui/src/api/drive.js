@@ -13,12 +13,26 @@
 
 export const isDemo = false;
 
-const FOLDER = import.meta.env.VITE_DRIVE_FOLDER_ID;
+// Accept either a raw folder id or a pasted folder URL.
+function parseFolderId(v) {
+  if (!v) return v;
+  const m = String(v).match(/\/folders\/([^/?#]+)/) || String(v).match(/[?&]id=([^&]+)/);
+  return m ? m[1] : String(v).trim();
+}
+const FOLDER = parseFolderId(import.meta.env.VITE_DRIVE_FOLDER_ID);
 const KEY = import.meta.env.VITE_DRIVE_KEY;
 
 // Public display URLs (no API key needed to *show* public files).
-const thumbOf = (id, w = 500) => `https://drive.google.com/thumbnail?id=${id}&sz=w${w}`;
+// Images use the direct googleusercontent CDN (no redirect, fast, CORS-enabled
+// so they work as WebGL textures). Videos use Drive's poster + preview iframe.
+const imgUrl = (id, w) => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
+const vidThumb = (id, w) => `https://drive.google.com/thumbnail?id=${id}&sz=w${w}`;
 const embedOf = (id) => `https://drive.google.com/file/d/${id}/preview`;
+
+function fmtDuration(ms) {
+  const s = Math.round(Number(ms || 0) / 1000);
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+}
 
 let _cache = null;
 
@@ -34,6 +48,8 @@ function driveDate(f) {
 function toAsset(f, album) {
   const isVid = (f.mimeType || '').startsWith('video/');
   const date = driveDate(f);
+  const im = f.imageMediaMetadata || {};
+  const vm = f.videoMediaMetadata || {};
   return {
     id: f.id,
     provider: 'drive',
@@ -41,15 +57,22 @@ function toAsset(f, album) {
     originalFileName: f.name || 'media',
     localDateTime: date,
     fileCreatedAt: f.createdTime || date,
-    category: album || 'Drive',
+    category: album || 'Wedding',
     people: [],
     isFavorite: false,
     labels: [],
-    thumb: thumbOf(f.id, 500),
-    preview: thumbOf(f.id, 1600),
-    src: isVid ? '' : thumbOf(f.id, 1600),
+    duration: isVid && vm.durationMillis ? fmtDuration(vm.durationMillis) : null,
+    thumb: isVid ? vidThumb(f.id, 500) : imgUrl(f.id, 500),
+    preview: isVid ? vidThumb(f.id, 1280) : imgUrl(f.id, 1600),
+    src: isVid ? '' : imgUrl(f.id, 1600),
     embed: isVid ? embedOf(f.id) : null,
-    exifInfo: { dateTimeOriginal: date, city: null, country: null },
+    exifInfo: {
+      dateTimeOriginal: date,
+      make: im.cameraMake || null,
+      model: im.cameraModel || null,
+      city: null,
+      country: import.meta.env.VITE_GALLERY_PLACE || null,
+    },
   };
 }
 
@@ -58,7 +81,7 @@ async function listFolder(folderId) {
   let pageToken = '';
   do {
     const q = encodeURIComponent(`'${folderId}' in parents and trashed=false`);
-    const fields = encodeURIComponent('nextPageToken,files(id,name,mimeType,createdTime,imageMediaMetadata(time))');
+    const fields = encodeURIComponent('nextPageToken,files(id,name,mimeType,createdTime,imageMediaMetadata(time,cameraMake,cameraModel),videoMediaMetadata(durationMillis))');
     const url = `https://www.googleapis.com/drive/v3/files?q=${q}&key=${KEY}&fields=${fields}&pageSize=1000&supportsAllDrives=true&includeItemsFromAllDrives=true${pageToken ? `&pageToken=${pageToken}` : ''}`;
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Drive ${res.status} — check folder sharing & API key`);

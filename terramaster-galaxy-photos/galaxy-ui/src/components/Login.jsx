@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
-// Per-account sign-in for Live (Immich) mode. Each person logs into their own
-// account, so the app only ever shows what *they* own or were shared.
+const TITLE = import.meta.env.VITE_GALLERY_TITLE;
+
+// Per-account sign-in for Live (Immich) mode. Each person signs into their own
+// account and only sees what they own or were shared. (The public wedding/demo
+// build doesn't use this — that's gated by the password screen in Gate.jsx.)
 export default function Login({ api, onSuccess, onDemo }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,8 +27,11 @@ export default function Login({ api, onSuccess, onDemo }) {
   return (
     <div className="login">
       <form className="login-card" onSubmit={submit}>
-        <div className="login-brand"><span className="spark">✦</span> Galaxy <em>Photos</em></div>
-        <p className="login-sub">Sign in to your own universe</p>
+        <div className="login-brand">
+          <span className="spark">✦</span>{' '}
+          {TITLE ? <strong>{TITLE}</strong> : <>Galaxy <em>Photos</em></>}
+        </div>
+        <p className="login-sub">Sign in to your own gallery</p>
         <label>Email
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="username" required />
         </label>
@@ -34,8 +40,8 @@ export default function Login({ api, onSuccess, onDemo }) {
         </label>
         {err && <div className="login-err">{err}</div>}
         <button className="login-go" type="submit" disabled={busy}>{busy ? 'Signing in…' : 'Sign in'}</button>
-        <button className="login-demo" type="button" onClick={onDemo}>Explore the demo instead</button>
-        <p className="login-foot">Use your account on this NAS’s Immich. Don’t have one? Ask the owner to create it.</p>
+        {onDemo && <button className="login-demo" type="button" onClick={onDemo}>Explore the demo instead</button>}
+        <p className="login-foot">Your photos stay private to your account.</p>
       </form>
     </div>
   );
