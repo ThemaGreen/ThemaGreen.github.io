@@ -1,21 +1,14 @@
 import { PALETTES } from '../store/palettes.js';
+import { sourcesFor, getTier } from '../store/access.js';
 
 // Slide-in / bottom-sheet settings panel: appearance, data source, galaxy look.
-// The "Wedding" source is whatever the build is configured to serve
-// (Drive/manifest); "My Immich" switches to the personal live login.
-const ENV_SOURCE = import.meta.env.VITE_DEFAULT_SOURCE;
-const WEDDING_SOURCE = ['drive', 'manifest'].includes(ENV_SOURCE) ? ENV_SOURCE : 'drive';
-
+// The offered sources depend on the access tier: family members (entered the
+// password) get Wedding + My Immich; guests get Demo + My Immich. "My Immich"
+// signs into the visitor's OWN Immich and shows their own media — not the wedding.
 const THEMES = [
   { id: 'dark', label: 'Dark' },
   { id: 'light', label: 'Light' },
   { id: 'auto', label: 'Auto' },
-];
-
-const SOURCES = [
-  { id: 'demo', label: 'Demo' },
-  { id: WEDDING_SOURCE, label: 'Wedding' },
-  { id: 'live', label: 'My Immich' },
 ];
 
 const MENU_STYLES = [
@@ -53,7 +46,10 @@ function Toggle({ on, onChange }) {
 }
 
 export default function SettingsPanel({ open, settings, update, reset, onClose, stats, account, onLogout }) {
-  const sourceVal = SOURCES.some((s) => s.id === settings.source) ? settings.source : 'demo';
+  const tier = getTier();
+  const SOURCES = sourcesFor(tier);
+  const sourceVal = SOURCES.some((s) => s.id === settings.source) ? settings.source : SOURCES[0].id;
+  const hint = tier === 'guest' ? 'demo · your own Immich' : 'the wedding · your own Immich';
   return (
     <div className={`settings menu-${settings.menuStyle || 'sheet'} ${open ? 'open' : ''}`} role="dialog" aria-label="Settings">
       <header>
@@ -64,7 +60,7 @@ export default function SettingsPanel({ open, settings, update, reset, onClose, 
       <div className="body">
         <section>
           <h4>Library</h4>
-          <Row label="Source" hint="demo · the wedding · your Immich">
+          <Row label="Source" hint={hint}>
             <Seg value={sourceVal} options={SOURCES} onChange={(v) => update({ source: v })} />
           </Row>
           {settings.source === 'live' && account && (
@@ -74,8 +70,8 @@ export default function SettingsPanel({ open, settings, update, reset, onClose, 
             </div>
           )}
           <p className="note">
-            {settings.source === 'demo' ? 'A built-in sample library — no server needed.'
-              : settings.source === 'live' ? 'Your own Immich account — only your media and what was shared with you.'
+            {settings.source === 'demo' ? 'A sample library to explore the experience — no account needed.'
+              : settings.source === 'live' ? 'Signed in to your own Immich — you see your personal photos & videos, not the wedding.'
                 : 'The shared wedding gallery.'}
           </p>
         </section>

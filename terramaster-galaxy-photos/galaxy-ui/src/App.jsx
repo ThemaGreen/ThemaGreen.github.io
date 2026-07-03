@@ -10,6 +10,8 @@ import { getLikes, getAllLikes, toggleLike, getViewer, setViewer } from './store
 import { setSfxEnabled, playTap, playMove } from './audio/sfx.js';
 import { fetchAllTags, addTag, removeTag, indexTags, KINDS } from './store/tags.js';
 import { listCollections, createCollection, deleteCollection, toggleInCollection, collectionsOf } from './store/collections.js';
+import { homeSource, WEDDING_SOURCE } from './store/access.js';
+import { useResolvedSrc } from './api/media.js';
 
 // Merge shared user-tags into an asset so the groupers/filters can use them.
 function enrich(a, byAsset) {
@@ -37,11 +39,21 @@ const ALL_MODES = [
   { id: 'friends', label: 'Friends' },
 ];
 
-// Optional gallery branding (public Drive build sets these); sensible wedding
-// defaults so it reads right even before the env vars are configured.
-const TITLE = import.meta.env.VITE_GALLERY_TITLE || 'Amira & Jacob’s Wedding';
-const SUBTITLE = import.meta.env.VITE_GALLERY_SUBTITLE || 'June 18, 2026 · Canada';
-if (typeof document !== 'undefined') document.title = TITLE;
+// Wedding branding applies ONLY while the wedding library is active. Demo and
+// My Immich get their own neutral/personal branding (see brandFor below).
+const WEDDING_TITLE = import.meta.env.VITE_GALLERY_TITLE || 'Amira & Jacob’s Wedding';
+const WEDDING_SUBTITLE = import.meta.env.VITE_GALLERY_SUBTITLE || 'June 18, 2026 · Canada';
+
+function brandFor(source, account) {
+  if (source === WEDDING_SOURCE) {
+    return { title: WEDDING_TITLE, sub: WEDDING_SUBTITLE, wedding: true };
+  }
+  if (source === 'live') {
+    const first = (account?.name || '').trim().split(/\s+/)[0];
+    return { title: first ? `${first}’s Galaxy` : 'My Immich', sub: 'Your personal photos & videos', wedding: false };
+  }
+  return { title: null, sub: 'Demo universe — a sample library to explore', wedding: false }; // null → “Galaxy Photos” wordmark
+}
 const GRANS = [
   { id: 'year',  label: 'Year' },
   { id: 'month', label: 'Month' },
@@ -109,6 +121,33 @@ export default function App() {
   // Albums: refresh from the store after any change.
   const refreshCollections = () => setCollections(listCollections());
   const activeAlbum = collections.find((c) => c.id === activeCollection) || null;
+
+  // ---- Mobile photo sheet: drag down to dismiss, opacity follows the drag ----
+  const [sheetT, setSheetT] = useState(0);      // px the sheet is dragged down
+  const sheetDrag = useRef(null);
+  useEffect(() => { setSheetT(0); }, [selected]); // reset when a new photo opens
+  const isTouchLayout = () => window.matchMedia?.('(max-width: 820px)').matches;
+  const startSheetDrag = (e) => {
+    if (!isTouchLayout()) return;
+    sheetDrag.current = { y: e.clientY, moved: 0 };
+    const onMove = (ev) => {
+      const d = sheetDrag.current; if (!d) return;
+      const dy = ev.clientY - d.y; d.moved = dy;
+      setSheetT(Math.max(0, dy));          // only downward
+    };
+    const onUp = () => {
+      const d = sheetDrag.current; sheetDrag.current = null;
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      if (d && d.moved > window.innerHeight * 0.16) setSelected(null); // dismiss
+      setSheetT(0);
+    };
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+  };
+  const sheetStyle = sheetT
+    ? { transform: `translateY(${sheetT}px)`, opacity: Math.max(0.25, 1 - sheetT / (window.innerHeight * 0.55)), transition: 'none' }
+    : undefined;
 
   // Close panels with Escape.
   useEffect(() => {
@@ -299,8 +338,13 @@ export default function App() {
 
   const liveLink = settings.source === 'live' && selected ? api.immichAssetLink(selected) : null;
 
+  // Branding follows the ACTIVE library: wedding title only on the wedding,
+  // "Galaxy Photos" for the demo, "<Name>'s Galaxy" once signed into Immich.
+  const brand = brandFor(settings.source, account);
+  useEffect(() => { document.title = brand.title || 'Galaxy Photos'; }, [brand.title]);
+
   if (needsLogin) {
-    return <Login api={api} onSuccess={setAccount} onDemo={() => update({ source: 'demo' })} />;
+    return <Login api={api} onSuccess={setAccount} onDemo={() => update({ source: homeSource() })} />;
   }
 
   return (
@@ -308,16 +352,18 @@ export default function App() {
       <div className="topbar">
         <div className="brand">
           <span className="spark">✦</span>{' '}
-          {TITLE ? <strong className="brand-title">{TITLE}</strong> : <>Galaxy <em>Photos</em></>}
+          {brand.title ? <strong className="brand-title">{brand.title}</strong> : <>Galaxy <em>Photos</em></>}
         </div>
-        {SUBTITLE && <div className="brand-sub">{SUBTITLE}</div>}
+        {brand.sub && <div className="brand-sub">{brand.sub}</div>}
 
         <form className="cmd" onSubmit={runSearch}>
           <button type="submit" className="cmd-go" aria-label="Search"><SearchIcon /></button>
           <input
             value={query}
             onChange={(e) => { const v = e.target.value; setQuery(v); if (!v.trim()) setOverride(null); }}
-            placeholder="Search a name, place, or label like “wedding”… (Enter)"
+            placeholder={brand.wedding
+              ? 'Search a name, place, or label like “wedding”… (Enter)'
+              : 'Search a name, place, or label… (Enter)'}
             spellCheck={false}
           />
           {query && <button type="button" className="clear" onClick={clearSearch} aria-label="Clear">×</button>}
@@ -385,18 +431,33 @@ export default function App() {
               <button className="close" onClick={() => setShowAbout(false)} aria-label="Close">×</button>
             </header>
             <div className="modal-body">
-              <p className="lead">Congratulations, Amira &amp; Jacob 💛</p>
-              <p>I built this little universe so the day wouldn’t live buried in a
-                camera roll. Each glowing galaxy is a cluster of our photos and
-                videos — drift through them, zoom into a memory, heart the ones you
-                love, and add names so we can all find each other again later.</p>
-              <p>What I hope you take from it: that an evening together can become a
-                place you can wander back into anytime. Tag yourself, build an album,
-                send it to someone who couldn’t make it. It was genuinely lovely
-                meeting everyone — thank you for letting me be part of it.</p>
-              <p className="sig">— with love, your friendly neighbourhood dev ✦</p>
-              <p>If you’d prefer a photo or video of you not be shown here, or have
-                any concern about your media, please reach out and I’ll remove it:</p>
+              {brand.wedding ? (
+                <>
+                  <p className="lead">Congratulations, Amira &amp; Jacob 💛</p>
+                  <p>I built this little universe so the day wouldn’t live buried in a
+                    camera roll. Each glowing galaxy is a cluster of our photos and
+                    videos — drift through them, zoom into a memory, heart the ones you
+                    love, and add names so we can all find each other again later.</p>
+                  <p>What I hope you take from it: that an evening together can become a
+                    place you can wander back into anytime. Tag yourself, build an album,
+                    send it to someone who couldn’t make it. It was genuinely lovely
+                    meeting everyone — thank you for letting me be part of it.</p>
+                  <p className="sig">— with love, your friendly neighbourhood dev ✦</p>
+                  <p>If you’d prefer a photo or video of you not be shown here, or have
+                    any concern about your media, please reach out and I’ll remove it:</p>
+                </>
+              ) : (
+                <>
+                  <p className="lead">A little universe for photos ✦</p>
+                  <p>Galaxy Photos turns a photo library into an explorable 3D galaxy —
+                    every cluster is a group of moments. Drift, zoom into a memory,
+                    heart what you love, and tag names so they’re easy to find again.</p>
+                  <p>{settings.source === 'live'
+                    ? 'You’re signed into your own Immich, so everything here is your personal library — private to your account.'
+                    : 'You’re exploring the demo — a sample library. Sign into your own Immich (Settings → Source) to see your personal photos this way.'}</p>
+                  <p>Questions or ideas? I’d love to hear them:</p>
+                </>
+              )}
               <p className="contact">
                 <a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a><br />
                 <a href="https://themagreen.com" target="_blank" rel="noreferrer">submit via the form on themagreen.com ↗</a>
@@ -431,8 +492,8 @@ export default function App() {
 
       {busy && (<div className="overlay"><div className="card"><div className="spinner" />{status}</div></div>)}
 
-      <div className={`detail ${selected ? 'open' : ''}`}>
-        <header>
+      <div className={`detail ${selected ? 'open' : ''}`} style={sheetStyle}>
+        <header onPointerDown={startSheetDrag} style={{ touchAction: 'none' }}>
           <span className="sheet-grip" aria-hidden="true" />
           <h3>{selected?.originalFileName || 'Photo'}</h3>
           <button className="close" onClick={() => setSelected(null)} aria-label="Close">×</button>
@@ -444,6 +505,7 @@ export default function App() {
             onLiked={refreshLikes}
             collections={collections}
             onCollectionsChanged={refreshCollections}
+            onSheetDragStart={startSheetDrag}
             initialWho={(likesMap[selected.assetId || selected.id]?.who) || []}
             onSearchTag={(t) => { setQuery(t); setTimeout(() => runSearch(), 0); }} />
         )}
@@ -463,7 +525,7 @@ export default function App() {
   );
 }
 
-function DetailBody({ selected, api, liveLink, suggestions, onTagsChanged, onSearchTag, onLiked, collections = [], onCollectionsChanged, initialWho = [] }) {
+function DetailBody({ selected, api, liveLink, suggestions, onTagsChanged, onSearchTag, onLiked, collections = [], onCollectionsChanged, onSheetDragStart, initialWho = [] }) {
   const assetId = selected.assetId || selected.id;
   const myAlbums = collectionsOf(assetId);
   const toggleAlbum = (id) => { toggleInCollection(id, assetId); onCollectionsChanged?.(); };
@@ -491,15 +553,18 @@ function DetailBody({ selected, api, liveLink, suggestions, onTagsChanged, onSea
 
   const video = selected.type === 'VIDEO';
   const vUrl = video ? api.videoUrl?.(selected) : '';
+  // Remote Immich media is fetched with the user's token (blob URL); everything
+  // else passes straight through.
+  const previewSrc = useResolvedSrc(api.previewUrl(selected));
 
   return (
     <div className="body">
-      <div className="photo-wrap">
+      <div className="photo-wrap" onPointerDown={onSheetDragStart} style={{ touchAction: 'pan-x' }}>
         {video && selected.embed
           ? <iframe className="embed" src={selected.embed} title={selected.originalFileName} allow="autoplay; encrypted-media" allowFullScreen />
           : video && vUrl
-            ? <video src={vUrl} poster={api.previewUrl(selected)} controls playsInline preload="metadata" />
-            : <img src={api.previewUrl(selected)} alt={selected.originalFileName} loading="lazy" />}
+            ? <video src={vUrl} poster={previewSrc || undefined} controls playsInline preload="metadata" />
+            : <img src={previewSrc || undefined} alt={selected.originalFileName} loading="lazy" />}
         {video && !vUrl && !selected.embed && <span className="play-badge" title="Video">▶ {selected.duration || 'Video'}</span>}
         <button className={`heart ${likes.mine ? 'liked' : ''}`} onClick={heart} title="Like" aria-label="Like">
           <HeartIcon filled={likes.mine} />{likes.count > 0 && <span>{likes.count}</span>}

@@ -9,12 +9,56 @@
 
 export const isDemo = false;
 
-const BASE = '/immich';
+// --- Server selection --------------------------------------------------------
+// Default is the family/NAS endpoint: the '/immich' reverse proxy (same-origin),
+// or VITE_IMMICH_URL if the build configures a public address. If the visitor's
+// network can't reach that (they're not on the NAS), they can enter their OWN
+// Immich server URL at the login screen — it's remembered on their device.
+const DEFAULT_BASE = import.meta.env.VITE_IMMICH_URL || '/immich';
+const SERVER_KEY = 'galaxy.immich.server';
+
+// Accepts "photos.example.com", "https://photos.example.com/", or a full
+// ".../api" URL — normalizes to the API root Immich expects.
+export function normalizeServer(v) {
+  let s = (v || '').trim();
+  if (!s) return '';
+  if (!/^https?:\/\//i.test(s) && !s.startsWith('/')) s = `https://${s}`;
+  s = s.replace(/\/+$/, '');
+  if (/^https?:\/\//i.test(s) && !/\/api$/i.test(s)) s = `${s}/api`;
+  return s;
+}
+export function getServer() { try { return localStorage.getItem(SERVER_KEY) || ''; } catch { return ''; } }
+export function setServer(v) {
+  const s = normalizeServer(v);
+  try { s ? localStorage.setItem(SERVER_KEY, s) : localStorage.removeItem(SERVER_KEY); } catch { /* ignore */ }
+}
+export function activeBase() { return getServer() || DEFAULT_BASE; }
+export function isRemote() { return /^https?:\/\//i.test(activeBase()); }
+const BASE = { toString: () => activeBase() }; // template-literal friendly
+const creds = () => (isRemote() ? 'omit' : 'same-origin');
+
+// Quick reachability probe (3s timeout) — used by the login screen to decide
+// whether to suggest entering a personal server address.
+export async function ping(server) {
+  const b = server ? normalizeServer(server) : activeBase();
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), 3000);
+  try {
+    for (const path of ['/server-info/ping', '/server/ping']) {
+      try {
+        const r = await fetch(`${b}${path}`, { signal: ctl.signal, credentials: creds() });
+        if (r.ok) { clearTimeout(t); return true; }
+      } catch { /* try next */ }
+    }
+  } finally { clearTimeout(t); }
+  return false;
+}
 
 // --- Per-user auth ---------------------------------------------------------
 // Each visitor logs into their OWN Immich account. We keep the access token for
-// API calls (Authorization header); Immich also sets a same-origin cookie which
-// authenticates <img>/<video> requests that can't carry a header.
+// API calls (Authorization header); on the same-origin NAS deployment Immich's
+// cookie also authenticates <img>/<video> requests that can't carry a header
+// (remote servers use the authenticated media resolver in api/media.js).
 const TOKEN_KEY = 'galaxy.immich.token';
 export function getToken() { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; } }
 function setToken(t) { try { t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY); } catch { /* ignore */ } }
@@ -26,9 +70,10 @@ function headers() {
   return h;
 }
 
-export async function login(email, password) {
+export async function login(email, password, server) {
+  if (server !== undefined) setServer(server); // '' clears back to the family default
   const res = await fetch(`${BASE}/auth/login`, {
-    method: 'POST', credentials: 'same-origin',
+    method: 'POST', credentials: creds(),
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   });
@@ -39,13 +84,13 @@ export async function login(email, password) {
 }
 
 export async function logout() {
-  try { await fetch(`${BASE}/auth/logout`, { method: 'POST', credentials: 'same-origin', headers: headers() }); } catch { /* ignore */ }
+  try { await fetch(`${BASE}/auth/logout`, { method: 'POST', credentials: creds(), headers: headers() }); } catch { /* ignore */ }
   setToken('');
 }
 
 // Returns the signed-in user, or throws if not authenticated.
 export async function me() {
-  const res = await fetch(`${BASE}/users/me`, { credentials: 'same-origin', headers: headers() });
+  const res = await fetch(`${BASE}/users/me`, { credentials: creds(), headers: headers() });
   if (!res.ok) throw new Error('not authenticated');
   return res.json();
 }
@@ -68,6 +113,7 @@ export function previewUrl(asset) { return `${BASE}/assets/${asset.id}/thumbnail
 export function videoUrl(asset) { return `${BASE}/assets/${asset.id}/video/playback`; }
 export const isVideo = (asset) => asset?.type === 'VIDEO';
 export function immichAssetLink(asset) {
+  if (isRemote()) return `${activeBase().replace(/\/api$/, '')}/photos/${asset.id}`;
   return `${window.location.protocol}//${window.location.hostname}:2283/photos/${asset.id}`;
 }
 

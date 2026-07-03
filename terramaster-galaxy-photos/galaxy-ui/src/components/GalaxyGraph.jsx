@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { buildSkybox, buildWorld, buildClusterClouds, spikeTexture, glowTexture } from '../three/cosmos.js';
 import { getPalette } from '../store/palettes.js';
+import { resolveImage } from '../api/media.js';
 import { start as startAmbient, stop as stopAmbient } from '../audio/ambient.js';
 
 // Hyperreal JWST-style deep field: black space, a dense starfield, soft nebula
@@ -21,9 +22,45 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
   const camRef = useRef(null);
   const rafRef = useRef(0);
   const bloomOn = useRef(bloom);
-  const texLoader = useMemo(() => new THREE.TextureLoader(), []);
+  const texLoader = useMemo(() => { const l = new THREE.TextureLoader(); l.setCrossOrigin('anonymous'); return l; }, []);
   const texCache = useRef(new Map());
+  const loadQueue = useRef([]);
+  const loadActive = useRef(0);
+  const isMobile = useMemo(() => window.matchMedia?.('(max-width: 820px)').matches, []);
   const [size, setSize] = useState({ w: window.innerWidth, h: window.innerHeight });
+
+  // Concurrency-limited thumbnail loader. Rather than firing hundreds of image
+  // requests at once (which stalls the page and floods GPU memory), we load a
+  // few at a time and fade each sprite in when its texture arrives.
+  const MAX_LOADS = isMobile ? 4 : 8;
+  const pumpLoads = () => {
+    while (loadActive.current < MAX_LOADS && loadQueue.current.length) {
+      const { url, sprite } = loadQueue.current.shift();
+      if (!sprite.material) { continue; } // disposed
+      loadActive.current += 1;
+      // Remote Immich media needs an authenticated fetch first (returns a blob
+      // object-URL); every other source resolves to the same URL untouched.
+      resolveImage(url).then((finalUrl) => texLoader.load(
+        finalUrl,
+        (tex) => {
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.generateMipmaps = false; tex.minFilter = THREE.LinearFilter;
+          texCache.current.set(url, tex);
+          if (sprite.material) { sprite.material.map = tex; sprite.material.needsUpdate = true; }
+          loadActive.current -= 1; pumpLoads();
+        },
+        undefined,
+        () => { loadActive.current -= 1; pumpLoads(); },
+      ));
+    }
+  };
+  const enqueueTexture = (url, sprite) => {
+    if (!url) return;
+    const cached = texCache.current.get(url);
+    if (cached) { sprite.material.map = cached; sprite.material.needsUpdate = true; return; }
+    loadQueue.current.push({ url, sprite });
+    pumpLoads();
+  };
 
   // Keep the canvas exactly window-sized so fullscreen fills the screen with
   // no black bars. fullscreenchange fires before layout settles, so re-measure
@@ -103,6 +140,9 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.15;
       renderer.outputColorSpace = THREE.SRGBColorSpace;
+      // Cap the device pixel ratio — phones often report 3x, which quadruples
+      // the pixels the GPU must shade for no visible benefit here.
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2));
     }
     // Push the far plane way out so the deep field never clips — endless space.
     const cam = fg.camera();
@@ -257,16 +297,15 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
     halo.scale.set(hs, hs, 1);
     group.add(halo);
 
-    let tex = texCache.current.get(node.thumb);
-    if (!tex) {
-      tex = texLoader.load(node.thumb);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      texCache.current.set(node.thumb, tex);
+    // Only load a thumbnail if we have a URL. The sprite is created immediately
+    // (map fills in later via the throttled queue) so nothing blocks the frame.
+    if (node.thumb) {
+      const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ transparent: true, opacity: faded ? 0.1 : 1 }));
+      const s = faded ? base * 0.5 : base;
+      sprite.scale.set(s, s, 1);
+      group.add(sprite);
+      enqueueTexture(node.thumb, sprite);
     }
-    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: faded ? 0.1 : 1 }));
-    const s = faded ? base * 0.5 : base;
-    sprite.scale.set(s, s, 1);
-    group.add(sprite);
     return group;
   };
 
@@ -287,8 +326,11 @@ const GalaxyGraph = forwardRef(function GalaxyGraph(
       warmupTicks={70}
       cooldownTicks={140}
       onNodeClick={(node) => {
-        flyTo(node);
-        if (node.type === 'photo') onSelect?.(node.asset);
+        if (!node || typeof node.x !== 'number') return;
+        // Tapping a photo opens it WITHOUT moving the camera — your current
+        // zoom/view is preserved. Only tapping a cluster core flies you in.
+        if (node.type === 'hub') flyTo(node);
+        else onSelect?.(node.asset);
       }}
       onBackgroundClick={() => onSelect?.(null)}
     />

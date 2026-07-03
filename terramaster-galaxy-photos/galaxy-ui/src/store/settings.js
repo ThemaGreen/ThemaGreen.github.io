@@ -6,11 +6,11 @@ import { useCallback, useEffect, useState } from 'react';
 
 const KEY = 'galaxy.settings.v1';
 
+import { homeSource } from './access.js';
+
 export const DEFAULTS = {
   theme: 'dark',        // 'dark' | 'light' | 'auto'
-  // 'demo' | 'live' | 'manifest'. The public ThemaGreen build sets
-  // VITE_DEFAULT_SOURCE=manifest so visitors land straight in the family gallery.
-  source: import.meta.env.VITE_DEFAULT_SOURCE || 'demo',
+  source: 'demo',       // overridden per access tier in loadSettings()
   bloom: true,          // glowing cores
   autoOrbit: true,      // gentle camera rotation
   density: 'comfortable', // 'comfortable' | 'compact' -> sprite size
@@ -21,8 +21,13 @@ export const DEFAULTS = {
 };
 
 export function loadSettings() {
-  try { return { ...DEFAULTS, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; }
-  catch { return { ...DEFAULTS }; }
+  // homeSource() must be read HERE (lazily) — after the gate has set the access
+  // tier — never at module-import time, or guests would get the family source.
+  let stored = {};
+  try { stored = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { /* ignore */ }
+  // Always open in the tier's home library (family → wedding, guest → demo),
+  // regardless of what was selected last session. Other prefs persist.
+  return { ...DEFAULTS, ...stored, source: homeSource() };
 }
 
 export function resolveTheme(theme) {
@@ -40,6 +45,6 @@ export function useSettings() {
   }, [settings]);
 
   const update = useCallback((patch) => setSettings((s) => ({ ...s, ...patch })), []);
-  const reset = useCallback(() => setSettings({ ...DEFAULTS }), []);
+  const reset = useCallback(() => setSettings({ ...DEFAULTS, source: homeSource() }), []);
   return [settings, update, reset];
 }

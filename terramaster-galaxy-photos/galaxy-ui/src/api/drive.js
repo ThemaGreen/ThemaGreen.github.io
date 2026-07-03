@@ -23,10 +23,12 @@ const FOLDER = parseFolderId(import.meta.env.VITE_DRIVE_FOLDER_ID);
 const KEY = import.meta.env.VITE_DRIVE_KEY;
 
 // Public display URLs (no API key needed to *show* public files).
-// Images use the direct googleusercontent CDN (no redirect, fast, CORS-enabled
-// so they work as WebGL textures). Videos use Drive's poster + preview iframe.
+// BOTH photo and video posters use the direct googleusercontent CDN — it is
+// CORS-enabled, so the posters work as WebGL textures. (drive.google.com/
+// thumbnail sends NO Access-Control-Allow-Origin header, so it gets blocked
+// when loaded into the galaxy.) Video playback still uses Drive's preview iframe.
 const imgUrl = (id, w) => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
-const vidThumb = (id, w) => `https://drive.google.com/thumbnail?id=${id}&sz=w${w}`;
+const vidThumb = (id, w) => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
 const embedOf = (id) => `https://drive.google.com/file/d/${id}/preview`;
 
 function fmtDuration(ms) {
@@ -62,7 +64,10 @@ function toAsset(f, album) {
     isFavorite: false,
     labels: [],
     duration: isVid && vm.durationMillis ? fmtDuration(vm.durationMillis) : null,
-    thumb: isVid ? vidThumb(f.id, 500) : imgUrl(f.id, 500),
+    // Galaxy sprites are tiny on screen, so the in-scene texture is small
+    // (w160) — this is the single biggest lever on load time + GPU memory with
+    // hundreds of photos. The detail view loads the full-res preview on demand.
+    thumb: isVid ? vidThumb(f.id, 160) : imgUrl(f.id, 160),
     preview: isVid ? vidThumb(f.id, 1280) : imgUrl(f.id, 1600),
     src: isVid ? '' : imgUrl(f.id, 1600),
     embed: isVid ? embedOf(f.id) : null,

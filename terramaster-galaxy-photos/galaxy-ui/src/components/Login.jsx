@@ -1,25 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const TITLE = import.meta.env.VITE_GALLERY_TITLE;
-
-// Per-account sign-in for Live (Immich) mode. Each person signs into their own
-// account and only sees what they own or were shared. (The public wedding/demo
-// build doesn't use this — that's gated by the password screen in Gate.jsx.)
+// Per-account sign-in for "My Immich" mode. Each person signs into their OWN
+// Immich account and only sees their own photos/videos (and anything shared
+// with them) — this is not the wedding gallery.
+//
+// Server fallback: we first probe the family/NAS endpoint. If it isn't
+// reachable from the visitor's network (they're not on the NAS), the form
+// surfaces a "server address" field so they can point at their own Immich
+// (e.g. https://photos.example.com) — remembered on their device.
 export default function Login({ api, onSuccess, onDemo }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [server, setServer] = useState(() => api.getServer?.() || '');
+  const [showServer, setShowServer] = useState(() => !!(api.getServer?.()));
+  const [probing, setProbing] = useState(true);
+  const [nasOk, setNasOk] = useState(null); // null=checking, true/false=result
   const [err, setErr] = useState('');
   const [busy, setBusy] = useState(false);
+
+  // Probe the default (family/NAS) endpoint once; if it's unreachable, open the
+  // server field so visitors can enter their own Immich address.
+  useEffect(() => {
+    let off = false;
+    if (!api.ping) { setProbing(false); return undefined; }
+    (async () => {
+      const ok = await api.ping().catch(() => false);
+      if (off) return;
+      setNasOk(ok); setProbing(false);
+      if (!ok) setShowServer(true);
+    })();
+    return () => { off = true; };
+  }, [api]);
 
   const submit = async (e) => {
     e.preventDefault();
     setBusy(true); setErr('');
     try {
-      await api.login(email.trim(), password);
+      await api.login(email.trim(), password, server.trim());
       const user = await api.me();
       onSuccess(user);
     } catch {
-      setErr('Invalid email or password.');
+      setErr(server.trim()
+        ? 'Sign-in failed — check the server address, email and password.'
+        : 'Invalid email or password.');
       setBusy(false);
     }
   };
@@ -28,10 +51,29 @@ export default function Login({ api, onSuccess, onDemo }) {
     <div className="login">
       <form className="login-card" onSubmit={submit}>
         <div className="login-brand">
-          <span className="spark">✦</span>{' '}
-          {TITLE ? <strong>{TITLE}</strong> : <>Galaxy <em>Photos</em></>}
+          <span className="spark">✦</span> My <em>Immich</em>
         </div>
-        <p className="login-sub">Sign in to your own gallery</p>
+        <p className="login-sub">Sign in to see your own photos &amp; videos</p>
+
+        {!probing && nasOk === false && !server && (
+          <div className="login-note">
+            The family server isn’t reachable from your network — enter your own
+            Immich address below.
+          </div>
+        )}
+
+        {showServer ? (
+          <label>Server address
+            <input type="text" value={server} placeholder="https://photos.example.com"
+              onChange={(e) => { setServer(e.target.value); setErr(''); }}
+              autoCapitalize="none" autoCorrect="off" spellCheck={false} />
+          </label>
+        ) : (
+          <button type="button" className="login-alt" onClick={() => setShowServer(true)}>
+            Using your own Immich server? Enter its address →
+          </button>
+        )}
+
         <label>Email
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="username" required />
         </label>
@@ -40,8 +82,8 @@ export default function Login({ api, onSuccess, onDemo }) {
         </label>
         {err && <div className="login-err">{err}</div>}
         <button className="login-go" type="submit" disabled={busy}>{busy ? 'Signing in…' : 'Sign in'}</button>
-        {onDemo && <button className="login-demo" type="button" onClick={onDemo}>Explore the demo instead</button>}
-        <p className="login-foot">Your photos stay private to your account.</p>
+        {onDemo && <button className="login-demo" type="button" onClick={onDemo}>← Back</button>}
+        <p className="login-foot">Your Immich account stays private to you.</p>
       </form>
     </div>
   );

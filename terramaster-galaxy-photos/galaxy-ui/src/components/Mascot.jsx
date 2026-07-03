@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { getTier } from '../store/access.js';
 
 // Stella — the star-photographer mascot.
 //
@@ -9,16 +10,21 @@ import { useEffect, useRef, useState } from 'react';
 // double-tap → happy spin, and you can DRAG her anywhere on screen — on drop
 // she plays one of several reaction animations (spin / bounce / wobble / flip).
 
+// Greeting matches the door the visitor came through (family vs guest).
+const greeting = () => (getTier() === 'guest'
+  ? "Hi, I'm Stella ✨ Welcome to Galaxy Photos."
+  : "Hi, I'm Stella ✨ Welcome to Amira & Jacob’s wedding.");
+
 const TIPS = [
-  "Hi! I'm Stella ✨ Welcome to Amira & Jacob’s wedding gallery.",
-  'Drag to orbit the galaxies · scroll to zoom in.',
-  'Psst — you can drag me anywhere on screen. Try it!',
-  'Each glowing core is a galaxy of photos — tap one to explore.',
-  'Tap a photo to see it big, with the date and details.',
-  'Tap the ❤️ on a photo so the family sees what you love.',
-  'Open a photo to add tags: People, Family, Location, Labels.',
-  'Search a name like “Thema” to find every photo they’re tagged in.',
-  'Make an Album so you don’t have to search the same thing twice.',
+  greeting,
+  'Drag to look around · pinch or scroll to zoom.',
+  'Tap a glowing cluster to fly into that group of photos.',
+  'Tap a photo to open it — swipe down on it to close.',
+  'Tap ❤️ on a photo so the couple sees what you loved.',
+  'Add your name: open a photo → People → type it in.',
+  'Search a name (like “Thema”) to see only their photos.',
+  'Save favourites into an Album to find them again fast.',
+  'You can drag me anywhere — give me a little toss! 🌟',
 ];
 
 const REACTIONS = ['react-spin', 'react-bounce', 'react-wobble', 'react-flip'];
@@ -63,7 +69,8 @@ export default function Mascot({ onTip }) {
   };
 
   const say = () => {
-    const t = TIPS[tipIdx.current % TIPS.length];
+    const raw = TIPS[tipIdx.current % TIPS.length];
+    const t = typeof raw === 'function' ? raw() : raw;
     tipIdx.current += 1;
     setTip(t);
     onTip?.(t);
