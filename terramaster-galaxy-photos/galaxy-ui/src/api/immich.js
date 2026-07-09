@@ -17,11 +17,33 @@ export const isDemo = false;
 const DEFAULT_BASE = import.meta.env.VITE_IMMICH_URL || '/immich';
 const SERVER_KEY = 'galaxy.immich.server';
 
-// Accepts "photos.example.com", "https://photos.example.com/", or a full
-// ".../api" URL — normalizes to the API root Immich expects.
+// --- User ID (shareable connect code) ---------------------------------------
+// A compact stand-in for the server URL: "GX-" + base64url(server). Shown in
+// Settings once signed in; paste it at the login on any device instead of
+// typing the address. (It encodes WHERE your Immich lives — never a password.)
+const ID_PREFIX = 'GX-';
+export function connectCode() {
+  const b = activeBase();
+  if (!/^https?:\/\//i.test(b)) return ''; // same-origin NAS proxy has no shareable address
+  return ID_PREFIX + btoa(b).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+function decodeConnectCode(s) {
+  try {
+    const b64 = s.slice(ID_PREFIX.length).replace(/-/g, '+').replace(/_/g, '/');
+    const url = atob(b64);
+    return /^https?:\/\//i.test(url) ? url : '';
+  } catch { return ''; }
+}
+
+// Accepts "photos.example.com", "https://photos.example.com/", a full ".../api"
+// URL, or a "GX-…" user ID — normalizes to the API root Immich expects.
 export function normalizeServer(v) {
   let s = (v || '').trim();
   if (!s) return '';
+  if (new RegExp(`^${ID_PREFIX}`, 'i').test(s)) {
+    const decoded = decodeConnectCode(s);
+    if (decoded) s = decoded; else return '';
+  }
   if (!/^https?:\/\//i.test(s) && !s.startsWith('/')) s = `https://${s}`;
   s = s.replace(/\/+$/, '');
   if (/^https?:\/\//i.test(s) && !/\/api$/i.test(s)) s = `${s}/api`;

@@ -236,21 +236,30 @@ export default function App() {
     }
   };
 
+  // Switching library: drop the previous source's assets IMMEDIATELY so the
+  // graph never mixes one source's assets with another's URL builder (that
+  // caused a flood of bogus /immich/assets/demo-… requests mid-switch).
+  useEffect(() => {
+    setRaw(null); setOverride(null); setSelected(null);
+    setGraph({ nodes: [], links: [] });
+  }, [settings.source]);
+
   // Fetch the base library when source or mode changes (once authed in Live).
   useEffect(() => {
     if (!authReady) return undefined;
     let cancelled = false;
     setBusy(true);
     setStatus('Loading your universe…');
+    const forSource = settings.source; // tag the payload with its origin
     (async () => {
       try {
         if (mode === 'friends') {
           const [friends, mine] = await Promise.all([api.fetchFriends(), api.fetchAssets({ max: 60 })]);
           const you = { id: 'you', me: true, name: 'You', palette: settings.palette, assets: mine.slice(0, 30) };
-          if (!cancelled) setRaw({ kind: 'friends', friends: [you, ...friends] });
+          if (!cancelled) setRaw({ kind: 'friends', friends: [you, ...friends], source: forSource });
         } else {
           const list = await api.fetchAssets({ max: 5000 });
-          if (!cancelled) setRaw({ kind: 'assets', assets: list });
+          if (!cancelled) setRaw({ kind: 'assets', assets: list, source: forSource });
         }
       } catch (e) {
         if (!cancelled) { setRaw(null); setStatus(`Couldn’t reach the library — ${e.message}`); setBusy(false); }
@@ -281,6 +290,9 @@ export default function App() {
   // Rebuild the graph from the active set (search override or base library).
   useEffect(() => {
     if (!raw && !override) return;
+    // Never build with another source's assets (mid-switch, effects can still
+    // see the previous library — its URLs would be built with the wrong API).
+    if (raw && raw.source && raw.source !== settings.source) return;
     const q = query.trim().toLowerCase();
     const favPass = (a) => !favOnly || (likesMap[a.assetId || a.id]?.count > 0);
     const textPass = (a) => override ? true : (!q || localMatch(a, q));
@@ -306,7 +318,7 @@ export default function App() {
     const galaxies = g.nodes.filter((n) => n.type === 'hub').length;
     const noun = override ? 'results' : 'photos';
     setStatus(count ? `${count.toLocaleString()} ${noun} · ${galaxies} galaxies` : (override ? 'No matches — try another search' : 'No photos match — try clearing filters'));
-  }, [raw, assets, tagIndex, likesMap, override, query, favOnly, mode, granularity, api, settings.palette, activeAlbum]);
+  }, [raw, assets, tagIndex, likesMap, override, query, favOnly, mode, granularity, api, settings.palette, settings.source, activeAlbum]);
 
   const stats = useMemo(() => ({
     photos: graph.nodes.filter((n) => n.type === 'photo').length,

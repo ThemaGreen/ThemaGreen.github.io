@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { PALETTES } from '../store/palettes.js';
 import { sourcesFor, getTier } from '../store/access.js';
+import { connectCode } from '../api/immich.js';
 
 // Slide-in / bottom-sheet settings panel: appearance, data source, galaxy look.
 // The offered sources depend on the access tier: family members (entered the
@@ -45,6 +47,28 @@ function Toggle({ on, onChange }) {
   );
 }
 
+// Shareable user ID for the signed-in Immich server: paste it at the login on
+// any device instead of typing the server address. (Encodes the address only —
+// never a password. Only exists when the server has a shareable URL.)
+function UserId() {
+  const [copied, setCopied] = useState(false);
+  const code = connectCode();
+  if (!code) return null;
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1600); }
+    catch { window.prompt('Copy your user ID:', code); }
+  };
+  return (
+    <div className="set-row col">
+      <div className="set-label">Your user ID<span className="set-hint">use it instead of the server address to sign in on another device</span></div>
+      <div className="userid-row">
+        <code className="userid-code">{code}</code>
+        <button className="ghost-btn slim" onClick={copy}>{copied ? 'Copied ✓' : 'Copy'}</button>
+      </div>
+    </div>
+  );
+}
+
 export default function SettingsPanel({ open, settings, update, reset, onClose, stats, account, onLogout }) {
   const tier = getTier();
   const SOURCES = sourcesFor(tier);
@@ -69,6 +93,7 @@ export default function SettingsPanel({ open, settings, update, reset, onClose, 
               <button className="ghost-btn slim" onClick={onLogout}>Sign out</button>
             </div>
           )}
+          {settings.source === 'live' && account && <UserId />}
           <p className="note">
             {settings.source === 'demo' ? 'A sample library to explore the experience — no account needed.'
               : settings.source === 'live' ? 'Signed in to your own Immich — you see your personal photos & videos, not the wedding.'

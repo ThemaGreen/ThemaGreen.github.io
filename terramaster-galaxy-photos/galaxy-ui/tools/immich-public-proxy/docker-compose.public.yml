@@ -1,0 +1,26 @@
+# Hardened public proxy for Immich — add this service next to your existing
+# Immich compose stack (or merge into it). It binds ONLY to the NAS loopback
+# (127.0.0.1), so nothing on your LAN or the internet can reach it directly;
+# the only way in is through the Tailscale Funnel you point at it.
+#
+#   docker compose -f docker-compose.public.yml up -d
+#
+# Assumes your Immich service is named "immich_server" on network "immich_default"
+# (the immich docker-compose defaults). Adjust the two marked lines if yours differ.
+
+services:
+  immich_public_proxy:
+    image: nginx:1.27-alpine
+    container_name: immich_public_proxy
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8089:8089"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./includes:/etc/nginx/includes:ro
+    networks:
+      - galaxy-photos_default
+
+networks:
+  galaxy-photos_default:
+    external: true

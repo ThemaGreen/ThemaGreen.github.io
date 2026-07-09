@@ -32,15 +32,26 @@ export default function Login({ api, onSuccess, onDemo }) {
     return () => { off = true; };
   }, [api]);
 
+  // A bare Immich ACCOUNT id (a UUID from Immich's own settings) can't locate a
+  // server — catch it early with a helpful message instead of a DNS error.
+  const looksLikeAccountUuid = (v) =>
+    /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i.test(v.trim());
+
   const submit = async (e) => {
     e.preventDefault();
+    const srv = server.trim();
+    if (srv && looksLikeAccountUuid(srv)) {
+      setErr('That looks like an Immich account ID — it can’t locate your server. '
+        + 'Enter your server address (https://…) or the GX-… user ID from this app’s Settings.');
+      return;
+    }
     setBusy(true); setErr('');
     try {
-      await api.login(email.trim(), password, server.trim());
+      await api.login(email.trim(), password, srv);
       const user = await api.me();
       onSuccess(user);
     } catch {
-      setErr(server.trim()
+      setErr(srv
         ? 'Sign-in failed — check the server address, email and password.'
         : 'Invalid email or password.');
       setBusy(false);
@@ -58,19 +69,20 @@ export default function Login({ api, onSuccess, onDemo }) {
         {!probing && nasOk === false && !server && (
           <div className="login-note">
             The family server isn’t reachable from your network — enter your own
-            Immich address below.
+            Immich address or a GX-… user ID below. (The ID comes from THIS app’s
+            Settings on a device that’s already signed in — not your Immich account ID.)
           </div>
         )}
 
         {showServer ? (
-          <label>Server address
-            <input type="text" value={server} placeholder="https://photos.example.com"
+          <label>Server address or user ID
+            <input type="text" value={server} placeholder="https://photos.example.com — or GX-… ID"
               onChange={(e) => { setServer(e.target.value); setErr(''); }}
               autoCapitalize="none" autoCorrect="off" spellCheck={false} />
           </label>
         ) : (
           <button type="button" className="login-alt" onClick={() => setShowServer(true)}>
-            Using your own Immich server? Enter its address →
+            Using your own Immich? Enter its address or your user ID →
           </button>
         )}
 
