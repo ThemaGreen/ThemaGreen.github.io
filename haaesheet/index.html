@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>HAAESheet — Howard University African American English (HAAE) Dataset</title>
+<title>HAAESheet: Howard University African American English (HAAE) Dataset</title>
 <style>
   :root{
     --ink:#1a1a1a; --muted:#5b5b5b; --line:#e4e2dd; --bg:#faf8f5; --card:#ffffff;
     --accent:#003a63;      /* deep blue */
-    --accent2:#b71234;     /* Howard red */
+    --accent2:#b71234;     /* red */
     --good-bg:#eef6ee; --good:#1f6b34;
     --warn-bg:#fdf3e3; --warn:#8a5a12;
     --note-bg:#eef2f7; --note:#2b4b6f;
@@ -79,7 +79,7 @@
 <header class="masthead">
   <div class="wrap">
     <p class="kicker">Project Elevate Black Voices · HCAI @ Howard University</p>
-    <h1>HAAESheet — Howard University African American English (HAAE) Dataset</h1>
+    <h1>HAAESheet: Howard University African American English (HAAE) Dataset</h1>
     <p class="sub">A Project Elevate Black Voices (PEBV) datasheet, adapted from <em>Datasheets for Datasets</em> (Gebru et al., 2021) for community‑centered, values‑first documentation.</p>
   </div>
 </header>
@@ -87,9 +87,9 @@
 <div class="meta">
   <table>
     <tr><td class="k">Dataset</td><td>Howard University African American English (HAAE, /hā/)</td></tr>
-    <tr><td class="k">Version</td><td>2025.04.01 — initial public release, April 1, 2025 (collection began 2023)</td></tr>
+    <tr><td class="k">Version</td><td>2025.04.01: initial public release, April 1, 2025 (collection began 2023)</td></tr>
     <tr><td class="k">Producer</td><td>The Human‑Centered AI Institute at Howard University (HCAI@Howard) / Project Elevate Black Voices</td></tr>
-    <tr><td class="k">Partners &amp; funding</td><td>Howard University; The Institute for Socially and Culturally Centered AI; Google Research (award #956968); National Science Foundation (NR Award N00014‑22‑1‑2714)</td></tr>
+    <tr><td class="k">Partners &amp; funding</td><td>Howard University; Google Research (award #956968); National Science Foundation (NR Award N00014‑22‑1‑2714)</td></tr>
     <tr><td class="k">Contact</td><td>aavehu@elevateblackvoiceshu.com · <a href="https://www.elevateblackvoiceshu.com/dataset">elevateblackvoiceshu.com/dataset</a></td></tr>
     <tr><td class="k">Sheet basis</td><td>Compiled from <em>Howard AAE User Guide v2025.04.01</em> and the PEBV regional‑clustering analysis (§6).</td></tr>
   </table>
@@ -98,7 +98,7 @@
 <main class="wrap">
   <div class="callout note">
     <span class="lab">What a HAAESheet is</span>
-    A HAAESheet answers the standard <em>Datasheets for Datasets</em> questions — motivation, composition, collection, preprocessing, uses, distribution, maintenance — but foregrounds the PEBV commitments the HAAE was built on: protecting the Black community from bias and harm, community benefit, and restricted, accountable access. Sections 6 (Regional Structure) and 9 (Fair Use, Community Benefit &amp; Harms) are the PEBV‑specific additions to the base template.
+    A HAAESheet answers the standard <em>Datasheets for Datasets</em> questions: motivation, composition, collection, preprocessing, uses, distribution, maintenance, but foregrounds the PEBV commitments the HAAE was built on: protecting the Black community from bias and harm, community benefit, and restricted, accountable access. Sections 6 (Regional Structure) and 9 (Fair Use, Community Benefit &amp; Harms) are the PEBV‑specific additions to the base template.
   </div>
 
   <nav class="toc">
@@ -128,9 +128,9 @@
   <section id="s2">
     <h2><span class="num">2</span>Motivation</h2>
     <p class="q">For what purpose was the dataset created?</p>
-    <p>To improve SLTs for AAE speakers and provide a high‑quality AAE speech resource for NLP, sociolinguistics, and ML research. AAE is a rule‑governed dialect with distinct syntax, verb usage, and phonology — not "English with mistakes" (Pullum, 1999) — and its under‑representation produces measurable, racialized performance gaps.</p>
+    <p>To improve SLTs for AAE speakers and provide a high‑quality AAE speech resource for NLP, sociolinguistics, and ML research. AAE is a rule‑governed dialect with distinct syntax, verb usage, and phonology, rather than "English with mistakes" (Pullum, 1999), and its under‑representation produces measurable, racialized performance gaps.</p>
     <p class="q">Who created and funded it?</p>
-    <p>HCAI@Howard with Google Research, funded by Howard University, the Institute for Socially and Culturally Centered AI, Google Research (award #956968), and the NSF (NR Award N00014‑22‑1‑2714).</p>
+    <p>HCAI@Howard with Google Research, funded by Howard University, Google Research (award #956968), and the NSF (NR Award N00014‑22‑1‑2714).</p>
     <p class="q">Associated publication</p>
     <p>Johnson, J., Williams, L., Nias, J., Aryal, S. K., &amp; Washington, G. (2025). <em>Centering Black Voices: Lessons Learned and Reflections from a Large‑Scale AAVE Data Collection.</em> Proc. ACM CHI '25, Yokohama, Japan.</p>
   </section>
@@ -152,7 +152,7 @@
       </tbody>
     </table>
     <p>The South is further divided by the U.S. Census into <strong>South Atlantic, East South Central, and West South Central</strong> subregions.</p>
-    <div class="callout warn"><span class="lab">Balance — important for regional modeling</span>Representation is heavily uneven <strong>between</strong> regions (South ≈ 49% of speakers; Midwest ≈ 12%) and <strong>within</strong> them: one state dominates each region — <strong>New York</strong> (NE), <strong>California</strong> (57/73 West), <strong>Illinois</strong> (28/36 Midwest), <strong>DC/GA/LA</strong> (South). Several states contribute a <strong>single speaker</strong> (MS, IN, MN, MO, ID, OR). Region labels are reliable; state‑ and subregion‑level analyses rest on very small samples.</div>
+    <div class="callout warn"><span class="lab">Balance: important for regional modeling</span>Representation is heavily uneven <strong>between</strong> regions (South ≈ 49% of speakers; Midwest ≈ 12%) and <strong>within</strong> them: one state dominates each region, <strong>New York</strong> (NE), <strong>California</strong> (57/73 West), <strong>Illinois</strong> (28/36 Midwest), <strong>DC/GA/LA</strong> (South). Several states contribute a <strong>single speaker</strong> (MS, IN, MN, MO, ID, OR). Region labels are reliable; state‑ and subregion‑level analyses rest on very small samples.</div>
     <p class="q">Confidential / identifying data?</p>
     <p>Recordings are of identifiable voices plus self‑reported state. Accordingly, <strong>biometric voice ID is contractually prohibited</strong> (§9) and the data may not be posted to the web. No sex, age, or fine dialect labels are published.</p>
   </section>
@@ -160,7 +160,7 @@
   <section id="s4">
     <h2><span class="num">4</span>Collection process</h2>
     <p class="q">How was the data collected?</p>
-    <p>By <strong>snowball sampling</strong> seeded through <strong>community activations</strong> — gatherings in Black communities on Black culture's impact on technology and the future of AI — held in <strong>New Orleans, Washington D.C., New York, Georgia, Illinois, and California</strong>. Attendees consented via a digital interest form and shared it onward; those referrals make up most participants.</p>
+    <p>By <strong>snowball sampling</strong> seeded through <strong>community activations</strong>, gatherings in Black communities on Black culture's impact on technology and the future of AI, held in <strong>New Orleans, Washington D.C., New York, Georgia, Illinois, and California</strong>. Attendees consented via a digital interest form and shared it onward; those referrals make up most participants.</p>
     <p class="q">Who was eligible?</p>
     <p>Individuals who <strong>self‑identified as African American</strong> and had <strong>lived in the U.S. ≥ 7 years</strong>. State counts came from each participant's self‑reported current state.</p>
     <p class="q">Timeframe &amp; consent</p>
@@ -174,7 +174,7 @@
     <p>Invariant <em>be</em> ("He be running"), double negation / negative concord, nonstandard negation ("ain't"), copula omission ("She nice") &amp; variation ("Here go your keys"), absence of <em>‑s</em>, relative‑pronoun deletion, double modals, past‑participle substitution, nonstandard possessive ("they church"), associative plural ("John and them"), benefactive datives ("get me some food"), subject‑auxiliary order ("Why I can't come").</p>
     <h3>Phonology <em>normalized</em> to MUSE spelling</h3>
     <p>Consonant‑cluster reduction (col'→cold), th‑substitution (dis→this), r‑lessness (cah→car), consonant substitution (fitty→fifty), metathesis (aks→ask). Lexical forms kept verbatim: <em>finna, Imma, gonna, talmbout, nem</em>.</p>
-    <div class="callout note"><span class="lab">Implication for ASR/TTS</span>Pronunciation‑level AAE features are <strong>normalized in the text</strong> but <strong>present in the audio</strong>. Transcripts describe <em>what</em> was said in MUSE orthography, not <em>how</em> it was pronounced — so acoustic/phonetic dialect signal lives in the waveform, not the transcript. This is the premise behind §6.</div>
+    <div class="callout note"><span class="lab">Implication for ASR/TTS</span>Pronunciation‑level AAE features are <strong>normalized in the text</strong> but <strong>present in the audio</strong>. Transcripts describe <em>what</em> was said in MUSE orthography, not <em>how</em> it was pronounced, so acoustic/phonetic dialect signal lives in the waveform, not the transcript. This is the premise behind §6.</div>
   </section>
 
   <section id="s6">
@@ -183,7 +183,7 @@
     <p class="q">Working subset</p>
     <p>Clustering to date uses a <strong>curated subset</strong> of speakers with sufficient usable audio (≈77 IDs after filtering), not the full 294‑speaker release. Clips are split into non‑overlapping reference / train / validation partitions (≈404 / 21,887 / 2,395 clips).</p>
     <p class="q">Initial finding</p>
-    <p>K‑means with <strong>K=2</strong> on WavLM layer‑11 features, plotted by speaker location, put <strong>both clusters at essentially every location</strong> — the dominant split is <strong>not geographic</strong>. In self‑supervised speech features the top axis is usually <strong>speaker sex/pitch, channel, or broad phonetic content</strong>, which swamp the subtler regional signal. A K=20 GMM (layer 10, UMAP) likewise showed acoustic/phonetic structure and non‑speech islands, not regions.</p>
+    <p>K‑means with <strong>K=2</strong> on WavLM layer‑11 features, plotted by speaker location, put <strong>both clusters at essentially every location</strong>, the dominant split is <strong>not geographic</strong>. In self‑supervised speech features the top axis is usually <strong>speaker sex/pitch, channel, or broad phonetic content</strong>, which swamp the subtler regional signal. A K=20 GMM (layer 10, UMAP) likewise showed acoustic/phonetic structure and non‑speech islands, not regions.</p>
     <p class="q">PEBV region‑clustering pipeline</p>
     <figure class="pipe">
       <svg width="100%" viewBox="0 0 860 96" role="img" aria-label="Pipeline: L2-normalize, aggregate to speaker, remove nuisance axis, cluster, evaluate">
@@ -225,7 +225,7 @@
 
   <section id="s9">
     <h2><span class="num">9</span>Fair use, community benefit &amp; harms <span class="pill derived">PEBV core</span></h2>
-    <p>Access is conditioned on the <strong>HAAE Dataset 1.0 Fair Use Guidelines</strong>, signed by the lead PI — encoding the PEBV stance that licensing is an instrument of community protection:</p>
+    <p>Access is conditioned on the <strong>HAAE Dataset 1.0 Fair Use Guidelines</strong>, signed by the lead PI, encoding the PEBV stance that licensing is an instrument of community protection:</p>
     <ol class="rules">
       <li><strong>No</strong> policing, criminal‑justice, or law‑enforcement use, or arresting/restraining/imprisoning Black or African American people.</li>
       <li><strong>No</strong> biometric recognition/identification of Black or Brown voices.</li>
@@ -240,7 +240,7 @@
       <li>Derived software/technology <strong>pays Howard a license fee</strong>, negotiated with Howard's IP Office &amp; Office of General Counsel.</li>
       <li>Any modification of this license <strong>requires Howard's approval</strong>.</li>
     </ol>
-    <div class="callout note"><span class="lab">Ethical framing</span>The guide situates HAAE against a history in which AAE was pathologized (the "deficit hypothesis") and studied narrowly (early focus on urban Black males). HAAE's design — community activations, self‑identification, culturally competent transcription, HBCU‑first access, harm‑preventing licensing — is the corrective: representation on the community's terms, so AAE speakers can "be their authentic selves" with speech technology.</div>
+    <div class="callout note"><span class="lab">Ethical framing</span>The guide situates HAAE against a history in which AAE was pathologized (the "deficit hypothesis") and studied narrowly (early focus on urban Black males). HAAE's design: community activations, self‑identification, culturally competent transcription, HBCU‑first access, harm‑preventing licensing, is the corrective: representation on the community's terms, so AAE speakers can "be their authentic selves" with speech technology.</div>
   </section>
 
   <section id="s10">
@@ -255,12 +255,12 @@
     <p><strong>Computed values.</strong> Totals of <strong>294 speakers</strong> and <strong>215,499 files</strong> are sums of the four regional figures; they are not stated as totals in the guide.</p>
     <div class="callout warn"><span class="lab">Discrepancies in the source guide (surfaced for correction)</span>
       <ol class="rules" style="margin-top:6px">
-        <li>Every regional table's total row reads <strong>"Total of Speakers from the Northeast,"</strong> including the South/Midwest/West tables — a copy‑paste artifact; the totals (143, 36, 73) are consistent with their state counts.</li>
+        <li>Every regional table's total row reads <strong>"Total of Speakers from the Northeast,"</strong> including the South/Midwest/West tables, a copy‑paste artifact; the totals (143, 36, 73) are consistent with their state counts.</li>
         <li>The narrative says <strong>"31 States and DC,"</strong> but the per‑region tables enumerate <strong>29 states + DC</strong>. <strong>Kansas, New Mexico, and Ohio</strong> appear in the narrative state list (and Ohio in Midwest prose) but not in any per‑region speaker table.</li>
-        <li>The Midwest and West "About" sentences both begin "The U.S. Southern region…" — a template artifact; their state lists/counts are region‑correct.</li>
+        <li>The Midwest and West "About" sentences both begin "The U.S. Southern region…", a template artifact; their state lists/counts are region‑correct.</li>
       </ol>
     </div>
-    <p><strong>Gaps not fillable from the guide alone:</strong> recording equipment/format &amp; sampling rate; per‑speaker audio counts; age/sex distributions; inter‑annotator agreement; and the license‑fee schedule — these require the HAAE team.</p>
+    <p><strong>Gaps not fillable from the guide alone:</strong> recording equipment/format &amp; sampling rate; per‑speaker audio counts; age/sex distributions; inter‑annotator agreement; and the license‑fee schedule, these require the HAAE team.</p>
   </section>
 
   <footer>
