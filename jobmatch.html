@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f2e9">
+<title>Job Match Explorer — Thema Green</title>
+<meta name="description" content="Paste a job description and get an evidence-backed read on how Thema Green's documented work maps to it. Runs entirely in your browser; nothing is uploaded.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://themagreen.github.io/job-match.html">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="styles/site.css">
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-header is-stuck">
+  <div class="wrap header-inner">
+    <a class="brandmark" href="index.html" aria-label="Thema Green — home">
+      <span class="brandmark__glyph" aria-hidden="true">TG</span>
+      <span class="brandmark__text">Thema <em>Green</em></span>
+    </a>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode"></button>
+      <a class="btn btn--ghost" href="index.html"><span data-icon="arrowRight" style="transform:rotate(180deg)"></span> Back to portfolio</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="jm-hero">
+    <div class="wrap">
+      <p class="eyebrow">Job Match Explorer</p>
+      <h1>Paste the posting. Get the honest read.</h1>
+      <p class="lede">
+        This scores a job description against my documented work — projects, capabilities, and roles —
+        and shows you the evidence behind every number, including where it runs thin.
+        It is a transparent heuristic, not an AI verdict, and it runs entirely in your browser.
+      </p>
+    </div>
+  </section>
+
+  <section class="jm-panel">
+    <div class="wrap">
+      <div class="jm-input-wrap">
+        <label class="visually-hidden" for="jobInput">Paste a job description</label>
+        <textarea id="jobInput" placeholder="Paste the full job description here — title, responsibilities, and qualifications. The more of the posting you include, the better the read."></textarea>
+      </div>
+
+      <div class="jm-actions">
+        <button class="btn btn--primary" id="runMatch" disabled><span data-icon="bolt"></span> Score my fit</button>
+        <button class="btn btn--ghost" id="useSample"><span data-icon="sparkle"></span> Try a sample posting</button>
+        <button class="btn btn--ghost btn--sm" id="clearMatch"><span data-icon="close"></span> Clear</button>
+        <span class="spacer"></span>
+        <span id="charCount"></span>
+      </div>
+
+      <p class="jm-privacy">
+        <span data-icon="shield"></span>
+        <span><strong>Nothing leaves this page.</strong> There is no server, no analytics call, and no storage —
+        the text you paste is analysed in memory and discarded when you close the tab.
+        Press <kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>↵</kbd> to score.</span>
+      </p>
+
+      <div id="results" hidden></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-meta" style="margin-top:0;border-top:0">
+      <p>© <span id="year">2026</span> Thema Green.</p>
+      <p><a href="index.html">Portfolio</a> · <a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a> ·
+         <a href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener">LinkedIn</a></p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="scripts/job-match.js"></script>
+</body>
+</html>
