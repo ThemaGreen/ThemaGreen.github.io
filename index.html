@@ -3,12 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fbfaf6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1712" media="(prefers-color-scheme: dark)">
 <title>Thema Green · Human Factors</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Thema Green, human factors researcher. A 3D globe of the places she has worked, studied and visited, with a recruiter-ready resume.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,100&family=Inter:wght@400;500;600;700&family=B612+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,100&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=B612+Mono:wght@400;700&display=swap">
 <style>
 /* Layout: an emerald-and-marble globe fills the stage; the details panel sits right (desktop) or rises as
    a bottom sheet (phone). Recruiter mode swaps in a full resume sheet. Palette: emerald, white marble, gold. */
@@ -389,9 +392,116 @@ h3.sec{font-size:1.15rem;font-weight:600;margin-top:6px;display:flex;align-items
   .score.mshow:not([hidden]){display:block}
   .hud span:not(.st){display:none}
   .hud .st b{padding-top:0}
-  #themeBtn{display:none}
 }
 @media (prefers-reduced-motion:reduce){.qa-item,.qa-fab,.qa-fab svg{transition:none}}
+
+/* evidence links */
+.evrow{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px;align-items:center}
+.ev{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;color:var(--emerald);background:var(--emerald-soft);border:1px solid color-mix(in srgb,var(--emerald) 30%,transparent);border-radius:999px;padding:5px 11px;text-decoration:none;transition:background .2s,color .2s,transform .2s var(--spring)}
+.ev:hover,.ev:focus-visible{background:var(--emerald);color:var(--on-emerald);transform:translateY(-1px)}
+.ev svg{width:14px;height:14px;flex:none}
+.evnote{font-size:.74rem;color:var(--muted);font-style:italic}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#lbLinks .evrow{margin-top:12px}
+.card .evrow{margin:0;padding:0 16px 14px 70px}
+@media (max-width:520px){.card .evrow,.card ul,.thumbs{padding-left:16px}}
+.r-skill a,.resume li a{color:var(--emerald);font-weight:600}
+.jm-cta{font-size:.92rem;color:var(--ink-2)}.jm-cta a{color:var(--emerald);font-weight:700}
+.jm-btn{text-decoration:none}
+@media (max-width:900px){.jm-btn .t{display:none}.jm-btn{padding:8px 10px}}
+.r-nums{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px}
+.r-nums li{border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--veil)}
+.r-nums b{display:block;font-family:var(--font-display);font-size:1.35rem;color:var(--emerald);line-height:1.1}
+.r-nums span{font-size:.72rem;color:var(--ink-2)}
+
+/* scene saturation at 50% for a calmer, professional palette */
+#globe{filter:saturate(.5)}
+/* wings reward */
+.wings{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:20px;background:rgba(10,23,18,.45);backdrop-filter:blur(6px);opacity:0;transition:opacity .3s var(--ease)}
+.wings.show{opacity:1}
+.w-card{max-width:420px;width:100%;min-width:0;box-sizing:border-box;text-align:center;background:var(--white);color:var(--ink);border:1px solid var(--gold);border-radius:24px;padding:26px 22px 22px;box-shadow:var(--shadow-strong);transform:translateY(14px) scale(.96);transition:transform .45s var(--spring)}
+.wings.show .w-card{transform:none}
+.w-badge{width:220px;max-width:80%;height:auto;filter:drop-shadow(0 6px 14px rgba(122,92,12,.3))}
+.wings.show .w-badge{animation:wIn .9s var(--spring) both}
+@keyframes wIn{from{transform:scale(.4) rotate(-8deg);opacity:0}60%{transform:scale(1.06)}}
+.w-k{color:var(--gold-ink);margin-top:6px}
+.w-card h2{font-size:1.7rem;margin:6px 0 8px}
+.w-t{color:var(--ink-2);font-size:.95rem}
+.w-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}.w-row .btn{white-space:normal}.wings{grid-template-columns:minmax(0,420px)}
+.sc-wings{display:block;margin:0 0 6px;background:none;border:0;padding:0;color:var(--bar-label);font:inherit;font-size:.68rem;font-weight:700;letter-spacing:.06em;cursor:pointer;text-decoration:underline}
+@media (prefers-reduced-motion:reduce){.wings,.w-card,.w-badge{transition:none;animation:none}}
+
+/* phone header fits 360px+: tighter gaps, compact controls, name can shrink */
+@media (max-width:520px){
+  header.bar{gap:6px}
+  .brand{gap:8px}.brand h1{font-size:1.05rem;white-space:nowrap}.brand .tagline{display:none}
+  .avatar{width:40px;height:40px}
+  .rec-btn,.jm-btn{padding:7px 9px}
+  .icon-btn{width:34px;height:34px}
+}
+@media (max-width:380px){.count{display:none}}
+/* plain résumé: black on white, one column, serif, letter-size */
+.plain{max-width:816px;margin:0 auto;background:#fff;color:#111;font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-size:15px;line-height:1.36;padding:46px 56px 50px;border-radius:4px;box-shadow:0 18px 44px rgba(0,0,0,.18);text-align:left}
+.plain *{font-family:inherit;color:inherit}
+.plain a{color:#111;text-decoration:none}
+.plain a:hover,.plain a:focus-visible{text-decoration:underline}
+.pr-head{text-align:center;margin:0 0 8px}
+.pr-head h2{font-size:28px;font-weight:700;letter-spacing:.03em;margin:0;line-height:1.1;font-variation-settings:normal}
+.pr-role{font-size:15px;margin:3px 0 0}
+.pr-contact{font-size:13px;margin:4px 0 0}
+.pr-sec{margin-top:11px}
+.pr-sec h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;border-bottom:1px solid #111;padding-bottom:2px;margin:0 0 5px;line-height:1.3;font-variation-settings:normal}
+.pr-sec p{margin:0 0 3px}
+.pr-line{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin:0}
+.pr-line span{white-space:nowrap;font-size:.94em}
+.pr-org{font-style:italic;margin:0 0 1px}
+.pr-sub{font-size:.93em;margin:1px 0 0}
+.pr-line .t{white-space:normal;font-size:1em}
+.plain ul{margin:2px 0 4px;padding-left:18px}
+.plain li{margin:1px 0}
+.pr-job{margin-bottom:6px}
+.pr-sec .pr-org+.pr-line{margin-top:4px}
+@media (max-width:640px){.plain{padding:28px 20px;font-size:14px}.pr-line{flex-direction:column;gap:0}.pr-head h2{font-size:24px}}
+@media print{
+  @page{size:letter;margin:.45in .5in}
+  .plain{max-width:none;padding:0;box-shadow:none;border-radius:0;font-size:13.2px;line-height:1.27}
+  .pr-head h2{font-size:24px}.pr-sec{margin-top:7px}.pr-sec h3{font-size:12px;margin-bottom:4px}.pr-job{margin-bottom:4px}
+  .plain a{text-decoration:none}
+}
+
+.r-view{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--white);margin-right:auto}
+.r-view button{border:0;background:none;color:var(--ink-2);font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer}
+.r-view button[aria-pressed="true"]{background:var(--ink);color:var(--marble)}
+.resume[data-view="plain"] .sheet,.resume[data-view="designed"] .plain{display:none}
+@media print{
+  body{overflow:visible!important;background:#fff!important}
+  body>*:not(.resume){display:none!important}
+  .resume{position:static!important;opacity:1!important;visibility:visible!important;transform:none!important;overflow:visible!important;background:#fff!important;padding:0!important}
+  .resume .r-bar,.resume .sheet{display:none!important}
+  .resume .plain{display:block!important}
+}
+
+/* credentials & quotes */
+.creds{display:grid;gap:10px}
+.cred{display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:start;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:10px;animation:rise .5s var(--ease) both;animation-delay:calc(var(--i)*50ms)}
+.cred-img{width:88px;height:66px;border-radius:10px;overflow:hidden;border:1px solid var(--line);padding:0;background:var(--veil);cursor:zoom-in;display:grid;place-items:center}
+.cred-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cred-badge{cursor:default;font-family:var(--font-mono);font-weight:700;font-size:.8rem;letter-spacing:.1em;color:var(--emerald);background:var(--emerald-soft)}
+.cred-b{display:grid;gap:2px;min-width:0}
+.cred-b .when{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink)}
+.cred-b strong{font-family:var(--font-display);font-size:1rem;line-height:1.2}
+.cred-b .org{font-size:.8rem;color:var(--muted)}
+.cred-b .evrow{margin-top:6px}
+button.ev{font:inherit;font-size:.76rem;font-weight:600;cursor:pointer}
+.cert-full{width:100%;height:100%;object-fit:contain;background:#fff;display:block}
+.quotes{display:grid;gap:10px}
+.quote{margin:0;background:var(--white);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:14px;padding:14px 16px}
+.quote blockquote{margin:0 0 8px;font-family:var(--font-display);font-size:1rem;line-height:1.45;color:var(--ink)}
+.quote figcaption{display:grid;font-size:.8rem;color:var(--ink-2)}.quote figcaption b{color:var(--ink)}
+.quote .rel{color:var(--muted);font-size:.74rem}
+.q-src{font-size:.78rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){.cred{animation:none}}
 </style>
 </head>
 <body>
@@ -413,6 +523,7 @@ h3.sec{font-size:1.15rem;font-weight:600;margin-top:6px;display:flex;align-items
       <div><h1>Thema <em>Green</em></h1><div class="tagline">Human factors &amp; UX research for things that fly</div></div>
     </div>
     <span class="count" aria-live="polite"><svg class="spark"><use href="#i-spark"/></svg><span class="txt">Logbook</span> <b id="count">1</b>/<span id="total">0</span></span>
+    <a class="rec-btn jm-btn" id="jmBtn" href="job-match.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg><span class="t">Job match</span></a>
     <button class="rec-btn" id="recBtn" type="button" aria-pressed="false"><svg><use href="#i-doc"/></svg><span class="t">Recruiter mode</span></button>
     <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch to night">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path id="themeIcon" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -434,7 +545,8 @@ h3.sec{font-size:1.15rem;font-weight:600;margin-top:6px;display:flex;align-items
         <div class="sc-body" id="scBody">
           <dl><div><dt>Best combo</dt><dd id="scBest">×0</dd></div><div><dt>This visit</dt><dd id="scVisit">0</dd></div><div><dt>Fleet</dt><dd id="scFleet">0/4</dd></div></dl>
           <ul class="sc-fleet" id="scList"></ul>
-          <p class="sc-note">Tap the aircraft to fly a maneuver. Saved only in this browser.</p>
+          <p class="sc-note">Fly a maneuver in all four aircraft to earn your wings. Saved only in this browser.</p>
+          <button class="sc-wings" id="scWings" type="button" hidden>✈ View your wings</button>
           <button class="sc-reset" id="scReset" type="button">Reset score</button>
         </div>
       </div>
@@ -496,6 +608,10 @@ h3.sec{font-size:1.15rem;font-weight:600;margin-top:6px;display:flex;align-items
           <p class="lede">I'm a human factors researcher. I study how people and automated systems work together, and I design for the moments when a person has to check, question or take over from the machine. Aerospace is where I want to do that work.</p>
           <h3 class="sec"><svg class="spark"><use href="#i-spark"/></svg>Also in my flight log</h3>
           <div class="cards" id="remoteCards"></div>
+          <h3 class="sec"><svg class="spark"><use href="#i-spark"/></svg>Credentials &amp; recognition</h3>
+          <div class="creds" id="credGrid"></div>
+          <h3 class="sec"><svg class="spark"><use href="#i-spark"/></svg>What colleagues say</h3>
+          <div class="quotes" id="quotes"></div>
           <h3 class="sec"><svg class="spark"><use href="#i-spark"/></svg>Off duty</h3>
           <button class="btn ghost" id="passportBtn" type="button" style="justify-self:start"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 16h6"/></svg>Open my passport</button>
           <div class="duty">
@@ -510,6 +626,7 @@ h3.sec{font-size:1.15rem;font-weight:600;margin-top:6px;display:flex;align-items
           <p>I'm looking for human factors, usability and systems work in aviation, space and air cargo, and I'm open to relocation.</p>
           <span class="addr" id="email">thema@themagreen.com</span>
           <div class="row"><button class="btn" id="copyEmail" type="button">Copy email</button><a class="btn ghost" href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener"><svg><use href="#i-in"/></svg>LinkedIn</a></div>
+          <p class="jm-cta">Hiring for a specific role? <a href="job-match.html">Paste the posting into Job Match</a> and see where my documented work lines up, with links to the evidence.</p>
           <p class="readout" id="copyOut" aria-live="polite"></p>
         </section>
 
@@ -538,25 +655,138 @@ h3.sec{font-size:1.15rem;font-weight:600;margin-top:6px;display:flex;align-items
   <div class="lb-card">
     <button class="icon-btn lb-close" id="lbClose" type="button" aria-label="Close"><svg><use href="#i-x"/></svg></button>
     <div class="lb-art" id="lbArt"></div>
-    <div class="lb-body"><p class="label" id="lbMeta"></p><h3 id="lbTitle"></h3><ul id="lbList"></ul></div>
+    <div class="lb-body"><p class="label" id="lbMeta"></p><h3 id="lbTitle"></h3><ul id="lbList"></ul><div id="lbLinks"></div></div>
   </div>
 </div>
 
 <!-- Recruiter mode -->
-<section class="resume marble-bg" id="resume" aria-label="Resume" aria-hidden="true">
+<div class="wings" id="wings" role="dialog" aria-modal="true" aria-labelledby="wTitle" hidden>
+  <div class="w-card">
+    <svg class="w-badge" viewBox="0 0 240 120" aria-hidden="true">
+      <defs><linearGradient id="wg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e7b0"/><stop offset=".45" stop-color="#d4af37"/><stop offset=".75" stop-color="#9c7a17"/><stop offset="1" stop-color="#e8cf7a"/></linearGradient></defs>
+      <g fill="url(#wg)" stroke="#7a5c0c" stroke-width="1.2" stroke-linejoin="round">
+        <path d="M100 52 C70 40 38 38 6 44 C30 50 52 54 70 58 C48 58 30 60 14 66 C38 68 60 68 78 66 C62 70 48 76 36 84 C60 82 82 76 100 68Z"/>
+        <path d="M140 52 C170 40 202 38 234 44 C210 50 188 54 170 58 C192 58 210 60 226 66 C202 68 180 68 162 66 C178 70 192 76 204 84 C180 82 158 76 140 68Z"/>
+      </g>
+      <circle cx="120" cy="60" r="27" fill="#0b6b4a" stroke="url(#wg)" stroke-width="5"/>
+      <text x="120" y="68" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="22" font-weight="700" fill="#f4e2a1">TG</text>
+    </svg>
+    <p class="label w-k">Full fleet · 4 of 4 aircraft</p>
+    <h2 id="wTitle">You earned your wings</h2>
+    <p class="w-t">You flew a maneuver in the plane, the jet, the spaceplane and the rocket. Thanks for exploring my work this closely.</p>
+    <div class="w-row"><button class="btn" id="wLivery" type="button" aria-pressed="false"><svg><use href="#i-plane"/></svg><span>Fly the gold livery</span></button><button class="btn ghost" id="wClose" type="button">Back to the map</button></div>
+  </div>
+</div>
+<section class="resume marble-bg" id="resume" data-view="plain" aria-label="Resume" aria-hidden="true">
   <div class="r-bar">
-    <span class="label">Recruiter mode</span>
+    <div class="r-view" role="group" aria-label="Résumé style"><button type="button" data-rv="plain" aria-pressed="true">Plain</button><button type="button" data-rv="designed" aria-pressed="false">Designed</button></div>
+    <a class="btn ghost" href="Thema_Green_Resume.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDF</a>
     <a class="btn" href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener"><svg><use href="#i-in"/></svg>View LinkedIn</a>
     <button class="btn ghost" id="rCopy" type="button">Copy email</button>
+    <a class="btn ghost" href="job-match.html">Job match</a>
     <button class="btn ghost" id="rClose" type="button"><svg><use href="#i-plane"/></svg>Back to the map</button>
   </div>
+<article class="plain" id="plainResume" aria-label="Résumé, plain version">
+  <header class="pr-head">
+    <h2>Thema Green</h2>
+    <p class="pr-role">Human Factors Researcher · Human-Machine Teaming</p>
+    <p class="pr-contact"><a href="mailto:thema@themagreen.com">thema@themagreen.com</a> · <a href="https://www.linkedin.com/in/themagreen/">linkedin.com/in/themagreen</a> · <a href="https://themagreen.com">themagreen.com</a> · U.S. citizen · Open to relocation</p>
+  </header>
+
+  <section class="pr-sec">
+    <h3>Summary</h3>
+    <p>Human factors researcher designing for the moments a person must check, question or take over from automation. Human-machine teaming research for ONR, AFRL and Google; led 20+ people; elected PM of a NASA L'SPACE team.</p>
+  </section>
+
+  <section class="pr-sec">
+    <h3>Core Skills</h3>
+    <p><b>Human factors methods:</b> experimental design, human-in-the-loop and simulator studies, usability testing, heuristic evaluation, task analysis, surveys, situational judgement assessment, incident analysis, WCAG 2.2</p>
+    <p><b>Tools:</b> R, Unity, Blender, VR, eye tracking, Figma, Miro, Notion, Google Workspace; Siemens NX (in training)</p>
+  </section>
+
+  <section class="pr-sec">
+    <h3>Experience</h3>
+    <div class="pr-job">
+      <p class="pr-line"><b>Project Manager; Human Factors &amp; Operations Lead</b><span>Sep 2026 – Present</span></p>
+      <p class="pr-org">NASA L'SPACE NPWEE, Team 11 · Remote</p>
+      <ul>
+        <li>Elected PM by an 8-member, cross-institutional team and NASA mentor; lead a NASA-style mission proposal.</li>
+        <li>Delivered concepts on deadline; originated 2 as PI; 1 team concept advanced to the full proposal.</li>
+        <li>Recruited 3 subject matter experts and a faculty advisor in 9 days from a 14-contact expert pipeline.</li>
+      </ul>
+    </div>
+    <div class="pr-job">
+      <p class="pr-line"><b>AI/ML Research Scientist &amp; Fellow</b><span>May 2026 – Sep 2026</span></p>
+      <p class="pr-org">Institute for Human-Centered AI, Howard University (RITA UARC) · Washington, DC</p>
+      <ul>
+        <li>Conducted human-machine teaming research across projects sponsored by ONR, AFRL and Google.</li>
+        <li>Benchmarked speech recognition on African American Vernacular English to find where speech AI fails users.</li>
+        <li>Mentored Howard computer science students on AI projects and AI ethics.</li>
+      </ul>
+    </div>
+    <div class="pr-job">
+      <p class="pr-line"><b>Chief Solutions Architect</b><span>Dec 2025 – Aug 2026</span></p>
+      <p class="pr-org">Cioré, sustainable and ethical technology · Washington, DC</p>
+      <ul>
+        <li>Led 20+ people across 3 subteams (engineering, design, finance); hosted and presented team meetings.</li>
+        <li>Met regularly with the C-suite and corresponded with the CEO to keep the product aligned with strategy.</li>
+        <li>Promoted from UX design hire to Project Manager to Chief Solutions Architect.</li>
+      </ul>
+    </div>
+    <div class="pr-job">
+      <p class="pr-line"><span class="t"><b>Fellow, Human Performance Lab</b> — <i>University of Massachusetts Amherst</i></span></p>
+      <ul><li>Tested 3 bike treatments (sharrow, bike box, none) for cyclist comfort in a VR simulator with eye tracking.</li></ul>
+    </div>
+    <div class="pr-job">
+      <p class="pr-line"><span class="t"><b>Undergraduate Human Factors Researcher</b> — <i>George Mason University</i></span><span>Through May 2025</span></p>
+      <ul>
+        <li>Researched social robotics and trust, vigilance, and multimodal learning, including telepresence robot studies.</li>
+        <li>Served as human factors consultant to the language learning lab on documenting endangered languages.</li>
+      </ul>
+    </div>
+    <div class="pr-job">
+      <p class="pr-line"><span class="t"><b>Fellow, Organizational Science Institute</b> — <i>UNC Charlotte</i> · trained in research on people and performance at work</span></p>
+    </div>
+  </section>
+
+  <section class="pr-sec">
+    <h3>Education</h3>
+    <p class="pr-line"><span class="t"><b>M.S., Systems Engineering (Engineering Management)</b> — <i>Embry-Riddle Aeronautical University</i></span><span>In progress</span></p>
+    <p class="pr-line"><span class="t"><b>B.S., Psychology, Human Factors &amp; Applied Cognition</b> — <i>George Mason University</i></span><span>May 2025</span></p>
+    <p class="pr-sub">HFES-accredited · minor in Design Thinking · Projects: Titanic incident analysis; library website redesign</p>
+  </section>
+
+  <section class="pr-sec">
+    <h3>Publications</h3>
+    <ul>
+      <li>Human-machine teaming paper, selected for presentation at the AIAA SciTech Forum, January 2027.</li>
+      <li><i>Human Machine Teaming Competence Assessment</i> (v1.0), situational judgement measure. Zenodo, 2026.</li>
+    </ul>
+  </section>
+
+  <section class="pr-sec">
+    <h3>Certifications</h3>
+    <p>Google UX Design Professional Certificate · Duke: Human Factors in AI · CITI: Human Subjects &amp; RCR · DoD CUI</p>
+  </section>
+
+  <section class="pr-sec">
+    <h3>Leadership, Honors &amp; Affiliations</h3>
+    <ul>
+      <li>Officer, Psi Chi Honor Society, GMU chapter (3 years) · Treasurer, AIAA Embry-Riddle Worldwide student branch</li>
+      <li>Student Affiliate, Royal Aeronautical Society; proposed the HF – Flight Ops subgroup's human-AI teaming priority</li>
+      <li>Bob Dahl Memorial Scholarship, Cargo Facts (2026) · Semper Fidelis Award for Musical Excellence (2021) · HFES</li>
+    </ul>
+  </section>
+</article>
+
   <article class="sheet">
     <header class="r-head">
       <h2>Thema Green</h2>
       <p class="t">Human Factors Researcher · Human-Machine Teaming · Aerospace Systems</p>
       <p class="c"><span id="rEmail">thema@themagreen.com</span><a href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener">linkedin.com/in/themagreen</a><span>U.S. citizen</span><span>Open to relocation</span></p>
     </header>
-    <div class="r-sec"><h3>Summary</h3><div><p class="r-skill">Human factors researcher with an HFES-accredited B.S. and an M.S. in Systems Engineering in progress. Conducted human-machine teaming research for ONR-, AFRL- and Google-sponsored defense projects, published a human-AI teaming competence assessment, and had a paper selected for AIAA SciTech 2027. Elected Project Manager and Human Factors &amp; Operations Lead of a NASA L'SPACE proposal team.</p></div></div>
+    <div class="r-sec"><h3>Summary</h3><div><p class="r-skill">Human factors researcher who designs for the moment a person has to check, question or take over from an automated system. Led 20+ people across 3 subteams as a Chief Solutions Architect, conducted human-machine teaming research on ONR-, AFRL- and Google-sponsored projects, and was elected Project Manager of a NASA L'SPACE proposal team. HFES-accredited B.S.; M.S. in Systems Engineering in progress; paper selected for AIAA SciTech 2027.</p>
+      <ul class="r-nums" aria-label="Highlights by the numbers"><li><b>20+</b><span>people led across 3 subteams</span></li><li><b>3</b><span>research sponsors: ONR, AFRL, Google</span></li><li><b>2</b><span>NASA concepts originated as PI</span></li><li><b>9 days</b><span>to recruit 3 SMEs and an advisor</span></li><li><b>~10 yrs</b><span>teaching and tutoring</span></li></ul></div></div>
     <div class="r-sec"><h3>Experience</h3><div id="rExp"></div></div>
     <div class="r-sec"><h3>Education</h3><div>
       <div class="r-job"><div class="top"><b>M.S. Systems Engineering, Engineering Management</b><span>In progress</span></div><span class="org">Embry-Riddle Aeronautical University, Worldwide</span></div>
@@ -568,14 +798,22 @@ h3.sec{font-size:1.15rem;font-weight:600;margin-top:6px;display:flex;align-items
     </div></div>
     <div class="r-sec"><h3>Projects</h3><div id="rProj"></div></div>
     <div class="r-sec"><h3>Honors &amp; affiliations</h3><div><ul class="r-skill" style="margin:0;padding-left:18px;display:grid;gap:4px">
-      <li>2026 Bob Dahl Memorial Scholarship, Cargo Facts</li>
+      <li>2026 Bob Dahl Memorial Scholarship, Cargo Facts (<a href="https://cargofactsevents.com/bob-dahl-memorial-scholarship/" target="_blank" rel="noopener">scholarship page</a>)</li>
       <li>Treasurer, AIAA Embry-Riddle Worldwide Student Branch</li>
-      <li>MRAeS, Royal Aeronautical Society, Human Factors – Flight Operations &amp; Training subgroup</li>
+      <li>Student Affiliate, Royal Aeronautical Society (elected Feb 2026); Human Factors – Flight Operations &amp; Training subgroup; proposed human-AI teaming as a subgroup priority and advanced it over 3 meetings to the group's leading candidate priority</li>
       <li>Member, Human Factors and Ergonomics Society</li>
+      <li>Officer, Psi Chi International Honor Society in Psychology, George Mason University chapter (3 years)</li>
+      <li>Semper Fidelis Award for Musical Excellence, U.S. Marines Youth Foundation and Marine Corps League, 2021</li>
+    </ul></div></div>
+    <div class="r-sec"><h3>Certifications</h3><div><ul class="r-skill" style="margin:0;padding-left:18px;display:grid;gap:4px">
+      <li>Google UX Design Professional Certificate, Google · Coursera, 2025 (<a href="https://coursera.org/verify/professional-cert/MRE89TRU2XPG" target="_blank" rel="noopener">verify</a>)</li>
+      <li>Human Factors in AI, Duke University · Coursera, 2025 (<a href="https://coursera.org/verify/EH7UJF4LMITL" target="_blank" rel="noopener">verify</a>)</li>
+      <li>CITI Program: Responsible Conduct of Research for Engineers, 2026 (<a href="https://www.citiprogram.org/verify/?w03b94bea-9f50-4c5b-85ee-ac9fd289b70e-76711358" target="_blank" rel="noopener">verify</a>); Human Subjects Research, Social &amp; Behavioral Investigators, 2023 (<a href="https://www.citiprogram.org/verify/?w8d8921e4-725f-450b-84fd-4bbe64f305fb-56533417" target="_blank" rel="noopener">verify</a>)</li>
+      <li>DoD Mandatory Controlled Unclassified Information (CUI) Training, DCSA, 2026</li>
     </ul></div></div>
     <div class="r-sec"><h3>Skills</h3><div>
       <p class="r-skill"><b>Human factors:</b> study design, usability testing, heuristic evaluation, task and stakeholder analysis, surveys, situational judgement assessment design, accessibility (WCAG 2.2)</p>
-      <p class="r-skill"><b>Leadership:</b> project management, NASA-style proposal development, SME recruitment, technical writing, stakeholder communication</p>
+      <p class="r-skill"><b>Leadership:</b> cross-functional team leadership (engineering, design, finance), executive and CEO communication, meeting facilitation, project management, NASA-style proposal development, SME recruitment, technical writing</p>
       <p class="r-skill"><b>Tools:</b> Figma, Miro, Canva, Notion, Google Workspace, AI-assisted prototyping; Unity, Blender, VR, eye tracking, R; Siemens NX (training)</p>
     </div></div>
   </article>
@@ -607,29 +845,52 @@ const ART={
 const art=(p)=>p.img?`<img src="${IMG[p.img]}" alt="${p.alt||''}" loading="lazy">`:ART[p.art];
 
 /* ---------------- Content ---------------- */
+
+/* ---------------- Evidence links: every claim points at something you can open ---------------- */
+const DOC='https://themagreen.com/';
+const EVL={
+  titanicPdf:{t:'Analysis deck (PDF)',u:DOC+'incident-investigation.pdf',k:'pdf'},
+  libraryPdf:{t:'Case deck (PDF)',u:DOC+encodeURI('Website Redesign - Group Project (Thema).pptx.pdf'),k:'pdf'},
+  bigbellyVid:{t:'Presentation (video)',u:DOC+encodeURI('PSYC-461 BigBelly Clean Presentation Deck  (1).mp4'),k:'video'},
+  bikeWrite:{t:'Project write-up',u:'https://themas-9dz0anv.gamma.site/',k:'web'},
+  cioreRepo:{t:'GitHub repository',u:'https://github.com/ThemaGreen/Ciore',k:'repo'},
+  lspace:{t:'NASA L\'SPACE program',u:'https://www.lspace.asu.edu/',k:'web'},
+  lspaceNews:{t:'ASU News: about L\'SPACE',u:'https://news.asu.edu/20230810-nasa-and-arizona-state-universityled-lspace-academy-selected-iaf-excellence-3g-diversity',k:'news'},
+  rita:{t:'RITA UARC at Howard',u:'https://rita.howard.edu/',k:'web'},
+  raesHfg:{t:'RAeS Human Factors Group',u:'https://www.raes-hfg.com/human-factors-group/',k:'web'},
+  raesWiki:{t:'About the RAeS',u:'https://en.wikipedia.org/wiki/Royal_Aeronautical_Society',k:'web'},
+  osi:{t:'Organizational Science Institute',u:'https://osinstitute.charlotte.edu/',k:'web'},
+  dahl:{t:'Bob Dahl Memorial Scholarship',u:'https://cargofactsevents.com/bob-dahl-memorial-scholarship/',k:'web'},
+  linkedin:{t:'LinkedIn profile',u:'https://www.linkedin.com/in/themagreen/',k:'web'},
+  hmtcRG:{t:'Read it on ResearchGate',u:'https://www.researchgate.net/publication/404221818_Human_Machine_Teaming_Competence_Assessment_A_Standardized_Situational_Judgment_Assessment_for_Organizations_Deploying_High-Impact_AI_Systems',k:'pdf'},
+  cioreSite:{t:'Cioré website',u:'https://www.cioreofficial.com/',k:'web'}
+};
+const EV_ICON={pdf:'<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/>',video:'<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/>',repo:'<path d="M9 19c-4 1.5-4-2-6-2m12 4v-3.5a3 3 0 0 0-1-2.5c3 0 6-1.5 6-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6.2 0C6.6 2.3 5.6 2.6 5.6 2.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.2 9c0 4.5 3 6 6 6a3 3 0 0 0-1 2.5V21"/>',news:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/>',web:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'};
+const evLink=l=>'<a class="ev" href="'+l.u+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(EV_ICON[l.k]||EV_ICON.web)+'</svg>'+l.t+'<span class="sr"> (opens in a new tab)</span></a>';
+const evRow=(links,note)=>(links&&links.length)||note?'<div class="evrow">'+(links||[]).map(evLink).join('')+(note?'<span class="evnote">'+note+'</span>':'')+'</div>':'';
 const PROJECTS=[
   {id:'luna', art:'luna', title:'NASA L\'SPACE team proposal', where:'NASA L\'SPACE NPWEE · 2026', stat:'In development',
-   items:['A NASA-style mission proposal written by an 8-member, cross-institutional team. I serve as Project Manager and Human Factors & Operations Lead, elected by my team.','Why this is vague: the proposal is still in development and belongs to my whole team, so I keep the concept and our contacts confidential until we choose to share them.']},
+   links:[EVL.lspace],items:['A NASA-style mission proposal written by an 8-member, cross-institutional team. I serve as Project Manager and Human Factors & Operations Lead, elected by my team.','Why this is vague: the proposal is still in development and belongs to my whole team, so I keep the concept and our contacts confidential until we choose to share them.']},
   {id:'hmtc', art:'hmtc', title:'Human Machine Teaming Competence Assessment', where:'Published · Zenodo, ResearchGate · 2026', stat:'5 competencies',
-   items:['A standardized situational judgement assessment for organizations deploying high-impact AI systems.','Scores calibrated trust, critical inquiry, accountability, sociotechnical systems thinking and teaming.']},
+   links:[EVL.hmtcRG],items:['A standardized situational judgement assessment for organizations deploying high-impact AI systems.','Scores calibrated trust, critical inquiry, accountability, sociotechnical systems thinking and teaming.']},
   {id:'scitech', art:'scitech', title:'AIAA SciTech Forum paper', where:'AIAA · 2027', stat:'Selected',
-   items:['My paper on human-machine teaming was selected for presentation at the AIAA SciTech Forum in 2027.']},
+   note:'Paper is not public until the forum.',items:['My paper on human-machine teaming was selected for presentation at the AIAA SciTech Forum in 2027.']},
   {id:'speech', art:'speech', title:'Speech AI fairness benchmark', where:'Howard University HCAI · 2026',
-   items:['Benchmarked automatic speech recognition on African American Vernacular English to find where speech AI fails the people using it.','Part of human-machine teaming and responsible AI research supporting ONR-, AFRL- and Google-sponsored projects.']},
+   note:'Code is private lab work.',items:['Benchmarked automatic speech recognition on African American Vernacular English to find where speech AI fails the people using it.','Part of human-machine teaming and responsible AI research supporting ONR-, AFRL- and Google-sponsored projects.']},
   {id:'titanic', img:'titanic', alt:'Titanic incident analysis title slide', title:'Titanic incident analysis', where:'George Mason University · team project', stat:'−40% error pathways',
-   items:['A human factors reconstruction of crew decisions, communication gaps and organizational conditions, using the Swiss cheese model.','Proposed layered countermeasures and modeled a 40% reduction in error pathways.']},
+   links:[EVL.titanicPdf],items:['A human factors reconstruction of crew decisions, communication gaps and organizational conditions, using the Swiss cheese model.','Proposed layered countermeasures and modeled a 40% reduction in error pathways.']},
   {id:'library', img:'library', alt:'Mock-ups of a redesigned university library website', title:'Library website redesign', where:'George Mason University · team project', stat:'+35% task success',
-   items:['Usability testing, heuristic review and competitor scans of a large university library site.','Restructured the information architecture around how students search; 35% higher task success in prototype tests.']},
+   links:[EVL.libraryPdf],items:['Usability testing, heuristic review and competitor scans of a large university library site.','Restructured the information architecture around how students search; 35% higher task success in prototype tests.']},
   {id:'bigbelly', img:'bigbelly', alt:'Bigbelly solar waste and recycling stations', title:'Bigbelly waste routes', where:'George Mason University · industry partner', stat:'~25% time saved',
-   items:['Shadowed collection crews to build a task analysis from observed work, then ran stakeholder analysis.','Recommended route and process changes the partner team adopted; estimated 25% time savings on key routes.']},
+   links:[EVL.bigbellyVid],items:['Shadowed collection crews to build a task analysis from observed work, then ran stakeholder analysis.','Recommended route and process changes the partner team adopted; estimated 25% time savings on key routes.']},
   {id:'bike', img:'bike', alt:'Illustration of cyclists on a road beside traffic', title:'Bike treatments in a VR bicycle simulator', where:'UMass Amherst Human Performance Lab · Fellow', stat:'VR · eye tracking',
-   items:['Studied which bike treatment best supports cyclist comfort: a sharrow, a bike box, or no treatment.','Ran the study in a VR bicycle simulator on a stationary bike, with eye tracking.','Tools: VR, Blender, Unity, R and eye tracking.']},
+   links:[EVL.bikeWrite],items:['Studied which bike treatment best supports cyclist comfort: a sharrow, a bike box, or no treatment.','Ran the study in a VR bicycle simulator on a stationary bike, with eye tracking.','Tools: VR, Blender, Unity, R and eye tracking.']},
   {id:'recsys', art:'recsys', title:'Recommendation platform redesign', where:'Independent UX project',
    items:['Ran a competitive audit and qualitative user survey to define personas.','Rebuilt the information architecture, filtering and navigation in Figma, Miro and Canva to reduce cognitive load.']},
   {id:'ciore', art:'ciore', title:'Solar-powered smartphone UX', where:'Cioré · 2026',
-   items:['UX research for a privacy-first, solar-powered smartphone at a sustainable and ethical tech company, where I later led a team of 20+ as Chief Solutions Architect.']},
+   links:[EVL.cioreSite,EVL.cioreRepo],items:['UX research for a privacy-first, solar-powered smartphone at a sustainable and ethical tech company, where I later led a team of 20+ as Chief Solutions Architect.']},
   {id:'whisper', art:'whisper', title:'Lab transcription service', where:'Howard University HCAI · AI-assisted build',
-   items:['Directed an AI-assisted build of a Whisper speech-transcription service on Google Cloud Run so researchers could run transcriptions on demand.']}
+   note:'Code is private lab work.',items:['Directed an AI-assisted build of a Whisper speech-transcription service on Google Cloud Run so researchers could run transcriptions on demand.']}
 ];
 const PJ=Object.fromEntries(PROJECTS.map(p=>[p.id,p]));
 
@@ -638,11 +899,12 @@ const PLACES = [
    lede:'Home base for most of my work so far: research, leadership, school and tutoring.',
    entries:[
     {cat:'Research', when:'MAY – SEP 2026', title:'Howard University · Institute for Human-Centered AI', role:'AI/ML Research Scientist & Fellow · RITA UARC', proj:['speech','whisper'],
-     items:['Human-machine teaming research supporting ONR-, AFRL- and Google-sponsored defense projects.','Benchmarked speech recognition on African American Vernacular English to find where speech AI fails its users.','Mentored Howard computer science students on AI projects and AI ethics.']},
-    {cat:'Research', when:'2026', title:'Human Machine Teaming Competence Assessment', role:'Published on Zenodo and ResearchGate', proj:['hmtc'],
+     links:[EVL.rita],items:['Human-machine teaming research supporting ONR-, AFRL- and Google-sponsored defense projects.','Benchmarked speech recognition on African American Vernacular English to find where speech AI fails its users.','Mentored Howard computer science students on AI projects and AI ethics.']},
+    {cat:'Research', when:'2026', title:'Human Machine Teaming Competence Assessment', role:'Published on Zenodo and ResearchGate', proj:['hmtc'], links:[EVL.hmtcRG],
      items:['A standardized situational judgement assessment for organizations deploying high-impact AI systems.']},
     {cat:'Leadership', when:'DEC 2025 – AUG 2026', title:'Cioré', role:'Chief Solutions Architect', proj:['ciore'],
-     items:['Joined for UX design, then became Project Manager, then Chief Solutions Architect.','Led a team of 20+ at a sustainable and ethical tech company.']},
+     links:[EVL.cioreSite,EVL.cioreRepo],items:['Led 20+ people across 3 subteams spanning engineering, design and finance.','Hosted and presented recurring team meetings to keep the subteams aligned on scope, priorities and deadlines.','Met regularly with the C-suite and corresponded directly with the CEO to keep the product aligned with company strategy.','Promoted twice in nine months: hired for UX design, then Project Manager, then Chief Solutions Architect.']},
+    {cat:'Leadership', when:'3 YEARS · GMU', title:'Psi Chi · George Mason University chapter', role:'Officer · International Honor Society in Psychology', items:['Served as an officer overseeing the GMU chapter for 3 years.']},
     {cat:'Education', when:'ENROLLED 2026', title:'Embry-Riddle Aeronautical University', role:'M.S. Systems Engineering · Engineering Management', items:['Worldwide campus.']},
     {cat:'Education', when:'2025', title:'George Mason University', role:'B.S. Psychology, Human Factors & Applied Cognition', items:['Design Thinking minor.','HFES-accredited human factors program at an R1 university.']},
     {cat:'Research', when:'UNDERGRADUATE', title:'GMU Human Factors & Applied Cognition lab', role:'Undergraduate researcher',
@@ -652,7 +914,7 @@ const PLACES = [
     {cat:'Teaching', when:'MAY 2018 – AUG 2025', title:'Littera Education', role:'Tutor', items:['Part of about ten years of volunteer and paid tutoring.']}
    ]},
   {id:'clt', name:'Charlotte', short:'Charlotte', lat:35.3071, lon:-80.7352, kind:'work', sub:'North Carolina',
-   entries:[{cat:'Fellowship', when:'UNC CHARLOTTE', title:'Organizational Science Institute', role:'Fellow', items:['Professionally trained in research on people and performance at work.']}]},
+   entries:[{cat:'Fellowship', when:'UNC CHARLOTTE', title:'Organizational Science Institute', role:'Fellow', links:[EVL.osi],items:['Professionally trained in research on people and performance at work.']}]},
   {id:'ma', name:'Massachusetts', short:'Massachusetts', lat:42.3732, lon:-72.5199, kind:'work', sub:'Amherst · Cambridge',
    entries:[
     {cat:'Fellowship', when:'UMASS AMHERST', title:'Human Performance Lab', role:'Fellow · bicycle simulator research', proj:['bike'],
@@ -663,7 +925,7 @@ const PLACES = [
   {id:'bna', name:'Nashville', short:'Nashville', lat:36.1627, lon:-86.7816, kind:'work', sub:'Tennessee',
    entries:[
     {cat:'Honor', when:'OCT 2026', title:'Cargo Facts Symposium', role:'2026 Bob Dahl Memorial Scholarship recipient', photo:'cargofacts', alt:'Thema on stage with other attendees at the Cargo Facts Symposium',
-     items:['The scholarship, awarded through Cargo Facts, brought me to the symposium to meet people from across the air cargo industry.']},
+     links:[EVL.dahl],items:['The scholarship, awarded through Cargo Facts, brought me to the symposium to meet people from across the air cargo industry.']},
     {cat:'Exploring', when:'SINCE OCT 2026', title:'Air cargo decision support', role:'Early-stage idea',
      items:['A forecasting model for air cargo market volatility, paired with a human-machine teaming design so planners know when to trust it and when to question it. Starting with interviews.']}
    ]},
@@ -686,8 +948,8 @@ const PLACES = [
   {id:'nola', name:'New Orleans', short:'New Orleans', lat:29.9511, lon:-90.0715, kind:'visit', sub:'Louisiana'},
   {id:'tx', name:'Texas', short:'Texas', lat:31.0, lon:-97.6, kind:'visit', sub:'Lone Star State'}
 ];
-const NASA={cat:'Mission', when:'SEP 2026 – PRESENT', title:'NASA L\'SPACE NPWEE · Team 11', role:'Project Manager and Human Factors & Operations Lead, elected by my team', proj:['luna'],
-   items:['Lead an 8-member, cross-institutional team writing a NASA-style mission proposal.','Delivered our concept package on deadline, including two concepts I originated as Principal Investigator. One team concept was selected for the full proposal.','Recruited subject matter experts and a faculty advisor for the team.','Lead the team\'s human factors and operations work.','Why this is vague: the proposal is still in development and belongs to my whole team, so I keep the concept and our contacts confidential until we choose to share them.']};
+const NASA={cat:'Mission', when:'SEP 2026 – PRESENT', title:'NASA L\'SPACE NPWEE · Team 11', role:'Project Manager and Human Factors & Operations Lead, elected by my team', proj:['luna'], links:[EVL.lspace],
+   items:['Elected Project Manager by my 8-member, cross-institutional team and our NASA mentor; I lead the team through a NASA-style mission proposal.','Delivered our concept package on deadline (Oct 5, 2026). I originated 2 of the concepts as Principal Investigator, and 1 team concept advanced to the full proposal.','Recruited 3 subject matter experts and a faculty advisor in 9 days from a 14-contact expert pipeline I built.','Lead the team\'s human factors and operations work.','Why this is vague: the proposal is still in development and belongs to my whole team, so I keep the concept and our contacts confidential until we choose to share them.']};
 PLACES.push({id:'moon', name:'The Moon', short:'The Moon', kind:'work', space:true, lat:0, lon:0, sub:'Team mission concept · NASA L\'SPACE',
   lede:'Not literally, yet. My NASA L\'SPACE team\'s mission concept points here. The details stay under wraps while the proposal is in development, because the ideas belong to the whole team.',
   entries:[NASA], link:{to:'asu',txt:'Fly to mission control at ASU'}});
@@ -695,12 +957,12 @@ PLACES.push(
  {id:'asu', name:'Arizona State University', short:'ASU · Arizona', lat:33.4242, lon:-111.9281, kind:'work', special:true, ride:'rocket', sub:'Tempe, Arizona · NASA L\'SPACE',
   lede:'Mission control for my NASA training. L\'SPACE is led by Arizona State University and runs online, so I take part remotely.',
   entries:[{cat:'Mission', when:'SEP 2026 – PRESENT', title:'NASA L\'SPACE · NPWEE Academy', role:'Fall 2026 cohort · Autonomy, AI & Space Robotics',
-    items:['A NASA proposal-writing academy led by Arizona State University.','My team elected me Project Manager and Human Factors & Operations Lead for our proposal.','Working through the program\'s Siemens NX CAD skill module (due December 2026).']}],
+    links:[EVL.lspace,EVL.lspaceNews],items:['A NASA proposal-writing academy led by Arizona State University.','My team elected me Project Manager and Human Factors & Operations Lead for our proposal.','Working through the program\'s Siemens NX CAD skill module (due December 2026).']}],
   link:{to:'moon',txt:'See our mission on the Moon'}},
  {id:'raes', name:'Royal Aeronautical Society', short:'RAeS · London', lat:51.5036, lon:-0.1513, kind:'work', special:true, ride:'delta', sub:'No.4 Hamilton Place, London',
   lede:'The world\'s oldest aeronautical society, founded in 1866. I take part remotely from the US.',
-  entries:[{cat:'Community', when:'2026 – PRESENT', title:'Royal Aeronautical Society', role:'MRAeS · Human Factors, Flight Operations & Training subgroup',
-    items:['Invited to join the subgroup to contribute to research.','Proposed human-AI teaming as a subgroup priority. It is now the group\'s leading candidate priority.']}]},
+  entries:[{cat:'Community', when:'2026 – PRESENT', title:'Royal Aeronautical Society', role:'Student Affiliate · Human Factors, Flight Operations & Training subgroup',
+    links:[EVL.raesHfg,EVL.raesWiki],items:['Invited to join the subgroup to contribute to research.','Proposed human-AI teaming as a subgroup priority. It is now the group\'s leading candidate priority.']}]},
  {id:'aiaa', name:'AIAA SciTech Forum 2027', short:'AIAA · Orlando', lat:28.4275, lon:-81.4689, kind:'work', special:true, ride:'spaceplane', sub:'Orlando, Florida · January 11–15, 2027',
   lede:'The American Institute of Aeronautics and Astronautics. My human-machine teaming paper is headed to its SciTech Forum in Orlando.',
   entries:[{cat:'Paper', when:'JAN 2027', title:'AIAA SciTech Forum', role:'Human-machine teaming paper selected for presentation', proj:['scitech'], items:['Selected for presentation at the 2027 forum.']},
@@ -714,13 +976,14 @@ const REMOTE=[
   {cat:'Paper', when:'2027', title:'AIAA SciTech Forum', role:'Human-machine teaming paper selected for presentation', proj:['scitech'], items:[]}
 ];
 const RESUME_EXP=[
-  {t:'Project Manager; Human Factors & Operations Lead',o:'NASA L\'SPACE NPWEE · Team 11 · Remote',d:'Sep 2026 – Present',b:NASA.items.slice(0,4).concat(['Proposal details withheld while in development; the concept is my team\'s shared work.','Set up the team\'s shared hub for phase, tasks and owners, so members with limited time can pick up and finish short tasks.'])},
-  {t:'AI/ML Research Scientist & Fellow',o:'Institute for Human-Centered AI, Howard University · RITA UARC · Washington, DC',d:'May – Sep 2026',b:['Conducted human-machine teaming research supporting ONR-, AFRL- and Google-sponsored defense projects.','Benchmarked automatic speech recognition on African American Vernacular English to examine speech-AI fairness.','Mentored Howard computer science students on AI projects and AI ethics.']},
-  {t:'Chief Solutions Architect (previously Project Manager; joined for UX design)',o:'Cioré, sustainable & ethical technology · Washington, DC',d:'Dec 2025 – Aug 2026',b:['Led a team of 20+ people.','Conducted UX research for a solar-powered smartphone.']},
-  {t:'Undergraduate Human Factors Researcher',o:'Human Factors & Applied Cognition lab, George Mason University · Fairfax, VA',d:'Through May 2025',b:['Researched social robotics and trust, vigilance, and multimodal learning, including studies with a telepresence robot.','Human factors consultant to the language learning lab on documenting endangered languages.']},
-  {t:'Fellow',o:'Human Performance Lab, University of Massachusetts Amherst · Amherst, MA',d:'',b:['Studied cyclist comfort across bike treatments (sharrow, bike box, none) in a VR bicycle simulator with eye tracking.','Worked with VR, Blender, Unity, R, a stationary bike rig and eye tracking.']},
+  {t:'Project Manager; Human Factors & Operations Lead',o:'NASA L\'SPACE NPWEE · Team 11 · Remote',d:'Sep 2026 – Present',b:[NASA.items[0],NASA.items[1],NASA.items[2],'Built the team\'s shared hub for phase, tasks and owners, so members with limited time can pick up and close out short tasks.','Proposal details are withheld while in development; the concept is my team\'s shared work.']},
+  {t:'AI/ML Research Scientist & Fellow',o:'Institute for Human-Centered AI, Howard University · RITA UARC · Washington, DC',d:'May – Sep 2026',b:['Conducted human-machine teaming research across projects sponsored by 3 organizations: ONR, AFRL and Google.','Benchmarked automatic speech recognition on African American Vernacular English to locate where speech AI fails the people who use it.','Mentored Howard computer science students on AI projects and AI ethics.']},
+  {t:'Chief Solutions Architect',o:'Cioré, sustainable & ethical technology · Washington, DC',d:'Dec 2025 – Aug 2026',b:['Led 20+ people across 3 subteams spanning engineering, design and finance.','Hosted and presented recurring team meetings to keep the subteams aligned on scope, priorities and deadlines.','Met regularly with the C-suite executive team and corresponded directly with the CEO to keep the product aligned with company strategy.','Promoted twice in nine months: hired for UX design, then Project Manager, then Chief Solutions Architect.','Conducted UX research for a privacy-first, solar-powered smartphone.']},
+  {t:'Fellow',o:'Human Performance Lab, University of Massachusetts Amherst · Amherst, MA',d:'',b:['Studied how 3 bike treatments (sharrow, bike box and no treatment) affect cyclist comfort, using a stationary-bike VR simulator with eye tracking.','Worked with VR, Blender, Unity and R.']},
+  {t:'Officer',o:'Psi Chi, International Honor Society in Psychology · George Mason University chapter',d:'3 years',b:['Oversaw the GMU chapter as an officer for 3 years.']},
+  {t:'Undergraduate Human Factors Researcher',o:'Human Factors & Applied Cognition lab, George Mason University · Fairfax, VA',d:'Through May 2025',b:['Researched social robotics and trust, vigilance, and multimodal learning, including studies with a telepresence robot.','Served as human factors consultant to the language learning lab on documenting endangered languages.']},
   {t:'Fellow',o:'Organizational Science Institute, UNC Charlotte · Charlotte, NC',d:'',b:['Professionally trained in research on people and performance at work.']},
-  {t:'Tutor',o:'Littera Education · Washington, DC',d:'May 2018 – Aug 2025',b:['Part of about ten years of volunteer and paid tutoring.']}
+  {t:'Tutor',o:'Littera Education · Washington, DC',d:'May 2018 – Aug 2025',b:['Tutored for 7 years at Littera, within about 10 years of volunteer and paid tutoring.']}
 ];
 const RESUME_PROJ=['titanic','library','bigbelly','bike','recsys','whisper'];
 
@@ -775,7 +1038,8 @@ function showView(id){
   $('views').scrollTop=0;
 }
 tabs.forEach(t=>t.addEventListener('click',()=>{showView(t.getAttribute('aria-controls'));if(isPhone())setSheet(true)}));
-function hashRoute(){ if(location.hash==='#hangar'){showView('v-hangar');if(isPhone())setSheet(true)} if(location.hash==='#resume')openResume(true) }
+function hashRoute(){ if(location.hash==='#hangar'){showView('v-hangar');if(isPhone())setSheet(true)} if(location.hash==='#resume')openResume(true);
+  const m=location.hash.match(/^#stop-([a-z]+)$/);if(m&&window.__flyTo){const j=PLACES.findIndex(p=>p.id===m[1]);if(j>=0&&PLACES[j].kind==='work')window.__flyTo(j)} }
 addEventListener('hashchange',hashRoute);
 
 /* ---------------- Copy email ---------------- */
@@ -802,14 +1066,14 @@ const ICON={
  Now:'<svg viewBox="0 0 24 24"><use href="#i-spark"/></svg>', Paper:'<svg viewBox="0 0 24 24"><use href="#i-doc"/></svg>'
 };
 function cardHTML(e,i,open){
-  const has=(e.items&&e.items.length)||(e.proj&&e.proj.length);
+  const has=(e.items&&e.items.length)||(e.proj&&e.proj.length)||(e.links&&e.links.length);
   const thumbs=e.proj&&e.proj.length?'<div class="thumbs">'+e.proj.map(id=>'<button type="button" data-proj="'+id+'" aria-label="Open project: '+PJ[id].title+'">'+art(PJ[id])+'</button>').join('')+'</div>':'';
   return '<article class="card'+(open&&has?' open':'')+'" style="--i:'+i+'" data-cat="'+e.cat+'">'+
     '<button type="button" aria-expanded="'+(open&&has?'true':'false')+'"'+(has?'':' disabled')+'>'+
     '<span class="ico" aria-hidden="true">'+(ICON[e.cat]||ICON.Research)+'</span>'+
     '<span class="when">'+e.when+'</span><span class="cat">'+e.cat+'</span><strong>'+e.title+'</strong>'+
     '<span class="role">'+(e.role||'')+'</span>'+(has?'<span class="chev" aria-hidden="true">'+CHEV+'</span>':'')+'</button>'+
-    (has?'<div class="more"><div>'+(e.photo?'<img class="photo" src="'+IMG[e.photo]+'" alt="'+(e.alt||'')+'" loading="lazy">':'')+(e.items&&e.items.length?'<ul>'+e.items.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'')+thumbs+'</div></div>':'')+'</article>';
+    (has?'<div class="more"><div>'+(e.photo?'<img class="photo" src="'+IMG[e.photo]+'" alt="'+(e.alt||'')+'" loading="lazy">':'')+(e.items&&e.items.length?'<ul>'+e.items.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'')+evRow(e.links)+thumbs+'</div></div>':'')+'</article>';
 }
 function wireCards(scope){
   scope.querySelectorAll('.card > button:not([disabled])').forEach(b=>b.addEventListener('click',()=>{const c=b.parentElement;const o=!c.classList.contains('open');c.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))}));
@@ -822,16 +1086,55 @@ $('gallery').innerHTML=PROJECTS.map((p,i)=>'<button class="tile" type="button" s
 $('gallery').querySelectorAll('[data-proj]').forEach(b=>b.addEventListener('click',()=>openProject(b.dataset.proj,b)));
 const lb=$('lightbox');let lbReturn=null;
 function openProject(id,from){const p=PJ[id];lbReturn=from||null;$('lbArt').innerHTML=art(p);$('lbMeta').textContent=p.where+(p.stat?' · '+p.stat:'');$('lbTitle').textContent=p.title;
-  $('lbList').innerHTML=p.items.map(x=>'<li>'+x+'</li>').join('');lb.classList.add('show');lb.setAttribute('aria-hidden','false');setTimeout(()=>$('lbClose').focus(),50)}
+  $('lbList').innerHTML=p.items.map(x=>'<li>'+x+'</li>').join('');$('lbLinks').innerHTML=evRow(p.links,p.note);lb.classList.add('show');lb.setAttribute('aria-hidden','false');setTimeout(()=>$('lbClose').focus(),50)}
 function closeProject(){lb.classList.remove('show');lb.setAttribute('aria-hidden','true');if(lbReturn)lbReturn.focus()}
 $('lbClose').addEventListener('click',closeProject);lb.addEventListener('click',e=>{if(e.target===lb)closeProject()});
 
+
+/* ---------------- Credentials & recognition: every item opens the certificate or its verification page ---------------- */
+const CREDS=[
+ {id:'google-ux',title:'Google UX Design Professional Certificate',org:'Google · Coursera · 8 courses',when:'Sep 2025',img:'certs/google-ux',verify:'https://coursera.org/verify/professional-cert/MRE89TRU2XPG',
+  items:['Eight courses covering the full design process: user research, wireframes and low-fidelity prototypes, high-fidelity design and prototyping in Figma, and usability testing.']},
+ {id:'duke',title:'Human Factors in AI',org:'Duke University · Pratt School of Engineering · Coursera',when:'Sep 2025',img:'certs/duke-hf-ai',verify:'https://coursera.org/verify/EH7UJF4LMITL',items:['Course certificate in applying human factors to the design of AI systems.']},
+ {id:'citi-rcr',title:'Responsible Conduct of Research for Engineers',org:'CITI Program · required by Howard University',when:'May 2026 · valid to May 2029',verify:'https://www.citiprogram.org/verify/?w03b94bea-9f50-4c5b-85ee-ac9fd289b70e-76711358',items:['Research ethics and integrity training.']},
+ {id:'citi-hsr',title:'Human Subjects Research: Social & Behavioral Investigators',org:'CITI Program · required by UMass Amherst',when:'Jun 2023 · valid to Jun 2028',verify:'https://www.citiprogram.org/verify/?w8d8921e4-725f-450b-84fd-4bbe64f305fb-56533417',items:['Basic course for investigators and key personnel running research with human participants.']},
+ {id:'cui',title:'DoD Mandatory Controlled Unclassified Information (CUI) Training',org:'Defense Counterintelligence and Security Agency (DCSA)',when:'Apr 2026',img:'certs/dod-cui',items:['Department of Defense training on identifying, marking and safeguarding controlled unclassified information.']},
+ {id:'raes',title:'Royal Aeronautical Society · Student Affiliate',org:'Elected to the Society',when:'Feb 2026',img:'certs/raes',items:['Elected a Student Affiliate of the Royal Aeronautical Society on 18 February 2026.']},
+ {id:'semper',title:'The Semper Fidelis Award for Musical Excellence',org:'U.S. Marines Youth Foundation and the Marine Corps League',when:'May 2021',img:'certs/semper-fidelis',
+  items:['Nominated by my music director and recognized as a performing high school bandsman and soloist.','The award honors self-discipline, reliability, dedication, leadership, talent and the willingness to work within a team.']}
+];
+const QUOTES=[
+ {who:'Janelle Yankey',role:'Computer science student, Howard University',rel:'Worked together at Howard\'s Human-Centered AI Institute · July 2026',
+  text:'Thema contributed to the project\'s documentation and written materials, and engineered the feature that brought respondent voice recordings to life on the platform\'s interactive globe, allowing users to hear each speaker rather than only reading their transcript. Beyond her technical contributions, Thema is hardworking and dedicated, always willing to jump in and take on new challenges.'},
+ {who:'Emmanuel Larbi Adjei',role:'Graduate teaching assistant, George Mason University',rel:'Classmates · January 2026',
+  text:'She consistently stood out for the originality and depth of her thinking. Thema brings a rare combination of high intelligence, creativity, and strong research skills, allowing her to approach problems from fresh angles while grounding her ideas in evidence and analysis.'}
+];
+function renderCreds(){
+  const g=$('credGrid');if(!g)return;
+  g.innerHTML=CREDS.map((c,i)=>'<article class="cred" style="--i:'+i+'">'+(c.img?'<button type="button" class="cred-img" data-cred="'+c.id+'" aria-label="View certificate: '+c.title+'"><img src="'+c.img+'-thumb.jpg" alt="" loading="lazy"></button>':'<span class="cred-img cred-badge" aria-hidden="true">CITI</span>')+
+    '<div class="cred-b"><span class="when">'+c.when+'</span><strong>'+c.title+'</strong><span class="org">'+c.org+'</span><div class="evrow">'+
+    (c.img?'<button type="button" class="ev" data-cred="'+c.id+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15l3-3 3 3 2-2 3 3"/></svg>View certificate</button>':'')+
+    (c.verify?evLink({t:'Verify',u:c.verify,k:'web'}):'')+'</div></div></article>').join('');
+  g.querySelectorAll('[data-cred]').forEach(b=>b.addEventListener('click',()=>openCert(b.dataset.cred,b)));
+  $('quotes').innerHTML=QUOTES.map(q=>'<figure class="quote"><blockquote>“'+q.text+'”</blockquote><figcaption><b>'+q.who+'</b><span>'+q.role+'</span><span class="rel">'+q.rel+'</span></figcaption></figure>').join('')+
+    '<p class="q-src">From my LinkedIn recommendations, excerpted. '+evLink({t:'Read them in full on LinkedIn',u:'https://www.linkedin.com/in/themagreen/',k:'web'})+'</p>';
+}
+function openCert(id,from){const c=CREDS.find(x=>x.id===id);lbReturn=from||null;
+  $('lbArt').innerHTML=c.img?'<img class="cert-full" src="'+c.img+'.jpg" alt="Certificate: '+c.title+'">':'';
+  $('lbMeta').textContent=c.org+' · '+c.when;$('lbTitle').textContent=c.title;$('lbList').innerHTML=c.items.map(x=>'<li>'+x+'</li>').join('');
+  $('lbLinks').innerHTML=c.verify?evRow([{t:'Verify this credential',u:c.verify,k:'web'}]):'';
+  lb.classList.add('show');lb.setAttribute('aria-hidden','false');setTimeout(()=>$('lbClose').focus(),50)}
+renderCreds();
+
 /* Recruiter resume */
 $('rExp').innerHTML=RESUME_EXP.map(j=>'<div class="r-job"><div class="top"><b>'+j.t+'</b><span>'+j.d+'</span></div><span class="org">'+j.o+'</span><ul>'+j.b.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>').join('');
-$('rProj').innerHTML='<ul class="r-skill" style="margin:0;padding-left:18px;display:grid;gap:4px">'+RESUME_PROJ.map(id=>{const p=PJ[id];return '<li><b>'+p.title+'</b> ('+p.where+'). '+p.items[p.items.length-1]+'</li>'}).join('')+'</ul>';
+$('rProj').innerHTML='<ul class="r-skill" style="margin:0;padding-left:18px;display:grid;gap:4px">'+RESUME_PROJ.map(id=>{const p=PJ[id];return '<li><b>'+p.title+'</b> ('+p.where+'). '+p.items[p.items.length-1]+(p.links?' '+p.links.map(l=>'<a href="'+l.u+'" target="_blank" rel="noopener">'+l.t+'</a>').join(' · '):'')+'</li>'}).join('')+'</ul>';
 const res=$('resume'),recBtn=$('recBtn');
 function openResume(on){res.classList.toggle('show',on);res.setAttribute('aria-hidden',String(!on));recBtn.setAttribute('aria-pressed',String(on));if(on){res.scrollTop=0;setTimeout(()=>$('rClose').focus(),60)}else recBtn.focus()}
 recBtn.addEventListener('click',()=>openResume(!res.classList.contains('show')));
+function setRV(v){res.dataset.view=v;document.querySelectorAll('[data-rv]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.rv===v)));store.set('tg-rv',v)}
+document.querySelectorAll('[data-rv]').forEach(b=>b.addEventListener('click',()=>setRV(b.dataset.rv)));
+setRV(store.get('tg-rv')==='designed'?'designed':'plain');
 $('rClose').addEventListener('click',()=>openResume(false));
 $('rCopy').addEventListener('click',()=>copyEmail(null,$('rEmail')));
 addEventListener('keydown',e=>{if(e.key==='Escape'){if(lb.classList.contains('show'))closeProject();else if(res.classList.contains('show'))openResume(false)}});
@@ -1418,8 +1721,10 @@ function spaceplane(){ // reusable spaceplane with three gold engines
   flame=new THREE.Mesh(new THREE.ConeGeometry(.07,.26,12),new THREE.MeshBasicMaterial({color:0x7fd6ff,transparent:true,opacity:.85}));flame.rotation.x=-Math.PI/2;flame.position.z=-.58;g.add(flame);
   g.traverse(o=>{if(o.isMesh)o.castShadow=true});return g;
 }
-let customPlane=null, model='plane';
-function setPlaneModel(obj){planeBody.clear();planeBody.add(obj)}
+let customPlane=null, model='plane', LIVERY=false;
+const goldLivery=toon('#d4af37');
+function applyLivery(obj){const m=toon(C.marble);obj.traverse(o=>{if(o.isMesh&&o.material===m)o.material=goldLivery})}
+function setPlaneModel(obj){planeBody.clear();if(LIVERY)applyLivery(obj);planeBody.add(obj)}
 function usePlane(){flame=null;setPlaneModel(customPlane?customPlane.clone():defaultPlane());model='plane'}
 const RIDES={rocket,delta,spaceplane};
 function setModel(k){if(model===k)return;if(k==='plane'){usePlane();return}flame=null;setPlaneModel(RIDES[k]());model=k}
@@ -1467,7 +1772,7 @@ let lastFly=0;
 const dest=()=>flight?flight.i:cur;
 function flyTo(i){
   const p=PLACES[i];if(p.kind==='visit'&&!travelOn)return Promise.resolve();
-  if(i===dest()){if(!flight){renderStop(p);showView('v-stop');userMoved=false;setMode('city')}return Promise.resolve()}
+  if(i===dest()){if(!flight){renderStop(p);showView('v-stop');userMoved=false;ov=null;spinTo=null;setMode('city')}return Promise.resolve()}
   const now=performance.now(), quick=now-lastFly<2600;lastFly=now;
   const fromPl=flight?PLACES[flight.i]:PLACES[cur];
   if(flight){const old=flight;flight=null;old.res()}
@@ -1558,6 +1863,7 @@ function renderScore(pop){
   $('scTaps').textContent=SC.taps.toLocaleString();$('scBest').textContent='×'+SC.best;$('scVisit').textContent=visit;
   const got=FLEET.filter(([k])=>SC.fleet[k]).length;$('scFleet').textContent=got+'/'+FLEET.length;
   $('scList').innerHTML=FLEET.map(([k,n])=>'<li class="'+(SC.fleet[k]?'got':'')+'"><span aria-hidden="true">'+(SC.fleet[k]?'✓':'·')+'</span>'+n+'</li>').join('');
+  $('scWings').hidden=!SC.wings;
   if(pop){const b=$('scTaps');b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop')}}
 function scoreTap(){
   const now=performance.now();combo=now-lastTap<2200?combo+1:1;lastTap=now;visit++;
@@ -1566,13 +1872,30 @@ function scoreTap(){
   const fl=document.createElement('span');fl.className='plus';fl.textContent=combo>1?'+1 ×'+combo:'+1';const r=stage.getBoundingClientRect();
   const v=planePos.clone().project(camera);fl.style.left=((v.x+1)/2*r.width)+'px';fl.style.top=((1-v.y)/2*r.height)+'px';stage.appendChild(fl);setTimeout(()=>fl.remove(),1100);
   const all=FLEET.every(([k])=>SC.fleet[k]);
-  if(first&&all)setTimeout(()=>toast('FULL FLEET · <b>YOU TAPPED EVERY AIRCRAFT</b>'),900);
+  if(all&&!SC.wings)setTimeout(earnWings,700);
   else if([10,25,50,100,250,500].includes(SC.taps))setTimeout(()=>toast('MILESTONE · <b>'+SC.taps+' MANEUVERS FLOWN</b>'),900);
   else if(first&&model!=='plane')setTimeout(()=>toast('NEW AIRCRAFT LOGGED · <b>'+FLEET.find(f=>f[0]===model)[1].toUpperCase()+'</b>'),900);
 }
 $('scToggle').addEventListener('click',()=>{const o=scoreEl.classList.toggle('open');$('scToggle').setAttribute('aria-expanded',String(o))});
-$('scReset').addEventListener('click',()=>{SC={taps:0,best:0,fleet:{}};visit=0;store.set(SCORE_KEY,JSON.stringify(SC));scoreEl.classList.remove('open');renderScore()});
+$('scReset').addEventListener('click',()=>{SC={taps:0,best:0,fleet:{}};setLivery(false);visit=0;store.set(SCORE_KEY,JSON.stringify(SC));scoreEl.classList.remove('open');renderScore()});
 renderScore();
+/* reward: pilot wings for flying a maneuver in all four aircraft */
+const wingsEl=$('wings');
+function refreshModel(){const k=model;model='';if(k==='plane'||!k)usePlane();else setModel(k)}
+function setLivery(on){LIVERY=!!on;SC.livery=LIVERY?1:0;store.set(SCORE_KEY,JSON.stringify(SC));refreshModel();
+  $('wLivery').setAttribute('aria-pressed',String(LIVERY));$('wLivery').querySelector('span').textContent=LIVERY?'Back to the classic livery':'Fly the gold livery'}
+function openWings(celebrate){wingsEl.hidden=false;requestAnimationFrame(()=>wingsEl.classList.add('show'));setTimeout(()=>$('wClose').focus(),80);
+  if(celebrate){const S=window.__sfx;if(S&&S.fanfare)S.fanfare();burst(70)}}
+function closeWings(){wingsEl.classList.remove('show');setTimeout(()=>{wingsEl.hidden=true},300)}
+function earnWings(){SC.wings=1;store.set(SCORE_KEY,JSON.stringify(SC));renderScore();openWings(true)}
+function burst(n){for(let k=0;k<n;k++){const m=new THREE.Mesh(new THREE.OctahedronGeometry(.003+Math.random()*.004,0),sparkMat.clone());m.material.color.set(['#f4e2a1','#d4af37','#ffffff','#50c88f'][k%4]);m.position.copy(planePos);
+  const v=new THREE.Vector3(Math.random()-.5,Math.random()-.5,Math.random()-.5).normalize().multiplyScalar(.05+Math.random()*.09);scene.add(m);sparks.push({m,v,t0:performance.now()})}}
+$('wClose').addEventListener('click',closeWings);
+$('wLivery').addEventListener('click',()=>{setLivery(!LIVERY);closeWings();toast(LIVERY?'GOLD LIVERY · <b>CLEARED FOR TAKEOFF</b>':'CLASSIC LIVERY · <b>RESTORED</b>')});
+wingsEl.addEventListener('click',e=>{if(e.target===wingsEl)closeWings()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!wingsEl.hidden)closeWings()});
+$('scWings').addEventListener('click',()=>openWings(false));
+if(SC.livery&&SC.wings)setLivery(true);
 function doTrick(){
   if(trick)return;const kinds=['roll','loop','roll','spin'];const k=kinds[trickN++%kinds.length];
   trick={k,t0:performance.now(),dur:k==='loop'?1300:1000,z0:planeBody.rotation.z};
@@ -1653,6 +1976,7 @@ const SFX=(()=>{
     tick(){tone(1650,0,.05,.018,'sine',false)},
     sparkle(){[1046.5,1318.5,1568,2093,2637].forEach((f,i)=>tone(f,i*.06,.5,.022))},
     stamp(){if(!live())return;tone(110,0,.22,.16,'sine',false);sweep(.18,900,400,.05);tone(659.25,.18,1,.04);tone(987.77,.3,1.2,.035)},
+    fanfare(){[523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,i*.11,1.3,.05));tone(1318.5,.5,1.6,.035);[1567.98,2093].forEach((f,i)=>tone(f,.62+i*.08,.6,.018))},
     toggle(){on=!on;store.set('tg-sound',on?'1':'0');sync();if(on){start();setTimeout(()=>api.tick(),60)}else fadeTo(0)}};
   sync();btn.addEventListener('click',e=>{e.stopPropagation();api.toggle()});
   const first=()=>{start();removeEventListener('pointerdown',first,true);removeEventListener('keydown',first,true)};
@@ -1672,8 +1996,9 @@ window.__sfx=SFX;
     {k:'travel',label:()=>'Off-duty travel: '+(travelOn?'on':'off'),on:()=>travelOn,icon:()=>svgOf('travelBtn'),run:()=>$('travelBtn').click()},
     {k:'sound',label:()=>'Sound: '+($('soundBtn').getAttribute('aria-pressed')==='true'?'on':'off'),on:()=>$('soundBtn').getAttribute('aria-pressed')==='true',icon:()=>svgOf('soundBtn'),run:()=>$('soundBtn').click()},
     {k:'theme',label:()=>isDark()?'Day mode':'Night mode',icon:()=>svgOf('themeBtn'),run:()=>$('themeBtn').click()},
+    {k:'jobs',label:()=>'Job match',icon:()=>svgOf('jmBtn'),run:()=>{location.href='job-match.html'}},
     {k:'score',label:()=>'Maneuvers: '+SC.taps,on:()=>scoreEl.classList.contains('mshow'),icon:scoreIcon,run:()=>{if(!SC.taps){toast('TAP THE AIRCRAFT · <b>TO FLY A MANEUVER</b>');return}const o=!scoreEl.classList.contains('mshow');scoreEl.classList.toggle('mshow',o);scoreEl.classList.toggle('open',o);$('scToggle').setAttribute('aria-expanded',String(o))}}];
-  const R=104,A0=96,A1=264;
+  const R=112,A0=94,A1=266;
   ACTIONS.forEach((a,i)=>{const b=document.createElement('button');b.type='button';b.className='qa-item';b.setAttribute('role','menuitem');b.tabIndex=-1;
     const ang=(A0+(A1-A0)*i/(ACTIONS.length-1))*Math.PI/180;a.dx=Math.cos(ang)*R;a.dy=-Math.sin(ang)*R;b.style.setProperty('--dx',a.dx.toFixed(1)+'px');b.style.setProperty('--dy',a.dy.toFixed(1)+'px');b.style.transitionDelay=(i*18)+'ms';
     b.addEventListener('click',e=>{e.stopPropagation();run(i)});itemsEl.appendChild(b);a.el=b});

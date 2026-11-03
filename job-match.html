@@ -1,91 +1,348 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f6f2e9">
-<title>Job Match Explorer — Thema Green</title>
-<meta name="description" content="Paste a job description and get an evidence-backed read on how Thema Green's documented work maps to it. Runs entirely in your browser; nothing is uploaded.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://themagreen.github.io/job-match.html">
-
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="favicon.svg">
+<meta name="theme-color" content="#fbfaf6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1712" media="(prefers-color-scheme: dark)">
+<title>Job Match · Thema Green</title>
+<meta name="description" content="Paste a job posting and see how Thema Green's documented work lines up, with links to the evidence and an honest read of the gaps.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="styles/site.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,100&family=Inter:wght@400;500;600;700&family=B612+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --marble:#fbfaf6;--white:#ffffff;--veil:#f4f1ea;--ink:#0f241c;--ink-2:#2c3d36;--muted:#5a6a62;--line:#e7dfc8;
+  --emerald:#0b6b4a;--emerald-soft:#d9efe5;--mint:#50c88f;--on-emerald:#ffffff;
+  --gold:#c9a227;--gold-ink:#7a5c0c;--amber-soft:#fbf1d3;--rose:#9c2f2f;--rose-soft:#f8e1de;
+  --shadow:0 10px 30px rgba(11,60,40,.10);
+  --ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.56,.64,1);
+  --font-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-mono:"B612 Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --marble:#0a1712;--white:#10221b;--veil:#0d1d17;--ink:#f4f1e6;--ink-2:#dcd8cb;--muted:#a8b3ad;--line:#2a3b32;
+  --emerald:#3fbf86;--emerald-soft:#123528;--mint:#6fdcaa;--on-emerald:#04130d;--gold:#e2c25a;--gold-ink:#e9cd73;
+  --amber-soft:#2e2611;--rose:#f2a49a;--rose-soft:#3a1b18;--shadow:0 12px 32px rgba(0,0,0,.55);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --marble:#0a1712;--white:#10221b;--veil:#0d1d17;--ink:#f4f1e6;--ink-2:#dcd8cb;--muted:#a8b3ad;--line:#2a3b32;
+  --emerald:#3fbf86;--emerald-soft:#123528;--mint:#6fdcaa;--on-emerald:#04130d;--gold:#e2c25a;--gold-ink:#e9cd73;
+  --amber-soft:#2e2611;--rose:#f2a49a;--rose-soft:#3a1b18;--shadow:0 12px 32px rgba(0,0,0,.55);color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--marble);color:var(--ink);font-family:var(--font-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--emerald)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--emerald);color:var(--on-emerald);padding:8px 14px;border-radius:999px;z-index:9}
+.skip:focus{left:12px}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:12px max(16px,env(safe-area-inset-left));background:color-mix(in srgb,var(--marble) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-right:auto}
+.mono{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--emerald);color:var(--on-emerald);font-family:var(--font-display);font-weight:700;box-shadow:0 0 0 2px var(--gold)}
+.brand b{font-family:var(--font-display);font-size:1.15rem;font-weight:600}.brand em{color:var(--emerald);font-style:italic}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 .86rem var(--font-body);border:1px solid var(--emerald);background:var(--emerald);color:var(--on-emerald);padding:10px 16px;border-radius:999px;cursor:pointer;text-decoration:none;transition:transform .25s var(--spring),background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:var(--white);color:var(--ink);border-color:var(--line)}
+.icon-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.icon-btn svg,.btn svg{width:18px;height:18px}
+main{max-width:980px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-left)) 60px}
+.kicker{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);margin:0 0 6px}
+h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2rem,6vw,3.2rem);line-height:1.05;margin:0 0 10px;letter-spacing:-.01em}
+h1 em{color:var(--emerald)}
+.lede{font-size:1.04rem;color:var(--ink-2);max-width:62ch;margin:0 0 22px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+label.lab{display:block;font-weight:700;margin:0 0 8px}
+textarea{width:100%;min-height:220px;resize:vertical;border:1px solid var(--line);border-radius:14px;padding:14px;font:400 .95rem/1.5 var(--font-body);color:var(--ink);background:var(--veil)}
+textarea:focus{outline:3px solid color-mix(in srgb,var(--gold) 60%,transparent);border-color:var(--gold)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.privacy{font-size:.84rem;color:var(--muted);margin:12px 0 0}
+kbd{font-family:var(--font-mono);font-size:.78rem;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 6px;background:var(--veil);color:var(--ink)}
+#results{margin-top:26px;display:grid;gap:16px}
+#results[hidden]{display:none}
+.summary{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.ring{width:132px;height:132px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .num{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.ring .num b{font-family:var(--font-display);font-size:2.4rem;line-height:1;color:var(--ink)}
+.ring .num span{display:block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;color:var(--muted)}
+.verdict{font-family:var(--font-display);font-size:1.5rem;margin:0 0 4px}
+.verdict-sub{margin:0;color:var(--ink-2)}
+.counts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.pill{display:inline-flex;align-items:center;gap:6px;font:700 .72rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid transparent}
+.pill.strong{background:var(--emerald-soft);color:var(--emerald);border-color:color-mix(in srgb,var(--emerald) 35%,transparent)}
+.pill.partial{background:var(--amber-soft);color:var(--gold-ink);border-color:color-mix(in srgb,var(--gold) 45%,transparent)}
+.pill.thin{background:var(--rose-soft);color:var(--rose);border-color:color-mix(in srgb,var(--rose) 35%,transparent)}
+.pill.ask{background:var(--veil);color:var(--ink-2);border-color:var(--line)}
+h2{font-family:var(--font-display);font-weight:600;font-size:1.35rem;margin:0 0 4px}
+.sec-sub{margin:0 0 12px;color:var(--muted);font-size:.9rem}
+.dims{display:grid;gap:10px}
+.dim{display:grid;grid-template-columns:minmax(150px,240px) 1fr 48px;gap:12px;align-items:center;font-size:.9rem}
+.bar{height:10px;border-radius:999px;background:var(--veil);border:1px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--emerald),var(--mint));border-radius:999px;transition:width .9s var(--ease)}
+.dim .v{font-family:var(--font-mono);font-size:.8rem;text-align:right;color:var(--ink-2)}
+.dim.na{opacity:.55}
+.reqs{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.req{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--veil)}
+.req p{margin:6px 0 8px;color:var(--ink)}
+.ev{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--white);border:1px solid var(--line);color:var(--ink);text-decoration:none}
+a.chip:hover,a.chip:focus-visible{border-color:var(--emerald);color:var(--emerald)}
+.chip svg{width:13px;height:13px;flex:none}
+.note{font-size:.84rem;color:var(--ink-2);margin:6px 0 0}
+.top{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.evcard{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--veil);display:flex;flex-direction:column;gap:6px}
+.evcard .when{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink)}
+.evcard h3{font-family:var(--font-display);font-size:1.1rem;margin:0}
+.evcard .org{font-size:.86rem;color:var(--muted)}
+.evcard ul{margin:4px 0;padding-left:18px;font-size:.9rem}
+.evcard .hits{font-size:.78rem;color:var(--ink-2)}
+.evcard .hits b{color:var(--emerald)}
+.thin-list{margin:0;padding-left:18px;display:grid;gap:6px}
+.method{font-size:.88rem;color:var(--ink-2)}
+.method summary{cursor:pointer;font-weight:700;color:var(--ink)}
+footer{border-top:1px solid var(--line);padding:18px max(16px,env(safe-area-inset-left));text-align:center;font-size:.85rem;color:var(--muted)}
+footer a{color:var(--emerald)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--marble);padding:8px 14px;border-radius:999px;font-size:.85rem;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+@media (max-width:640px){
+  .summary{grid-template-columns:1fr;justify-items:start}
+  .dim{grid-template-columns:1fr 44px;gap:6px 10px}.dim .bar{grid-column:1/-1;grid-row:2}
+  .brand b{font-size:1rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
 </head>
-
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
-<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="grain" aria-hidden="true"></div>
-
-<header class="site-header is-stuck">
-  <div class="wrap header-inner">
-    <a class="brandmark" href="index.html" aria-label="Thema Green — home">
-      <span class="brandmark__glyph" aria-hidden="true">TG</span>
-      <span class="brandmark__text">Thema <em>Green</em></span>
-    </a>
-    <div class="header-actions">
-      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode"></button>
-      <a class="btn btn--ghost" href="index.html"><span data-icon="arrowRight" style="transform:rotate(180deg)"></span> Back to portfolio</a>
-    </div>
-  </div>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <a class="brand" href="index.html" aria-label="Thema Green, back to the portfolio"><span class="mono" aria-hidden="true">TG</span><b>Thema <em>Green</em></b></a>
+  <a class="btn ghost" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Portfolio</a>
+  <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path id="themeIcon" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </header>
-
 <main id="main">
-  <section class="jm-hero">
-    <div class="wrap">
-      <p class="eyebrow">Job Match Explorer</p>
-      <h1>Paste the posting. Get the honest read.</h1>
-      <p class="lede">
-        This scores a job description against my documented work — projects, capabilities, and roles —
-        and shows you the evidence behind every number, including where it runs thin.
-        It is a transparent heuristic, not an AI verdict, and it runs entirely in your browser.
-      </p>
+  <p class="kicker">Job Match Explorer</p>
+  <h1>Paste the posting. <em>Get the honest read.</em></h1>
+  <p class="lede">This scores a job description against my documented work (roles, research, projects and tools) and shows the evidence behind every number, including where it runs thin. It is a transparent keyword heuristic, not an AI verdict, and it runs entirely in your browser.</p>
+
+  <section class="card" aria-labelledby="jdLab">
+    <label class="lab" id="jdLab" for="jd">Paste a job description</label>
+    <textarea id="jd" placeholder="Paste the full posting here: responsibilities, requirements and nice-to-haves."></textarea>
+    <div class="row">
+      <button class="btn" id="scoreBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>Score my fit</button>
+      <button class="btn ghost" id="sampleBtn" type="button">Try a sample posting</button>
+      <button class="btn ghost" id="clearBtn" type="button">Clear</button>
     </div>
+    <p class="privacy"><b>Nothing leaves this page.</b> There is no server, no analytics call and no storage. The text you paste is analysed in memory and discarded when you close the tab. Press <kbd>Ctrl</kbd> or <kbd>⌘</kbd> + <kbd>Enter</kbd> to score.</p>
   </section>
 
-  <section class="jm-panel">
-    <div class="wrap">
-      <div class="jm-input-wrap">
-        <label class="visually-hidden" for="jobInput">Paste a job description</label>
-        <textarea id="jobInput" placeholder="Paste the full job description here — title, responsibilities, and qualifications. The more of the posting you include, the better the read."></textarea>
-      </div>
-
-      <div class="jm-actions">
-        <button class="btn btn--primary" id="runMatch" disabled><span data-icon="bolt"></span> Score my fit</button>
-        <button class="btn btn--ghost" id="useSample"><span data-icon="sparkle"></span> Try a sample posting</button>
-        <button class="btn btn--ghost btn--sm" id="clearMatch"><span data-icon="close"></span> Clear</button>
-        <span class="spacer"></span>
-        <span id="charCount"></span>
-      </div>
-
-      <p class="jm-privacy">
-        <span data-icon="shield"></span>
-        <span><strong>Nothing leaves this page.</strong> There is no server, no analytics call, and no storage —
-        the text you paste is analysed in memory and discarded when you close the tab.
-        Press <kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>↵</kbd> to score.</span>
-      </p>
-
-      <div id="results" hidden></div>
-    </div>
-  </section>
+  <div id="results" hidden aria-live="polite"></div>
 </main>
+<footer>© 2026 Thema Green · <a href="index.html">Portfolio</a> · <a href="mailto:thema@themagreen.com">thema@themagreen.com</a> · <a href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener">LinkedIn</a></footer>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* ---------- theme: shares the portfolio's saved choice ---------- */
+const root=document.documentElement;let saved=null;try{saved=localStorage.getItem('tg-theme')}catch(e){}
+if(saved)root.setAttribute('data-theme',saved);
+const isDark=()=>{const t=root.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches};
+const SUN='M12 4V2M12 22v-2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z',MOON='M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z';
+const syncT=()=>{$('#themeIcon').setAttribute('d',isDark()?SUN:MOON);$('#themeBtn').setAttribute('aria-label',isDark()?'Switch to day':'Switch to night')};syncT();
+$('#themeBtn').addEventListener('click',()=>{const n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('tg-theme',n)}catch(e){}syncT()});
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-meta" style="margin-top:0;border-top:0">
-      <p>© <span id="year">2026</span> Thema Green.</p>
-      <p><a href="index.html">Portfolio</a> · <a href="mailto:themagreen@gmail.com">themagreen@gmail.com</a> ·
-         <a href="https://www.linkedin.com/in/themagreen/" target="_blank" rel="noopener">LinkedIn</a></p>
-    </div>
-  </div>
-</footer>
+/* ---------- evidence: every item points at something you can open ---------- */
+const DOC='https://themagreen.com/';
+const LK={
+  lspace:['NASA L\'SPACE program','https://www.lspace.asu.edu/','web'],
+  rita:['RITA UARC at Howard','https://rita.howard.edu/','web'],
+  ciore:['GitHub repository','https://github.com/ThemaGreen/Ciore','repo'],
+  titanic:['Analysis deck (PDF)',DOC+'incident-investigation.pdf','pdf'],
+  library:['Case deck (PDF)',DOC+encodeURI('Website Redesign - Group Project (Thema).pptx.pdf'),'pdf'],
+  bigbelly:['Presentation (video)',DOC+encodeURI('PSYC-461 BigBelly Clean Presentation Deck  (1).mp4'),'video'],
+  bike:['Project write-up','https://themas-9dz0anv.gamma.site/','web'],
+  raes:['RAeS Human Factors Group','https://www.raes-hfg.com/human-factors-group/','web'],
+  osi:['Organizational Science Institute','https://osinstitute.charlotte.edu/','web'],
+  dahl:['Bob Dahl Memorial Scholarship','https://cargofactsevents.com/bob-dahl-memorial-scholarship/','web'],
+  linkedin:['LinkedIn profile','https://www.linkedin.com/in/themagreen/','web'],
+  gux:['Verify: Google UX Design','https://coursera.org/verify/professional-cert/MRE89TRU2XPG','web'],
+  duke:['Verify: Duke Human Factors in AI','https://coursera.org/verify/EH7UJF4LMITL','web'],
+  citi:['Verify: CITI human subjects','https://www.citiprogram.org/verify/?w8d8921e4-725f-450b-84fd-4bbe64f305fb-56533417','web'],
+  hmtc:['Read it on ResearchGate','https://www.researchgate.net/publication/404221818_Human_Machine_Teaming_Competence_Assessment_A_Standardized_Situational_Judgment_Assessment_for_Organizations_Deploying_High-Impact_AI_Systems','pdf'],
+  cioreSite:['Cioré website','https://www.cioreofficial.com/','web']
+};
+const ICON={pdf:'<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/>',video:'<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/>',repo:'<circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M6 8v4a6 6 0 0 0 6 6h4"/>',web:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',globe:'<path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>'};
+const svg=k=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICON[k]||ICON.web)+'</svg>';
 
-<script type="module" src="scripts/job-match.js"></script>
+const EVIDENCE=[
+ {id:'nasa',title:'NASA L\'SPACE NPWEE · Team 11',org:'Project Manager; Human Factors & Operations Lead',when:'Sep 2026 – present',stop:'moon',links:['lspace'],
+  pts:['Elected Project Manager by an 8-member, cross-institutional team and our NASA mentor.','Delivered the concept package on deadline; originated 2 concepts as Principal Investigator.','Recruited 3 subject matter experts and a faculty advisor in 9 days.'],
+  kw:['nasa','space','spaceflight','aerospace','mission','proposal','proposal development','project management','project manager','program management','schedule','deadline','team lead','team leadership','leadership','cross-functional','cross functional','stakeholder','subject matter expert','sme','human factors','operations','autonomy','robotics','lunar','requirements','technical writing','remote','collaboration','systems engineering']},
+ {id:'howard',title:'Institute for Human-Centered AI, Howard University',org:'AI/ML Research Scientist & Fellow · RITA UARC',when:'May – Sep 2026',stop:'dc',links:['rita'],
+  pts:['Human-machine teaming research on ONR-, AFRL- and Google-sponsored projects.','Benchmarked speech recognition on African American Vernacular English.','Mentored computer science students on AI projects and AI ethics.'],
+  kw:['human-machine teaming','human machine teaming','human-autonomy teaming','human autonomy teaming','human-ai teaming','human ai teaming','human-robot interaction','artificial intelligence','ai','machine learning','autonomy','automation','trust','research','researcher','defense','dod','department of defense','navy','air force','onr','afrl','speech recognition','asr','fairness','bias','benchmark','benchmarking','evaluation','mentoring','mentor','ai ethics','responsible ai','human-centered ai','human centered ai']},
+ {id:'ciore',title:'Cioré',org:'Chief Solutions Architect (previously Project Manager; hired for UX design)',when:'Dec 2025 – Aug 2026',stop:'dc',links:['cioreSite','ciore'],
+  pts:['Led 20+ people across 3 subteams spanning engineering, design and finance.','Hosted and presented recurring team meetings.','Met regularly with the C-suite and corresponded directly with the CEO on project alignment.'],
+  kw:['leadership','lead','led','manage','management','people management','team lead','cross-functional','cross functional','engineering','engineers','design','designers','finance','executive','executives','c-suite','ceo','leadership team','stakeholder','stakeholders','alignment','presentations','presenting','meetings','facilitation','communication','solutions architect','architecture','product','product development','project manager','project management','ux','user experience','ux research','startup','strategy','roadmap']},
+ {id:'hmtc',title:'Human Machine Teaming Competence Assessment',org:'Published on Zenodo and ResearchGate',when:'2026',stop:'dc',links:['hmtc'],
+  pts:['A standardized situational judgement assessment for organizations deploying high-impact AI.'],
+  kw:['assessment','assessments','measurement','psychometrics','situational judgement','situational judgment','test development','instrument','workforce','training','readiness','human oversight','ai governance','governance','publication','published','human-machine teaming','human machine teaming']},
+ {id:'scitech',title:'AIAA SciTech Forum 2027',org:'Human-machine teaming paper selected for presentation',when:'Jan 2027',stop:'aiaa',links:[],
+  pts:['Paper on human-machine teaming selected for presentation.'],
+  kw:['aiaa','paper','papers','publication','publications','conference','technical paper','peer reviewed','peer-reviewed','presentation','aerospace','human-machine teaming','human machine teaming','technical writing']},
+ {id:'gmulab',title:'GMU Human Factors & Applied Cognition lab',org:'Undergraduate researcher',when:'Through May 2025',stop:'dc',links:[],
+  pts:['Social robotics and trust, vigilance and multimodal learning, including telepresence robot studies.','Human factors consultant to the language learning lab.'],
+  kw:['experiment','experiments','experimental design','study design','human subjects','participants','user studies','user study','lab study','laboratory','human-robot interaction','robotics','robot','trust','vigilance','attention','workload','cognition','cognitive','perception','multimodal','telepresence','research assistant','data collection','research']},
+ {id:'psichi',title:'Psi Chi · George Mason University chapter',org:'Officer · International Honor Society in Psychology',when:'3 years',stop:'dc',links:[],
+  pts:['Oversaw the GMU chapter as an officer for 3 years.'],
+  kw:['leadership','officer','student organization','honor society','psychology','psi chi','event','events','community','governance','organizing','organization']},
+ {id:'gmu',title:'B.S. Psychology, Human Factors & Applied Cognition',org:'George Mason University · HFES-accredited program · Design Thinking minor',when:'2025',stop:'dc',links:[],
+  pts:['HFES-accredited human factors program at an R1 university.'],
+  kw:['human factors','ergonomics','human factors engineering','applied cognition','cognitive psychology','psychology','bachelor','bachelors','b.s.','hfes','design thinking','engineering psychology','human performance','human-systems integration','human systems integration','hsi','usability']},
+ {id:'erau',title:'M.S. Systems Engineering, Engineering Management',org:'Embry-Riddle Aeronautical University (in progress)',when:'Enrolled 2026',stop:'aiaa',links:[],
+  pts:['Graduate study in systems engineering and engineering management, in progress.'],
+  kw:['systems engineering','engineering management','master','masters','graduate','m.s.','aeronautical','aviation','requirements','lifecycle','life cycle','verification','validation']},
+ {id:'umass',title:'Human Performance Lab, UMass Amherst',org:'Fellow · bicycle simulator research',when:'Fellowship',stop:'ma',links:['bike'],
+  pts:['Studied how 3 bike treatments (sharrow, bike box, none) affect cyclist comfort.','Stationary-bike VR simulator with eye tracking; VR, Blender, Unity and R.'],
+  kw:['simulation','simulator','simulators','virtual reality','vr','eye tracking','eye-tracking','unity','blender','r','statistics','data analysis','transportation','safety','driving','human performance','experiment','comfort','behavioral','3d']},
+ {id:'titanic',title:'Titanic incident analysis',org:'GMU applied human factors project',when:'GMU',stop:'dc',links:['titanic'],
+  pts:['Reconstructed crew decisions, communication gaps and organizational conditions with the Swiss cheese model.','Proposed layered countermeasures.'],
+  kw:['incident','incident analysis','accident','accident investigation','investigation','root cause','safety','safety analysis','risk','risk assessment','error','human error','swiss cheese','countermeasures','crew','communication','organizational factors','mishap']},
+ {id:'library',title:'University library site redesign',org:'GMU UX project',when:'GMU',stop:'dc',links:['library'],
+  pts:['Redesigned a university library website through user research and usability work.'],
+  kw:['ux','user experience','usability','usability testing','user research','information architecture','redesign','website','web','wireframes','wireframing','prototyping','prototype','interface','ui','interaction design','heuristic evaluation','accessibility']},
+ {id:'bigbelly',title:'Bigbelly waste-route field study',org:'GMU field study',when:'GMU',stop:'dc',links:['bigbelly'],
+  pts:['Field study of a waste-collection route, presented to a partner.'],
+  kw:['field study','field research','observation','observational','contextual inquiry','operations','logistics','process','workflow','presentation','client','partner']},
+ {id:'recsys',title:'Recommendation platform redesign',org:'Independent UX project',when:'Independent',stop:'dc',links:[],
+  pts:['Competitive audit and qualitative survey to define personas.','Rebuilt information architecture, filtering and navigation in Figma, Miro and Canva.'],
+  kw:['figma','miro','canva','personas','persona','competitive analysis','competitive audit','survey','surveys','qualitative','information architecture','navigation','cognitive load','product design','ux design','prototyping']},
+ {id:'raes',title:'Royal Aeronautical Society',org:'Student Affiliate · Human Factors – Flight Operations & Training subgroup',when:'2026 – present',stop:'raes',links:['raes'],
+  pts:['Proposed human-AI teaming as a subgroup priority and advanced it over 3 meetings to the group\'s leading candidate priority.'],
+  kw:['aviation','flight operations','flight deck','cockpit','pilot','pilots','training','flight training','airline','human-ai teaming','human ai teaming','industry','professional society','standards','policy','raes','safety','crew resource management','crm']},
+ {id:'aiaa',title:'AIAA · Embry-Riddle Worldwide student branch',org:'Treasurer',when:'2026 – present',stop:'aiaa',links:[],
+  pts:['Treasurer of the American Institute of Aeronautics and Astronautics student branch.'],
+  kw:['aiaa','aerospace','budget','treasurer','finance','student organization','volunteer','community']},
+ {id:'osi',title:'Organizational Science Institute, UNC Charlotte',org:'Fellow',when:'Fellowship',stop:'clt',links:['osi'],
+  pts:['Professionally trained in research on people and performance at work.'],
+  kw:['organizational','organizational psychology','industrial-organizational','industrial organizational','i-o','performance','workforce','teams','teamwork','people analytics']},
+ {id:'cargo',title:'Cargo Facts Symposium',org:'2026 Bob Dahl Memorial Scholarship recipient',when:'Oct 2026',stop:'bna',links:['dahl'],
+  pts:['Scholarship brought me to the symposium to meet people across the air cargo industry.'],
+  kw:['air cargo','cargo','freight','logistics','aviation','airline','airlines','supply chain','industry']},
+ {id:'tutor',title:'Littera Education',org:'Tutor',when:'May 2018 – Aug 2025',stop:'dc',links:[],
+  pts:['About 10 years of volunteer and paid tutoring.'],
+  kw:['teaching','tutoring','instruction','instructional','training','mentoring','coaching','education','communication','explain']},
+ {id:'certs',title:'Certifications',org:'Google UX Design · Duke Human Factors in AI · CITI · DoD CUI',when:'2023 – 2026',stop:'',links:['gux','duke','citi'],
+  pts:['Google UX Design Professional Certificate (2025); Human Factors in AI, Duke University (2025).','CITI human subjects research (2023) and responsible conduct of research (2026); DoD CUI training, DCSA (2026).'],
+  kw:['certificate','certification','certified','google ux','ux design','figma','wireframes','prototyping','usability testing','human factors','ai','irb','human subjects','human subjects research','research ethics','responsible conduct','citi','cui','controlled unclassified information','dod','security','compliance','handling sensitive information']},
+ {id:'tools',title:'Tools and methods',org:'From my roles and projects',when:'',stop:'',links:['linkedin'],
+  pts:['Figma, Miro, Canva, Notion, Google Workspace; Unity, Blender, VR, eye tracking, R; accessibility (WCAG 2.2); Siemens NX in training.'],
+  kw:['wcag','accessibility','notion','google workspace','microsoft office','excel','powerpoint','heuristic evaluation','task analysis','stakeholder analysis','surveys','usability testing']}
+];
+const DIMS=[
+ {id:'hf',label:'Human factors & research methods',kw:['human factors','ergonomics','human performance','usability','experiment','experimental design','study design','human subjects','participants','research','workload','situation awareness','trust','cognition','cognitive','task analysis','eye tracking','simulation','simulator','statistics','data analysis','assessment','measurement','human-systems integration','human systems integration','hsi']},
+ {id:'hmt',label:'Human-machine teaming & AI',kw:['human-machine teaming','human machine teaming','human-autonomy teaming','human-ai teaming','human-robot interaction','autonomy','automation','artificial intelligence','ai','machine learning','trust','robotics','speech recognition','responsible ai','ai ethics','human oversight']},
+ {id:'ux',label:'UX, design & accessibility',kw:['ux','user experience','user research','usability testing','interface','ui','interaction design','prototyping','prototype','wireframes','figma','information architecture','personas','accessibility','wcag','heuristic evaluation','design']},
+ {id:'aero',label:'Aerospace, aviation & space',kw:['aerospace','aviation','aircraft','flight','flight deck','cockpit','pilot','pilots','space','spaceflight','nasa','mission','satellite','air cargo','airline','faa','dod','defense','air force','navy','aeronautical']},
+ {id:'sys',label:'Systems, safety & operations',kw:['systems engineering','requirements','safety','risk','incident','accident','root cause','human error','operations','verification','validation','lifecycle','process','logistics','engineering management']},
+ {id:'lead',label:'Leadership & communication',kw:['leadership','lead','project management','project manager','program management','stakeholder','stakeholders','cross-functional','cross functional','executive','presentations','communication','technical writing','proposal','mentoring','teaching','training','facilitation','team']}
+];
+/* honest thin spots: things a posting may ask for that my documented work does not show */
+const THIN=[
+ {re:/\b(python|java(script)?|c\+\+|c#|typescript|sql|matlab|software development|software engineer(ing)?|programming|coding|full[- ]stack|back[- ]end|front[- ]end)\b/i,text:'Hands-on coding is not part of my documented work. I partner closely with engineers and have directed AI-assisted builds, but I would not present myself as a software developer.'},
+ {re:/\b(cad|solidworks|catia|creo|autocad|siemens nx|\bnx\b)\b/i,text:'CAD: I am completing Siemens NX training through NASA L\'SPACE (skill module due December 2026); no production CAD work yet.'},
+ {re:/\b(ph\.?d|doctorate|doctoral)\b/i,text:'A PhD is not something I hold. I have a B.S. and an M.S. in progress.'},
+ {re:/\b(chfp|cpe|pmp|capm|certified professional ergonomist|certified human factors professional)\b/i,text:'Professional certifications such as CHFP, CPE or PMP are not in my documented work.'},
+ {re:/\b(\d{1,2})\+?\s*(\-|to)?\s*\d{0,2}\s*years?\b/i,text:'Years of experience: I am early-career. Each role on my portfolio is dated so you can count it against your requirement.'},
+ {re:/\b(clearance|ts\/sci|top secret|secret clearance|polygraph)\b/i,ask:true,text:'Security clearance: please ask me directly. I do not list clearance details on a public page.'},
+ {re:/\b(faa|part 25|do-178|mil-std-1472|mil std 1472|as9100|nasa-std-3001)\b/i,text:'Specific standards such as MIL-STD-1472, NASA-STD-3001 or FAA rules are not cited in my documented work, though my training covers human factors standards in general.'}
+];
+const SYN={ml:'machine learning',ai:'artificial intelligence',ux:'user experience',ui:'user interface',hci:'human computer interaction',hf:'human factors',hfe:'human factors engineering',asr:'speech recognition',hmt:'human-machine teaming',hat:'human-autonomy teaming',hri:'human-robot interaction',hsi:'human-systems integration',pm:'project management',vr:'virtual reality',sme:'subject matter expert'};
+const norm=t=>' '+t.toLowerCase().replace(/[’']/g,"'").replace(/[^a-z0-9+#.\/\- ]+/g,' ').replace(/\s+/g,' ')+' ';
+const has=(text,k)=>{const n=' '+k+' ';if(text.includes(n))return true;if(k.length>3&&!k.includes(' ')){return new RegExp('[ /(-]'+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(s|es|ed|ing)?[ ,.;:)/-]').test(text)}return false};
+const expand=t=>{let x=t;Object.entries(SYN).forEach(([a,b])=>{if(new RegExp(' '+a+' ').test(x))x+=' '+b+' '});return x};
+function splitReqs(jd){
+  const raw=jd.replace(/\r/g,'').split(/\n+|(?<=[.;])\s+(?=[A-Z•\-*])/).map(s=>s.replace(/^[\s•*\-–·\d.)]+/,'').trim()).filter(s=>s.split(/\s+/).length>=4&&s.length<400);
+  const seen=new Set();return raw.filter(s=>{const k=s.toLowerCase();if(seen.has(k))return false;seen.add(k);return true}).slice(0,40)}
+function score(jd){
+  const reqs=splitReqs(jd);const whole=expand(norm(jd));
+  const evHits=new Map();
+  const rows=reqs.map(line=>{
+    const t=expand(norm(line));
+    const thin=THIN.find(x=>x.re.test(line));
+    const matches=EVIDENCE.map(e=>{const k=e.kw.filter(w=>has(t,w));return {e,k,w:k.reduce((s,w)=>s+(w.includes(' ')?2:1),0)}}).filter(m=>m.w>0).sort((a,b)=>b.w-a.w);
+    matches.forEach(m=>{const cur=evHits.get(m.e.id)||{e:m.e,w:0,k:new Set()};cur.w+=m.w;m.k.forEach(x=>cur.k.add(x));evHits.set(m.e.id,cur)});
+    const total=matches.reduce((s,m)=>s+m.w,0);
+    let status=total>=4&&matches.length>=2?'strong':total>=2?'partial':total>=1?'partial':'gap';
+    if(thin&&thin.ask)status='ask';else if(thin&&status!=='strong')status='thin';
+    return {line,status,matches:matches.slice(0,4),thin};
+  }).filter(r=>r.matches.length||r.thin||/\b(required|requirement|must|should|experience|ability|knowledge|familiar|proficien|degree|skill)/i.test(r.line));
+  const counted=rows.filter(r=>r.status!=='ask');
+  const pts=counted.reduce((s,r)=>s+(r.status==='strong'?1:r.status==='partial'?.55:r.status==='thin'?.2:0),0);
+  const fit=counted.length?Math.round(pts/counted.length*100):0;
+  const dims=DIMS.map(d=>{const asked=d.kw.filter(k=>has(whole,k));if(!asked.length)return {d,na:true,v:0,asked};
+    const shown=asked.filter(k=>EVIDENCE.some(e=>e.kw.includes(k)));return {d,na:false,v:Math.round(shown.length/asked.length*100),asked,shown}});
+  const top=[...evHits.values()].sort((a,b)=>b.w-a.w).slice(0,6);
+  const thinAll=[];THIN.forEach(x=>{if(x.re.test(jd))thinAll.push(x)});
+  return {rows,fit,dims,top,thinAll};
+}
+const linkChip=id=>{const l=LK[id];return l?'<a class="chip" href="'+l[1]+'" target="_blank" rel="noopener">'+svg(l[2])+esc(l[0])+'</a>':''};
+const stopChip=e=>e.stop?'<a class="chip" href="index.html#stop-'+e.stop+'">'+svg('globe')+'See it on the globe</a>':'';
+const LABEL={strong:'Strong evidence',partial:'Some evidence',thin:'Runs thin',gap:'No evidence',ask:'Ask me'};
+function render(r){
+  const out=$('#results');
+  if(!r.rows.length){out.hidden=false;out.innerHTML='<section class="card"><h2>Nothing to score yet</h2><p class="sec-sub">I could not find requirement-style lines. Paste the full posting, including the responsibilities and qualifications.</p></section>';return}
+  const c={strong:0,partial:0,thin:0,gap:0,ask:0};r.rows.forEach(x=>c[x.status]++);
+  const verdict=r.fit>=70?'Strong match':r.fit>=50?'Solid match':r.fit>=30?'Partial match':'Stretch role';
+  const sub=r.fit>=70?'Most requirements map to documented work, with links you can check.':r.fit>=50?'Many requirements map to documented work; review the thinner lines below.':r.fit>=30?'Some requirements map well; several are outside my documented work.':'This posting mostly asks for things my documented work does not show.';
+  const C=2*Math.PI*54;
+  let h='<section class="card summary"><div class="ring" role="img" aria-label="Fit score '+r.fit+' out of 100"><svg viewBox="0 0 132 132"><circle cx="66" cy="66" r="54" fill="none" stroke="var(--veil)" stroke-width="12"/><circle id="arc" cx="66" cy="66" r="54" fill="none" stroke="var(--emerald)" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s var(--ease)"/></svg><div class="num"><div><b>'+r.fit+'</b><span>FIT / 100</span></div></div></div>'+
+    '<div><p class="verdict">'+verdict+'</p><p class="verdict-sub">'+sub+'</p><div class="counts">'+['strong','partial','thin','gap','ask'].filter(k=>c[k]).map(k=>'<span class="pill '+(k==='gap'?'thin':k)+'">'+c[k]+' · '+LABEL[k]+'</span>').join('')+'</div></div></section>';
+  h+='<section class="card"><h2>Where the posting focuses</h2><p class="sec-sub">For each area the posting mentions, the share of its terms that my documented work covers.</p><div class="dims">'+
+    r.dims.map(x=>'<div class="dim'+(x.na?' na':'')+'"><span>'+esc(x.d.label)+'</span><div class="bar" aria-hidden="true"><i data-w="'+(x.na?0:x.v)+'"></i></div><span class="v">'+(x.na?'n/a':x.v+'%')+'</span></div>').join('')+'</div></section>';
+  if(r.top.length)h+='<section class="card"><h2>Strongest evidence</h2><p class="sec-sub">The work that matched the most terms in this posting, with links to the source.</p><div class="top">'+
+    r.top.map(t=>'<article class="evcard"><span class="when">'+esc(t.e.when)+'</span><h3>'+esc(t.e.title)+'</h3><span class="org">'+esc(t.e.org)+'</span><ul>'+t.e.pts.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul><span class="hits">Matched: <b>'+[...t.k].slice(0,8).map(esc).join(', ')+'</b></span><div class="ev">'+t.e.links.map(linkChip).join('')+stopChip(t.e)+'</div></article>').join('')+'</div></section>';
+  h+='<section class="card"><h2>Requirement by requirement</h2><p class="sec-sub">Each line from the posting, the evidence behind it, and where it runs thin.</p><ol class="reqs">'+
+    r.rows.map(x=>'<li class="req"><span class="pill '+(x.status==='gap'?'thin':x.status)+'">'+LABEL[x.status]+'</span><p>'+esc(x.line)+'</p>'+
+      (x.matches.length?'<div class="ev">'+x.matches.map(m=>{const l=m.e.links[0]?LK[m.e.links[0]]:null;return l?'<a class="chip" href="'+l[1]+'" target="_blank" rel="noopener">'+svg(l[2])+esc(m.e.title)+'</a>':(m.e.stop?'<a class="chip" href="index.html#stop-'+m.e.stop+'">'+svg('globe')+esc(m.e.title)+'</a>':'<span class="chip">'+esc(m.e.title)+'</span>')}).join('')+'</div>':'')+
+      (x.thin?'<p class="note">'+esc(x.thin.text)+'</p>':'')+'</li>').join('')+'</ol></section>';
+  if(r.thinAll.length)h+='<section class="card"><h2>Where it runs thin</h2><p class="sec-sub">Said plainly, so you do not have to guess.</p><ul class="thin-list">'+r.thinAll.map(t=>'<li>'+esc(t.text)+'</li>').join('')+'</ul></section>';
+  h+='<section class="card method"><details><summary>How this score works</summary><p>The posting is split into requirement lines. Each line is checked against keywords drawn from my documented roles, research, projects and tools; multi-word matches count double. A line with matches from two or more sources is marked strong, a single source is partial, and known gaps are flagged. The fit score averages those lines. It is a keyword heuristic, so it can miss synonyms and cannot judge quality. The links are there so you can check the work itself.</p></details></section>';
+  out.innerHTML=h;out.hidden=false;
+  requestAnimationFrame(()=>{const a=document.getElementById('arc');if(a)a.style.strokeDashoffset=C*(1-r.fit/100);out.querySelectorAll('.bar i').forEach(i=>i.style.width=i.dataset.w+'%')});
+  out.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+}
+const SAMPLE=`Junior Human Factors Engineer, Aerospace Systems
+
+About the role
+You will support human-machine teaming and crew interface work for next-generation aircraft and space systems, working with systems engineers, designers and pilots.
+
+Responsibilities
+- Plan and run human-in-the-loop experiments and usability testing with participants, including simulator studies
+- Analyse workload, trust and situation awareness data and report findings to engineering stakeholders
+- Conduct task analysis and support requirements development for crew interfaces
+- Support incident and safety analyses that identify human error contributors and countermeasures
+- Prepare technical papers, presentations and proposal sections for customers such as NASA and the Air Force
+- Coordinate with cross-functional teams and communicate results to program leadership
+
+Qualifications
+- Bachelor's degree in human factors, psychology, industrial engineering or a related field
+- Experience with experimental design, statistics and data analysis (R preferred)
+- Familiarity with eye tracking, virtual reality or flight simulation
+- Strong written and verbal communication skills
+- Experience with CAD tools such as Siemens NX is a plus
+- Ability to obtain a security clearance
+- 2+ years of relevant experience, including internships or research`;
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('show'),1800)};
+const go=()=>{const v=$('#jd').value.trim();if(!v){toast('Paste a job description first.');$('#jd').focus();return}render(score(v))};
+$('#scoreBtn').addEventListener('click',go);
+$('#sampleBtn').addEventListener('click',()=>{$('#jd').value=SAMPLE;go()});
+$('#clearBtn').addEventListener('click',()=>{$('#jd').value='';const o=$('#results');o.hidden=true;o.innerHTML='';$('#jd').focus()});
+$('#jd').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();go()}});
+window.__jm={score};
+})();
+</script>
 </body>
 </html>
