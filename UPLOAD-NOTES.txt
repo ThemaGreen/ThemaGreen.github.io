@@ -1,0 +1,24 @@
+themagreen.com update (branch: Q3-Update)
+
+1. Upload every file in this folder to the TOP LEVEL of the repo (no folders).
+   Replace any file with the same name.
+
+2. Delete these old files from the repo. They are earlier copies that still list outdated roles:
+   jobmatch.html
+   jobMatch.html
+   index7.html
+   scripts/data.js
+   scripts/job-match.js
+   favicon.svg   (only if you uploaded it earlier; the site no longer uses it)
+
+3. After GitHub Pages rebuilds (check the Actions tab for a green tick), open themagreen.com
+   and hard-refresh: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac).
+
+4. Optional: paste https://themagreen.com into LinkedIn Post Inspector so link previews pick up og-image.jpg.
+
+Files:
+  index.html               portfolio (globe, recruiter mode, credentials, all images built in)
+  job-match.html           Job Match page
+  Thema_Green_Resume.pdf   one-page résumé (linked from recruiter mode)
+  og-image.jpg             link-preview image for LinkedIn, Slack, iMessage
+  favicon.ico, favicon-32.png, apple-touch-icon.png   tab and home-screen icon (your photo)

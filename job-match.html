@@ -7,7 +7,11 @@
 <meta name="theme-color" content="#fbfaf6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0a1712" media="(prefers-color-scheme: dark)">
 <title>Job Match · Thema Green</title>
-<meta name="description" content="Paste a job posting and see how Thema Green's documented work lines up, with links to the evidence and an honest read of the gaps.">
+<link rel="icon" href="favicon.ico?v=4" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=4">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
+
+<meta name="description" content="Compare a job posting with Thema Green's experience, with links to supporting work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,100&family=Inter:wght@400;500;600;700&family=B612+Mono:wght@400;700&display=swap">
@@ -40,7 +44,7 @@ a{color:var(--emerald)}
 .skip:focus{left:12px}
 header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:12px max(16px,env(safe-area-inset-left));background:color-mix(in srgb,var(--marble) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-right:auto}
-.mono{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--emerald);color:var(--on-emerald);font-family:var(--font-display);font-weight:700;box-shadow:0 0 0 2px var(--gold)}
+.mono{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--emerald);color:var(--on-emerald);font-family:var(--font-display);font-weight:700;}
 .brand b{font-family:var(--font-display);font-size:1.15rem;font-weight:600}.brand em{color:var(--emerald);font-style:italic}
 .btn{display:inline-flex;align-items:center;gap:8px;font:600 .86rem var(--font-body);border:1px solid var(--emerald);background:var(--emerald);color:var(--on-emerald);padding:10px 16px;border-radius:999px;cursor:pointer;text-decoration:none;transition:transform .25s var(--spring),background .2s}
 .btn:hover{transform:translateY(-1px)}
@@ -117,24 +121,25 @@ footer a{color:var(--emerald)}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header>
-  <a class="brand" href="index.html" aria-label="Thema Green, back to the portfolio"><span class="mono" aria-hidden="true">TG</span><b>Thema <em>Green</em></b></a>
+  <a class="brand" href="index.html" aria-label="Thema Green, back to the portfolio"><span class="mono" aria-hidden="true"><svg width="38" height="38" viewBox="0 0 64 64"><defs><linearGradient id="fg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e7b0"/><stop offset=".55" stop-color="#d4af37"/><stop offset="1" stop-color="#a8841f"/></linearGradient><radialGradient id="fe" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#14895f"/><stop offset="1" stop-color="#08513a"/></radialGradient></defs><circle cx="32" cy="32" r="30" fill="url(#fe)"/><g fill="none" stroke="#f4f1e6" stroke-opacity=".28" stroke-width="2"><ellipse cx="32" cy="32" rx="12" ry="25"/><path d="M8 32h48"/></g><ellipse cx="32" cy="32" rx="27" ry="10" fill="none" stroke="url(#fg)" stroke-width="3.2" transform="rotate(-28 32 32)"/><g transform="translate(32 32) rotate(45) scale(1.55) translate(-12 -12)"><path fill="#fbfaf6" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></g></svg>
+</span><b>Thema <em>Green</em></b></a>
   <a class="btn ghost" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Portfolio</a>
   <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path id="themeIcon" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </header>
 <main id="main">
-  <p class="kicker">Job Match Explorer</p>
-  <h1>Paste the posting. <em>Get the honest read.</em></h1>
-  <p class="lede">This scores a job description against my documented work (roles, research, projects and tools) and shows the evidence behind every number, including where it runs thin. It is a transparent keyword heuristic, not an AI verdict, and it runs entirely in your browser.</p>
+  <p class="kicker">Job Match</p>
+  <h1>How my experience fits <em>your role</em></h1>
+  <p class="lede">Paste a job description to see which requirements match my experience, with links to examples of my work. The score is based on keyword matching, so treat it as a starting point.</p>
 
   <section class="card" aria-labelledby="jdLab">
     <label class="lab" id="jdLab" for="jd">Paste a job description</label>
-    <textarea id="jd" placeholder="Paste the full posting here: responsibilities, requirements and nice-to-haves."></textarea>
+    <textarea id="jd" placeholder="Paste the job description here."></textarea>
     <div class="row">
-      <button class="btn" id="scoreBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>Score my fit</button>
-      <button class="btn ghost" id="sampleBtn" type="button">Try a sample posting</button>
+      <button class="btn" id="scoreBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>Compare</button>
+      <button class="btn ghost" id="sampleBtn" type="button">Use a sample posting</button>
       <button class="btn ghost" id="clearBtn" type="button">Clear</button>
     </div>
-    <p class="privacy"><b>Nothing leaves this page.</b> There is no server, no analytics call and no storage. The text you paste is analysed in memory and discarded when you close the tab. Press <kbd>Ctrl</kbd> or <kbd>⌘</kbd> + <kbd>Enter</kbd> to score.</p>
+    <p class="privacy">The text you paste stays in your browser and is not saved or sent anywhere. Shortcut: <kbd>Ctrl</kbd> or <kbd>⌘</kbd> + <kbd>Enter</kbd>.</p>
   </section>
 
   <div id="results" hidden aria-live="polite"></div>
@@ -251,13 +256,13 @@ const DIMS=[
 ];
 /* honest thin spots: things a posting may ask for that my documented work does not show */
 const THIN=[
- {re:/\b(python|java(script)?|c\+\+|c#|typescript|sql|matlab|software development|software engineer(ing)?|programming|coding|full[- ]stack|back[- ]end|front[- ]end)\b/i,text:'Hands-on coding is not part of my documented work. I partner closely with engineers and have directed AI-assisted builds, but I would not present myself as a software developer.'},
- {re:/\b(cad|solidworks|catia|creo|autocad|siemens nx|\bnx\b)\b/i,text:'CAD: I am completing Siemens NX training through NASA L\'SPACE (skill module due December 2026); no production CAD work yet.'},
- {re:/\b(ph\.?d|doctorate|doctoral)\b/i,text:'A PhD is not something I hold. I have a B.S. and an M.S. in progress.'},
- {re:/\b(chfp|cpe|pmp|capm|certified professional ergonomist|certified human factors professional)\b/i,text:'Professional certifications such as CHFP, CPE or PMP are not in my documented work.'},
- {re:/\b(\d{1,2})\+?\s*(\-|to)?\s*\d{0,2}\s*years?\b/i,text:'Years of experience: I am early-career. Each role on my portfolio is dated so you can count it against your requirement.'},
- {re:/\b(clearance|ts\/sci|top secret|secret clearance|polygraph)\b/i,ask:true,text:'Security clearance: please ask me directly. I do not list clearance details on a public page.'},
- {re:/\b(faa|part 25|do-178|mil-std-1472|mil std 1472|as9100|nasa-std-3001)\b/i,text:'Specific standards such as MIL-STD-1472, NASA-STD-3001 or FAA rules are not cited in my documented work, though my training covers human factors standards in general.'}
+ {re:/\b(python|java(script)?|c\+\+|c#|typescript|sql|matlab|software development|software engineer(ing)?|programming|coding|full[- ]stack|back[- ]end|front[- ]end)\b/i,text:'Programming: I work closely with engineers and have directed AI-assisted builds, but I am not a software developer.'},
+ {re:/\b(cad|solidworks|catia|creo|autocad|siemens nx|\bnx\b)\b/i,text:'CAD: I am completing Siemens NX training through NASA L\'SPACE (due December 2026).'},
+ {re:/\b(ph\.?d|doctorate|doctoral)\b/i,text:'Degree: I have a B.S. and am completing an M.S.; I do not have a PhD.'},
+ {re:/\b(chfp|cpe|pmp|capm|certified professional ergonomist|certified human factors professional)\b/i,text:'Certifications: I do not currently hold CHFP, CPE or PMP certification.'},
+ {re:/\b(\d{1,2})\+?\s*(\-|to)?\s*\d{0,2}\s*years?\b/i,text:'Years of experience: I am early in my career. The dates for each role are listed on my résumé.'},
+ {re:/\b(clearance|ts\/sci|top secret|secret clearance|polygraph)\b/i,ask:true,text:'Security clearance: please contact me directly about this.'},
+ {re:/\b(faa|part 25|do-178|mil-std-1472|mil std 1472|as9100|nasa-std-3001)\b/i,text:'Standards: I have not yet worked directly with MIL-STD-1472, NASA-STD-3001 or FAA regulations.'}
 ];
 const SYN={ml:'machine learning',ai:'artificial intelligence',ux:'user experience',ui:'user interface',hci:'human computer interaction',hf:'human factors',hfe:'human factors engineering',asr:'speech recognition',hmt:'human-machine teaming',hat:'human-autonomy teaming',hri:'human-robot interaction',hsi:'human-systems integration',pm:'project management',vr:'virtual reality',sme:'subject matter expert'};
 const norm=t=>' '+t.toLowerCase().replace(/[’']/g,"'").replace(/[^a-z0-9+#.\/\- ]+/g,' ').replace(/\s+/g,' ')+' ';
@@ -290,26 +295,26 @@ function score(jd){
 }
 const linkChip=id=>{const l=LK[id];return l?'<a class="chip" href="'+l[1]+'" target="_blank" rel="noopener">'+svg(l[2])+esc(l[0])+'</a>':''};
 const stopChip=e=>e.stop?'<a class="chip" href="index.html#stop-'+e.stop+'">'+svg('globe')+'See it on the globe</a>':'';
-const LABEL={strong:'Strong evidence',partial:'Some evidence',thin:'Runs thin',gap:'No evidence',ask:'Ask me'};
+const LABEL={strong:'Strong match',partial:'Partial match',thin:'Limited experience',gap:'Not covered',ask:'Ask me'};
 function render(r){
   const out=$('#results');
-  if(!r.rows.length){out.hidden=false;out.innerHTML='<section class="card"><h2>Nothing to score yet</h2><p class="sec-sub">I could not find requirement-style lines. Paste the full posting, including the responsibilities and qualifications.</p></section>';return}
+  if(!r.rows.length){out.hidden=false;out.innerHTML='<section class="card"><h2>No requirements found</h2><p class="sec-sub">Try pasting the full job description, including responsibilities and qualifications.</p></section>';return}
   const c={strong:0,partial:0,thin:0,gap:0,ask:0};r.rows.forEach(x=>c[x.status]++);
-  const verdict=r.fit>=70?'Strong match':r.fit>=50?'Solid match':r.fit>=30?'Partial match':'Stretch role';
-  const sub=r.fit>=70?'Most requirements map to documented work, with links you can check.':r.fit>=50?'Many requirements map to documented work; review the thinner lines below.':r.fit>=30?'Some requirements map well; several are outside my documented work.':'This posting mostly asks for things my documented work does not show.';
+  const verdict=r.fit>=70?'Strong match':r.fit>=50?'Good match':r.fit>=30?'Partial match':'Limited match';
+  const sub=r.fit>=70?'Most of the requirements match my experience.':r.fit>=50?'Many of the requirements match my experience.':r.fit>=30?'Some of the requirements match my experience.':'Few of the requirements match my experience.';
   const C=2*Math.PI*54;
   let h='<section class="card summary"><div class="ring" role="img" aria-label="Fit score '+r.fit+' out of 100"><svg viewBox="0 0 132 132"><circle cx="66" cy="66" r="54" fill="none" stroke="var(--veil)" stroke-width="12"/><circle id="arc" cx="66" cy="66" r="54" fill="none" stroke="var(--emerald)" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="transition:stroke-dashoffset 1s var(--ease)"/></svg><div class="num"><div><b>'+r.fit+'</b><span>FIT / 100</span></div></div></div>'+
     '<div><p class="verdict">'+verdict+'</p><p class="verdict-sub">'+sub+'</p><div class="counts">'+['strong','partial','thin','gap','ask'].filter(k=>c[k]).map(k=>'<span class="pill '+(k==='gap'?'thin':k)+'">'+c[k]+' · '+LABEL[k]+'</span>').join('')+'</div></div></section>';
-  h+='<section class="card"><h2>Where the posting focuses</h2><p class="sec-sub">For each area the posting mentions, the share of its terms that my documented work covers.</p><div class="dims">'+
+  h+='<section class="card"><h2>Match by area</h2><p class="sec-sub">How much of each area in the posting my experience covers.</p><div class="dims">'+
     r.dims.map(x=>'<div class="dim'+(x.na?' na':'')+'"><span>'+esc(x.d.label)+'</span><div class="bar" aria-hidden="true"><i data-w="'+(x.na?0:x.v)+'"></i></div><span class="v">'+(x.na?'n/a':x.v+'%')+'</span></div>').join('')+'</div></section>';
-  if(r.top.length)h+='<section class="card"><h2>Strongest evidence</h2><p class="sec-sub">The work that matched the most terms in this posting, with links to the source.</p><div class="top">'+
-    r.top.map(t=>'<article class="evcard"><span class="when">'+esc(t.e.when)+'</span><h3>'+esc(t.e.title)+'</h3><span class="org">'+esc(t.e.org)+'</span><ul>'+t.e.pts.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul><span class="hits">Matched: <b>'+[...t.k].slice(0,8).map(esc).join(', ')+'</b></span><div class="ev">'+t.e.links.map(linkChip).join('')+stopChip(t.e)+'</div></article>').join('')+'</div></section>';
-  h+='<section class="card"><h2>Requirement by requirement</h2><p class="sec-sub">Each line from the posting, the evidence behind it, and where it runs thin.</p><ol class="reqs">'+
+  if(r.top.length)h+='<section class="card"><h2>Most relevant experience</h2><p class="sec-sub">The roles and projects that match this posting most closely.</p><div class="top">'+
+    r.top.map(t=>'<article class="evcard"><span class="when">'+esc(t.e.when)+'</span><h3>'+esc(t.e.title)+'</h3><span class="org">'+esc(t.e.org)+'</span><ul>'+t.e.pts.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul><span class="hits">Matched terms: <b>'+[...t.k].slice(0,8).map(esc).join(', ')+'</b></span><div class="ev">'+t.e.links.map(linkChip).join('')+stopChip(t.e)+'</div></article>').join('')+'</div></section>';
+  h+='<section class="card"><h2>Requirements</h2><p class="sec-sub">Each requirement from the posting and the experience that relates to it.</p><ol class="reqs">'+
     r.rows.map(x=>'<li class="req"><span class="pill '+(x.status==='gap'?'thin':x.status)+'">'+LABEL[x.status]+'</span><p>'+esc(x.line)+'</p>'+
       (x.matches.length?'<div class="ev">'+x.matches.map(m=>{const l=m.e.links[0]?LK[m.e.links[0]]:null;return l?'<a class="chip" href="'+l[1]+'" target="_blank" rel="noopener">'+svg(l[2])+esc(m.e.title)+'</a>':(m.e.stop?'<a class="chip" href="index.html#stop-'+m.e.stop+'">'+svg('globe')+esc(m.e.title)+'</a>':'<span class="chip">'+esc(m.e.title)+'</span>')}).join('')+'</div>':'')+
       (x.thin?'<p class="note">'+esc(x.thin.text)+'</p>':'')+'</li>').join('')+'</ol></section>';
-  if(r.thinAll.length)h+='<section class="card"><h2>Where it runs thin</h2><p class="sec-sub">Said plainly, so you do not have to guess.</p><ul class="thin-list">'+r.thinAll.map(t=>'<li>'+esc(t.text)+'</li>').join('')+'</ul></section>';
-  h+='<section class="card method"><details><summary>How this score works</summary><p>The posting is split into requirement lines. Each line is checked against keywords drawn from my documented roles, research, projects and tools; multi-word matches count double. A line with matches from two or more sources is marked strong, a single source is partial, and known gaps are flagged. The fit score averages those lines. It is a keyword heuristic, so it can miss synonyms and cannot judge quality. The links are there so you can check the work itself.</p></details></section>';
+  if(r.thinAll.length)h+='<section class="card"><h2>Gaps</h2><p class="sec-sub">Areas where my experience is limited.</p><ul class="thin-list">'+r.thinAll.map(t=>'<li>'+esc(t.text)+'</li>').join('')+'</ul></section>';
+  h+='<section class="card method"><details><summary>How the score is calculated</summary><p>Each line of the posting is compared with keywords from my roles, research, projects and tools. Lines that match more than one of them count as a strong match, and the score is the average across all lines. It relies on keywords, so it can miss related terms and does not judge the quality of the work.</p></details></section>';
   out.innerHTML=h;out.hidden=false;
   requestAnimationFrame(()=>{const a=document.getElementById('arc');if(a)a.style.strokeDashoffset=C*(1-r.fit/100);out.querySelectorAll('.bar i').forEach(i=>i.style.width=i.dataset.w+'%')});
   out.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
